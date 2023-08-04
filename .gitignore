@@ -1,0 +1,11 @@
+# WebStorm files
+.idea
+
+# VS Code files
+.vscode
+
+# Dependency directories
+node_modules/
+
+# Build
+dist/
