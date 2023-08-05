@@ -1,0 +1,42 @@
+{
+  "name": "ecommerce-application",
+  "version": "0.0.1",
+  "description": "eCommerce-Application for bouquinistes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-default": "webpack build",
+    "build-dev": "webpack --node-env development",
+    "build-dev-css": "webpack --node-env development --env no_css_in_js=true",
+    "watch": "webpack --watch",
+    "server-start": "webpack serve",
+    "server-start-dev": "webpack serve --node-env development --env no_css_in_js=true"
+  },
+  "author": "spacehummer",
+  "license": "",
+  "dependencies": {
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "html-webpack-plugin": "^5.5.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "css-loader": "^6.7.1",
+    "eslint": "8.22.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-webpack-plugin": "^4.0.1",
+    "mini-css-extract-plugin": "^2.6.1",
+    "prettier": "2.2.1",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.4.3",
+    "typescript": "4.9.5",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1"
+  }
+}
