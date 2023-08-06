@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 // ESLint rules per file end
 
-console.log({ env: process.env.NODE_ENV });
+console.log(`Script env variables:`, { env: process.env.NODE_ENV });
 
 const env = process.env.NODE_ENV || 'production';
 

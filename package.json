@@ -5,16 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-default": "webpack build",
+    "build-prod": "rm -r dist/production/* && webpack build",
     "build-dev": "webpack --node-env development",
     "build-dev-css": "webpack --node-env development --env no_css_in_js=true",
     "watch": "webpack --watch",
-    "server-start": "webpack serve",
-    "server-start-dev": "webpack serve --node-env development --env no_css_in_js=true"
+    "server-prod": "webpack serve",
+    "server-dev": "webpack serve --node-env development --env no_css_in_js=true"
   },
   "author": "spacehummer",
   "license": "",
   "dependencies": {
+    "eslint-webpack-plugin": "^4.0.1",
     "html-webpack-plugin": "^5.5.0"
   },
   "devDependencies": {
@@ -29,7 +30,6 @@
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "eslint-webpack-plugin": "^4.0.1",
     "mini-css-extract-plugin": "^2.6.1",
     "prettier": "2.2.1",
     "style-loader": "^3.3.1",

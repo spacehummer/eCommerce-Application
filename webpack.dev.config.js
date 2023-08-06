@@ -1,30 +1,29 @@
-// ESLint rules per file start
-/* eslint-disable no-console */
-// ESLint rules per file end
-
 const path = require('path');
+// suppress reason: ESLint false positive reaction
+// plugin for work with HTML template: using `index.html` as base for final app html file
 // eslint-disable-next-line import/no-extraneous-dependencies
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// suppress reason: ESLint false positive reaction
+// plugin for extract css (not inline) in dev build
 // eslint-disable-next-line import/no-extraneous-dependencies
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// suppress reason: ESLint cant identifier inner lvl webpack config file
+// suppress reason: ESLint false positive reaction
+// plugin for webpack for work with ESLint: check every build ESLint errors
 // eslint-disable-next-line import/no-extraneous-dependencies
 const EslintPlugin = require('eslint-webpack-plugin');
+// getTimestamp function import, used for generate folder name for every dev build
 const { getTimestamp } = require('./config_utils/config-utils');
-// getTimestamp function import
 
-console.log('Using webpack.dev.config.js.');
+console.log('Using development configuration from`webpack.dev.config.js`.');
 
 module.exports = (env) => {
-  // module.exports = {
-  // Use env.<YOUR VARIABLE> here:
+  // false positive reaction: IDE and linters cant see env variable
   // noinspection JSUnresolvedVariable
   const noCssInJs = env.no_css_in_js === 'true';
-  console.log({ noCssInJs });
+  console.log(`Don\`t inline CSS in JS:`, { noCssInJs });
 
-  const styleLoaderOrMiniCssExtractPluginLoader = noCssInJs
-    ? MiniCssExtractPlugin.loader
-    : 'style-loader';
+  // chose style loader: save styles as css, or inline
+  const chosenStyleLoader = noCssInJs ? MiniCssExtractPlugin.loader : 'style-loader';
 
   return {
     mode: 'development',
@@ -41,7 +40,7 @@ module.exports = (env) => {
     resolve: {
       extensions: ['.ts', '.js'],
       alias: {
-        '#srcAlias': path.resolve('./src'),
+        '#src': path.resolve('./src'),
       },
     },
     output: {
@@ -64,7 +63,7 @@ module.exports = (env) => {
       rules: [
         {
           test: /\.css$/,
-          use: [styleLoaderOrMiniCssExtractPluginLoader, 'css-loader'],
+          use: [chosenStyleLoader, 'css-loader'],
         },
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,

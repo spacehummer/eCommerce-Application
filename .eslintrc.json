@@ -28,7 +28,7 @@
         "import/resolver": {
             "alias": {
                 "map": [
-                    ["#srcAlias", "./src"]
+                    ["#src", "./src"]
                 ]
             }
         }
