@@ -23,7 +23,7 @@
         "no-console": 0,
         "class-methods-use-this": "off"
     },
-    "ignorePatterns": ["dist", "node_modules"],
+    "ignorePatterns": ["dist", "node_modules", ".github"],
     "settings": {
         "import/resolver": {
             "alias": {
