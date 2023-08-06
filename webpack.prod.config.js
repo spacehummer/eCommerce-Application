@@ -12,7 +12,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist', 'production'),
   },
   plugins: [new HtmlWebpackPlugin({
     filename: 'index.html',
