@@ -4,13 +4,14 @@
   "description": "eCommerce-Application for bouquinistes",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build-prod": "rm -r dist/production/* && webpack build",
     "build-dev": "webpack --node-env development",
     "build-dev-css": "webpack --node-env development --env no_css_in_js=true",
     "watch": "webpack --watch",
     "server-prod": "webpack serve",
-    "server-dev": "webpack serve --node-env development --env no_css_in_js=true"
+    "server-dev": "webpack serve --node-env development --env no_css_in_js=true",
+    "lint": "eslint . --ext .ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "spacehummer",
   "license": "",
