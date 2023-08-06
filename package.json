@@ -14,6 +14,7 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "prettier": "prettier . --check",
     "prettier:fix": "prettier . --write",
+    "husky:prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "spacehummer",
@@ -34,6 +35,7 @@
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^8.0.3",
     "mini-css-extract-plugin": "^2.6.1",
     "prettier": "2.2.1",
     "style-loader": "^3.3.1",
