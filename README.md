@@ -24,3 +24,80 @@ This solution is a platform that brings together people who want to buy new or s
 - Git hooks [Husky](https://github.com/typicode/husky)
 - [Jest](https://jestjs.io/) for testing
 - The application is a Single Page Application (SPA).
+
+# Start guide
+
+## Prerequisites
+
+- Git - [Download & Install Git](https://git-scm.com/downloads).
+- Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+
+## Downloading project
+
+```
+git clone https://github.com/spacehummer/eCommerce-Application.git
+```
+
+## Installing
+
+- install node modules
+```
+npm install
+```
+
+- install Husky
+```
+npm run husky:prepare
+```
+
+## CLI Commands
+
+- Run application in `watch` mode
+```
+npm run watch
+```
+
+- Run application on webpack dev server in `prod` mode
+```
+npm run server-prod
+```
+
+- Run application on webpack dev server in `dev` mode
+```
+npm run server-dev
+```
+
+- Build application bundle in `prod` mode
+```
+npm run build-prod
+```
+
+- Build application bundle  in `dev` mode
+```
+npm run build-dev
+```
+
+- Run linter for code check
+```
+npm run lint
+```
+
+- Run linter for code check with `--fix` flag
+```
+npm run lint:fix
+```
+
+- Run prettier for code check
+```
+npm run prettier
+```
+
+- Run prettier for format all files
+```
+npm run prettier:fix
+```
+
+- To run all unit tests
+```
+npm run test
+```
