@@ -7,6 +7,9 @@ const rootContainerParams = {
   callback: null,
 };
 
+/**
+ * Root container for all App components.
+ */
 export default class RootContainer extends BasicComponent {
   constructor() {
     super(rootContainerParams);
