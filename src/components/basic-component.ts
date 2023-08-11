@@ -4,11 +4,11 @@ import { ListenerCB } from '#src/types/types';
 /**
  * Args for component constructor.
  */
-interface BasicComponentConstructorArgs {
+export interface BasicComponentConstructorArgs {
   tagName: string;
   classNames: Array<string>;
   textContent: string;
-  callback?: ListenerCB;
+  callback?: ListenerCB | null;
   eventType?: string;
 }
 
@@ -23,7 +23,7 @@ type ComponentElementField = HTMLElement | null;
  * callback: function,
  * }} ElementParams
  */
-export default class BasicComponent {
+export class BasicComponent {
   public element: ComponentElementField;
 
   /**
@@ -38,7 +38,7 @@ export default class BasicComponent {
    * Get HTMLElement from component object.
    * @returns {HTMLElement}
    */
-  public getElement(): ComponentElementField {
+  public getHTMLElement(): ComponentElementField {
     return this.element;
   }
 
@@ -50,7 +50,7 @@ export default class BasicComponent {
     const currentComponentElement = checkInstance(this.element, HTMLElement);
 
     if (innerElement instanceof BasicComponent) {
-      currentComponentElement.append(checkInstance(innerElement.getElement(), HTMLElement));
+      currentComponentElement.append(checkInstance(innerElement.getHTMLElement(), HTMLElement));
     } else {
       currentComponentElement.append(innerElement);
     }

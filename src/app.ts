@@ -5,36 +5,35 @@ import '../assets/styles/general.css';
 import '../assets/styles/normalize.css';
 
 /* Import classes */
-import BasicComponent from '#src/components/basic-component';
+// import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
+import HeaderView from '#src/view/header/header-view';
 import checkInstance from '#src/utils/utils';
 
 // </editor-fold desc="Imports">
 
 export default class App {
-  public readonly root: HTMLElement;
+  public readonly root: HTMLElement | null;
 
-  public helloWorld: BasicComponent;
+  public headerView: HeaderView | null;
 
-  constructor() {
-    this.helloWorld = new BasicComponent({
-      tagName: 'div',
-      classNames: ['demo-container'],
-      textContent: 'Hello world!',
-      callback: (e): void => {
-        if (e instanceof Event) {
-          checkInstance(e.target, HTMLElement).classList.toggle('demo-red');
-        }
-      },
-      eventType: 'mouseover',
-    });
-    this.root = checkInstance(document.getElementsByTagName('body')[0], HTMLElement);
+  constructor(rootToken: string = 'body') {
+    this.headerView = null;
+    this.root = checkInstance(document.querySelector(rootToken), HTMLElement);
+
+    this.createView();
+  }
+
+  public createView(): void {
+    this.headerView = new HeaderView();
   }
 
   /**
    * Onload work method: entry point for most code.
    */
   private onloadStartWork(): void {
-    this.root.append(checkInstance(this.helloWorld.getElement(), HTMLElement));
+    checkInstance(this.root, HTMLElement).append(
+      checkInstance(checkInstance(this.headerView, HeaderView).getHTMLElement(), HTMLElement)
+    );
   }
 
   public start(): void {
