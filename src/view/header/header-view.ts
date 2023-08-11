@@ -2,15 +2,11 @@ import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import checkInstance from '#src/utils/utils';
 import View from '#src/view/view';
 
-const cssClasses = {
-  header: 'header',
-};
-
 const text = 'Demo header';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: 'header',
-  classNames: [cssClasses.header],
+  classNames: ['header'],
   textContent: text,
   callback: (e: Event | undefined): void => {
     if (e instanceof Event) {

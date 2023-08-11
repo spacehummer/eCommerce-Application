@@ -8,34 +8,52 @@ import '../assets/styles/normalize.css';
 // import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import RootContainer from '#src/components/basic_structure/root-container';
 import HeaderView from '#src/view/header/header-view';
+import MainView from '#src/view/main/main-view';
+import FooterView from '#src/view/footer/footer-view';
 import checkInstance from '#src/utils/utils';
 
 // </editor-fold desc="Imports">
 
 export default class App {
-  public readonly root: HTMLElement | null;
+  private readonly root: HTMLElement;
 
-  public rootContainer: RootContainer | null;
+  private rootContainer: RootContainer | null;
 
-  public headerView: HeaderView | null;
+  private headerView: HeaderView | null;
+
+  private mainView: MainView | null;
+
+  private footerView: FooterView | null;
 
   constructor(rootToken: string = 'body') {
-    this.headerView = null;
     this.root = checkInstance(document.querySelector(rootToken), HTMLElement);
     this.rootContainer = null;
+
+    this.headerView = null;
+    this.mainView = null;
+    this.footerView = null;
+
     this.createView();
   }
 
   public createView(): void {
     this.rootContainer = new RootContainer();
     this.headerView = new HeaderView();
+    this.mainView = new MainView();
+    this.footerView = new FooterView();
   }
 
   private appendView(): void {
     checkInstance(this.rootContainer, RootContainer).addInnerElement(
       checkInstance(checkInstance(this.headerView, HeaderView).getHTMLElement(), HTMLElement)
     );
-    checkInstance(this.root, HTMLElement).append(
+    checkInstance(this.rootContainer, RootContainer).addInnerElement(
+      checkInstance(checkInstance(this.mainView, MainView).getHTMLElement(), HTMLElement)
+    );
+    checkInstance(this.rootContainer, RootContainer).addInnerElement(
+      checkInstance(checkInstance(this.footerView, FooterView).getHTMLElement(), HTMLElement)
+    );
+    this.root.append(
       checkInstance(checkInstance(this.rootContainer, RootContainer).getHTMLElement(), HTMLElement)
     );
   }
