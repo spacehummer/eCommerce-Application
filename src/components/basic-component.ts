@@ -7,7 +7,7 @@ import { ListenerCB } from '#src/types/types';
 export interface BasicComponentConstructorArgs {
   tagName: string;
   classNames: Array<string>;
-  textContent: string;
+  textContent?: string | null;
   callback?: ListenerCB | null;
   eventType?: string;
 }
@@ -26,11 +26,14 @@ type ComponentElementField = HTMLElement | null;
 export class BasicComponent {
   public element: ComponentElementField;
 
+  public cssClasses: string[];
+
   /**
    * @param {ElementParams} params
    */
   constructor(params: BasicComponentConstructorArgs) {
     this.element = null;
+    this.cssClasses = params.classNames;
     this.createElement(params);
   }
 
@@ -46,7 +49,7 @@ export class BasicComponent {
    * Add inner HTMLElement for component.
    * @param {HTMLElement | BasicComponent} innerElement
    */
-  public addInnerElement(innerElement: Node | BasicComponent): void {
+  public addInnerElement(innerElement: HTMLElement | BasicComponent): void {
     const currentComponentElement = checkInstance(this.element, HTMLElement);
 
     if (innerElement instanceof BasicComponent) {
@@ -60,10 +63,12 @@ export class BasicComponent {
    * Create component HTML Element. Add CB and listener for event, when CB is specified.
    * @param {ElementParams} params
    */
-  private createElement(params: BasicComponentConstructorArgs): void {
+  protected createElement(params: BasicComponentConstructorArgs): void {
     this.element = document.createElement(params.tagName);
-    this.setCssClasses(params.classNames);
-    this.setTextContent(params.textContent);
+    this.setCssClasses(this.cssClasses);
+    if (params.textContent) {
+      this.setTextContent(params.textContent);
+    }
     if (params.callback) {
       this.setCallback(params.callback, params.eventType);
     }

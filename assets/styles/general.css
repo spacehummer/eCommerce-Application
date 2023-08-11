@@ -1,3 +1,13 @@
+.root-container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+}
+
 .demo-container {
   user-select: none;
 }

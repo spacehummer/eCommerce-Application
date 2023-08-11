@@ -11,7 +11,7 @@ export default function checkInstance<Class extends { new (...args: unknown[]): 
   constructor: Class
 ): InstanceType<Class> {
   if (!(instance instanceof constructor)) {
-    throw new Error();
+    throw new Error(`${instance} not an instance of ${constructor}`);
   }
   return instance as InstanceType<Class>;
 }
