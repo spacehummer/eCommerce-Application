@@ -25,6 +25,7 @@ export default class App {
           checkInstance(e.target, HTMLElement).classList.toggle('demo-red');
         }
       },
+      eventType: 'mouseover',
     });
     this.root = checkInstance(document.getElementsByTagName('body')[0], HTMLElement);
   }

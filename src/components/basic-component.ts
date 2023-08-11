@@ -9,6 +9,7 @@ interface BasicComponentConstructorArgs {
   classNames: Array<string>;
   textContent: string;
   callback: ListenerCB;
+  eventType?: string;
 }
 
 type ComponentElementField = HTMLElement | null;
@@ -63,12 +64,12 @@ export default class BasicComponent {
     this.element = document.createElement(params.tagName);
     this.setCssClasses(params.classNames);
     this.setTextContent(params.textContent);
-    this.setCallback(params.callback);
+    this.setCallback(params.callback, params.eventType);
   }
 
   /**
    * Add css classes.
-   * @param cssClasses
+   * @param {Array<string>} cssClasses  - list of CSS classes for component HTML Element.
    */
   public setCssClasses(cssClasses: Array<string>): void {
     cssClasses.map((cssClass) => checkInstance(this.element, HTMLElement).classList.add(cssClass));
@@ -76,7 +77,7 @@ export default class BasicComponent {
 
   /**
    * Add component HTML Element text content.
-   * @param {string} text
+   * @param {string} text - new text content for component HTML Element.
    */
   public setTextContent(text = ''): void {
     checkInstance(this.element, HTMLElement).textContent = text;
@@ -84,11 +85,12 @@ export default class BasicComponent {
 
   /**
    * Set component HTML Element callback.
-   * @param {function} callback
+   * @param {string}    eventType - type of event for listener.
+   * @param {function}  callback  - listener CB.
    */
-  public setCallback(callback: ListenerCB): void {
+  public setCallback(callback: ListenerCB, eventType: string = 'click'): void {
     if (typeof callback === 'function') {
-      checkInstance(this.element, HTMLElement).addEventListener('click', (event) =>
+      checkInstance(this.element, HTMLElement).addEventListener(eventType, (event) =>
         callback(event)
       );
     }
