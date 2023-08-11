@@ -74,7 +74,7 @@ export default class BasicComponent {
    * @param {Array<string>} cssClasses  - list of CSS classes for component HTML Element.
    */
   public setCssClasses(cssClasses: Array<string>): void {
-    cssClasses.map((cssClass) => checkInstance(this.element, HTMLElement).classList.add(cssClass));
+    checkInstance(this.element, HTMLElement).classList.add(...cssClasses);
   }
 
   /**
