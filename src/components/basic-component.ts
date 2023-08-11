@@ -8,7 +8,7 @@ interface BasicComponentConstructorArgs {
   tagName: string;
   classNames: Array<string>;
   textContent: string;
-  callback: ListenerCB;
+  callback?: ListenerCB;
   eventType?: string;
 }
 
@@ -57,14 +57,16 @@ export default class BasicComponent {
   }
 
   /**
-   * Create component HTML Element.
+   * Create component HTML Element. Add CB and listener for event, when CB is specified.
    * @param {ElementParams} params
    */
   private createElement(params: BasicComponentConstructorArgs): void {
     this.element = document.createElement(params.tagName);
     this.setCssClasses(params.classNames);
     this.setTextContent(params.textContent);
-    this.setCallback(params.callback, params.eventType);
+    if (params.callback) {
+      this.setCallback(params.callback, params.eventType);
+    }
   }
 
   /**
