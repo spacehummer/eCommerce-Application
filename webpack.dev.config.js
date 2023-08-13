@@ -41,6 +41,7 @@ module.exports = (env) => {
       extensions: ['.ts', '.js'],
       alias: {
         '#src': path.resolve('./src'),
+        '#assets': path.resolve('./assets'),
       },
     },
     output: {

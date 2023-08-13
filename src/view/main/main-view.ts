@@ -5,17 +5,17 @@ const cssClasses = {
   header: 'main',
 };
 
-const text = 'Demo main';
+// const text = 'Demo main';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: 'main',
   classNames: [cssClasses.header],
-  textContent: text,
+  textContent: '',
   callback: null,
 };
 
 /**
- * Header view component.
+ * Main view component.
  */
 export default class MainView extends View {
   constructor() {

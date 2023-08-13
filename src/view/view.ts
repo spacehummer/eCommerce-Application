@@ -1,6 +1,7 @@
 import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
+import { GetHTMLElement } from '#src/types/types';
 
-export default class View {
+export default class View implements GetHTMLElement {
   public basicComponent: BasicComponent;
 
   constructor(viewParams: BasicComponentConstructorArgs) {

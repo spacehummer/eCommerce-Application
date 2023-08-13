@@ -13,6 +13,7 @@ module.exports = {
     extensions: ['.ts', '.js'],
     alias: {
       '#src': path.resolve('./src'),
+      '#assets': path.resolve('./assets'),
     },
   },
   output: {

@@ -1,3 +1,9 @@
+* {
+  box-sizing: border-box;
+  /* outline: solid red 1px; */
+}
+
+/* <editor-fold desc="General styles">*/
 .root-container {
   display: flex;
   position: relative;
@@ -8,6 +14,18 @@
   font-weight: 400;
 }
 
+.content {
+  max-width: 100%;
+  width: 1322px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+/* </editor-fold desc="General styles">*/
+
+.content--header {
+  display: flex;
+}
+
 .main {
   /*flex-grow: 1;*/
 }
@@ -16,6 +34,25 @@
   margin-top: auto;
 }
 
+/* <editor-fold desc="Logo component">*/
+.logo {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+}
+
+.logo__img {
+  width: 64px;
+  height: 64px;
+}
+
+.logo__name {
+  font-size: 32px;
+}
+/* </editor-fold desc="Logo component">*/
+
+/* <editor-fold desc="Test styles">*/
 .demo-container {
   user-select: none;
 }
@@ -23,3 +60,4 @@
 .demo-red {
   color: #FF0000;
 }
+/* </editor-fold desc="Test styles">*/

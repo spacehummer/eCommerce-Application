@@ -1,18 +1,19 @@
 import checkInstance from '#src/utils/utils';
-import { ListenerCB } from '#src/types/types';
+import { ListenerCB, ComponentElementField, GetHTMLElement } from '#src/types/types';
 
 /**
  * Args for component constructor.
  */
 export interface BasicComponentConstructorArgs {
   tagName: string;
-  classNames: Array<string>;
+  classNames: ClassList;
+  id?: string | null;
   textContent?: string | null;
   callback?: ListenerCB | null;
   eventType?: string;
 }
 
-type ComponentElementField = HTMLElement | null;
+export type ClassList = string[];
 
 /**
  * Basic component class.
@@ -23,8 +24,8 @@ type ComponentElementField = HTMLElement | null;
  * callback: function,
  * }} ElementParams
  */
-export class BasicComponent {
-  public element: ComponentElementField;
+export class BasicComponent implements GetHTMLElement {
+  public htmlElement: ComponentElementField;
 
   public cssClasses: string[];
 
@@ -32,7 +33,7 @@ export class BasicComponent {
    * @param {ElementParams} params
    */
   constructor(params: BasicComponentConstructorArgs) {
-    this.element = null;
+    this.htmlElement = null;
     this.cssClasses = params.classNames;
     this.createElement(params);
   }
@@ -42,20 +43,20 @@ export class BasicComponent {
    * @returns {HTMLElement}
    */
   public getHTMLElement(): ComponentElementField {
-    return this.element;
+    return this.htmlElement;
   }
 
   /**
    * Add inner HTMLElement for component.
    * @param {HTMLElement | BasicComponent} innerElement
    */
-  public addInnerElement(innerElement: HTMLElement | BasicComponent): void {
-    const currentComponentElement = checkInstance(this.element, HTMLElement);
+  public addInnerElement(innerElement: HTMLElement | GetHTMLElement): void {
+    const currentComponentElement = checkInstance(this.htmlElement, HTMLElement);
 
-    if (innerElement instanceof BasicComponent) {
-      currentComponentElement.append(checkInstance(innerElement.getHTMLElement(), HTMLElement));
-    } else {
+    if (innerElement instanceof HTMLElement) {
       currentComponentElement.append(innerElement);
+    } else {
+      currentComponentElement.append(checkInstance(innerElement.getHTMLElement(), HTMLElement));
     }
   }
 
@@ -64,8 +65,11 @@ export class BasicComponent {
    * @param {ElementParams} params
    */
   protected createElement(params: BasicComponentConstructorArgs): void {
-    this.element = document.createElement(params.tagName);
+    this.htmlElement = document.createElement(params.tagName);
     this.setCssClasses(this.cssClasses);
+    if (params.id) {
+      this.setCssId(params.id);
+    }
     if (params.textContent) {
       this.setTextContent(params.textContent);
     }
@@ -79,7 +83,15 @@ export class BasicComponent {
    * @param {Array<string>} cssClasses  - list of CSS classes for component HTML Element.
    */
   public setCssClasses(cssClasses: Array<string>): void {
-    checkInstance(this.element, HTMLElement).classList.add(...cssClasses);
+    checkInstance(this.htmlElement, HTMLElement).classList.add(...cssClasses);
+  }
+
+  /**
+   * Add id to HTML Element.
+   * @param {string} id - new id for HTML Element.
+   */
+  public setCssId(id: string): void {
+    checkInstance(this.htmlElement, HTMLElement).setAttribute('id', id);
   }
 
   /**
@@ -87,19 +99,31 @@ export class BasicComponent {
    * @param {string} text - new text content for component HTML Element.
    */
   public setTextContent(text = ''): void {
-    checkInstance(this.element, HTMLElement).textContent = text;
+    checkInstance(this.htmlElement, HTMLElement).textContent = text;
   }
 
   /**
    * Set component HTML Element callback.
-   * @param {string}    eventType - type of event for listener.
    * @param {function}  callback  - listener CB.
+   * @param {string}    eventType - type of event for listener.
    */
   public setCallback(callback: ListenerCB, eventType: string = 'click'): void {
     if (typeof callback === 'function') {
-      checkInstance(this.element, HTMLElement).addEventListener(eventType, (event) =>
+      checkInstance(this.htmlElement, HTMLElement).addEventListener(eventType, (event) =>
         callback(event)
       );
     }
+  }
+
+  /**
+   * Set component outer HTML Element attribute.
+   * @param {string} name   - A string specifying the name of the attribute
+   *                          whose value is to be set.
+   * @param {string} value  - A string containing the value to assign to the attribute.
+   *                          Any non-string value specified is converted automatically
+   *                          into a string.
+   */
+  public setComponentAttribute(name: string, value: string): void {
+    checkInstance(this.htmlElement, HTMLElement).setAttribute(name, value);
   }
 }

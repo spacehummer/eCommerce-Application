@@ -1,19 +1,21 @@
 import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import checkInstance from '#src/utils/utils';
 import View from '#src/view/view';
+import Content from '#src/components/basic_structure/content';
+import LogoGeneralView from '#src/view/general-components/logo-general-view';
 
-const text = 'Demo header';
+// const text = 'Demo header';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: 'header',
   classNames: ['header'],
-  textContent: text,
   callback: (e: Event | undefined): void => {
     if (e instanceof Event) {
-      checkInstance(e.target, HTMLElement).classList.toggle('demo-red');
+      checkInstance(e.currentTarget, HTMLElement).classList.toggle('demo-red');
+      e.stopPropagation();
     }
   },
-  eventType: 'mouseover',
+  eventType: 'mouseenter',
 };
 
 /**
@@ -22,5 +24,16 @@ const viewParams: BasicComponentConstructorArgs = {
 export default class HeaderView extends View {
   constructor() {
     super(viewParams);
+    this.configureView();
+  }
+
+  private configureView(): void {
+    const content = new Content(['content--header']);
+
+    const logo = new LogoGeneralView();
+
+    content.addInnerElement(logo);
+
+    this.basicComponent.addInnerElement(content);
   }
 }
