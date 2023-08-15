@@ -1,12 +1,13 @@
 import checkInstance from '#src/utils/utils';
 import { ListenerCB, ComponentElementField, GetHTMLElement } from '#src/types/types';
+import ClassesEnum from '#src/components_params/classes-enum';
 
 /**
  * Args for component constructor.
  */
 export interface BasicComponentConstructorArgs {
   tagName: string;
-  classNames: ClassList;
+  classNames: ClassesEnum | ClassesEnum[];
   id?: string | null;
   textContent?: string | null;
   callback?: ListenerCB | null;
@@ -27,15 +28,20 @@ export type ClassList = string[];
 export class BasicComponent implements GetHTMLElement {
   public htmlElement: ComponentElementField;
 
-  public cssClasses: string[];
+  public paramsObj: BasicComponentConstructorArgs;
+
+  public cssClasses: ClassList;
 
   /**
    * @param {ElementParams} params
    */
   constructor(params: BasicComponentConstructorArgs) {
+    this.paramsObj = params;
     this.htmlElement = null;
-    this.cssClasses = params.classNames;
-    this.createElement(params);
+    this.cssClasses = Array.isArray(this.paramsObj.classNames)
+      ? this.paramsObj.classNames
+      : [this.paramsObj.classNames];
+    this.createElement(this.paramsObj);
   }
 
   /**
@@ -82,8 +88,8 @@ export class BasicComponent implements GetHTMLElement {
    * Add css classes.
    * @param {Array<string>} cssClasses  - list of CSS classes for component HTML Element.
    */
-  public setCssClasses(cssClasses: Array<string>): void {
-    checkInstance(this.htmlElement, HTMLElement).classList.add(...cssClasses);
+  public setCssClasses(cssClasses: ClassList): void {
+    checkInstance(this.htmlElement, HTMLElement).classList.add(...cssClasses.flat(Infinity));
   }
 
   /**
@@ -125,5 +131,19 @@ export class BasicComponent implements GetHTMLElement {
    */
   public setComponentAttribute(name: string, value: string): void {
     checkInstance(this.htmlElement, HTMLElement).setAttribute(name, value);
+  }
+
+  protected addAdditionalClasses(additionClassesList: ClassesEnum | ClassesEnum[]): void {
+    if (Array.isArray(this.paramsObj.classNames)) {
+      if (Array.isArray(additionClassesList)) {
+        this.paramsObj.classNames.push(...additionClassesList);
+      } else {
+        this.paramsObj.classNames.push(additionClassesList);
+      }
+    } else {
+      this.paramsObj.classNames = additionClassesList;
+    }
+
+    this.setCssClasses(this.cssClasses);
   }
 }

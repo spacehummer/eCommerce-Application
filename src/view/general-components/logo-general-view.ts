@@ -1,12 +1,13 @@
 import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import View from '#src/view/view';
 
+import ClassesEnum from '#src/components_params/classes-enum';
 import logoImgSrc from '../../../assets/icons/logo.svg';
 // import logoImgSrc2 from '../../../assets/icons/logo.png';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: 'div',
-  classNames: ['logo'],
+  classNames: ClassesEnum.GENERAL_LOGO,
 };
 
 /**
@@ -21,14 +22,14 @@ export default class LogoGeneralView extends View {
   private configureView(): void {
     const logoImgParams = {
       tagName: 'img',
-      classNames: ['logo__img'],
+      classNames: ClassesEnum.GENERAL_LOGO_IMG,
     };
     const logoImg = new BasicComponent(logoImgParams);
     logoImg.setComponentAttribute('src', logoImgSrc);
 
     const logoSpanParams = {
       tagName: 'span',
-      classNames: ['logo__name'],
+      classNames: ClassesEnum.GENERAL_LOGO_NAME,
       textContent: 'BookSavior',
     };
     const logoSpan = new BasicComponent(logoSpanParams);

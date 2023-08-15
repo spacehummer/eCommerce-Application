@@ -1,8 +1,9 @@
+import ClassesEnum from '#src/components_params/classes-enum';
 import { BasicComponent } from '../basic-component';
 
 const rootContainerParams = {
   tagName: 'div',
-  classNames: ['root-container'],
+  classNames: ClassesEnum.ROOT_CONTAINER,
   textContent: null,
   callback: null,
 };

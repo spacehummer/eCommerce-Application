@@ -1,12 +1,13 @@
 import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import View from '#src/view/view';
 import Content from '#src/components/basic_structure/content';
+import ClassesEnum from '#src/components_params/classes-enum';
 
 // const text = 'Demo footer';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: 'footer',
-  classNames: ['footer'],
+  classNames: ClassesEnum.FOOTER,
   callback: null,
 };
 

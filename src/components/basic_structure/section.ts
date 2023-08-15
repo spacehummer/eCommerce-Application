@@ -1,8 +1,9 @@
-import { BasicComponent, ClassList } from '../basic-component';
+import ClassesEnum from '#src/components_params/classes-enum';
+import { BasicComponent } from '../basic-component';
 
-const rootContainerParams = {
+const sectionParams = {
   tagName: 'section',
-  classNames: [''],
+  classNames: ClassesEnum.SECTION,
   id: '',
   textContent: null,
   callback: null,
@@ -12,9 +13,12 @@ const rootContainerParams = {
  * Root container for all App components.
  */
 export default class Content extends BasicComponent {
-  constructor(additionClassesList: ClassList, id: string) {
-    rootContainerParams.classNames = additionClassesList;
-    rootContainerParams.id = id;
-    super(rootContainerParams);
+  constructor(additionClassesList: ClassesEnum | ClassesEnum[], id: string) {
+    sectionParams.id = id;
+    super(sectionParams);
+
+    if (additionClassesList) {
+      this.addAdditionalClasses(additionClassesList);
+    }
   }
 }

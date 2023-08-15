@@ -1,15 +1,10 @@
 import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import View from '#src/view/view';
-
-const cssClasses = {
-  header: 'main',
-};
-
-// const text = 'Demo main';
+import ClassesEnum from '#src/components_params/classes-enum';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: 'main',
-  classNames: [cssClasses.header],
+  classNames: [ClassesEnum.MAIN],
   textContent: '',
   callback: null,
 };

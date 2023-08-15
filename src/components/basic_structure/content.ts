@@ -1,8 +1,9 @@
-import { BasicComponent, ClassList } from '../basic-component';
+import ClassesEnum from '#src/components_params/classes-enum';
+import { BasicComponent, BasicComponentConstructorArgs } from '../basic-component';
 
-const rootContainerParams = {
+const rootContainerParams: BasicComponentConstructorArgs = {
   tagName: 'div',
-  classNames: ['content'],
+  classNames: ClassesEnum.CONTENT,
   textContent: null,
   callback: null,
 };
@@ -11,10 +12,16 @@ const rootContainerParams = {
  * Root container for all App components.
  */
 export default class Content extends BasicComponent {
-  constructor(additionClassesList?: ClassList) {
-    if (additionClassesList) {
-      rootContainerParams.classNames.push(...additionClassesList);
-    }
+  /**
+   * Uses rootContainerParams amd can add new classes throw arg additionClassesList
+   * @param { ClassesEnum | ClassesEnum[]} additionClassesList  - additional classes
+   *  for content block, e.g. 'content--header' modifier for header content.
+   */
+  constructor(additionClassesList?: ClassesEnum | ClassesEnum[]) {
     super(rootContainerParams);
+
+    if (additionClassesList) {
+      this.addAdditionalClasses(additionClassesList);
+    }
   }
 }

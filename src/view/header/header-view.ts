@@ -3,12 +3,13 @@ import checkInstance from '#src/utils/utils';
 import View from '#src/view/view';
 import Content from '#src/components/basic_structure/content';
 import LogoGeneralView from '#src/view/general-components/logo-general-view';
+import ClassesEnum from '#src/components_params/classes-enum';
 
 // const text = 'Demo header';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: 'header',
-  classNames: ['header'],
+  classNames: ClassesEnum.HEADER,
   callback: (e: Event | undefined): void => {
     if (e instanceof Event) {
       checkInstance(e.currentTarget, HTMLElement).classList.toggle('demo-red');
@@ -28,7 +29,7 @@ export default class HeaderView extends View {
   }
 
   private configureView(): void {
-    const content = new Content(['content--header']);
+    const content = new Content([ClassesEnum.CONTENT_HEADER]);
 
     const logo = new LogoGeneralView();
 
