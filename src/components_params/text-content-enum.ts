@@ -1,5 +1,5 @@
 const enum TextContentEnum {
-  GENERAL_LOGO_NAME = 'BookSavior',
+  GENERAL_LOGO_NAME = 'ProjectName',
 }
 
 export default TextContentEnum;

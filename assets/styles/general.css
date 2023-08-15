@@ -10,7 +10,7 @@
   flex-direction: column;
   /*justify-content: space-between;*/
   min-height: 100vh;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
 }
 
@@ -24,6 +24,10 @@
 
 .content--header {
   display: flex;
+}
+
+.header {
+  background-color: #B44739;
 }
 
 .main {
@@ -49,6 +53,8 @@
 
 .logo__name {
   font-size: 32px;
+  font-weight: 600;
+  color: #F2F2F2;
 }
 /* </editor-fold desc="Logo component">*/
 

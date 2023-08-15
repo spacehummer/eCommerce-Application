@@ -6,7 +6,7 @@ import TagsEnum from '#src/components_params/tags-enum';
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.MAIN,
   classNames: [ClassesEnum.MAIN],
-  textContent: '',
+  textContent: null,
   callback: null,
 };
 
