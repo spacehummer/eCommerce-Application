@@ -2,6 +2,7 @@ import checkInstance from '#src/utils/utils';
 import { ListenerCB, ComponentElementField, GetHTMLElement } from '#src/types/types';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
+import TextContentEnum from '#src/components_params/text-content-enum';
 
 /**
  * Args for component constructor.
@@ -10,7 +11,7 @@ export interface BasicComponentConstructorArgs {
   tagName: TagsEnum;
   classNames: ClassesEnum | ClassesEnum[];
   id?: string | null;
-  textContent?: string | null;
+  textContent?: TextContentEnum | null;
   callback?: ListenerCB | null;
   eventType?: string;
 }

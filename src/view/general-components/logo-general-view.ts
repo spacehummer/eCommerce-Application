@@ -3,6 +3,7 @@ import View from '#src/view/view';
 
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
+import TextContentEnum from '#src/components_params/text-content-enum';
 
 import logoImgSrc from '#assets/icons/logo.svg';
 
@@ -31,7 +32,7 @@ export default class LogoGeneralView extends View {
     const logoSpanParams = {
       tagName: TagsEnum.SPAN,
       classNames: ClassesEnum.GENERAL_LOGO_NAME,
-      textContent: 'BookSavior',
+      textContent: TextContentEnum.GENERAL_LOGO_NAME,
     };
     const logoSpan = new BasicComponent(logoSpanParams);
 
