@@ -1,8 +1,9 @@
+import TagsEnum from '#src/components_params/tags-enum';
 import ClassesEnum from '#src/components_params/classes-enum';
 import { BasicComponent, BasicComponentConstructorArgs } from '../basic-component';
 
 const rootContainerParams: BasicComponentConstructorArgs = {
-  tagName: 'div',
+  tagName: TagsEnum.CONTAINER,
   classNames: ClassesEnum.CONTENT,
   textContent: null,
   callback: null,

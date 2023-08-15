@@ -4,11 +4,12 @@ import View from '#src/view/view';
 import Content from '#src/components/basic_structure/content';
 import LogoGeneralView from '#src/view/general-components/logo-general-view';
 import ClassesEnum from '#src/components_params/classes-enum';
+import TagsEnum from '#src/components_params/tags-enum';
 
 // const text = 'Demo header';
 
 const viewParams: BasicComponentConstructorArgs = {
-  tagName: 'header',
+  tagName: TagsEnum.HEADER,
   classNames: ClassesEnum.HEADER,
   callback: (e: Event | undefined): void => {
     if (e instanceof Event) {

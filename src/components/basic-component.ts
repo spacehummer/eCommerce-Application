@@ -1,12 +1,13 @@
 import checkInstance from '#src/utils/utils';
 import { ListenerCB, ComponentElementField, GetHTMLElement } from '#src/types/types';
 import ClassesEnum from '#src/components_params/classes-enum';
+import TagsEnum from '#src/components_params/tags-enum';
 
 /**
  * Args for component constructor.
  */
 export interface BasicComponentConstructorArgs {
-  tagName: string;
+  tagName: TagsEnum;
   classNames: ClassesEnum | ClassesEnum[];
   id?: string | null;
   textContent?: string | null;

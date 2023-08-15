@@ -1,4 +1,4 @@
-const enum ListTags {
+const enum TagsEnum {
   /* General structure elements */
   CONTAINER = 'div',
   HEADER = 'header',
@@ -19,4 +19,4 @@ const enum ListTags {
   IMG = 'img',
 }
 
-export default ListTags;
+export default TagsEnum;

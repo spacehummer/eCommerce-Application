@@ -1,8 +1,9 @@
 import ClassesEnum from '#src/components_params/classes-enum';
+import TagsEnum from '#src/components_params/tags-enum';
 import { BasicComponent } from '../basic-component';
 
 const sectionParams = {
-  tagName: 'section',
+  tagName: TagsEnum.SECTION,
   classNames: ClassesEnum.SECTION,
   id: '',
   textContent: null,
