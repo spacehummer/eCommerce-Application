@@ -19,18 +19,15 @@ const product = new ProductProjection(authService);
 
 class Api {
   public async getProducts(): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> {
-    const result = await product.getProducts();
-    return (await product.getProducts()) as ClientResponse<ProductProjectionPagedQueryResponse>;
-    return result as ClientResponse<ProductProjectionPagedQueryResponse>;
+    return product.getProducts();
   }
 
   public async login(credentials: UserAuthOptions): Promise<ClientResponse<CustomerSignInResult>> {
     authService.login(credentials);
-    const result = await customer.getCustomer({
+    return customer.getCustomer({
       email: credentials.username,
       password: credentials.password,
     });
-    return result as ClientResponse<CustomerSignInResult>;
   }
 
   public async logout(): Promise<void> {
@@ -39,11 +36,15 @@ class Api {
 
   public async signUp(user: CustomerData): Promise<ClientResponse<CustomerSignInResult>> {
     const draftUser = customer.createCustomerDraft(user);
-    return (await customer.createCustomer(draftUser)) as ClientResponse<CustomerSignInResult>;
+    return customer.createCustomer(draftUser);
   }
 
-  public async getCart(currency: string): Promise<ClientResponse<Cart>> {
-    return (await cart.createCartForCurrentCustomer({ currency })) as ClientResponse<Cart>;
+  public async getActiveCartOrCreateIt(): Promise<ClientResponse<Cart>> {
+    return cart.getActiveCartOrCreateIt();
+  }
+
+  public async createCart(currency: string): Promise<ClientResponse<Cart>> {
+    return cart.createCartForCurrentCustomer({ currency });
   }
 
   public async addToCart(
@@ -51,13 +52,13 @@ class Api {
     variantId: number,
     quantity: number
   ): Promise<ClientResponse<Cart>> {
-    return (await cart.updateActiveCart({
+    return cart.updateActiveCart({
       cartUpdateDraft: { productId, variantId, quantity, version: -1 },
-    })) as ClientResponse<Cart>;
+    });
   }
 
   public async removeFromCart(itemDraft: CartRemoveItemDraft): Promise<ClientResponse<Cart>> {
-    return (await cart.removeLineItem(itemDraft)) as ClientResponse<Cart>;
+    return cart.removeLineItem(itemDraft);
   }
 }
 

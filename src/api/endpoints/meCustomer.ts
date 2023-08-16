@@ -7,6 +7,7 @@ import {
 import BaseEndpoint from './baseEndpoint';
 import ErrorData from './types/error';
 import CustomerData from './types/customer';
+import ApiError from '../utils/apiError';
 
 interface ICustomerRepository {
   createCustomerDraft(customerData: CustomerData): object;
@@ -36,7 +37,7 @@ class CustomerRepository extends BaseEndpoint implements ICustomerRepository {
 
   public async createCustomer(
     customerData: MyCustomerDraft
-  ): Promise<ClientResponse<CustomerSignInResult> | ErrorData> {
+  ): Promise<ClientResponse<CustomerSignInResult>> {
     try {
       const customer = await this.apiRoot
         .withProjectKey({ projectKey: this.projectKey })
@@ -50,14 +51,14 @@ class CustomerRepository extends BaseEndpoint implements ICustomerRepository {
       // check to make sure status is 201
       return customer;
     } catch (error) {
-      return error as ErrorData;
+      throw new ApiError(error as ErrorData);
     }
   }
 
   public async getCustomer({
     email,
     password,
-  }: CustomerSignin): Promise<ClientResponse<CustomerSignInResult> | ErrorData> {
+  }: CustomerSignin): Promise<ClientResponse<CustomerSignInResult>> {
     try {
       const customer = await this.apiRoot
         .withProjectKey({ projectKey: this.projectKey })
@@ -75,7 +76,7 @@ class CustomerRepository extends BaseEndpoint implements ICustomerRepository {
 
       return customer;
     } catch (error) {
-      return error as ErrorData;
+      throw new ApiError(error as ErrorData);
     }
   }
 }

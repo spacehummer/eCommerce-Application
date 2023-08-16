@@ -1,4 +1,5 @@
 import { ClientResponse, ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
+import ApiError from '../utils/apiError';
 import BaseEndpoint from './baseEndpoint';
 import ErrorData from './types/error';
 
@@ -7,9 +8,7 @@ interface IProductRepository {
 }
 
 class ProductProjection extends BaseEndpoint implements IProductRepository {
-  public async getProducts(): Promise<
-    ClientResponse<ProductProjectionPagedQueryResponse> | ErrorData
-  > {
+  public async getProducts(): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> {
     try {
       const products = await this.apiRoot
         .withProjectKey({ projectKey: this.projectKey })
@@ -19,7 +18,7 @@ class ProductProjection extends BaseEndpoint implements IProductRepository {
 
       return products;
     } catch (error) {
-      return error as ErrorData;
+      throw new ApiError(error as ErrorData);
     }
   }
 }
