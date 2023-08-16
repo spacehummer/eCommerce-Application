@@ -22,6 +22,20 @@
 }
 /* </editor-fold desc="General styles">*/
 
+/* <editor-fold desc="General modifiers">*/
+.reset-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.reset-list-element {
+  margin-left: 0;
+  padding-left: 0;
+}
+/* </editor-fold desc="General modifiers">*/
+
 /* <editor-fold desc="Header">*/
 .header {
   background-color: #B44739;
@@ -29,6 +43,7 @@
 
 .content--header {
   display: flex;
+  justify-content: space-between;
 }
 /* </editor-fold desc="Header">*/
 
@@ -40,6 +55,24 @@
   margin-top: auto;
 }
 
+/* <editor-fold desc="Navigation menu component">*/
+.nav-menu-list {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  column-gap: 16px;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-menu-list__item {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
+}
+/* </editor-fold>*/
+
 /* <editor-fold desc="Logo component">*/
 .logo {
   display: flex;
@@ -49,13 +82,16 @@
 }
 
 .logo__img {
+  display: block;
   width: 64px;
   height: 64px;
 }
 
 .logo__name {
+  display: inline-block;
   font-size: 32px;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   color: #F2F2F2;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
 }

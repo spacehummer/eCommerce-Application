@@ -4,7 +4,7 @@ const enum ClassesEnum {
   CONTENT = 'content',
   SECTION = 'section',
   HEADER = 'header',
-  CONTENT_HEADER = 'content--header test-style',
+  CONTENT_HEADER = 'content--header',
   MAIN = 'main',
   FOOTER = 'footer',
   /* Logo */
@@ -13,8 +13,8 @@ const enum ClassesEnum {
   GENERAL_LOGO_NAME = 'logo__name',
   /* Nav menu */
   NAV_MENU = 'nav-menu',
-  NAV_MENU_LIST = 'nav-menu-list',
-  NAV_MENU_LIST_ITEM = 'nav-menu-list__item',
+  NAV_MENU_LIST = 'nav-menu-list reset-list',
+  NAV_MENU_LIST_ITEM = 'nav-menu-list__item reset-list-element',
 }
 
 export default ClassesEnum;
