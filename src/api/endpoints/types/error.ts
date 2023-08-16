@@ -10,7 +10,7 @@ type ErrorBody = Readonly<{
 }>;
 
 type ErrorData = Readonly<{
-  statusCode: number;
+  statusCode?: number;
   message: string;
   body: ErrorBody;
 }>;
