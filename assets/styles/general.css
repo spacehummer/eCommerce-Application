@@ -18,7 +18,7 @@
   max-width: 100%;
   width: 1322px;
   margin: 0 auto;
-  padding: 0 50px;
+  padding: 0 64px;
 }
 /* </editor-fold desc="General styles">*/
 
@@ -55,6 +55,7 @@
   font-size: 32px;
   font-weight: 600;
   color: #F2F2F2;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
 }
 /* </editor-fold desc="Logo component">*/
 
