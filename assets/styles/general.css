@@ -22,13 +22,15 @@
 }
 /* </editor-fold desc="General styles">*/
 
-.content--header {
-  display: flex;
-}
-
+/* <editor-fold desc="Header">*/
 .header {
   background-color: #B44739;
 }
+
+.content--header {
+  display: flex;
+}
+/* </editor-fold desc="Header">*/
 
 .main {
   /*flex-grow: 1;*/

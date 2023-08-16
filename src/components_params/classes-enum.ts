@@ -4,7 +4,7 @@ const enum ClassesEnum {
   CONTENT = 'content',
   SECTION = 'section',
   HEADER = 'header',
-  CONTENT_HEADER = 'content--header',
+  CONTENT_HEADER = 'content--header test-style',
   MAIN = 'main',
   FOOTER = 'footer',
   /* Logo */

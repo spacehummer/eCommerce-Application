@@ -16,7 +16,7 @@ export interface BasicComponentConstructorArgs {
   eventType?: string;
 }
 
-export type ClassList = string[];
+export type ClassList = string[] | null;
 
 /**
  * Basic component class.
@@ -40,9 +40,7 @@ export class BasicComponent implements GetHTMLElement {
   constructor(params: BasicComponentConstructorArgs) {
     this.paramsObj = params;
     this.htmlElement = null;
-    this.cssClasses = Array.isArray(this.paramsObj.classNames)
-      ? this.paramsObj.classNames
-      : [this.paramsObj.classNames];
+    this.cssClasses = null;
     this.createElement(this.paramsObj);
   }
 
@@ -74,7 +72,8 @@ export class BasicComponent implements GetHTMLElement {
    */
   protected createElement(params: BasicComponentConstructorArgs): void {
     this.htmlElement = document.createElement(params.tagName);
-    this.setCssClasses(this.cssClasses);
+    this.updateCssClassesComponent();
+    this.setCssClassesToElement(this.cssClasses);
     if (params.id) {
       this.setCssId(params.id);
     }
@@ -87,11 +86,26 @@ export class BasicComponent implements GetHTMLElement {
   }
 
   /**
+   * Update CSS classes list, stored in component.
+   * @protected
+   */
+  protected updateCssClassesComponent(): void {
+    this.cssClasses = Array.isArray(this.paramsObj.classNames)
+      ? this.paramsObj.classNames
+      : [this.paramsObj.classNames];
+  }
+
+  /**
    * Add css classes.
    * @param {Array<string>} cssClasses  - list of CSS classes for component HTML Element.
    */
-  public setCssClasses(cssClasses: ClassList): void {
-    checkInstance(this.htmlElement, HTMLElement).classList.add(...cssClasses.flat(Infinity));
+  public setCssClassesToElement(cssClasses: ClassList): void {
+    console.log(cssClasses);
+    if (cssClasses !== null) {
+      cssClasses.forEach((element) => {
+        checkInstance(this.htmlElement, HTMLElement).classList.add(...element.split(' '));
+      });
+    }
   }
 
   /**
@@ -146,6 +160,7 @@ export class BasicComponent implements GetHTMLElement {
       this.paramsObj.classNames = additionClassesList;
     }
 
-    this.setCssClasses(this.cssClasses);
+    this.updateCssClassesComponent();
+    this.setCssClassesToElement(this.cssClasses);
   }
 }

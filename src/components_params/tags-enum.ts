@@ -13,7 +13,7 @@ const enum TagsEnum {
   PARAGRAPH = 'p',
   SPAN = 'span',
   /* Lists */
-  NUMBERED_LIST = 'ul',
+  MARKED_LIST = 'ul',
   LIST_ITEM = 'li',
   /* UI interactive */
   LINK = 'a',

@@ -5,6 +5,7 @@ import Content from '#src/components/basic_structure/content';
 import LogoGeneralView from '#src/view/general-components/logo-general-view';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
+import NavMenuView from '#src/view/header/navigation/nav-menu-view';
 
 // const text = 'Demo header';
 
@@ -31,10 +32,11 @@ export default class HeaderView extends View {
 
   private configureView(): void {
     const content = new Content([ClassesEnum.CONTENT_HEADER]);
-
     const logo = new LogoGeneralView();
+    const navMenu = new NavMenuView();
 
     content.addInnerElement(logo);
+    content.addInnerElement(navMenu);
 
     this.basicComponent.addInnerElement(content);
   }
