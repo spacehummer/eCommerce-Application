@@ -11,3 +11,11 @@ export type ComponentElementField = HTMLElement | null;
 export interface GetHTMLElement {
   getHTMLElement(): ComponentElementField;
 }
+
+/**
+ * Interface for pages parameters object.
+ */
+export interface PageParams {
+  name: string;
+  callback: () => void;
+}

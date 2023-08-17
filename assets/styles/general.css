@@ -71,6 +71,10 @@
   color: #ffffff;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
 }
+
+.item__link--current {
+  color: #FF6F61;
+}
 /* </editor-fold>*/
 
 /* <editor-fold desc="Logo component">*/
