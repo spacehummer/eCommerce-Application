@@ -17,7 +17,17 @@ interface ICustomerRepository {
 
 class CustomerRepository extends BaseEndpoint implements ICustomerRepository {
   public createCustomerDraft(customerData: CustomerData): MyCustomerDraft {
-    const { email, password, firstName, lastName, countryCode } = customerData;
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      countryCode,
+      streetName,
+      streetNumber,
+      postalCode,
+      city,
+    } = customerData;
 
     return {
       email,
@@ -28,6 +38,10 @@ class CustomerRepository extends BaseEndpoint implements ICustomerRepository {
       addresses: [
         {
           country: countryCode,
+          streetName,
+          streetNumber,
+          postalCode,
+          city,
         },
       ],
 

@@ -1,6 +1,6 @@
 import { ApiRoot } from '@commercetools/platform-sdk';
 import { UserAuthOptions } from '@commercetools/sdk-client-v2';
-import { ApiClient } from '../client';
+import ApiClient from '../client/apiClient';
 
 export default class AuthService {
   private root: ApiRoot;

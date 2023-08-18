@@ -51,7 +51,6 @@
                 "project": "./tsconfig.json"
             },
             "rules": {
-                "import/prefer-default-export": 0,
                 "@typescript-eslint/no-explicit-any": 2,
                 "@typescript-eslint/naming-convention": "error",
                 "@typescript-eslint/explicit-function-return-type": "error",
