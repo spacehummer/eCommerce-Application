@@ -10,7 +10,7 @@ export default class LoginModel {
       return '';
     } catch (error) {
       if (error instanceof ApiError) {
-        if (error.data && error.data.statusCode) {
+        if (error.data && error.data.body.statusCode) {
           return error.message;
         }
         return 'Network Error';
