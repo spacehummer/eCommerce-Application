@@ -30,7 +30,17 @@ export default class NavItemLinkView extends View {
   }
 
   private setCurrentStatus(): void {
+    this.linkElements.forEach((linkComponent) => {
+      linkComponent.setNotCurrentStatus();
+    });
+
     checkInstance(this.basicComponent.getHTMLElement(), HTMLElement).classList.add(
+      ClassesEnum.ITEM_CURRENT
+    );
+  }
+
+  private setNotCurrentStatus(): void {
+    checkInstance(this.basicComponent.getHTMLElement(), HTMLElement).classList.remove(
       ClassesEnum.ITEM_CURRENT
     );
   }
