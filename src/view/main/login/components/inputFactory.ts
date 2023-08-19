@@ -6,6 +6,7 @@ type Args = {
   placeholder?: string;
   required?: boolean;
   classList?: string[];
+  pattern?: string;
 };
 
 type DefaultArgs = {
@@ -27,7 +28,7 @@ type SubmitArgs = {
 
 export default class InputFactory {
   public static default(
-    { type, id, name, placeholder, required = false, classList }: DefaultArgs,
+    { type, id, name, placeholder, required = false, classList, pattern }: DefaultArgs,
     elem?: HTMLInputElement
   ): HTMLInputElement {
     const result = elem || document.createElement(TagsEnum.INPUT);
@@ -38,6 +39,7 @@ export default class InputFactory {
     if (name) result.name = name;
     if (placeholder) result.placeholder = placeholder;
     if (required) result.required = required;
+    if (pattern) result.pattern = pattern;
 
     return result;
   }

@@ -6,7 +6,7 @@
 }
 
 .login-form {
-    width: 206px;
+    width: 60vw;
 }
 
 .form__label {
@@ -23,4 +23,21 @@
 
 .form__input {
     margin-bottom: 5px;
+    width: 100%;
+}
+
+.form__input-check {
+    margin-right: 2px;
+    width: auto !important;
+}
+
+.form-field {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    margin: 5px 0;
+}
+
+.from__submit-btn {
+    width: 100%;
 }

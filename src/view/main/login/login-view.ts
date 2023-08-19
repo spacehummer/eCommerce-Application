@@ -2,6 +2,7 @@ import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
+import Validator from '#src/utils/validator';
 import LoginController from './login-controller';
 import '#assets/styles/login.css';
 import InputFactory from './components/inputFactory';
@@ -25,6 +26,8 @@ export default class LoginView extends View {
 
   private readonly controller: LoginController;
 
+  private readonly showPasswordChkBox: HTMLInputElement;
+
   constructor() {
     super(constructorArgs);
 
@@ -32,6 +35,7 @@ export default class LoginView extends View {
     this.emailInput = document.createElement('input');
     this.passInput = document.createElement('input');
     this.submitBtn = document.createElement('input');
+    this.showPasswordChkBox = document.createElement('input');
     this.errorMsg = document.createElement('p');
     this.createComponents();
 
@@ -70,6 +74,7 @@ export default class LoginView extends View {
         name: 'password',
         placeholder: 'Your password',
         required: true,
+        pattern: Validator.passwordRegex.source,
       },
       this.passInput
     );
@@ -79,12 +84,30 @@ export default class LoginView extends View {
       htmlFor: this.emailInput.id,
     });
 
+    InputFactory.default(
+      {
+        type: 'checkbox',
+        id: 'showPassword',
+        classList: [ClassesEnum.INPUT_CHECK, ClassesEnum.INPUT],
+      },
+      this.showPasswordChkBox
+    );
+
+    const chkBoxLabel = LabelFactory.default({
+      textContent: 'Show password',
+      htmlFor: this.showPasswordChkBox.id,
+    });
+
+    const chkBoxContainer = document.createElement(TagsEnum.CONTAINER);
+    chkBoxContainer.classList.add(ClassesEnum.FORM_FIELD);
+    chkBoxContainer.append(this.showPasswordChkBox, chkBoxLabel);
+
     InputFactory.submit(
       {
         type: 'submit',
         id: 'submit',
         value: 'Log in',
-        classList: [ClassesEnum.INPUT],
+        classList: [ClassesEnum.INPUT, ClassesEnum.INPUT_SUBMIT],
       },
       this.submitBtn
     );
@@ -100,6 +123,7 @@ export default class LoginView extends View {
       this.emailInput,
       passLabel,
       this.passInput,
+      chkBoxContainer,
       this.submitBtn
     );
 
@@ -109,7 +133,16 @@ export default class LoginView extends View {
 
   private setLiesteners(): void {
     this.form.onsubmit = this.onSubmit;
+    this.showPasswordChkBox.onclick = this.showPassword;
   }
+
+  private readonly showPassword = (): void => {
+    if (this.passInput.type === 'password') {
+      this.passInput.type = 'text';
+    } else {
+      this.passInput.type = 'password';
+    }
+  };
 
   private readonly onSubmit = (): boolean => {
     this.errorMsg.hidden = true;
