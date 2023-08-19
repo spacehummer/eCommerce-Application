@@ -46,7 +46,7 @@ export default class NavMenuView extends View {
       new BasicComponent(navMenuListItemParams),
     ];
 
-    navMenuListItems.forEach((component) => {
+    navMenuListItems.forEach((component, index) => {
       this.pageParams = {
         name: TextContentEnum.PLACEHOLDER,
         callback: (): void => {
@@ -58,7 +58,9 @@ export default class NavMenuView extends View {
 
       component.addInnerElement(newLink);
 
-      this.linkElements = new Map<string, NavItemLinkView>([['Some String', newLink]]);
+      this.linkElements.set(`link-${index}`, newLink);
+      // this.linkElements = new Map<string, NavItemLinkView>([['Some String', newLink]]);
+      console.log(this.linkElements);
     });
 
     navMenuList.addInnerElement(navMenuListItems[0]);
