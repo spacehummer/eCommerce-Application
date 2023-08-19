@@ -76,11 +76,10 @@ export default class NavMenuView extends View {
       this.linkComponents.set(`link-${index}`, newLink);
       // this.linkComponents = new Map<string, NavItemLinkView>([['Some String', newLink]]);
       console.log(this.linkComponents);
+
+      navMenuList.addInnerElement(component);
     });
 
-    navMenuList.addInnerElement(navMenuListItems[0]);
-    navMenuList.addInnerElement(navMenuListItems[1]);
-    navMenuList.addInnerElement(navMenuListItems[2]);
     this.basicComponent.addInnerElement(navMenuList);
   }
 }
