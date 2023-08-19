@@ -4,6 +4,8 @@ import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
 import LoginController from './login-controller';
 import '#assets/styles/login.css';
+import InputFactory from './components/inputFactory';
+import LabelFactory from './components/labelFactory';
 
 const constructorArgs: BasicComponentConstructorArgs = {
   classNames: ClassesEnum.LOGIN,
@@ -38,44 +40,70 @@ export default class LoginView extends View {
   }
 
   private createComponents(): void {
-    const loginTitle = document.createElement('h2');
+    const loginTitle = document.createElement(TagsEnum.H2);
     loginTitle.textContent = 'Log in';
 
-    this.form.classList.add('login-form');
+    this.form.classList.add(ClassesEnum.LOGIN_FORM);
 
-    this.emailInput.type = 'email';
-    this.emailInput.id = 'email';
-    this.emailInput.name = 'email';
-    this.emailInput.placeholder = 'test@example.com';
-    this.emailInput.required = true;
-    this.emailInput.classList.add('form__input');
+    InputFactory.email(
+      {
+        type: 'email',
+        classList: [ClassesEnum.INPUT],
+        id: 'email',
+        name: 'email',
+        placeholder: 'Your email',
+        required: true,
+      },
+      this.emailInput
+    );
 
-    const emailLabel = document.createElement('label');
-    emailLabel.htmlFor = this.emailInput.id;
-    emailLabel.textContent = 'Email';
-    emailLabel.classList.add('form__label');
+    const emailLabel = LabelFactory.default({
+      textContent: 'Email',
+      htmlFor: this.emailInput.id,
+    });
 
-    this.passInput.type = 'password';
-    this.passInput.id = 'password';
-    this.passInput.name = 'password';
-    this.passInput.placeholder = 'password';
-    this.passInput.required = true;
-    this.passInput.classList.add('form__input');
+    InputFactory.password(
+      {
+        type: 'password',
+        classList: [ClassesEnum.INPUT],
+        id: 'password',
+        name: 'password',
+        placeholder: 'Your password',
+        required: true,
+      },
+      this.passInput
+    );
 
-    const passLabel = document.createElement('label');
-    passLabel.htmlFor = this.passInput.id;
-    passLabel.textContent = 'Password';
-    passLabel.classList.add('form__label');
+    const passLabel = LabelFactory.default({
+      textContent: 'Password',
+      htmlFor: this.emailInput.id,
+    });
 
-    this.submitBtn.type = 'submit';
-    this.submitBtn.value = 'Log in';
+    InputFactory.submit(
+      {
+        type: 'submit',
+        id: 'submit',
+        value: 'Log in',
+        classList: [ClassesEnum.INPUT],
+      },
+      this.submitBtn
+    );
 
-    this.form.append(emailLabel, this.emailInput, passLabel, this.passInput, this.submitBtn);
-
+    const errMsgContainer = document.createElement(TagsEnum.CONTAINER);
+    errMsgContainer.append(this.errorMsg);
     this.errorMsg.hidden = true;
+    this.errorMsg.classList.add(ClassesEnum.FORM_ERROR_MESSAGE);
+
+    this.form.append(
+      errMsgContainer,
+      emailLabel,
+      this.emailInput,
+      passLabel,
+      this.passInput,
+      this.submitBtn
+    );
 
     this.basicComponent.addInnerElement(loginTitle);
-    this.basicComponent.addInnerElement(this.errorMsg);
     this.basicComponent.addInnerElement(this.form);
   }
 

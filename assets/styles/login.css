@@ -5,11 +5,20 @@
     align-items: center;
 }
 
+.login-form {
+    width: 206px;
+}
+
 .form__label {
     display: flex;
     width: 100%;
     align-items: start;
     padding-bottom: 2px;
+}
+
+.form__error-msg {
+    background-color: pink;
+    color: red;
 }
 
 .form__input {

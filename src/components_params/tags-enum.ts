@@ -19,6 +19,7 @@ const enum TagsEnum {
   LINK = 'a',
   BUTTON = 'button',
   INPUT = 'input',
+  LABEL = 'label',
   /* Media */
   IMG = 'img',
 }
