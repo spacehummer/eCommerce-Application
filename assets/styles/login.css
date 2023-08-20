@@ -26,6 +26,11 @@
     width: 100%;
 }
 
+.form__input__invalid {
+    border-color: red !important;
+    border: solid 2px;
+}
+
 .form__input-check {
     margin-right: 2px;
     width: auto !important;

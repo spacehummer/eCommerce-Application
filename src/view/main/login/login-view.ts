@@ -57,6 +57,7 @@ export default class LoginView extends View {
         placeholder: 'Your email',
         required: true,
         title: Validator.emailMsg,
+        pattern: Validator.emailRegex.source,
       },
       this.emailInput
     );
@@ -133,6 +134,8 @@ export default class LoginView extends View {
   private setLiesteners(): void {
     this.form.onsubmit = this.onSubmit;
     this.showPasswordChkBox.onclick = this.showPassword;
+    this.emailInput.onchange = this.check;
+    this.passInput.onchange = this.check;
   }
 
   private readonly showPassword = (): void => {
@@ -140,6 +143,22 @@ export default class LoginView extends View {
       this.passInput.type = 'text';
     } else {
       this.passInput.type = 'password';
+    }
+  };
+
+  private readonly check = (e: Event): void => {
+    const input = e.currentTarget as HTMLInputElement;
+    input.classList.remove(ClassesEnum.INPUT_INVALID);
+    if (input.value.length > 0) {
+      input.setCustomValidity('');
+      const isValid = input.checkValidity();
+      if (!isValid) {
+        input.classList.add(ClassesEnum.INPUT_INVALID);
+        input.setCustomValidity(input.title);
+        input.form?.reportValidity();
+      }
+    } else {
+      input.setCustomValidity('');
     }
   };
 

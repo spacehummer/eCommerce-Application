@@ -27,6 +27,7 @@ const enum ClassesEnum {
   INPUT_LABEL = 'form__label',
   INPUT_LIST = 'form__input-list',
   INPUT_SUBMIT = 'from__submit-btn',
+  INPUT_INVALID = 'form__input__invalid',
   FORM_ERROR_MESSAGE = 'form__error-msg',
 }
 
