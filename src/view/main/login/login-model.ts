@@ -11,9 +11,12 @@ export default class LoginModel {
     } catch (error) {
       if (error instanceof ApiError) {
         if (error.data && error.data.body.statusCode) {
+          if (error.data.body.statusCode === 400) {
+            return 'Incorrect email or password!';
+          }
           return error.message;
         }
-        return 'Network Error';
+        return 'Network Error. Check network connection.';
       }
       throw error;
     }

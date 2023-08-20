@@ -7,28 +7,44 @@ type Args = {
   required?: boolean;
   classList?: string[];
   pattern?: string;
+  value?: string;
+  title?: string;
 };
 
 type DefaultArgs = {
   type: string;
 } & Args;
 
-type PassArgs = {
-  type: 'password';
+type InputType = 'password' | 'email' | 'submit';
+
+type ConcreteType = {
+  type: InputType;
 } & Args;
 
-type EmailArgs = {
-  type: 'email';
+type PassArgs = {
+  pattern: string;
+  title: string;
 } & Args;
+
+type EmailArgs = Args;
 
 type SubmitArgs = {
-  type: 'submit';
   value: string;
 } & Args;
 
 export default class InputFactory {
   public static default(
-    { type, id, name, placeholder, required = false, classList, pattern }: DefaultArgs,
+    {
+      type,
+      id,
+      name,
+      placeholder,
+      required = false,
+      classList,
+      pattern,
+      value,
+      title,
+    }: DefaultArgs,
     elem?: HTMLInputElement
   ): HTMLInputElement {
     const result = elem || document.createElement(TagsEnum.INPUT);
@@ -40,20 +56,27 @@ export default class InputFactory {
     if (placeholder) result.placeholder = placeholder;
     if (required) result.required = required;
     if (pattern) result.pattern = pattern;
+    if (value) result.value = value;
+    if (title) result.title = title;
 
     return result;
+  }
+
+  private static concrete(type: InputType, args: Args, elem?: HTMLInputElement): HTMLInputElement {
+    const newArgs = args as ConcreteType;
+    newArgs.type = type;
+    return this.default(newArgs, elem);
   }
 
   public static password(args: PassArgs, elem?: HTMLInputElement): HTMLInputElement {
-    return this.default(args, elem);
+    return this.concrete('password', args, elem);
   }
 
   public static email(args: EmailArgs, elem?: HTMLInputElement): HTMLInputElement {
-    return this.default(args, elem);
+    return this.concrete('email', args, elem);
   }
 
   public static submit(args: SubmitArgs, elem?: HTMLInputElement): HTMLInputElement {
-    const result = this.default(args, elem);
-    return result;
+    return this.concrete('submit', args, elem);
   }
 }

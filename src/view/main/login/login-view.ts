@@ -51,12 +51,12 @@ export default class LoginView extends View {
 
     InputFactory.email(
       {
-        type: 'email',
         classList: [ClassesEnum.INPUT],
         id: 'email',
         name: 'email',
         placeholder: 'Your email',
         required: true,
+        title: Validator.emailMsg,
       },
       this.emailInput
     );
@@ -68,13 +68,13 @@ export default class LoginView extends View {
 
     InputFactory.password(
       {
-        type: 'password',
         classList: [ClassesEnum.INPUT],
         id: 'password',
         name: 'password',
         placeholder: 'Your password',
         required: true,
         pattern: Validator.passwordRegex.source,
+        title: Validator.passwordMsg,
       },
       this.passInput
     );
@@ -104,7 +104,6 @@ export default class LoginView extends View {
 
     InputFactory.submit(
       {
-        type: 'submit',
         id: 'submit',
         value: 'Log in',
         classList: [ClassesEnum.INPUT, ClassesEnum.INPUT_SUBMIT],
