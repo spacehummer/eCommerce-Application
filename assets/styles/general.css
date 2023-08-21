@@ -34,6 +34,10 @@
   margin-left: 0;
   padding-left: 0;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
 /* </editor-fold desc="General modifiers">*/
 
 /* <editor-fold desc="Header">*/
@@ -73,8 +77,14 @@
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
 }
 
+.nav-link:hover {
+  color: rgb(255, 245, 191);
+  text-shadow: 0 0 1px rgb(0, 0, 0), 0 0 4px rgba(255, 215, 0, 1), 1px 1px 16px rgba(0, 0, 0, 0.6);
+}
+
 .item__link--current {
-  color: #FF6F61;
+  color: rgb(255, 238, 140);
+  text-shadow: 0 0 1px rgb(0, 0, 0), 0 0 3px rgba(255, 215, 0, 1), 1px 1px 8px rgba(0, 0, 0, 0.6);
 }
 /* </editor-fold>*/
 

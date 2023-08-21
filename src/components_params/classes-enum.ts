@@ -16,7 +16,7 @@ const enum ClassesEnum {
   NAV_MENU = 'nav-menu',
   NAV_MENU_LIST = 'nav-menu-list reset-list',
   NAV_MENU_LIST_ITEM = 'nav-menu-list__item reset-list-element',
-  NAV_MENU_LIST_ITEM_LINK = 'nav-link reset-link',
+  NAV_MENU_LIST_ITEM_LINK = 'nav-link reset-link cursor-pointer',
   ITEM = 'item__link',
   ITEM_CURRENT = 'item__link--current',
   /* Login / Register */
