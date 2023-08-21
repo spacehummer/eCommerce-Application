@@ -8,7 +8,7 @@ import checkInstance from '#src/utils/utils';
 /**
  * Type for Map with NavItemLinkView instances.
  */
-export type LinkElements = Map<string, NavItemLinkView>;
+export type LinkComponents = Map<string, NavItemLinkView>;
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.LINK,
@@ -18,19 +18,37 @@ const viewParams: BasicComponentConstructorArgs = {
 export default class NavItemLinkView extends View {
   private pageParam: PageParams;
 
-  private linkElements: LinkElements;
+  private linkComponents: LinkComponents;
 
-  constructor(pageParams: PageParams, linkElements: LinkElements) {
+  constructor(pageParams: PageParams, linkComponents: LinkComponents) {
     super(viewParams);
 
     this.pageParam = pageParams;
-    this.linkElements = linkElements;
+    this.linkComponents = linkComponents;
 
     this.configureView();
   }
 
-  private setCurrentStatus(): void {
+  /**
+   * Set current page status for navigation link component.
+   * @private
+   */
+  public setCurrentStatus(): void {
+    this.linkComponents.forEach((linkComponent) => {
+      linkComponent.setNotCurrentStatus();
+    });
+
     checkInstance(this.basicComponent.getHTMLElement(), HTMLElement).classList.add(
+      ClassesEnum.ITEM_CURRENT
+    );
+  }
+
+  /**
+   * Unset current page status for navigation link component.
+   * @private
+   */
+  private setNotCurrentStatus(): void {
+    checkInstance(this.basicComponent.getHTMLElement(), HTMLElement).classList.remove(
       ClassesEnum.ITEM_CURRENT
     );
   }

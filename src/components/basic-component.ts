@@ -100,7 +100,6 @@ export class BasicComponent implements GetHTMLElement {
    * @param {Array<string>} cssClasses  - list of CSS classes for component HTML Element.
    */
   public setCssClassesToElement(cssClasses: ClassList): void {
-    console.log(cssClasses);
     if (cssClasses !== null) {
       cssClasses.forEach((element) => {
         checkInstance(this.htmlElement, HTMLElement).classList.add(...element.split(' '));

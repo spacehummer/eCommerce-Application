@@ -1,11 +1,13 @@
 import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
-import View from '#src/view/view';
+import View, { ViewLogicParams } from '#src/view/view';
 
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
-import TextContentEnum from '#src/components_params/text-content-enum';
-import NavItemLinkView, { LinkElements } from '#src/view/header/navigation/nav-item-link-view';
+// import TextContentEnum from '#src/components_params/text-content-enum';
+import NavItemLinkView, { LinkComponents } from '#src/view/header/navigation/nav-item-link-view';
 import { PageParams } from '#src/types/types';
+
+import { PagesNames, pagesSequence, PagesUrls } from '#src/logic/router/pages-params';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.NAV,
@@ -18,18 +20,28 @@ const viewParams: BasicComponentConstructorArgs = {
 export default class NavMenuView extends View {
   public pageParams: PageParams | null;
 
-  private linkElements: LinkElements;
+  public PagesNames: typeof PagesNames;
 
-  constructor() {
-    super(viewParams);
+  public readonly linkComponents: LinkComponents;
+
+  constructor(logicParams: ViewLogicParams) {
+    super(viewParams, logicParams);
 
     this.pageParams = null;
-    this.linkElements = new Map<string, NavItemLinkView>();
+
+    this.PagesNames = PagesNames;
+
+    this.linkComponents = new Map<string, NavItemLinkView>();
 
     this.configureView();
   }
 
   private configureView(): void {
+    if (this.logicParams === null) {
+      throw new Error(`ERR: unexpected null value in logicParams!`);
+    }
+    const { logicParams } = this;
+
     const navMenuListParams = {
       tagName: TagsEnum.MARKED_LIST,
       classNames: ClassesEnum.NAV_MENU_LIST,
@@ -40,30 +52,30 @@ export default class NavMenuView extends View {
       tagName: TagsEnum.LIST_ITEM,
       classNames: ClassesEnum.NAV_MENU_LIST_ITEM,
     };
-    const navMenuListItems = [
-      new BasicComponent(navMenuListItemParams),
-      new BasicComponent(navMenuListItemParams),
-      new BasicComponent(navMenuListItemParams),
-    ];
+    const navMenuListItems = pagesSequence.map(() => new BasicComponent(navMenuListItemParams));
 
-    navMenuListItems.forEach((component) => {
+    navMenuListItems.forEach((component, index) => {
+      const currentPageKey = pagesSequence[index];
+      // console.log(this.PagesNames[currentPageKey]);
       this.pageParams = {
-        name: TextContentEnum.PLACEHOLDER,
+        name: this.PagesNames[currentPageKey],
         callback: (): void => {
-          console.log('Routing request!');
+          console.log(`Routing request for page: ${currentPageKey}!`);
+          logicParams.router.navigate(PagesUrls[currentPageKey]);
         },
       };
 
-      const newLink = new NavItemLinkView(this.pageParams, this.linkElements);
+      const newLink = new NavItemLinkView(this.pageParams, this.linkComponents);
 
       component.addInnerElement(newLink);
 
-      this.linkElements = new Map<string, NavItemLinkView>([['Some String', newLink]]);
+      this.linkComponents.set(`${PagesUrls[currentPageKey]}`, newLink);
+      // this.linkComponents = new Map<string, NavItemLinkView>([['Some String', newLink]]);
+      console.log(this.linkComponents);
+
+      navMenuList.addInnerElement(component);
     });
 
-    navMenuList.addInnerElement(navMenuListItems[0]);
-    navMenuList.addInnerElement(navMenuListItems[1]);
-    navMenuList.addInnerElement(navMenuListItems[2]);
     this.basicComponent.addInnerElement(navMenuList);
   }
 }

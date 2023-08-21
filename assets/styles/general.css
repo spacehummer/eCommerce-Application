@@ -65,9 +65,10 @@
   height: 100%;
 }
 
-.nav-menu-list__item {
+.nav-link {
   font-size: 22px;
   font-weight: 700;
+  letter-spacing: 0.04em;
   color: #ffffff;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
 }
@@ -95,7 +96,7 @@
   display: inline-block;
   font-size: 32px;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   color: #F2F2F2;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
 }
