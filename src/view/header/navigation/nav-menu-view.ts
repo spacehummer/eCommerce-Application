@@ -3,9 +3,9 @@ import View from '#src/view/view';
 
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
-import TextContentEnum from '#src/components_params/text-content-enum';
 import NavItemLinkView, { LinkElements } from '#src/view/header/navigation/nav-item-link-view';
 import { PageParams } from '#src/types/types';
+import { route } from '#src/routing/router';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.NAV,
@@ -29,6 +29,22 @@ export default class NavMenuView extends View {
     this.configureView();
   }
 
+  private constructLink(component: BasicComponent, name: string, path: string): void {
+    this.pageParams = {
+      name,
+      callback: (): void => {
+        route();
+      },
+    };
+
+    const newLink = new NavItemLinkView(this.pageParams, this.linkElements);
+    newLink.basicComponent.setComponentAttribute('href', path);
+
+    component.addInnerElement(newLink);
+
+    this.linkElements = new Map<string, NavItemLinkView>([['Some String', newLink]]);
+  }
+
   private configureView(): void {
     const navMenuListParams = {
       tagName: TagsEnum.MARKED_LIST,
@@ -46,20 +62,9 @@ export default class NavMenuView extends View {
       new BasicComponent(navMenuListItemParams),
     ];
 
-    navMenuListItems.forEach((component) => {
-      this.pageParams = {
-        name: TextContentEnum.PLACEHOLDER,
-        callback: (): void => {
-          console.log('Routing request!');
-        },
-      };
-
-      const newLink = new NavItemLinkView(this.pageParams, this.linkElements);
-
-      component.addInnerElement(newLink);
-
-      this.linkElements = new Map<string, NavItemLinkView>([['Some String', newLink]]);
-    });
+    this.constructLink(navMenuListItems[0], 'Main', '/');
+    this.constructLink(navMenuListItems[1], 'Log in', '/#login');
+    this.constructLink(navMenuListItems[2], 'Sign up', '/#signup');
 
     navMenuList.addInnerElement(navMenuListItems[0]);
     navMenuList.addInnerElement(navMenuListItems[1]);

@@ -11,6 +11,8 @@ import HeaderView from '#src/view/header/header-view';
 import MainView from '#src/view/main/main-view';
 import FooterView from '#src/view/footer/footer-view';
 import checkInstance from '#src/utils/utils';
+import { handleRoute, startRouting } from './routing/router';
+import View from './view/view';
 
 // </editor-fold desc="Imports">
 
@@ -21,7 +23,7 @@ export default class App {
 
   private headerView: HeaderView | null;
 
-  private mainView: MainView | null;
+  private currentMainView: View | null;
 
   private footerView: FooterView | null;
 
@@ -30,7 +32,7 @@ export default class App {
     this.rootContainer = null;
 
     this.headerView = null;
-    this.mainView = null;
+    this.currentMainView = null;
     this.footerView = null;
 
     this.createView();
@@ -39,7 +41,7 @@ export default class App {
   public createView(): void {
     this.rootContainer = new RootContainer();
     this.headerView = new HeaderView();
-    this.mainView = new MainView();
+    this.currentMainView = new MainView();
     this.footerView = new FooterView();
   }
 
@@ -48,7 +50,7 @@ export default class App {
       checkInstance(checkInstance(this.headerView, HeaderView).getHTMLElement(), HTMLElement)
     );
     checkInstance(this.rootContainer, RootContainer).addInnerElement(
-      checkInstance(checkInstance(this.mainView, MainView).getHTMLElement(), HTMLElement)
+      checkInstance(checkInstance(this.currentMainView, MainView).getHTMLElement(), HTMLElement)
     );
     checkInstance(this.rootContainer, RootContainer).addInnerElement(
       checkInstance(checkInstance(this.footerView, FooterView).getHTMLElement(), HTMLElement)
@@ -58,11 +60,23 @@ export default class App {
     );
   }
 
+  private onRoute = (): void => {
+    const res = handleRoute();
+    res.then((Value: new () => object) => {
+      const newPage = new Value() as View;
+      const newElement = newPage.getHTMLElement() as HTMLElement;
+      const oldElement = this.currentMainView?.getHTMLElement() as HTMLElement;
+      this.rootContainer?.getHTMLElement()?.replaceChild(newElement, oldElement);
+      this.currentMainView = newPage;
+    });
+  };
+
   /**
    * Onload work method: entry point for most code.
    */
   private onloadStartWork(): void {
     this.appendView();
+    startRouting(this.onRoute);
   }
 
   public start(): void {
