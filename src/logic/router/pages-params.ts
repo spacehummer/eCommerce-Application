@@ -3,11 +3,11 @@
  */
 const PagesNames: { [index: string]: string } = {
   INDEX: 'Main',
-  LOGIN: 'Sign up',
-  SIGN_UP: 'Sign in',
+  LOGIN: 'Log in',
+  SIGN_UP: 'Sign up',
 };
 
-const pagesSequence: string[] = ['INDEX', 'LOGIN', 'SIGN_UP'];
+const pagesSequence: string[] = ['INDEX', 'SIGN_UP', 'LOGIN'];
 
 const PagesUrls: { [index: string]: string } = {
   INDEX: 'main',
