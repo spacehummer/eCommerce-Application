@@ -1,4 +1,4 @@
-import { PagesUrls } from '#src/logic/router/pages-params';
+import { ID_SELECTOR, PagesUrls } from '#src/logic/router/pages-params';
 
 interface Route {
   path: string;
@@ -17,6 +17,16 @@ export default class Router {
 
   constructor(routes: Routes) {
     this.routes = routes;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const startAddressBarPath = this.getCurrentAddressBarPath();
+      this.navigate(startAddressBarPath);
+      console.log(`Startup navigation! Navigate to: ${startAddressBarPath}`);
+    });
+
+    // work with agent URL address bar.
+    window.addEventListener('popstate', this.browserAddressBarHandler.bind(this));
+    window.addEventListener('hashchange', this.browserAddressBarHandler.bind(this));
   }
 
   /**
@@ -33,7 +43,7 @@ export default class Router {
     const seekingPath =
       requestFromURL.resource === ''
         ? requestFromURL.path
-        : `${requestFromURL.path}/${requestFromURL.resource}`;
+        : `${requestFromURL.path}/${ID_SELECTOR}`;
 
     const route = this.routes.find((currentRoute) => currentRoute.path === seekingPath);
 
@@ -69,5 +79,18 @@ export default class Router {
     if (routeError404) {
       this.navigate(routeError404.path);
     }
+  }
+
+  private browserAddressBarHandler(): void {
+    const addressBarPath = this.getCurrentAddressBarPath();
+    console.log(addressBarPath);
+    this.navigate(addressBarPath);
+  }
+
+  private getCurrentAddressBarPath(): string {
+    if (window.location.hash) {
+      return window.location.hash.slice(1);
+    }
+    return window.location.pathname.slice(1);
   }
 }
