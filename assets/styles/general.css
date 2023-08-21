@@ -1,0 +1,123 @@
+* {
+  box-sizing: border-box;
+  /* outline: solid red 1px; */
+}
+
+/* <editor-fold desc="General styles">*/
+.root-container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  /*justify-content: space-between;*/
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.content {
+  max-width: 100%;
+  width: 1322px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+/* </editor-fold desc="General styles">*/
+
+/* <editor-fold desc="General modifiers">*/
+.reset-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.reset-list-element {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+/* </editor-fold desc="General modifiers">*/
+
+/* <editor-fold desc="Header">*/
+.header {
+  background-color: #B44739;
+}
+
+.content--header {
+  display: flex;
+  justify-content: space-between;
+}
+/* </editor-fold desc="Header">*/
+
+.main {
+  /*flex-grow: 1;*/
+}
+
+.footer {
+  margin-top: auto;
+}
+
+/* <editor-fold desc="Navigation menu component">*/
+.nav-menu-list {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  column-gap: 16px;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-link {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
+}
+
+.nav-link:hover {
+  color: rgb(255, 245, 191);
+  text-shadow: 0 0 1px rgb(0, 0, 0), 0 0 4px rgba(255, 215, 0, 1), 1px 1px 16px rgba(0, 0, 0, 0.6);
+}
+
+.item__link--current {
+  color: rgb(255, 238, 140);
+  text-shadow: 0 0 1px rgb(0, 0, 0), 0 0 3px rgba(255, 215, 0, 1), 1px 1px 8px rgba(0, 0, 0, 0.6);
+}
+/* </editor-fold>*/
+
+/* <editor-fold desc="Logo component">*/
+.logo {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+}
+
+.logo__img {
+  display: block;
+  width: 64px;
+  height: 64px;
+}
+
+.logo__name {
+  display: inline-block;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #F2F2F2;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
+}
+/* </editor-fold desc="Logo component">*/
+
+/* <editor-fold desc="Test styles">*/
+.demo-container {
+  user-select: none;
+}
+
+.demo-red {
+  color: #FF0000;
+}
+/* </editor-fold desc="Test styles">*/
