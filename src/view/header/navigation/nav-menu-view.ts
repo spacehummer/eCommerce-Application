@@ -1,23 +1,13 @@
 import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
-import View from '#src/view/view';
+import View, { ViewLogicParams } from '#src/view/view';
 
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 // import TextContentEnum from '#src/components_params/text-content-enum';
 import NavItemLinkView, { LinkComponents } from '#src/view/header/navigation/nav-item-link-view';
 import { PageParams } from '#src/types/types';
-// import { PagesPathsEnum } from '#src/components_params/pages-paths';
 
-/**
- * Names of pages available via navigation menu.
- */
-const PagesNames: { [index: string]: string } = {
-  INDEX: 'Main',
-  LOGIN: 'Sign up',
-  SIGN_UP: 'Sign in',
-};
-
-const pagesSequence: string[] = ['INDEX', 'LOGIN', 'SIGN_UP'];
+import { PagesNames, pagesSequence, PagesUrlsEnum } from '#src/logic/router/pages-params';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.NAV,
@@ -34,8 +24,8 @@ export default class NavMenuView extends View {
 
   private readonly linkComponents: LinkComponents;
 
-  constructor() {
-    super(viewParams);
+  constructor(logicParams: ViewLogicParams) {
+    super(viewParams, logicParams);
 
     this.pageParams = null;
 
@@ -47,6 +37,11 @@ export default class NavMenuView extends View {
   }
 
   private configureView(): void {
+    if (this.logicParams === null) {
+      throw new Error(`ERR: unexpected null value in logicParams!`);
+    }
+    const { logicParams } = this;
+
     const navMenuListParams = {
       tagName: TagsEnum.MARKED_LIST,
       classNames: ClassesEnum.NAV_MENU_LIST,
@@ -65,7 +60,8 @@ export default class NavMenuView extends View {
       this.pageParams = {
         name: this.PagesNames[currentPageKey],
         callback: (): void => {
-          console.log('Routing request!');
+          console.log(`Routing request for page: ${currentPageKey}!`);
+          logicParams.router.navigate(PagesUrlsEnum[currentPageKey]);
         },
       };
 

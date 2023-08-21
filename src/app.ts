@@ -11,6 +11,8 @@ import HeaderView from '#src/view/header/header-view';
 import MainView from '#src/view/main/main-view';
 import FooterView from '#src/view/footer/footer-view';
 import checkInstance from '#src/utils/utils';
+import { ViewLogicParams } from '#src/view/view';
+import Router from '#src/logic/router/router';
 
 // </editor-fold desc="Imports">
 
@@ -25,6 +27,8 @@ export default class App {
 
   private footerView: FooterView | null;
 
+  private readonly logicParams: ViewLogicParams;
+
   constructor(rootToken: string = 'body') {
     this.root = checkInstance(document.querySelector(rootToken), HTMLElement);
     this.rootContainer = null;
@@ -33,19 +37,23 @@ export default class App {
     this.mainView = null;
     this.footerView = null;
 
+    this.logicParams = {
+      router: new Router(),
+    };
+
     this.createView();
   }
 
   public createView(): void {
     this.rootContainer = new RootContainer();
-    this.headerView = new HeaderView();
+    this.headerView = new HeaderView(this.logicParams);
     this.mainView = new MainView();
     this.footerView = new FooterView();
   }
 
   private appendView(): void {
     checkInstance(this.rootContainer, RootContainer).addInnerElement(
-      checkInstance(checkInstance(this.headerView, HeaderView).getHTMLElement(), HTMLElement)
+      checkInstance(this.headerView?.getHTMLElement(), HTMLElement)
     );
     checkInstance(this.rootContainer, RootContainer).addInnerElement(
       checkInstance(checkInstance(this.mainView, MainView).getHTMLElement(), HTMLElement)

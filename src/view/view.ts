@@ -1,11 +1,20 @@
 import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import { GetHTMLElement } from '#src/types/types';
+import Router from '#src/logic/router/router';
+
+export interface ViewLogicParams {
+  router: Router;
+}
 
 export default class View implements GetHTMLElement {
   public basicComponent: BasicComponent;
 
-  constructor(viewParams: BasicComponentConstructorArgs) {
+  public logicParams: ViewLogicParams | null;
+
+  constructor(viewParams: BasicComponentConstructorArgs, logicParams?: ViewLogicParams) {
     this.basicComponent = this.createView(viewParams);
+
+    this.logicParams = logicParams || null;
   }
 
   /**
