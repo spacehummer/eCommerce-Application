@@ -25,8 +25,12 @@ const viewParams: BasicComponentConstructorArgs = {
  * Header view component.
  */
 export default class HeaderView extends View {
+  private navMenu: NavMenuView | null;
+
   constructor(logicParams: ViewLogicParams) {
     super(viewParams, logicParams);
+
+    this.navMenu = null;
 
     this.configureView();
   }
@@ -38,11 +42,18 @@ export default class HeaderView extends View {
     if (this.logicParams === null) {
       throw new Error(`ERR: unexpected null value in logicParams!`);
     }
-    const navMenu = new NavMenuView(this.logicParams);
+    this.navMenu = new NavMenuView(this.logicParams);
 
     content.addInnerElement(logo);
-    content.addInnerElement(navMenu);
+    content.addInnerElement(this.navMenu);
 
     this.basicComponent.addInnerElement(content);
+  }
+
+  public setCurrentStatusToLink(newPageUrl: string): void {
+    const currentLink = this.navMenu?.linkComponents.get(newPageUrl);
+    if (currentLink) {
+      currentLink.setCurrentStatus();
+    }
   }
 }

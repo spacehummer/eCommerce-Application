@@ -17,4 +17,14 @@ export default class MainView extends View {
   constructor() {
     super(viewParams);
   }
+
+  public setNewPageView(newView: View): void {
+    const basicComponentHTMLElement = this.basicComponent.getHTMLElement();
+    // clear old view components from root
+    while (basicComponentHTMLElement?.firstElementChild) {
+      basicComponentHTMLElement.firstElementChild.remove();
+    }
+    // add new view nested page components
+    this.basicComponent.addInnerElement(newView);
+  }
 }

@@ -7,7 +7,7 @@ import TagsEnum from '#src/components_params/tags-enum';
 import NavItemLinkView, { LinkComponents } from '#src/view/header/navigation/nav-item-link-view';
 import { PageParams } from '#src/types/types';
 
-import { PagesNames, pagesSequence, PagesUrlsEnum } from '#src/logic/router/pages-params';
+import { PagesNames, pagesSequence, PagesUrls } from '#src/logic/router/pages-params';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.NAV,
@@ -22,7 +22,7 @@ export default class NavMenuView extends View {
 
   public PagesNames: typeof PagesNames;
 
-  private readonly linkComponents: LinkComponents;
+  public readonly linkComponents: LinkComponents;
 
   constructor(logicParams: ViewLogicParams) {
     super(viewParams, logicParams);
@@ -61,7 +61,7 @@ export default class NavMenuView extends View {
         name: this.PagesNames[currentPageKey],
         callback: (): void => {
           console.log(`Routing request for page: ${currentPageKey}!`);
-          logicParams.router.navigate(PagesUrlsEnum[currentPageKey]);
+          logicParams.router.navigate(PagesUrls[currentPageKey]);
         },
       };
 
@@ -69,7 +69,7 @@ export default class NavMenuView extends View {
 
       component.addInnerElement(newLink);
 
-      this.linkComponents.set(`link-${index}`, newLink);
+      this.linkComponents.set(`${PagesUrls[currentPageKey]}`, newLink);
       // this.linkComponents = new Map<string, NavItemLinkView>([['Some String', newLink]]);
       console.log(this.linkComponents);
 

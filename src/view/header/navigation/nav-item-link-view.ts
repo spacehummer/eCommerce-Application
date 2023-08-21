@@ -33,7 +33,7 @@ export default class NavItemLinkView extends View {
    * Set current page status for navigation link component.
    * @private
    */
-  private setCurrentStatus(): void {
+  public setCurrentStatus(): void {
     this.linkComponents.forEach((linkComponent) => {
       linkComponent.setNotCurrentStatus();
     });

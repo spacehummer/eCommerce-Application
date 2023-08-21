@@ -7,6 +7,7 @@ const enum ClassesEnum {
   CONTENT_HEADER = 'content--header',
   MAIN = 'main',
   FOOTER = 'footer',
+  PLACEHOLDER = 'placeholder',
   /* Logo */
   GENERAL_LOGO = 'logo',
   GENERAL_LOGO_IMG = 'logo__img',

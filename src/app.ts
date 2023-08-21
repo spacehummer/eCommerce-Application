@@ -11,8 +11,9 @@ import HeaderView from '#src/view/header/header-view';
 import MainView from '#src/view/main/main-view';
 import FooterView from '#src/view/footer/footer-view';
 import checkInstance from '#src/utils/utils';
-import { ViewLogicParams } from '#src/view/view';
-import Router from '#src/logic/router/router';
+import View, { ViewLogicParams } from '#src/view/view';
+import Router, { Routes } from '#src/logic/router/router';
+import { PagesUrls } from '#src/logic/router/pages-params';
 
 // </editor-fold desc="Imports">
 
@@ -37,8 +38,10 @@ export default class App {
     this.mainView = null;
     this.footerView = null;
 
+    const routes = this.createRoutes();
+
     this.logicParams = {
-      router: new Router(),
+      router: new Router(routes),
     };
 
     this.createView();
@@ -71,6 +74,36 @@ export default class App {
    */
   private onloadStartWork(): void {
     this.appendView();
+  }
+
+  /**
+   * Generate array of routes objects for router.
+   * @return { Routes } - array of routes object.
+   * @private
+   */
+  private createRoutes(): Routes {
+    return [
+      {
+        path: `${PagesUrls.INDEX}`,
+        callback: async (): Promise<void> => {
+          const { default: TestView1 } = await import('./view/main/test-view-1/test-view-1');
+          this.setContent(PagesUrls.INDEX, new TestView1());
+        },
+      },
+      {
+        path: `${PagesUrls.LOGIN}`,
+        callback: async (): Promise<void> => {
+          const { default: TestView2 } = await import('./view/main/test-view-2/test-view-2');
+          this.setContent(PagesUrls.LOGIN, new TestView2());
+        },
+      },
+    ];
+  }
+
+  private setContent(newPageUrl: string, newPageViewComponent: View): void {
+    // Set selected status to according link in nav-menu
+    this.headerView?.setCurrentStatusToLink(newPageUrl);
+    checkInstance(this.mainView, MainView).setNewPageView(newPageViewComponent);
   }
 
   public start(): void {
