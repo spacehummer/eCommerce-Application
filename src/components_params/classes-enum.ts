@@ -18,6 +18,17 @@ const enum ClassesEnum {
   NAV_MENU_LIST_ITEM_LINK = 'reset-link',
   ITEM = 'item__link',
   ITEM_CURRENT = 'item__link--current',
+  /* Login / Register */
+  LOGIN = 'login',
+  LOGIN_FORM = 'login-form',
+  FORM_FIELD = 'form-field',
+  INPUT = 'form__input',
+  INPUT_CHECK = 'form__input-check',
+  INPUT_LABEL = 'form__label',
+  INPUT_LIST = 'form__input-list',
+  INPUT_SUBMIT = 'from__submit-btn',
+  INPUT_INVALID = 'form__input__invalid',
+  FORM_ERROR_MESSAGE = 'form__error-msg',
 }
 
 export default ClassesEnum;

@@ -1,0 +1,48 @@
+.login,
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form {
+    width: 25rem;
+}
+
+.form__label {
+    display: flex;
+    width: 100%;
+    align-items: start;
+    padding-bottom: 2px;
+}
+
+.form__error-msg {
+    background-color: pink;
+    color: red;
+}
+
+.form__input {
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.form__input__invalid {
+    border-color: red !important;
+    border: solid 2px;
+}
+
+.form__input-check {
+    margin-right: 2px;
+    width: auto !important;
+}
+
+.form-field {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    margin: 5px 0;
+}
+
+.from__submit-btn {
+    width: 100%;
+}
