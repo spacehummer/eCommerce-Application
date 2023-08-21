@@ -1,6 +1,6 @@
 import TagsEnum from '#src/components_params/tags-enum';
 
-type Args = {
+export type Args = {
   id: string;
   name?: string;
   placeholder?: string;
@@ -11,11 +11,11 @@ type Args = {
   title?: string;
 };
 
-type DefaultArgs = {
-  type: string;
+export type DefaultArgs = {
+  type: InputType;
 } & Args;
 
-type InputType = 'password' | 'email' | 'submit';
+export type InputType = 'password' | 'email' | 'submit' | 'checkbox' | 'text';
 
 type ConcreteType = {
   type: InputType;
