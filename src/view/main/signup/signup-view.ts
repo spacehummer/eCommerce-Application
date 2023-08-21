@@ -41,9 +41,9 @@ export default class SignUpView extends View {
 
   private readonly postalCode: HTMLInputElement;
 
-  private readonly country: HTMLInputElement;
-
   private readonly okMsg: HTMLParagraphElement;
+
+  private readonly country: HTMLSelectElement;
 
   constructor() {
     super(args);
@@ -59,7 +59,7 @@ export default class SignUpView extends View {
     this.street = document.createElement('input');
     this.city = document.createElement('input');
     this.postalCode = document.createElement('input');
-    this.country = document.createElement('input');
+    this.country = this.createSelectCountry();
 
     this.errorMsg = document.createElement('p');
     this.okMsg = document.createElement('p');
@@ -70,35 +70,48 @@ export default class SignUpView extends View {
     this.setLiesteners();
   }
 
+  private wrap(...nodes: (Node | string)[]): HTMLDivElement {
+    const root = document.createElement(TagsEnum.CONTAINER);
+    root.classList.add(ClassesEnum.FORM_FIELD);
+    root.append(...nodes);
+    return root;
+  }
+
   private createInput(
     elem: HTMLInputElement,
     type: InputType,
-    { name, label }: FormField
+    { name, label, pattern, title }: FormField
   ): FormFieldContainer {
     const input = InputFactory.default(
       {
         type,
         id: name,
         name,
+        pattern,
+        title,
         classList: [ClassesEnum.INPUT],
       },
       elem
     );
-
-    const root = document.createElement(TagsEnum.CONTAINER);
-    root.classList.add(ClassesEnum.FORM_FIELD);
 
     const inputLabel = LabelFactory.default({
       textContent: label,
       htmlFor: input.id,
     });
 
-    root.append(inputLabel, input);
+    const root = this.wrap(inputLabel, input);
     return {
       input,
       root,
       label: inputLabel,
     };
+  }
+
+  private createSelectCountry(): HTMLSelectElement {
+    const result = document.createElement('select');
+    const option = new Option('RUSSIA', 'RU', true, true);
+    result.append(option);
+    return result;
   }
 
   private createComponents(): void {
@@ -183,17 +196,27 @@ export default class SignUpView extends View {
     const firsName = this.createInput(this.firstName, 'text', {
       name: 'firstName',
       label: 'First name',
+      pattern: Validator.nameRegex.source,
+      title: Validator.nameMsg,
     });
     const lastName = this.createInput(this.lastName, 'text', {
       name: 'lastName',
       label: 'Last name',
+      pattern: Validator.nameRegex.source,
+      title: Validator.nameMsg,
     });
-    const dateOfBirth = this.createInput(this.dateOfBirth, 'text', {
+    const dateOfBirth = this.createInput(this.dateOfBirth, 'date', {
       name: 'dateOfBirth',
       label: 'Date of birth',
     });
-    const country = this.createInput(this.country, 'text', { name: 'country', label: 'Country' });
-    const city = this.createInput(this.city, 'text', { name: 'city', label: 'City' });
+    dateOfBirth.input.setAttribute('min', '2010-08-21');
+    const country = this.wrap('Country', this.country);
+    const city = this.createInput(this.city, 'text', {
+      name: 'city',
+      label: 'City',
+      pattern: Validator.nameRegex.source,
+      title: Validator.nameMsg,
+    });
     const street = this.createInput(this.street, 'text', { name: 'street', label: 'Street' });
     const postalCode = this.createInput(this.postalCode, 'text', {
       name: 'postalCode',
@@ -211,7 +234,7 @@ export default class SignUpView extends View {
       firsName.root,
       lastName.root,
       dateOfBirth.root,
-      country.root,
+      country,
       city.root,
       street.root,
       postalCode.root,

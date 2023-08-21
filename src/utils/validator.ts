@@ -18,4 +18,14 @@ export default class Validator {
     }
     return false;
   };
+
+  public static readonly nameRegex = /^[A-Z]{1,}[a-z]*$/i;
+
+  public static readonly nameMsg =
+    'Must contain at least one character and no special characters or numbers';
+
+  public static readonly streetRegex = /^[A-Za-z]*$/i;
+
+  public static readonly streetMsg =
+    'Must contain at least one character and no special characters or numbers';
 }
