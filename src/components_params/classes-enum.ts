@@ -23,6 +23,7 @@ const enum ClassesEnum {
   LOGIN = 'login',
   LOGIN_FORM = 'login-form',
   FORM_FIELD = 'form-field',
+  FORM_FIELD_CHECKBOX = 'form-field-checkbox',
   INPUT = 'form__input',
   INPUT_CHECK = 'form__input-check',
   INPUT_LABEL = 'form__label',
@@ -30,6 +31,9 @@ const enum ClassesEnum {
   INPUT_SUBMIT = 'from__submit-btn',
   INPUT_INVALID = 'form__input__invalid',
   FORM_ERROR_MESSAGE = 'form__error-msg',
+  FORM_OK_MESSAGE = 'form__ok-msg',
+  SIGN_UP = 'sign-up',
+  SIGN_UP_FORM = 'sign-up-form',
 }
 
 export default ClassesEnum;
