@@ -12,7 +12,7 @@ export default class SignUpModel {
   public async signUp(data: CustomerData): Promise<string> {
     try {
       await this.api.signUp(data);
-      await this.api.login({ password: data.password, username: data.email })
+      await this.api.login({ password: data.password, username: data.email });
       return '';
     } catch (error) {
       if (error instanceof ApiError) {

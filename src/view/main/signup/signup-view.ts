@@ -2,10 +2,10 @@ import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import Validator from '#src/utils/validator';
-import InputFactory, { InputType } from '../login/components/inputFactory';
-import LabelFactory from '../login/components/labelFactory';
-import { FormField, FormFieldContainer } from '../login/components/types';
-import View from '../view';
+import InputFactory, { InputType } from '../../login/components/inputFactory';
+import LabelFactory from '../../login/components/labelFactory';
+import { FormField, FormFieldContainer } from '../../login/components/types';
+import View from '../../view';
 import SignUpController from './signup-controller';
 import '#assets/styles/sign-up.css';
 
@@ -170,7 +170,6 @@ export default class SignUpView extends View {
       this.submitBtn
     );
 
-
     const okMsgContainer = document.createElement(TagsEnum.CONTAINER);
     okMsgContainer.append(this.okMsg);
     this.okMsg.hidden = true;
@@ -274,7 +273,7 @@ export default class SignUpView extends View {
           this.errorMsg.textContent = errorMsg;
           this.errorMsg.hidden = false;
         } else {
-          this.okMsg.textContent = 'Registation succsesful!'
+          this.okMsg.textContent = 'Registation succsesful!';
           this.okMsg.hidden = false;
         }
       });
