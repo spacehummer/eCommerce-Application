@@ -108,8 +108,8 @@ export default class App {
       {
         path: `${PagesUrls.SIGN_UP}`,
         callback: async (): Promise<void> => {
-          const { default: TestView2 } = await import('./view/main/test-view-2/test-view-2');
-          this.setContent(PagesUrls.SIGN_UP, new TestView2());
+          const { default: SignUpView } = await import('./view/main/signup/signup-view');
+          this.setContent(PagesUrls.SIGN_UP, new SignUpView());
         },
       },
     ];
