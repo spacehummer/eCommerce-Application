@@ -8,6 +8,7 @@ import { FormField, FormFieldContainer } from '../../login/components/types';
 import View from '../../view';
 import SignUpController from './signup-controller';
 import '#assets/styles/sign-up.css';
+import { SignUpResult } from './signup-model';
 
 const args: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
@@ -90,6 +91,7 @@ export default class SignUpView extends View {
         pattern,
         title,
         classList: [ClassesEnum.INPUT],
+        required: true,
       },
       elem
     );
@@ -107,9 +109,23 @@ export default class SignUpView extends View {
     };
   }
 
+  private createDate(input: HTMLInputElement): FormFieldContainer {
+    const result = this.createInput(input, 'date', {
+      name: 'dateOfBirth',
+      label: 'Date of birth',
+    });
+
+    const date = new Date();
+    date.setFullYear(date.getFullYear() - 13);
+    input.setAttribute('max', date.toISOString().split('T')[0]);
+
+    return result;
+  }
+
   private createSelectCountry(): HTMLSelectElement {
     const result = document.createElement('select');
     const option = new Option('RUSSIA', 'RU', true, true);
+    result.name = 'countryCode';
     result.append(option);
     return result;
   }
@@ -205,11 +221,7 @@ export default class SignUpView extends View {
       pattern: Validator.nameRegex.source,
       title: Validator.nameMsg,
     });
-    const dateOfBirth = this.createInput(this.dateOfBirth, 'date', {
-      name: 'dateOfBirth',
-      label: 'Date of birth',
-    });
-    dateOfBirth.input.setAttribute('min', '2010-08-21');
+    const dateOfBirth = this.createDate(this.dateOfBirth);
     const country = this.wrap('Country', this.country);
     const city = this.createInput(this.city, 'text', {
       name: 'city',
@@ -217,11 +229,20 @@ export default class SignUpView extends View {
       pattern: Validator.nameRegex.source,
       title: Validator.nameMsg,
     });
-    const street = this.createInput(this.street, 'text', { name: 'street', label: 'Street' });
+    const street = this.createInput(this.street, 'text', {
+      name: 'street',
+      label: 'Street',
+      pattern: Validator.streetRegex.source,
+      title: Validator.streetMsg,
+    });
     const postalCode = this.createInput(this.postalCode, 'text', {
       name: 'postalCode',
       label: 'Postal code',
+      pattern: Validator.postCodeRegex.source,
+      title: Validator.postCodeMsg,
     });
+    this.postalCode.minLength = 11;
+    this.postalCode.maxLength = 11;
 
     this.form.append(
       okMsgContainer,
@@ -250,6 +271,13 @@ export default class SignUpView extends View {
     this.showPasswordChkBox.onclick = this.showPassword;
     this.emailInput.onchange = this.check;
     this.passInput.onchange = this.check;
+    this.firstName.onchange = this.check;
+    this.lastName.onchange = this.check;
+    this.dateOfBirth.onchange = this.check;
+    this.country.onchange = this.check;
+    this.city.onchange = this.check;
+    this.street.onchange = this.check;
+    this.postalCode.onchange = this.check;
   }
 
   private readonly showPassword = (): void => {
@@ -278,6 +306,7 @@ export default class SignUpView extends View {
 
   private readonly onSubmit = (): boolean => {
     this.errorMsg.hidden = true;
+    this.okMsg.hidden = true;
     this.controller
       .signUp({
         email: this.emailInput.value,
@@ -291,10 +320,21 @@ export default class SignUpView extends View {
         postalCode: this.postalCode.value,
         streetNumber: '',
       })
-      .then((errorMsg: string) => {
-        if (errorMsg) {
-          this.errorMsg.textContent = errorMsg;
+      .then((response: SignUpResult) => {
+        if (response.errorMsg) {
+          response.error?.forEach((value) => {
+            if (value.field) {
+              const namedItem = this.form.elements.namedItem(value.field);
+              if (namedItem) {
+                const input = namedItem as HTMLInputElement;
+                input.setCustomValidity(value.message);
+                input.checkValidity();
+              }
+            }
+          });
+          this.errorMsg.textContent = response.errorMsg;
           this.errorMsg.hidden = false;
+          this.form.reportValidity();
         } else {
           this.okMsg.textContent = 'Registation succsesful!';
           this.okMsg.hidden = false;
