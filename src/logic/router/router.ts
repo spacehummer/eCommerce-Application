@@ -72,6 +72,7 @@ export default class Router {
     };
 
     [result.path = '', result.resource = ''] = URLStr.split('/');
+    console.log(result);
 
     return result;
   }
