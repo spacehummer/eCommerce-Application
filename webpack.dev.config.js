@@ -49,6 +49,7 @@ module.exports = (env) => {
       filename: '[name].[contenthash:8].js',
       chunkFilename: '[name].chunk.js',
       path: path.resolve(__dirname, 'dist', getTimestamp()),
+      publicPath: '/',
     },
     plugins: [
       new HtmlWebpackPlugin({
