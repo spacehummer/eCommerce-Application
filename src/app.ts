@@ -84,13 +84,13 @@ export default class App {
   private createRoutes(): Routes {
     return [
       // Test startup navigation
-      // {
-      //   path: ``,
-      //   callback: async (): Promise<void> => {
-      //     const { default: TestView1 } = await import('./view/main/test-view-1/test-view-1');
-      //     this.setContent(PagesUrls.INDEX, new TestView1());
-      //   },
-      // },
+      {
+        path: ``,
+        callback: async (): Promise<void> => {
+          const { default: TestView1 } = await import('./view/main/test-view-1/test-view-1');
+          this.setContent(PagesUrls.INDEX, new TestView1());
+        },
+      },
       {
         path: `${PagesUrls.INDEX}`,
         callback: async (): Promise<void> => {
@@ -110,6 +110,13 @@ export default class App {
         callback: async (): Promise<void> => {
           const { default: SignUpView } = await import('./view/main/signup/signup-view');
           this.setContent(PagesUrls.SIGN_UP, new SignUpView());
+        },
+      },
+      {
+        path: `${PagesUrls.ERROR_404}`,
+        callback: async (): Promise<void> => {
+          const { default: TestView2 } = await import('./view/main/test-view-2/test-view-2');
+          this.setContent(PagesUrls.INDEX, new TestView2());
         },
       },
     ];
