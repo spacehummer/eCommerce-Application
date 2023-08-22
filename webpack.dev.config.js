@@ -36,6 +36,7 @@ module.exports = (env) => {
         overlay: false,
         progress: true,
       },
+      historyApiFallback: true,
     },
     resolve: {
       extensions: ['.ts', '.js'],
