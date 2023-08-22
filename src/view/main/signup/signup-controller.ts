@@ -1,5 +1,5 @@
 import CustomerData from '#src/api/endpoints/types/customer';
-import SignUpModel from './signup-model';
+import SignUpModel, { SignUpResult } from './signup-model';
 
 export default class SignUpController {
   private readonly model: SignUpModel;
@@ -8,7 +8,7 @@ export default class SignUpController {
     this.model = new SignUpModel();
   }
 
-  public async signUp(data: CustomerData): Promise<string> {
+  public async signUp(data: CustomerData): Promise<SignUpResult> {
     return this.model.signUp(data);
   }
 }

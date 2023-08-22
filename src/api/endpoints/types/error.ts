@@ -1,5 +1,7 @@
-type ErrorBodyCollection = Readonly<{
+export type ErrorBodyCollection = Readonly<{
   code: string;
+  duplicateValue?: string;
+  field?: string;
   message: string;
 }>;
 

@@ -22,10 +22,14 @@ export default class Validator {
   public static readonly nameRegex = /^[A-Z]{1,}[a-z]*$/i;
 
   public static readonly nameMsg =
-    'Must contain at least one character and no special characters or numbers';
+    'Must contain at least one character and no special characters or numbers. Starts with uppercase.';
 
-  public static readonly streetRegex = /^[A-Za-z]*$/i;
+  public static readonly streetRegex = /^[^]+$/i;
 
-  public static readonly streetMsg =
-    'Must contain at least one character and no special characters or numbers';
+  public static readonly streetMsg = 'Must contain at least one character';
+
+  public static readonly postCodeRegex = /^[0-9]{11}$/i;
+
+  public static readonly postCodeMsg =
+    'Must follow the format for RUSSIA: 11 numbers without spaces!';
 }
