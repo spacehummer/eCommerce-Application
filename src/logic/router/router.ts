@@ -38,6 +38,10 @@ export default class Router {
     console.log(`Rote to page URL: ${urlStr}`);
     console.log('Current routes:', this.routes);
 
+    if (typeof urlStr !== null) {
+      this.setHistory(urlStr);
+    }
+
     const requestFromURL = this.parseURLStr(urlStr);
 
     const seekingPath =
@@ -83,6 +87,7 @@ export default class Router {
 
   private browserAddressBarHandler(): void {
     const addressBarPath = this.getCurrentAddressBarPath();
+    // alert(addressBarPath);
     console.log(addressBarPath);
     this.navigate(addressBarPath);
   }
@@ -92,5 +97,14 @@ export default class Router {
       return window.location.hash.slice(1);
     }
     return window.location.pathname.slice(1);
+  }
+
+  /**
+   * Set URL to browser history and current address bar.
+   * @param {string}  urlStr  - URL, which was just used for navigation.
+   * @private
+   */
+  private setHistory(urlStr: string): void {
+    window.history.pushState(null, '', `/${urlStr}`);
   }
 }
