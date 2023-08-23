@@ -194,7 +194,7 @@ html {
 }
 
 @media screen and (max-width: 390px) {
-  .main-page-welcome {
+  .page-section {
     margin: 0;
     row-gap: 16px;
   }
