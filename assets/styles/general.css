@@ -47,6 +47,7 @@
 
 .content--header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 16px;
   margin-bottom: 16px;
@@ -129,3 +130,9 @@
   color: #FF0000;
 }
 /* </editor-fold desc="Test styles">*/
+
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
+}
