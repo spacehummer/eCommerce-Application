@@ -64,6 +64,13 @@
   align-items: center;
 }
 
+.main-page-welcome {
+  display: flex;
+  flex-direction: column;
+  row-gap: 64px;
+  margin: 128px 0;
+}
+
 .footer {
   margin-top: auto;
 }

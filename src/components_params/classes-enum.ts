@@ -22,6 +22,10 @@ const enum ClassesEnum {
   ITEM = 'item__link',
   ITEM_CURRENT = 'item__link--current',
   /* Main page */
+  MAIN_WELCOME_SECTION = 'main-page-welcome',
+  MAIN_WELCOME_SECTION_HEADING = 'main-page-welcome__heading',
+  MAIN_WELCOME_SECTION_TEXT_BLOCK = 'main-page-welcome__text-block',
+  MAIN_WELCOME_SECTION_PARAGRAPH = 'text-block__paragraph',
   /* Login / Register */
   LOGIN = 'login',
   LOGIN_FORM = 'login-form',
