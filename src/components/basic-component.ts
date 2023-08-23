@@ -39,22 +39,7 @@ export class BasicComponent implements GetHTMLElement {
    * @param {ElementParams} params
    */
   constructor(params: BasicComponentConstructorArgs) {
-    this.paramsObj = {
-      name: '',
-      tagName: TagsEnum.CONTAINER,
-      classNames: ClassesEnum.PLACEHOLDER,
-      id: null,
-      textContent: null,
-      callback: null,
-      eventType: '',
-    };
-    this.paramsObj.name = params?.name;
-    this.paramsObj.tagName = params?.tagName;
-    this.paramsObj.classNames = params?.classNames;
-    this.paramsObj.id = params?.id;
-    this.paramsObj.textContent = params?.textContent;
-    this.paramsObj.callback = params?.callback;
-    this.paramsObj.eventType = params?.eventType;
+    this.paramsObj = { ...params };
 
     this.htmlElement = null;
     this.cssClasses = null;
