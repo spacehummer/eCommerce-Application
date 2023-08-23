@@ -8,6 +8,7 @@ import TextContentEnum from '#src/components_params/text-content-enum';
  * Args for component constructor.
  */
 export interface BasicComponentConstructorArgs {
+  name?: string;
   tagName: TagsEnum;
   classNames: ClassesEnum | ClassesEnum[];
   id?: string | null;
@@ -158,7 +159,6 @@ export class BasicComponent implements GetHTMLElement {
     } else {
       this.paramsObj.classNames = additionClassesList;
     }
-
     this.updateCssClassesComponent();
     this.setCssClassesToElement(this.cssClasses);
   }

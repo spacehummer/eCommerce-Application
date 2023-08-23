@@ -36,7 +36,7 @@ export default class HeaderView extends View {
   }
 
   private configureView(): void {
-    const content = new Content([ClassesEnum.CONTENT_HEADER]);
+    const content = new Content(ClassesEnum.CONTENT_HEADER);
     const logo = new LogoGeneralView();
 
     if (this.logicParams === null) {

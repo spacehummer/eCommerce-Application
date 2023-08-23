@@ -6,6 +6,7 @@ const enum ClassesEnum {
   HEADER = 'header',
   CONTENT_HEADER = 'content--header',
   MAIN = 'main',
+  CONTENT_MAIN = 'content--main',
   FOOTER = 'footer',
   PLACEHOLDER = 'placeholder',
   /* Logo */
@@ -19,6 +20,7 @@ const enum ClassesEnum {
   NAV_MENU_LIST_ITEM_LINK = 'nav-link reset-link cursor-pointer',
   ITEM = 'item__link',
   ITEM_CURRENT = 'item__link--current',
+  /* Main page */
   /* Login / Register */
   LOGIN = 'login',
   LOGIN_FORM = 'login-form',

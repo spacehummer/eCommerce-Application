@@ -17,7 +17,7 @@
 .content {
   max-width: 100%;
   width: 1322px;
-  margin: 0 auto;
+  margin: 32px auto;
   padding: 0 64px;
 }
 /* </editor-fold desc="General styles">*/
@@ -48,11 +48,18 @@
 .content--header {
   display: flex;
   justify-content: space-between;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 /* </editor-fold desc="Header">*/
 
 .main {
   /*flex-grow: 1;*/
+}
+
+.content--main {
+  display: flex;
+  justify-content: space-between;
 }
 
 .footer {
@@ -91,6 +98,7 @@
 /* <editor-fold desc="Logo component">*/
 .logo {
   display: flex;
+  column-gap: 16px;
   align-items: center;
   width: fit-content;
   height: fit-content;
