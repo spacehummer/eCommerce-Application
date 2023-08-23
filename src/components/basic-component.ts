@@ -54,6 +54,26 @@ export class BasicComponent implements GetHTMLElement {
   }
 
   /**
+   * Create component HTML Element. Add CB and listener for event, when CB is specified.
+   * @param {ElementParams} params
+   */
+  protected createElement(params: BasicComponentConstructorArgs): void {
+    this.htmlElement = document.createElement(params.tagName);
+    this.updateCssClassesComponent();
+    console.log('Classes:', this.cssClasses);
+    this.setCssClassesToElement(this.cssClasses);
+    if (params.id) {
+      this.setCssId(params.id);
+    }
+    if (params.textContent) {
+      this.setTextContent(params.textContent);
+    }
+    if (params.callback) {
+      this.setCallback(params.callback, params.eventType);
+    }
+  }
+
+  /**
    * Add inner HTMLElement for component.
    * @param {HTMLElement | BasicComponent} innerElement
    */
@@ -68,43 +88,22 @@ export class BasicComponent implements GetHTMLElement {
   }
 
   /**
-   * Create component HTML Element. Add CB and listener for event, when CB is specified.
-   * @param {ElementParams} params
-   */
-  protected createElement(params: BasicComponentConstructorArgs): void {
-    this.htmlElement = document.createElement(params.tagName);
-    this.updateCssClassesComponent();
-    this.setCssClassesToElement(this.cssClasses);
-    if (params.id) {
-      this.setCssId(params.id);
-    }
-    if (params.textContent) {
-      this.setTextContent(params.textContent);
-    }
-    if (params.callback) {
-      this.setCallback(params.callback, params.eventType);
-    }
-  }
-
-  /**
    * Update CSS classes list, stored in component.
    * @protected
    */
   protected updateCssClassesComponent(): void {
     this.cssClasses = Array.isArray(this.paramsObj.classNames)
-      ? this.paramsObj.classNames
-      : [this.paramsObj.classNames];
+      ? this.paramsObj.classNames.flat(Infinity).join(' ').split(' ')
+      : this.paramsObj.classNames.split(' ');
   }
 
   /**
-   * Add css classes.
+   * Add css classes to component HTML Element.
    * @param {Array<string>} cssClasses  - list of CSS classes for component HTML Element.
    */
   public setCssClassesToElement(cssClasses: ClassList): void {
     if (cssClasses !== null) {
-      cssClasses.forEach((element) => {
-        checkInstance(this.htmlElement, HTMLElement).classList.add(...element.split(' '));
-      });
+      checkInstance(this.htmlElement, HTMLElement).classList.add(...cssClasses);
     }
   }
 

@@ -32,6 +32,10 @@ export default class App {
 
   constructor(rootToken: string = 'body') {
     this.root = checkInstance(document.querySelector(rootToken), HTMLElement);
+    while (this.root.firstElementChild) {
+      this.root.firstElementChild.remove();
+    }
+
     this.rootContainer = null;
 
     this.headerView = null;
