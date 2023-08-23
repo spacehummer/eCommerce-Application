@@ -23,7 +23,7 @@ export default class Section404View extends View {
     const section404HeadingParams: BasicComponentConstructorArgs = {
       tagName: TagsEnum.H2,
       classNames: ClassesEnum.SECTION_404_HEADING,
-      textContent: TextContentEnum.PLACEHOLDER,
+      textContent: TextContentEnum.SECTION_ERROR_404_HEADING,
     };
     const section404Heading = new BasicComponent(section404HeadingParams);
 
@@ -40,7 +40,7 @@ export default class Section404View extends View {
     const section404ParagraphsArr = [
       new BasicComponent({
         ...section404ParagraphParams,
-        ...{ textContent: TextContentEnum.PLACEHOLDER },
+        ...{ textContent: TextContentEnum.SECTION_ERROR_404_TB1_P1 },
       }),
     ];
     section404ParagraphsArr.forEach((paragraph) => {
