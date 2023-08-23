@@ -193,3 +193,10 @@ html {
     font-size: 12px;
   }
 }
+
+@media screen and (max-width: 390px) {
+  .main-page-welcome {
+    margin: 0;
+    row-gap: 16px;
+  }
+}
