@@ -1,5 +1,4 @@
 import { BasicComponentConstructorArgs } from '#src/components/basic-component';
-import checkInstance from '#src/utils/utils';
 import View, { ViewLogicParams } from '#src/view/view';
 import Content from '#src/components/basic_structure/content';
 import LogoGeneralView from '#src/view/general-components/logo-general-view';
@@ -12,13 +11,6 @@ import NavMenuView from '#src/view/header/navigation/nav-menu-view';
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.HEADER,
   classNames: ClassesEnum.HEADER,
-  callback: (e: Event | undefined): void => {
-    if (e instanceof Event) {
-      checkInstance(e.currentTarget, HTMLElement).classList.toggle('demo-red');
-      e.stopPropagation();
-    }
-  },
-  eventType: 'mouseenter',
 };
 
 /**
