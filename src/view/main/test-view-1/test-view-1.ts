@@ -3,7 +3,7 @@ import View from '#src/view/view';
 
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
-import Content from '#src/components/basic_structure/content';
+// import Content from '#src/components/basic_structure/content';
 import TextContentEnum from '#src/components_params/text-content-enum';
 
 const viewParams: BasicComponentConstructorArgs = {
@@ -18,12 +18,10 @@ const viewParams: BasicComponentConstructorArgs = {
 export default class TestView1 extends View {
   constructor() {
     super(viewParams);
-    this.configureView();
+    // this.configureView();
   }
 
-  private configureView(): void {
-    const content = new Content();
-
-    this.basicComponent.addInnerElement(content);
-  }
+  // private configureView(): void {
+  //
+  // }
 }

@@ -22,7 +22,7 @@ export default class FooterView extends View {
   }
 
   private configureView(): void {
-    const content = new Content();
+    const content = new Content(ClassesEnum.CONTENT_FOOTER);
 
     this.basicComponent.addInnerElement(content);
   }

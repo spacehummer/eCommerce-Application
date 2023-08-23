@@ -3,6 +3,7 @@ import ClassesEnum from '#src/components_params/classes-enum';
 import { BasicComponent, BasicComponentConstructorArgs } from '../basic-component';
 
 const rootContainerParams: BasicComponentConstructorArgs = {
+  name: 'content-base',
   tagName: TagsEnum.CONTAINER,
   classNames: ClassesEnum.CONTENT,
   textContent: null,
