@@ -23,7 +23,7 @@ export default class MainDefaultView extends View {
     const welcomeHeadingParams: BasicComponentConstructorArgs = {
       tagName: TagsEnum.H2,
       classNames: ClassesEnum.MAIN_WELCOME_SECTION_HEADING,
-      textContent: TextContentEnum.PLACEHOLDER,
+      textContent: TextContentEnum.MAIN_WELCOME_SECTION_HEADING,
     };
     const welcomeHeading = new BasicComponent(welcomeHeadingParams);
 
@@ -40,15 +40,15 @@ export default class MainDefaultView extends View {
     const welcomeParagraphsArr = [
       new BasicComponent({
         ...welcomeParagraphParams,
-        ...{ textContent: TextContentEnum.PLACEHOLDER },
+        ...{ textContent: TextContentEnum.MAIN_WELCOME_SECTION_TB1_P1 },
       }),
       new BasicComponent({
         ...welcomeParagraphParams,
-        ...{ textContent: TextContentEnum.PLACEHOLDER },
+        ...{ textContent: TextContentEnum.MAIN_WELCOME_SECTION_TB1_P2 },
       }),
       new BasicComponent({
         ...welcomeParagraphParams,
-        ...{ textContent: TextContentEnum.PLACEHOLDER },
+        ...{ textContent: TextContentEnum.MAIN_WELCOME_SECTION_TB1_P3 },
       }),
     ];
     welcomeParagraphsArr.forEach((paragraph) => {

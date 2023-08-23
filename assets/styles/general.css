@@ -53,6 +53,8 @@ html {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  column-gap: 2rem;
+  row-gap: 1rem;
   margin-top: 16px;
   margin-bottom: 16px;
 }
@@ -72,6 +74,7 @@ html {
 .main-page-welcome {
   display: flex;
   flex-direction: column;
+  align-items: center;
   row-gap: 4rem;
   margin: 8rem 0;
 }
@@ -79,16 +82,21 @@ html {
 .main-page-welcome__heading {
   font-size: 2rem;
   font-weight: 700;
+  margin: 0;
 }
 
 .main-page-welcome__text-block {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
+  width: 100%;
+  max-width: 512px;
 }
 
 .text-block__paragraph {
   font-size: 1.25rem;
+  margin: 0;
+  width: 100%;
 }
 
 /*</editor-fold>*/
@@ -160,6 +168,25 @@ html {
   color: #FF0000;
 }
 /* </editor-fold desc="Test styles">*/
+
+@media screen and (max-width: 1024px) {
+  /* Points
+   * 100vw  |  margin  *
+   * ----------------- *
+   * 1024   |  128     *
+   * 390    |  0       *
+   * */
+  /* Points
+   * 100vw  |  row-gap  *
+   * -----------------  *
+   * 1024   |  64       *
+   * 390    |  16       *
+   * */
+  .main-page-welcome {
+    margin: calc((64 / 317) * 100vw - 24960px / 317) 0;
+    row-gap: calc((24 / 317) * 100vw - 4288px / 317);
+  }
+}
 
 @media screen and (max-width: 480px) {
   html {
