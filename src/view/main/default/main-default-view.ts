@@ -13,9 +13,9 @@ const viewParams: BasicComponentConstructorArgs = {
 };
 
 /**
- * Test view component 1.
+ * Main default view component.
  */
-export default class TestView1 extends View {
+export default class MainDefaultView extends View {
   constructor() {
     super(viewParams);
     // this.configureView();
