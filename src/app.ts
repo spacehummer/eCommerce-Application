@@ -5,7 +5,6 @@ import '../assets/styles/general.css';
 import '../assets/styles/normalize.css';
 
 /* Import classes */
-// import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import RootContainer from '#src/components/basic_structure/root-container';
 import HeaderView from '#src/view/header/header-view';
 import MainView from '#src/view/main/main-view';
@@ -138,6 +137,9 @@ export default class App {
     checkInstance(this.mainView, MainView).setNewPageView(newPageViewComponent);
   }
 
+  /**
+   * Start App work.
+   */
   public start(): void {
     /* Listener for start onload work */
     window.addEventListener('load', () => {
