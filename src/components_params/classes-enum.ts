@@ -22,10 +22,10 @@ const enum ClassesEnum {
   ITEM = 'item__link',
   ITEM_CURRENT = 'item__link--current',
   /* Main page */
-  MAIN_WELCOME_SECTION = 'main-page-welcome',
-  MAIN_WELCOME_SECTION_HEADING = 'main-page-welcome__heading',
-  MAIN_WELCOME_SECTION_TEXT_BLOCK = 'main-page-welcome__text-block',
-  MAIN_WELCOME_SECTION_PARAGRAPH = 'text-block__paragraph',
+  MAIN_WELCOME_SECTION = 'page-section page-section--welcome',
+  MAIN_WELCOME_SECTION_HEADING = 'page-section__heading page-section__heading--welcome',
+  MAIN_WELCOME_SECTION_TEXT_BLOCK = 'page-section__text-block page-section__text-block--welcome',
+  MAIN_WELCOME_SECTION_PARAGRAPH = 'text-block__paragraph text-block__paragraph--welcome',
   /* Login / Register */
   LOGIN = 'login',
   LOGIN_FORM = 'login-form',
@@ -41,6 +41,11 @@ const enum ClassesEnum {
   FORM_OK_MESSAGE = 'form__ok-msg',
   SIGN_UP = 'sign-up',
   SIGN_UP_FORM = 'sign-up-form',
+  /* ERROR 404 */
+  SECTION_404 = 'page-section page-section--error-404',
+  SECTION_404_HEADING = 'page-section__heading page-section__heading--error-404',
+  SECTION_404_TEXT_BLOCK = 'page-section__text-block page-section__text-block--error-404',
+  SECTION_404_PARAGRAPH = 'text-block__paragraph text-block__paragraph--error-404',
 }
 
 export default ClassesEnum;
