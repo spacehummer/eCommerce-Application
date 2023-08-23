@@ -42,6 +42,10 @@ export default class Section404View extends View {
         ...section404ParagraphParams,
         ...{ textContent: TextContentEnum.SECTION_ERROR_404_TB1_P1 },
       }),
+      new BasicComponent({
+        ...section404ParagraphParams,
+        ...{ textContent: TextContentEnum.SECTION_ERROR_404_TB1_P2 },
+      }),
     ];
     section404ParagraphsArr.forEach((paragraph) => {
       section404TextBlock.addInnerElement(paragraph);

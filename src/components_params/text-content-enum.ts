@@ -12,6 +12,7 @@ const enum TextContentEnum {
   /* Section: ERROR 404 */
   SECTION_ERROR_404_HEADING = 'ERROR 404',
   SECTION_ERROR_404_TB1_P1 = 'We can`t find the page you`re looking for.',
+  SECTION_ERROR_404_TB1_P2 = 'You may have entered the wrong URL or you do not have rights to view the page.',
 }
 
 export default TextContentEnum;
