@@ -60,7 +60,8 @@
 
 .content--main {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
 }
 
 .footer {
