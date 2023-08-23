@@ -123,8 +123,10 @@ export default class App {
       {
         path: `${PagesUrls.ERROR_404}`,
         callback: async (): Promise<void> => {
-          const { default: TestView2 } = await import('./view/main/test-view-2/test-view-2');
-          this.setContent(PagesUrls.INDEX, new TestView2());
+          const { default: Section404View } = await import(
+            './view/main/error-404/section-404-view'
+          );
+          this.setContent(PagesUrls.INDEX, new Section404View());
         },
       },
     ];
