@@ -32,8 +32,8 @@ export default class App {
 
   constructor(rootToken: string = 'body') {
     this.root = checkInstance(document.querySelector(rootToken), HTMLElement);
-    while (this.root.firstElementChild) {
-      this.root.firstElementChild.remove();
+    while (this.root.firstChild) {
+      this.root.firstChild.remove();
     }
 
     this.rootContainer = null;

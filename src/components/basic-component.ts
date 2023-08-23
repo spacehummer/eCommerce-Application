@@ -39,7 +39,23 @@ export class BasicComponent implements GetHTMLElement {
    * @param {ElementParams} params
    */
   constructor(params: BasicComponentConstructorArgs) {
-    this.paramsObj = params;
+    this.paramsObj = {
+      name: '',
+      tagName: TagsEnum.CONTAINER,
+      classNames: ClassesEnum.PLACEHOLDER,
+      id: null,
+      textContent: null,
+      callback: null,
+      eventType: '',
+    };
+    this.paramsObj.name = params?.name;
+    this.paramsObj.tagName = params?.tagName;
+    this.paramsObj.classNames = params?.classNames;
+    this.paramsObj.id = params?.id;
+    this.paramsObj.textContent = params?.textContent;
+    this.paramsObj.callback = params?.callback;
+    this.paramsObj.eventType = params?.eventType;
+
     this.htmlElement = null;
     this.cssClasses = null;
     this.createElement(this.paramsObj);
@@ -95,6 +111,7 @@ export class BasicComponent implements GetHTMLElement {
     this.cssClasses = Array.isArray(this.paramsObj.classNames)
       ? this.paramsObj.classNames.flat(Infinity).join(' ').split(' ')
       : this.paramsObj.classNames.split(' ');
+    this.cssClasses = this.cssClasses.filter((className) => className !== '');
   }
 
   /**
@@ -155,8 +172,10 @@ export class BasicComponent implements GetHTMLElement {
       } else {
         this.paramsObj.classNames.push(additionClassesList);
       }
+    } else if (Array.isArray(additionClassesList)) {
+      this.paramsObj.classNames = [...additionClassesList];
     } else {
-      this.paramsObj.classNames = additionClassesList;
+      this.paramsObj.classNames = [this.paramsObj.classNames, additionClassesList];
     }
     this.updateCssClassesComponent();
     this.setCssClassesToElement(this.cssClasses);
