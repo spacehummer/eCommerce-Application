@@ -64,14 +64,14 @@ html {
   /*flex-grow: 1;*/
 }
 
-/*<editor-fold desc="Main: default">*/
+/*<editor-fold desc="Main section">*/
 .content--main {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.main-page-welcome {
+.page-section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,13 +79,13 @@ html {
   margin: 8rem 0;
 }
 
-.main-page-welcome__heading {
+.page-section__heading {
   font-size: 2rem;
   font-weight: 700;
   margin: 0;
 }
 
-.main-page-welcome__text-block {
+.page-section__text-block {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
@@ -98,8 +98,7 @@ html {
   margin: 0;
   width: 100%;
 }
-
-/*</editor-fold>*/
+/*</editor-fold desc="Main section">*/
 
 .footer {
   margin-top: auto;
@@ -120,7 +119,7 @@ html {
   font-weight: 700;
   letter-spacing: 0.04em;
   color: #ffffff;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
+  text-shadow: 0 0 1px rgb(0, 0, 0), 1px 1px 3px rgba(0, 0, 0, 0.75);
 }
 
 .nav-link:hover {
@@ -155,7 +154,7 @@ html {
   font-weight: 700;
   letter-spacing: 0.04em;
   color: #F2F2F2;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
+  text-shadow: 0 0 1px rgb(0, 0, 0), 1px 1px 3px rgba(0, 0, 0, 0.75);
 }
 /* </editor-fold desc="Logo component">*/
 
@@ -182,7 +181,7 @@ html {
    * 1024   |  64       *
    * 390    |  16       *
    * */
-  .main-page-welcome {
+  .page-section {
     margin: calc((64 / 317) * 100vw - 24960px / 317) 0;
     row-gap: calc((24 / 317) * 100vw - 4288px / 317);
   }
@@ -195,7 +194,7 @@ html {
 }
 
 @media screen and (max-width: 390px) {
-  .main-page-welcome {
+  .page-section {
     margin: 0;
     row-gap: 16px;
   }

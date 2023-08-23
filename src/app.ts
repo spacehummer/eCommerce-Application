@@ -5,7 +5,6 @@ import '../assets/styles/general.css';
 import '../assets/styles/normalize.css';
 
 /* Import classes */
-// import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import RootContainer from '#src/components/basic_structure/root-container';
 import HeaderView from '#src/view/header/header-view';
 import MainView from '#src/view/main/main-view';
@@ -123,8 +122,10 @@ export default class App {
       {
         path: `${PagesUrls.ERROR_404}`,
         callback: async (): Promise<void> => {
-          const { default: TestView2 } = await import('./view/main/test-view-2/test-view-2');
-          this.setContent(PagesUrls.INDEX, new TestView2());
+          const { default: Section404View } = await import(
+            './view/main/error-404/section-404-view'
+          );
+          this.setContent(PagesUrls.INDEX, new Section404View());
         },
       },
     ];
@@ -136,6 +137,9 @@ export default class App {
     checkInstance(this.mainView, MainView).setNewPageView(newPageViewComponent);
   }
 
+  /**
+   * Start App work.
+   */
   public start(): void {
     /* Listener for start onload work */
     window.addEventListener('load', () => {
