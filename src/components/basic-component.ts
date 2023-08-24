@@ -8,6 +8,7 @@ import TextContentEnum from '#src/components_params/text-content-enum';
  * Args for component constructor.
  */
 export interface BasicComponentConstructorArgs {
+  name?: string;
   tagName: TagsEnum;
   classNames: ClassesEnum | ClassesEnum[];
   id?: string | null;
@@ -38,7 +39,8 @@ export class BasicComponent implements GetHTMLElement {
    * @param {ElementParams} params
    */
   constructor(params: BasicComponentConstructorArgs) {
-    this.paramsObj = params;
+    this.paramsObj = { ...params };
+
     this.htmlElement = null;
     this.cssClasses = null;
     this.createElement(this.paramsObj);
@@ -50,6 +52,26 @@ export class BasicComponent implements GetHTMLElement {
    */
   public getHTMLElement(): ComponentElementField {
     return this.htmlElement;
+  }
+
+  /**
+   * Create component HTML Element. Add CB and listener for event, when CB is specified.
+   * @param {ElementParams} params
+   */
+  protected createElement(params: BasicComponentConstructorArgs): void {
+    this.htmlElement = document.createElement(params.tagName);
+    this.updateCssClassesComponent();
+    console.log('Classes:', this.cssClasses);
+    this.setCssClassesToElement(this.cssClasses);
+    if (params.id) {
+      this.setCssId(params.id);
+    }
+    if (params.textContent) {
+      this.setTextContent(params.textContent);
+    }
+    if (params.callback) {
+      this.setCallback(params.callback, params.eventType);
+    }
   }
 
   /**
@@ -67,44 +89,23 @@ export class BasicComponent implements GetHTMLElement {
   }
 
   /**
-   * Create component HTML Element. Add CB and listener for event, when CB is specified.
-   * @param {ElementParams} params
-   */
-  protected createElement(params: BasicComponentConstructorArgs): void {
-    this.htmlElement = document.createElement(params.tagName);
-    this.updateCssClassesComponent();
-    this.setCssClassesToElement(this.cssClasses);
-    if (params.id) {
-      this.setCssId(params.id);
-    }
-    if (params.textContent) {
-      this.setTextContent(params.textContent);
-    }
-    if (params.callback) {
-      this.setCallback(params.callback, params.eventType);
-    }
-  }
-
-  /**
    * Update CSS classes list, stored in component.
    * @protected
    */
   protected updateCssClassesComponent(): void {
     this.cssClasses = Array.isArray(this.paramsObj.classNames)
-      ? this.paramsObj.classNames
-      : [this.paramsObj.classNames];
+      ? this.paramsObj.classNames.flat(Infinity).join(' ').split(' ')
+      : this.paramsObj.classNames.split(' ');
+    this.cssClasses = this.cssClasses.filter((className) => className !== '');
   }
 
   /**
-   * Add css classes.
+   * Add css classes to component HTML Element.
    * @param {Array<string>} cssClasses  - list of CSS classes for component HTML Element.
    */
   public setCssClassesToElement(cssClasses: ClassList): void {
-    console.log(cssClasses);
     if (cssClasses !== null) {
-      cssClasses.forEach((element) => {
-        checkInstance(this.htmlElement, HTMLElement).classList.add(...element.split(' '));
-      });
+      checkInstance(this.htmlElement, HTMLElement).classList.add(...cssClasses);
     }
   }
 
@@ -156,10 +157,11 @@ export class BasicComponent implements GetHTMLElement {
       } else {
         this.paramsObj.classNames.push(additionClassesList);
       }
+    } else if (Array.isArray(additionClassesList)) {
+      this.paramsObj.classNames = [...additionClassesList];
     } else {
-      this.paramsObj.classNames = additionClassesList;
+      this.paramsObj.classNames = [this.paramsObj.classNames, additionClassesList];
     }
-
     this.updateCssClassesComponent();
     this.setCssClassesToElement(this.cssClasses);
   }

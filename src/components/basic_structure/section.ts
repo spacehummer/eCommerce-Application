@@ -13,7 +13,7 @@ const sectionParams = {
 /**
  * Root container for all App components.
  */
-export default class Content extends BasicComponent {
+export default class Section extends BasicComponent {
   constructor(additionClassesList: ClassesEnum | ClassesEnum[], id: string) {
     sectionParams.id = id;
     super(sectionParams);
