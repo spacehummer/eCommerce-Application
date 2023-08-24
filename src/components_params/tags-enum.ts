@@ -17,9 +17,11 @@ const enum TagsEnum {
   LIST_ITEM = 'li',
   /* UI interactive */
   LINK = 'a',
+  FORM = 'form',
   BUTTON = 'button',
   INPUT = 'input',
   LABEL = 'label',
+  SELECT = 'select',
   /* Media */
   IMG = 'img',
 }

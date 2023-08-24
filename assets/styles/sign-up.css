@@ -41,7 +41,12 @@
     width: auto !important;
 }
 
+.form__input-select {
+    padding: 1px 2px;
+}
+
 .form-field,
+.form-field-container,
 .form-field-checkbox {
     display: flex;
     justify-content: left;
@@ -49,10 +54,21 @@
     margin: 5px 0;
 }
 
+.form-field-container,
 .form-field {
     flex-direction: column;
 }
 
+.form-field-checkbox {
+    flex-direction: row;
+}
+
 .from__submit-btn {
     width: 100%;
+}
+
+@media screen and (max-width: 480px) {
+    html {
+        font-size: 12px;
+    }
 }
