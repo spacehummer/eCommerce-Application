@@ -15,7 +15,7 @@ type SelectOptionsArgs = {
   selected?: boolean;
 };
 
-export default class Select extends View {
+export default class SelectComponent extends View {
   constructor(name: string, options: SelectOptionsArgs | SelectOptionsArgs[]) {
     super(args);
 

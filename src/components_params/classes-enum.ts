@@ -39,6 +39,7 @@ const enum ClassesEnum {
   INPUT_SUBMIT = 'from__submit-btn',
   INPUT_SELECT = 'form__input-select',
   INPUT_INVALID = 'form__input__invalid',
+  FORM_MESSAGE = 'form__msg',
   FORM_ERROR_MESSAGE = 'form__error-msg',
   FORM_OK_MESSAGE = 'form__ok-msg',
   SIGN_UP = 'sign-up',

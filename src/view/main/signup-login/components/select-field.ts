@@ -1,10 +1,10 @@
 import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
-import LabelFactory from '#src/view/login/components/labelFactory';
 import View from '#src/view/view';
-import { IFormField } from './field';
-import Select from './select';
+import { IFormField } from './form-field';
+import SelectComponent from './select';
+import LabelFactory from './utils/labelFactory';
 
 const args: BasicComponentConstructorArgs = {
   tagName: TagsEnum.CONTAINER,
@@ -19,7 +19,7 @@ type SelectOptionsArgs = {
 };
 
 export default class SelectField extends View implements IFormField {
-  private readonly select: Select;
+  private readonly select: SelectComponent;
 
   public readonly label: HTMLLabelElement;
 
@@ -30,7 +30,7 @@ export default class SelectField extends View implements IFormField {
   constructor(name: string, label: string, options: SelectOptionsArgs | SelectOptionsArgs[]) {
     super(args);
 
-    this.select = new Select(name, options);
+    this.select = new SelectComponent(name, options);
 
     this.label = LabelFactory.default({
       textContent: label,

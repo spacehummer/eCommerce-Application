@@ -2,7 +2,7 @@ import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
-import { IFormField } from './field';
+import { IFormField } from './form-field';
 import InputField, { FormFieldArgs } from './input-field';
 
 const args: BasicComponentConstructorArgs = {

@@ -1,10 +1,13 @@
 import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
-import InputFactory, { Args, InputType } from '#src/view/login/components/inputFactory';
-import LabelFactory from '#src/view/login/components/labelFactory';
+import InputFactory, {
+  Args,
+  InputType,
+} from '#src/view/main/signup-login/components/utils/inputFactory';
 import View from '#src/view/view';
-import { IFormField } from './field';
+import LabelFactory from './utils/labelFactory';
+import { IFormField } from './form-field';
 
 const args: BasicComponentConstructorArgs = {
   classNames: ClassesEnum.FORM_FIELD,

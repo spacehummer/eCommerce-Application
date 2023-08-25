@@ -3,8 +3,8 @@ import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '../../view';
 import SignUpController from './signup-controller';
-import '#assets/styles/sign-up.css';
-import SignUpForm, { FieldName } from './components/signup-form';
+import '#assets/styles/signup-login.css';
+import SignUpForm, { SignUpFieldNames } from './components/signup-form';
 import { ApiRequestResult } from './components/types';
 
 const args: BasicComponentConstructorArgs = {
@@ -37,19 +37,21 @@ export default class SignUpView extends View {
 
   private signUp(record: Record<string, string>): void {
     const data = {
-      email: record[FieldName.Email],
-      password: record[FieldName.Password],
-      firstName: record[FieldName.FirstName],
-      lastName: record[FieldName.LastName],
-      dateOfBirth: record[FieldName.DateOfBirth],
-      countryCode: record[FieldName.CountryCode],
-      city: record[FieldName.City],
-      streetName: record[FieldName.Street],
-      postalCode: record[FieldName.PostalCode],
+      email: record[SignUpFieldNames.Email],
+      password: record[SignUpFieldNames.Password],
+      firstName: record[SignUpFieldNames.FirstName],
+      lastName: record[SignUpFieldNames.LastName],
+      dateOfBirth: record[SignUpFieldNames.DateOfBirth],
+      countryCode: record[SignUpFieldNames.CountryCode],
+      city: record[SignUpFieldNames.City],
+      streetName: record[SignUpFieldNames.Street],
+      postalCode: record[SignUpFieldNames.PostalCode],
       streetNumber: '',
     };
     this.controller
       .signUp(data)
-      .then((result: ApiRequestResult) => this.form.showSubmitResults(result));
+      .then((result: ApiRequestResult) =>
+        this.form.showSubmitResults('Registation successful!', result)
+      );
   }
 }

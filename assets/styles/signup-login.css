@@ -1,3 +1,5 @@
+.login,
+.login-form,
 .sign-up,
 .sign-up-form {
     display: flex;
@@ -5,6 +7,7 @@
     align-items: center;
 }
 
+.login-form,
 .sign-up-form {
     width: 25rem;
 }
@@ -65,6 +68,12 @@
 
 .from__submit-btn {
     width: 100%;
+}
+
+.form__msg {
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 @media screen and (max-width: 480px) {
