@@ -23,5 +23,15 @@ export default class ModalWindowView extends View {
     this.container = null;
     this.headingContainer = null;
     this.content = null;
+
+    this.configureView();
+  }
+
+  private configureView(): void {
+    const containerParams = {
+      tagName: TagsEnum.CONTAINER,
+      classNames: ClassesEnum.PLACEHOLDER,
+    };
+    this.container = new BasicComponent(containerParams);
   }
 }
