@@ -24,6 +24,18 @@ html {
   margin: 32px auto;
   padding: 0 64px;
 }
+
+.viewport-shading {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(84, 84, 84, 0.5);
+  width: 100%;
+  height: 100%;
+}
 /* </editor-fold desc="General styles">*/
 
 /* <editor-fold desc="General modifiers">*/
@@ -59,50 +71,6 @@ html {
   margin-bottom: 16px;
 }
 /* </editor-fold desc="Header">*/
-
-.main {
-  /*flex-grow: 1;*/
-}
-
-/*<editor-fold desc="Main section">*/
-.content--main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.page-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 4rem;
-  margin: 8rem 0;
-}
-
-.page-section__heading {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0;
-}
-
-.page-section__text-block {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
-  width: 100%;
-  max-width: 512px;
-}
-
-.text-block__paragraph {
-  font-size: 1.25rem;
-  margin: 0;
-  width: 100%;
-}
-/*</editor-fold desc="Main section">*/
-
-.footer {
-  margin-top: auto;
-}
 
 /* <editor-fold desc="Navigation menu component">*/
 .nav-menu-list {
@@ -158,6 +126,58 @@ html {
 }
 /* </editor-fold desc="Logo component">*/
 
+.main {
+  /*flex-grow: 1;*/
+}
+
+/*<editor-fold desc="Main section">*/
+.content--main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 4rem;
+  margin: 8rem 0;
+}
+
+.page-section__heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.page-section__text-block {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  width: 100%;
+  max-width: 512px;
+}
+
+.text-block__paragraph {
+  font-size: 1.25rem;
+  margin: 0;
+  width: 100%;
+}
+/*</editor-fold desc="Main section">*/
+
+.footer {
+  margin-top: auto;
+}
+
+.modal-window-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  border: 2px green;
+  padding: 16px;
+}
+
 /* <editor-fold desc="Test styles">*/
 .demo-container {
   user-select: none;
@@ -168,6 +188,7 @@ html {
 }
 /* </editor-fold desc="Test styles">*/
 
+/* <editor-fold desc="Media">*/
 @media screen and (max-width: 1024px) {
   /* Points
    * 100vw  |  margin  *
@@ -199,3 +220,4 @@ html {
     row-gap: 16px;
   }
 }
+/* </editor-fold desc="Media">*/

@@ -41,6 +41,9 @@ const enum ClassesEnum {
   FORM_OK_MESSAGE = 'form__ok-msg',
   SIGN_UP = 'sign-up',
   SIGN_UP_FORM = 'sign-up-form',
+  /* Modal window */
+  MODAL_WINDOW_SHADING = 'viewport-shading',
+  MODAL_WINDOW_CONTAINER = 'modal-window-container',
   /* ERROR 404 */
   SECTION_404 = 'page-section page-section--error-404',
   SECTION_404_HEADING = 'page-section__heading page-section__heading--error-404',

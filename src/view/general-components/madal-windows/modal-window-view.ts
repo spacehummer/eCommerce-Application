@@ -6,8 +6,7 @@ import TextContentEnum from '#src/components_params/text-content-enum';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.CONTAINER,
-  classNames: ClassesEnum.PLACEHOLDER,
-  textContent: TextContentEnum.PLACEHOLDER,
+  classNames: ClassesEnum.MODAL_WINDOW_SHADING,
 };
 
 export default class ModalWindowView extends View {
@@ -30,8 +29,11 @@ export default class ModalWindowView extends View {
   private configureView(): void {
     const containerParams = {
       tagName: TagsEnum.CONTAINER,
-      classNames: ClassesEnum.PLACEHOLDER,
+      classNames: ClassesEnum.MODAL_WINDOW_CONTAINER,
+      textContent: TextContentEnum.PLACEHOLDER,
     };
     this.container = new BasicComponent(containerParams);
+
+    this.basicComponent.addInnerElement(this.container);
   }
 }

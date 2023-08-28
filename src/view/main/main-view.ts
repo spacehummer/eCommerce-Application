@@ -3,6 +3,8 @@ import View from '#src/view/view';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import Content from '#src/components/basic_structure/content';
+import checkInstance from '../../utils/utils';
+import ModalWindowView from '../general-components/madal-windows/modal-window-view';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.MAIN,
@@ -39,5 +41,6 @@ export default class MainView extends View {
     }
     // add new view nested page components
     this.pageViewRoot?.addInnerElement(newView);
+    document.body.append(checkInstance(new ModalWindowView().getHTMLElement(), HTMLElement));
   }
 }
