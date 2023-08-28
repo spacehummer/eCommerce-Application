@@ -14,25 +14,64 @@ export default class ModalWindowView extends View {
 
   private headingContainer: BasicComponent | null;
 
-  private content: BasicComponent | null;
+  private contentContainer: BasicComponent | null;
 
   constructor() {
     super(viewParams);
 
     this.container = null;
     this.headingContainer = null;
-    this.content = null;
+    this.contentContainer = null;
 
     this.configureView();
   }
 
   private configureView(): void {
-    const containerParams = {
+    const containerParams: BasicComponentConstructorArgs = {
       tagName: TagsEnum.CONTAINER,
       classNames: ClassesEnum.MODAL_WINDOW_CONTAINER,
-      textContent: TextContentEnum.PLACEHOLDER,
     };
     this.container = new BasicComponent(containerParams);
+
+    // <editor-fold desc="Heading components">
+    const headingContainerParams: BasicComponentConstructorArgs = {
+      tagName: TagsEnum.CONTAINER,
+      classNames: ClassesEnum.PLACEHOLDER,
+    };
+    this.headingContainer = new BasicComponent(headingContainerParams);
+
+    const stateIconWrpParams = {
+      tagName: TagsEnum.CONTAINER,
+      classNames: ClassesEnum.PLACEHOLDER,
+    };
+    const stateIconWrp = new BasicComponent(stateIconWrpParams);
+
+    const stateIconParams = {
+      tagName: TagsEnum.IMG,
+      classNames: ClassesEnum.PLACEHOLDER,
+    };
+    const stateIcon = new BasicComponent(stateIconParams);
+
+    const headingTextLabelParams = {
+      tagName: TagsEnum.SPAN,
+      classNames: ClassesEnum.PLACEHOLDER,
+      textContent: TextContentEnum.PLACEHOLDER,
+    };
+    const headingTextLabel = new BasicComponent(headingTextLabelParams);
+
+    const closeBtnParams = {
+      tagName: TagsEnum.BUTTON,
+      classNames: ClassesEnum.PLACEHOLDER,
+    };
+    const closeBtn = new BasicComponent(closeBtnParams);
+
+    stateIconWrp.addInnerElement(stateIcon);
+
+    this.headingContainer.addInnerElement(stateIconWrp);
+    this.headingContainer.addInnerElement(headingTextLabel);
+    this.headingContainer.addInnerElement(closeBtn);
+    this.container.addInnerElement(this.headingContainer);
+    // </editor-fold desc="Heading components">
 
     this.basicComponent.addInnerElement(this.container);
   }
