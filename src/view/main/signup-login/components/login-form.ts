@@ -12,7 +12,7 @@ export enum LoginFieldNames {
 }
 
 export default class LoginForm extends FormComponent {
-  constructor(submitCallback: (record: Record<string, string>) => void) {
+  constructor(submitCallback: (record: Record<string, string | Record<string, string>>) => void) {
     super(submitCallback, Object.values(LoginFieldNames), ClassesEnum.LOGIN_FORM);
 
     const submit = InputFactory.submit({

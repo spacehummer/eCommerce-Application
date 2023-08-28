@@ -2,6 +2,7 @@ import ClassesEnum from '#src/components_params/classes-enum';
 import Validator from '#src/utils/validator';
 import InputFactory from '#src/view/main/signup-login/components/utils/inputFactory';
 import View from '#src/view/view';
+import FieldSet from './field-set';
 import FormComponent from './form';
 import InputField from './input-field';
 import PasswordField from './password-field';
@@ -17,10 +18,17 @@ export enum SignUpFieldNames {
   Password = 'password',
   Street = 'street',
   PostalCode = 'postalCode',
+  ShippingAddress = 'shippingAddress',
+  BillingAddress = 'billingAddress',
+  SetAsBillingToo = 'setAsBillingToo',
 }
 
 export default class SignUpForm extends FormComponent {
-  constructor(submitCallback: (record: Record<string, string>) => void) {
+  private readonly shippingFieldset: FieldSet;
+
+  private readonly billingFieldset: FieldSet;
+
+  constructor(submitCallback: (record: Record<string, string | Record<string, string>>) => void) {
     super(submitCallback, Object.values(SignUpFieldNames), ClassesEnum.SIGN_UP_FORM);
 
     const submit = InputFactory.submit({
@@ -30,7 +38,26 @@ export default class SignUpForm extends FormComponent {
     });
 
     this.append(this.createPersonFields());
-    this.append(this.createAdressFields());
+
+    const billingAddress = this.createAdressFields();
+    this.billingFieldset = new FieldSet(
+      SignUpFieldNames.BillingAddress,
+      'Billing address',
+      billingAddress
+    );
+
+    const shippingAdresses = this.createAdressFields();
+    shippingAdresses.push(this.createAddressContr(this.billingFieldset));
+
+    this.shippingFieldset = new FieldSet(
+      SignUpFieldNames.ShippingAddress,
+      'Shipping address',
+      shippingAdresses
+    );
+
+    this.basicComponent.addInnerElement(this.shippingFieldset);
+    this.basicComponent.addInnerElement(this.billingFieldset);
+
     this.basicComponent.addInnerElement(submit);
   }
 
@@ -80,18 +107,23 @@ export default class SignUpForm extends FormComponent {
       type: 'date',
       name: SignUpFieldNames.DateOfBirth,
       label: 'Date of birth',
+      required: true,
       max: date.toISOString().split('T')[0],
     });
   }
 
   private createAdressFields(): View[] {
-    const country = new SelectField(SignUpFieldNames.CountryCode, 'Country', [
-      { text: 'RUSSIA', value: 'RU', defaultSelected: true, selected: true },
-    ]);
+    const country = new SelectField(
+      SignUpFieldNames.CountryCode,
+      'Country',
+      [{ text: 'RUSSIA', value: 'RU', defaultSelected: true, selected: true }],
+      true
+    );
     const city = new InputField({
       type: 'text',
       name: SignUpFieldNames.City,
       label: 'City',
+      required: true,
       pattern: Validator.nameRegex.source,
       title: Validator.nameMsg,
     });
@@ -99,6 +131,7 @@ export default class SignUpForm extends FormComponent {
       type: 'text',
       name: SignUpFieldNames.Street,
       label: 'Street',
+      required: true,
       pattern: Validator.streetRegex.source,
       title: Validator.streetMsg,
     });
@@ -106,11 +139,42 @@ export default class SignUpForm extends FormComponent {
       type: 'text',
       name: SignUpFieldNames.PostalCode,
       label: 'Postal code',
+      required: true,
       pattern: Validator.postCodeRegex.source,
       title: Validator.postCodeMsg,
       minLength: 11,
       maxLength: 11,
     });
     return [country, city, street, postalCode];
+  }
+
+  private createAddressContr(view: FieldSet): InputField {
+    const checkbox = new InputField(
+      {
+        type: 'checkbox',
+        name: SignUpFieldNames.SetAsBillingToo,
+        label: 'Set as default billing address.',
+        classList: [ClassesEnum.INPUT_CHECK],
+        value: 'off',
+      },
+      'input-first'
+    );
+    checkbox.basicComponent.setCssClassesToElement([ClassesEnum.FORM_FIELD_CHECKBOX]);
+
+    checkbox.input.onclick = (): void => {
+      const elem = view.getHTMLElement();
+      if (elem) {
+        elem.classList.toggle(ClassesEnum.HIDDEN);
+        if (!checkbox.input.checked) {
+          checkbox.input.value = 'off';
+          view.setAttrForAllItems('required', '');
+        } else {
+          view.removeAttrForAllItems('required');
+          checkbox.input.value = 'on';
+        }
+      }
+    };
+
+    return checkbox;
   }
 }

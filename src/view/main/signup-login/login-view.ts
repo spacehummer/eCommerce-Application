@@ -35,10 +35,10 @@ export default class LoginView extends View {
     this.basicComponent.addInnerElement(this.form);
   }
 
-  private login(record: Record<string, string>): void {
+  private login(record: Record<string, string | Record<string, string>>): void {
     const data = {
-      email: record[LoginFieldNames.Email],
-      password: record[LoginFieldNames.Password],
+      email: record[LoginFieldNames.Email] as string,
+      password: record[LoginFieldNames.Password] as string,
     };
     this.controller
       .login(data.email, data.password)

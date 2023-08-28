@@ -18,6 +18,7 @@ const enum TagsEnum {
   /* UI interactive */
   LINK = 'a',
   FORM = 'form',
+  FIELD_SET = 'fieldset',
   BUTTON = 'button',
   INPUT = 'input',
   LABEL = 'label',

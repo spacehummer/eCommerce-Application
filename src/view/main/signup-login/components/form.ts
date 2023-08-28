@@ -18,7 +18,9 @@ export default class FormComponent extends View {
   }
 
   constructor(
-    protected readonly submitCallback: (record: Record<string, string>) => void,
+    protected readonly submitCallback: (
+      record: Record<string, string | Record<string, string>>
+    ) => void,
     protected readonly itemsNames: ReadonlyArray<string>,
     classNames: ClassesEnum | ClassesEnum[]
   ) {
@@ -40,12 +42,20 @@ export default class FormComponent extends View {
     items.forEach((item) => this.basicComponent.addInnerElement(item));
   }
 
-  protected getSubmitItems(): Record<string, string> {
-    const result: Record<string, string> = {};
+  protected getSubmitItems(
+    elements: HTMLFormControlsCollection
+  ): Record<string, string | Record<string, string>> {
+    const result: Record<string, string | Record<string, string>> = {};
 
     this.itemsNames.reduce((acc, value) => {
-      const elem = this.elements.namedItem(value) as HTMLInputElement;
-      acc[value] = elem.value;
+      const elem = elements.namedItem(value) as HTMLInputElement;
+      if (elem) {
+        if (elem instanceof HTMLFieldSetElement) {
+          acc[value] = this.getSubmitItems(elem.elements) as Record<string, string>;
+        } else {
+          acc[value] = elem.value;
+        }
+      }
       return acc;
     }, result);
 
@@ -74,7 +84,7 @@ export default class FormComponent extends View {
   protected readonly onSubmit = (): boolean => {
     this.errorMsg.hide();
     this.okMsg.hide();
-    const submitData = this.getSubmitItems();
+    const submitData = this.getSubmitItems(this.elements);
     this.submitCallback(submitData);
     return false;
   };

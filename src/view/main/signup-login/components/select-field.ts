@@ -27,10 +27,15 @@ export default class SelectField extends View implements IFormField {
     return this.select.getHTMLElement() as HTMLInputElement;
   }
 
-  constructor(name: string, label: string, options: SelectOptionsArgs | SelectOptionsArgs[]) {
+  constructor(
+    name: string,
+    label: string,
+    options: SelectOptionsArgs | SelectOptionsArgs[],
+    required?: boolean
+  ) {
     super(args);
 
-    this.select = new SelectComponent(name, options);
+    this.select = new SelectComponent(name, options, required);
 
     this.label = LabelFactory.default({
       textContent: label,

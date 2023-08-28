@@ -16,11 +16,12 @@ type SelectOptionsArgs = {
 };
 
 export default class SelectComponent extends View {
-  constructor(name: string, options: SelectOptionsArgs | SelectOptionsArgs[]) {
+  constructor(name: string, options: SelectOptionsArgs | SelectOptionsArgs[], required?: boolean) {
     super(args);
 
     const base = this.basicComponent.getHTMLElement() as HTMLSelectElement;
     base.name = name;
+    if (required) base.required = required;
     base.append(...this.createOptions(options));
   }
 

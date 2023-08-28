@@ -12,6 +12,13 @@ const args: BasicComponentConstructorArgs = {
   classNames: ClassesEnum.SIGN_UP,
 };
 
+type Address = {
+  country: string;
+  streetName: string;
+  postalCode: string;
+  city: string;
+};
+
 export default class SignUpView extends View {
   private readonly form: SignUpForm;
 
@@ -35,18 +42,36 @@ export default class SignUpView extends View {
     this.basicComponent.addInnerElement(this.form);
   }
 
-  private signUp(record: Record<string, string>): void {
+  private signUp(record: Record<string, string | Record<string, string>>): void {
+    const getAddress = (rec: Record<string, string>): Address => {
+      return {
+        country: rec[SignUpFieldNames.CountryCode],
+        city: rec[SignUpFieldNames.City],
+        streetName: rec[SignUpFieldNames.Street],
+        postalCode: rec[SignUpFieldNames.PostalCode],
+      };
+    };
+    const shippingAddressRecord = record[SignUpFieldNames.ShippingAddress] as Record<
+      string,
+      string
+    >;
+    const shippingAddress = getAddress(shippingAddressRecord);
+    const billingAddressRecord = record[SignUpFieldNames.BillingAddress] as Record<string, string>;
+    const billingAddress = getAddress(billingAddressRecord);
+    const shipIsBill = shippingAddressRecord[SignUpFieldNames.SetAsBillingToo] === 'on';
+
+    const [addresses, billingAddressIndex] = shipIsBill
+      ? [[shippingAddress], 0]
+      : [[shippingAddress, billingAddress], 1];
     const data = {
-      email: record[SignUpFieldNames.Email],
-      password: record[SignUpFieldNames.Password],
-      firstName: record[SignUpFieldNames.FirstName],
-      lastName: record[SignUpFieldNames.LastName],
-      dateOfBirth: record[SignUpFieldNames.DateOfBirth],
-      countryCode: record[SignUpFieldNames.CountryCode],
-      city: record[SignUpFieldNames.City],
-      streetName: record[SignUpFieldNames.Street],
-      postalCode: record[SignUpFieldNames.PostalCode],
-      streetNumber: '',
+      email: record[SignUpFieldNames.Email] as string,
+      password: record[SignUpFieldNames.Password] as string,
+      firstName: record[SignUpFieldNames.FirstName] as string,
+      lastName: record[SignUpFieldNames.LastName] as string,
+      dateOfBirth: record[SignUpFieldNames.DateOfBirth] as string,
+      addresses,
+      shippingAddress: 0,
+      billingAddress: billingAddressIndex,
     };
     this.controller
       .signUp(data)
