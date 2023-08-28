@@ -62,6 +62,7 @@ export default class ModalWindowView extends View {
     const closeBtnParams = {
       tagName: TagsEnum.BUTTON,
       classNames: ClassesEnum.PLACEHOLDER,
+      textContent: TextContentEnum.PLACEHOLDER,
     };
     const closeBtn = new BasicComponent(closeBtnParams);
 
@@ -72,6 +73,24 @@ export default class ModalWindowView extends View {
     this.headingContainer.addInnerElement(closeBtn);
     this.container.addInnerElement(this.headingContainer);
     // </editor-fold desc="Heading components">
+
+    // <editor-fold desc="Modal window content components">
+    const contentContainerParams = {
+      tagName: TagsEnum.CONTAINER,
+      classNames: ClassesEnum.PLACEHOLDER,
+    };
+    this.contentContainer = new BasicComponent(contentContainerParams);
+
+    const contentMsgTextParams = {
+      tagName: TagsEnum.PARAGRAPH,
+      classNames: ClassesEnum.PLACEHOLDER,
+      textContent: TextContentEnum.PLACEHOLDER,
+    };
+    const contentMsgText = new BasicComponent(contentMsgTextParams);
+
+    this.contentContainer.addInnerElement(contentMsgText);
+    this.container.addInnerElement(this.contentContainer);
+    // </editor-fold desc="Modal window content components">
 
     this.basicComponent.addInnerElement(this.container);
   }
