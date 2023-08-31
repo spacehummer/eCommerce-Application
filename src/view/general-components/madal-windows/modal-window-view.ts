@@ -14,6 +14,8 @@ const viewParams: BasicComponentConstructorArgs = {
 export default class ModalWindowView extends View {
   private container: BasicComponent | null;
 
+  private containerWrp: BasicComponent | null;
+
   private headingContainer: BasicComponent | null;
 
   private contentContainer: BasicComponent | null;
@@ -22,6 +24,7 @@ export default class ModalWindowView extends View {
     super(viewParams);
 
     this.container = null;
+    this.containerWrp = null;
     this.headingContainer = null;
     this.contentContainer = null;
 
@@ -29,6 +32,12 @@ export default class ModalWindowView extends View {
   }
 
   private configureView(): void {
+    const containerWrpParams: BasicComponentConstructorArgs = {
+      tagName: TagsEnum.CONTAINER,
+      classNames: ClassesEnum.MODAL_WINDOW_CONTAINER_WRP,
+    };
+    this.containerWrp = new BasicComponent(containerWrpParams);
+
     const containerParams: BasicComponentConstructorArgs = {
       tagName: TagsEnum.CONTAINER,
       classNames: ClassesEnum.MODAL_WINDOW_CONTAINER,
@@ -38,7 +47,8 @@ export default class ModalWindowView extends View {
     this.generateHeadingComponents();
     this.generateContentComponents();
 
-    this.basicComponent.addInnerElement(this.container);
+    this.containerWrp.addInnerElement(this.container);
+    this.basicComponent.addInnerElement(this.containerWrp);
   }
 
   private generateHeadingComponents(): void {

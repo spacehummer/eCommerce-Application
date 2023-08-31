@@ -43,6 +43,7 @@ const enum ClassesEnum {
   SIGN_UP_FORM = 'sign-up-form',
   /* Modal window */
   MODAL_WINDOW_SHADING = 'viewport-shading',
+  MODAL_WINDOW_CONTAINER_WRP = 'modal-window-container-wrp',
   MODAL_WINDOW_CONTAINER = 'modal-window-container',
   MODAL_WINDOW_HEADING_CONTAINER = 'heading-container',
   MODAL_WINDOW_STATE_ICON_WRP = 'state-icon-wrp',

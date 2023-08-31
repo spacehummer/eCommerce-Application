@@ -178,9 +178,10 @@ html {
 }
 
 /* <editor-fold desc="Modal window">*/
-.modal-window-container {
+.modal-window-container-wrp {
   --modal-window-width: 608px;
   --modal-window-height: 184px;
+  --modal-window-viewport-padding: 16px;
   position: absolute;
   z-index: 2;
   left: 50%;
@@ -188,10 +189,14 @@ html {
   transform: translate(-50%, 25%);
   /*bottom: 5%;*/
   /*left: calc(50% - var(--modal-window-width) / 2);*/
-  background-color: #FFFFFF;
-  width: var(--modal-window-width);
+  width: calc(var(--modal-window-width) + var(--modal-window-viewport-padding));
   max-width: 100%;
-  min-height: var(--modal-window-height);
+  min-height: calc(var(--modal-window-height) + var(--modal-window-viewport-padding));
+  padding: var(--modal-window-viewport-padding);
+}
+
+.modal-window-container {
+  background-color: #FFFFFF;
   padding: 16px 48px 48px;
 }
 
