@@ -36,13 +36,13 @@ export default class ModalWindowView extends View {
     // <editor-fold desc="Heading components">
     const headingContainerParams: BasicComponentConstructorArgs = {
       tagName: TagsEnum.CONTAINER,
-      classNames: ClassesEnum.PLACEHOLDER,
+      classNames: ClassesEnum.MODAL_WINDOW_HEADING_CONTAINER,
     };
     this.headingContainer = new BasicComponent(headingContainerParams);
 
     const stateIconWrpParams = {
       tagName: TagsEnum.CONTAINER,
-      classNames: ClassesEnum.PLACEHOLDER,
+      classNames: ClassesEnum.MODAL_WINDOW_STATE_ICON,
     };
     const stateIconWrp = new BasicComponent(stateIconWrpParams);
 

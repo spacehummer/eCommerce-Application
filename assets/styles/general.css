@@ -170,13 +170,33 @@ html {
   margin-top: auto;
 }
 
+/* <editor-fold desc="Modal window">*/
 .modal-window-container {
-  display: flex;
-  flex-direction: column;
-  row-gap: 16px;
-  border: 2px green;
-  padding: 16px;
+  --modal-window-width: 608px;
+  --modal-window-height: 184px;
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 25%;
+  transform: translate(-50%, 25%);
+  /*bottom: 5%;*/
+  /*left: calc(50% - var(--modal-window-width) / 2);*/
+  width: var(--modal-window-width);
+  max-width: 100%;
+  min-height: var(--modal-window-height);
+  padding: 16px 48px 48px;
 }
+
+.heading-container {
+  display: flex;
+  column-gap: 32px;
+}
+
+.state-icon {
+  width: 64px;
+  height: 64px;
+}
+/* </editor-fold desc="Modal window">*/
 
 /* <editor-fold desc="Test styles">*/
 .demo-container {
