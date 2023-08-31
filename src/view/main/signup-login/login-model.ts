@@ -1,5 +1,6 @@
 import Api from '#src/api/api';
 import ApiError from '#src/api/utils/apiError';
+import { setProfile } from '#src/logic/state/profile';
 import { ApiRequestResult } from './components/types';
 
 export default class LoginModel {
@@ -7,7 +8,8 @@ export default class LoginModel {
 
   public async login(username: string, password: string): Promise<ApiRequestResult> {
     try {
-      await this.api.login({ username, password });
+      const response = await this.api.login({ username, password });
+      setProfile(response.body.customer);
       return {
         isSuccessful: true,
       };

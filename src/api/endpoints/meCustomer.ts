@@ -17,7 +17,7 @@ interface ICustomerRepository {
 
 class CustomerRepository extends BaseEndpoint implements ICustomerRepository {
   public createCustomerDraft(customerData: CustomerData): MyCustomerDraft {
-    const { email, password, firstName, lastName, addresses } = customerData;
+    const { email, password, firstName, lastName, addresses, dateOfBirth } = customerData;
 
     const billingAddress = customerData.billingAddress
       ? customerData.billingAddress
@@ -30,6 +30,8 @@ class CustomerRepository extends BaseEndpoint implements ICustomerRepository {
       firstName,
       lastName,
       addresses,
+
+      dateOfBirth,
 
       defaultShippingAddress: customerData.shippingAddress,
       defaultBillingAddress: billingAddress,
@@ -49,7 +51,6 @@ class CustomerRepository extends BaseEndpoint implements ICustomerRepository {
         })
         .execute();
 
-      // check to make sure status is 201
       return customer;
     } catch (error) {
       throw new ApiError(error as ErrorData);
