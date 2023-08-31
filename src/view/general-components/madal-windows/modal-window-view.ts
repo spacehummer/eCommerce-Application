@@ -33,30 +33,13 @@ export default class ModalWindowView extends View {
     };
     this.container = new BasicComponent(containerParams);
 
-    this.generateHeadingContainer();
-
-    // <editor-fold desc="Modal window content components">
-    const contentContainerParams = {
-      tagName: TagsEnum.CONTAINER,
-      classNames: ClassesEnum.PLACEHOLDER,
-    };
-    this.contentContainer = new BasicComponent(contentContainerParams);
-
-    const contentMsgTextParams = {
-      tagName: TagsEnum.PARAGRAPH,
-      classNames: ClassesEnum.PLACEHOLDER,
-      textContent: TextContentEnum.PLACEHOLDER,
-    };
-    const contentMsgText = new BasicComponent(contentMsgTextParams);
-
-    this.contentContainer.addInnerElement(contentMsgText);
-    this.container.addInnerElement(this.contentContainer);
-    // </editor-fold desc="Modal window content components">
+    this.generateHeadingComponents();
+    this.generateContentComponents();
 
     this.basicComponent.addInnerElement(this.container);
   }
 
-  private generateHeadingContainer(): void {
+  private generateHeadingComponents(): void {
     const headingContainerParams: BasicComponentConstructorArgs = {
       tagName: TagsEnum.CONTAINER,
       classNames: ClassesEnum.MODAL_WINDOW_HEADING_CONTAINER,
@@ -96,6 +79,30 @@ export default class ModalWindowView extends View {
     this.headingContainer.addInnerElement(closeBtn);
     if (this.container instanceof BasicComponent) {
       this.container.addInnerElement(this.headingContainer);
+    } else {
+      throw new Error(
+        'ERR: In ModalWindowView: container must be an instance of the BasicComponent!'
+      );
+    }
+  }
+
+  private generateContentComponents(): void {
+    const contentContainerParams = {
+      tagName: TagsEnum.CONTAINER,
+      classNames: ClassesEnum.PLACEHOLDER,
+    };
+    this.contentContainer = new BasicComponent(contentContainerParams);
+
+    const contentMsgTextParams = {
+      tagName: TagsEnum.PARAGRAPH,
+      classNames: ClassesEnum.PLACEHOLDER,
+      textContent: TextContentEnum.PLACEHOLDER,
+    };
+    const contentMsgText = new BasicComponent(contentMsgTextParams);
+
+    this.contentContainer.addInnerElement(contentMsgText);
+    if (this.container instanceof BasicComponent) {
+      this.container.addInnerElement(this.contentContainer);
     } else {
       throw new Error(
         'ERR: In ModalWindowView: container must be an instance of the BasicComponent!'
