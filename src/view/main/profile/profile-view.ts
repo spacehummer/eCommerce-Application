@@ -1,14 +1,24 @@
 import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
-import { Address, getProfile } from '#src/logic/state/profile';
+import { Address, getProfile, isDefaultAddress } from '#src/logic/state/profile';
 import View from '#src/view/view';
 import FieldSet from '../signup-login/components/field-set';
-import { createDisplayField } from './field-factory';
+import { createDisplayAdress, createDisplayField } from './field-factory';
 
 const args: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
   classNames: ClassesEnum.SIGN_UP,
+};
+
+const sortPredicate = (a: Address, b: Address): number => {
+  if (isDefaultAddress(a.id)) {
+    return -1;
+  }
+  if (isDefaultAddress(b.id)) {
+    return 1;
+  }
+  return 0;
 };
 
 export default class ProfileView extends View {
@@ -25,30 +35,6 @@ export default class ProfileView extends View {
   private createFields(): void {
     const profile = getProfile();
 
-    const isDefaultAddress = (id: string): boolean =>
-      id === profile.defaultShippingAddressId || id === profile.defaultBillingAddressId;
-
-    const createAdress = (val: Address): FieldSet => {
-      const fields = [
-        createDisplayField('Country', val.country),
-        createDisplayField('City', val.city),
-        createDisplayField('Street', val.streetName),
-        createDisplayField('Postal code', val.postalCode),
-      ];
-      const label = isDefaultAddress(val.id) ? 'Default' : '';
-      return new FieldSet('', label, fields);
-    };
-
-    const sortPredicate = (a: Address, b: Address): number => {
-      if (isDefaultAddress(a.id)) {
-        return -1;
-      }
-      if (isDefaultAddress(b.id)) {
-        return 1;
-      }
-      return 0;
-    };
-
     if (profile) {
       const firstName = createDisplayField('First Name', profile.firstName);
 
@@ -59,11 +45,11 @@ export default class ProfileView extends View {
       const shippingAddresses = profile.addresses
         .filter((val) => profile.shippingAddressIds.find((shipId) => shipId === val.id))
         .sort(sortPredicate)
-        .map(createAdress);
+        .map(createDisplayAdress);
       const billingAddresses = profile.addresses
         .filter((val) => profile.billingAddressIds.find((billId) => billId === val.id))
         .sort(sortPredicate)
-        .map(createAdress);
+        .map(createDisplayAdress);
 
       this.basicComponent.addInnerElement(firstName);
       this.basicComponent.addInnerElement(lastName);

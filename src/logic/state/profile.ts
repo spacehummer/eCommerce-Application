@@ -40,3 +40,6 @@ export const getProfile = (): Profile => {
 export const setProfile = (user: Customer): void => {
   profile = user as Profile;
 };
+
+export const isDefaultAddress = (id: string): boolean =>
+  profile && (id === profile.defaultShippingAddressId || id === profile.defaultBillingAddressId);
