@@ -45,7 +45,9 @@ const enum ClassesEnum {
   MODAL_WINDOW_SHADING = 'viewport-shading',
   MODAL_WINDOW_CONTAINER = 'modal-window-container',
   MODAL_WINDOW_HEADING_CONTAINER = 'heading-container',
+  MODAL_WINDOW_STATE_ICON_WRP = 'state-icon-wrp',
   MODAL_WINDOW_STATE_ICON = 'state-icon',
+  MODAL_WINDOW_HEADING_LABEL = 'heading_type-3',
   /* ERROR 404 */
   SECTION_404 = 'page-section page-section--error-404',
   SECTION_404_HEADING = 'page-section__heading page-section__heading--error-404',

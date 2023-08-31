@@ -36,6 +36,13 @@ html {
   width: 100%;
   height: 100%;
 }
+
+.heading_type-3 {
+  font-family: Inter, sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+}
 /* </editor-fold desc="General styles">*/
 
 /* <editor-fold desc="General modifiers">*/
@@ -181,6 +188,7 @@ html {
   transform: translate(-50%, 25%);
   /*bottom: 5%;*/
   /*left: calc(50% - var(--modal-window-width) / 2);*/
+  background-color: #FFFFFF;
   width: var(--modal-window-width);
   max-width: 100%;
   min-height: var(--modal-window-height);
@@ -193,8 +201,14 @@ html {
 }
 
 .state-icon {
+  display: block;
   width: 64px;
   height: 64px;
+}
+
+.state-icon[src=""] {
+  /*noinspection CssUnknownTarget*/
+  content:url("data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
 }
 /* </editor-fold desc="Modal window">*/
 

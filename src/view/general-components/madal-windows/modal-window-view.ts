@@ -3,6 +3,8 @@ import TagsEnum from '#src/components_params/tags-enum';
 import ClassesEnum from '#src/components_params/classes-enum';
 import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import TextContentEnum from '#src/components_params/text-content-enum';
+import AttributesNamesEnum from '../../../components_params/attributes-names-enum';
+import AttributesValuesEnum from '../../../components_params/attributes-values-enum';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.CONTAINER,
@@ -48,20 +50,21 @@ export default class ModalWindowView extends View {
 
     const stateIconWrpParams = {
       tagName: TagsEnum.CONTAINER,
-      classNames: ClassesEnum.MODAL_WINDOW_STATE_ICON,
+      classNames: ClassesEnum.MODAL_WINDOW_STATE_ICON_WRP,
     };
     const stateIconWrp = new BasicComponent(stateIconWrpParams);
 
     const stateIconParams = {
       tagName: TagsEnum.IMG,
-      classNames: ClassesEnum.PLACEHOLDER,
+      classNames: ClassesEnum.MODAL_WINDOW_STATE_ICON,
     };
     const stateIcon = new BasicComponent(stateIconParams);
+    stateIcon.setComponentAttribute(AttributesNamesEnum.SRC, AttributesValuesEnum.SRC_EMPTY_IMG);
 
     const headingTextLabelParams = {
       tagName: TagsEnum.SPAN,
-      classNames: ClassesEnum.PLACEHOLDER,
-      textContent: TextContentEnum.PLACEHOLDER,
+      classNames: ClassesEnum.MODAL_WINDOW_HEADING_LABEL,
+      textContent: TextContentEnum.MODAL_WINDOW_LOGIN_SUCCESSFUL_HEADING,
     };
     const headingTextLabel = new BasicComponent(headingTextLabelParams);
 
