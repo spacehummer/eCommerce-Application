@@ -33,7 +33,30 @@ export default class ModalWindowView extends View {
     };
     this.container = new BasicComponent(containerParams);
 
-    // <editor-fold desc="Heading components">
+    this.generateHeadingContainer();
+
+    // <editor-fold desc="Modal window content components">
+    const contentContainerParams = {
+      tagName: TagsEnum.CONTAINER,
+      classNames: ClassesEnum.PLACEHOLDER,
+    };
+    this.contentContainer = new BasicComponent(contentContainerParams);
+
+    const contentMsgTextParams = {
+      tagName: TagsEnum.PARAGRAPH,
+      classNames: ClassesEnum.PLACEHOLDER,
+      textContent: TextContentEnum.PLACEHOLDER,
+    };
+    const contentMsgText = new BasicComponent(contentMsgTextParams);
+
+    this.contentContainer.addInnerElement(contentMsgText);
+    this.container.addInnerElement(this.contentContainer);
+    // </editor-fold desc="Modal window content components">
+
+    this.basicComponent.addInnerElement(this.container);
+  }
+
+  private generateHeadingContainer(): void {
     const headingContainerParams: BasicComponentConstructorArgs = {
       tagName: TagsEnum.CONTAINER,
       classNames: ClassesEnum.MODAL_WINDOW_HEADING_CONTAINER,
@@ -71,27 +94,12 @@ export default class ModalWindowView extends View {
     this.headingContainer.addInnerElement(stateIconWrp);
     this.headingContainer.addInnerElement(headingTextLabel);
     this.headingContainer.addInnerElement(closeBtn);
-    this.container.addInnerElement(this.headingContainer);
-    // </editor-fold desc="Heading components">
-
-    // <editor-fold desc="Modal window content components">
-    const contentContainerParams = {
-      tagName: TagsEnum.CONTAINER,
-      classNames: ClassesEnum.PLACEHOLDER,
-    };
-    this.contentContainer = new BasicComponent(contentContainerParams);
-
-    const contentMsgTextParams = {
-      tagName: TagsEnum.PARAGRAPH,
-      classNames: ClassesEnum.PLACEHOLDER,
-      textContent: TextContentEnum.PLACEHOLDER,
-    };
-    const contentMsgText = new BasicComponent(contentMsgTextParams);
-
-    this.contentContainer.addInnerElement(contentMsgText);
-    this.container.addInnerElement(this.contentContainer);
-    // </editor-fold desc="Modal window content components">
-
-    this.basicComponent.addInnerElement(this.container);
+    if (this.container instanceof BasicComponent) {
+      this.container.addInnerElement(this.headingContainer);
+    } else {
+      throw new Error(
+        'ERR: In ModalWindowView: container must be an instance of the BasicComponent!'
+      );
+    }
   }
 }
