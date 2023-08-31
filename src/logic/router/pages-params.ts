@@ -5,14 +5,16 @@ const PagesNames: { [index: string]: string } = {
   INDEX: 'Main',
   LOGIN: 'Log in',
   SIGN_UP: 'Sign up',
+  PROFILE: 'Profile',
 };
 
-const pagesSequence: string[] = ['INDEX', 'SIGN_UP', 'LOGIN'];
+const pagesSequence: string[] = ['INDEX', 'SIGN_UP', 'LOGIN', 'PROFILE'];
 
 const PagesUrls: { [index: string]: string } = {
   INDEX: 'main',
   LOGIN: 'login',
   SIGN_UP: 'sign-up',
+  PROFILE: 'profile',
   ERROR_404: 'error-404',
 };
 

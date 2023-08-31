@@ -120,6 +120,13 @@ export default class App {
         },
       },
       {
+        path: `${PagesUrls.PROFILE}`,
+        callback: async (): Promise<void> => {
+          const { default: ProfileView } = await import('./view/main/profile/profile-view');
+          this.setContent(PagesUrls.SIGN_UP, new ProfileView());
+        },
+      },
+      {
         path: `${PagesUrls.ERROR_404}`,
         callback: async (): Promise<void> => {
           const { default: Section404View } = await import(

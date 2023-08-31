@@ -1,6 +1,6 @@
 import { Customer } from '@commercetools/platform-sdk';
 
-type Address = Readonly<{
+export type Address = Readonly<{
   city: string;
   country: 'RU';
   id: string;
@@ -33,10 +33,10 @@ export type Profile = TechData & PersonalData & Addresses;
 
 let profile: Profile;
 
-export const getProfile = () => {
+export const getProfile = (): Profile => {
   return profile;
 };
 
-export const setProfile = (user: Customer) => {
+export const setProfile = (user: Customer): void => {
   profile = user as Profile;
 };
