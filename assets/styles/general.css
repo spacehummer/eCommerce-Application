@@ -202,6 +202,7 @@ html {
 
 .heading-container {
   display: flex;
+  align-items: center;
   column-gap: 32px;
 }
 
@@ -214,6 +215,12 @@ html {
 .state-icon[src=""] {
   /*noinspection CssUnknownTarget*/
   content:url("data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
+}
+
+.heading-text-label {
+  flex-grow: 1;
+  height: fit-content;
+  padding-top: 8px;
 }
 /* </editor-fold desc="Modal window">*/
 
