@@ -1,7 +1,7 @@
 import Api from '#src/api/api';
 import CustomerData from '#src/api/endpoints/types/customer';
 import ApiError from '#src/api/utils/apiError';
-import { setProfile } from '#src/logic/state/profile';
+import { setProfile } from '#src/logic/state/state';
 import { ApiRequestResult } from './components/types';
 
 export default class SignUpModel {

@@ -27,8 +27,13 @@ export const getProfile = (): Profile | undefined => {
 };
 
 export const setProfile = (user: Customer): void => {
-  isLogin = true;
   profile = user as Profile;
+  if (!isLogin) {
+    isLogin = true;
+    eventTarget.emit('login');
+  } else {
+    eventTarget.emit('update');
+  }
 };
 
 export const isDefaultAddress = (id: string): boolean =>
@@ -40,14 +45,17 @@ export const logout = (): void => {
   isLogin = false;
   const api = new Api();
   api.logout();
+  eventTarget.emit('logout');
 };
 
-export const addEventListener = (
-  type: EventType,
-  callback: EventListenerOrEventListenerObject
-): void => eventTarget.addEventListener(type, callback);
+export const addStateListener = (type: EventType, callback: (event: StateEvent) => void): void => {
+  const wrappedCallback = (event: Event): void => {
+    callback(event as StateEvent);
+  };
+  eventTarget.addEventListener(type, wrappedCallback);
+};
 
-export const removeEventListener = (
+export const removeStateListener = (
   type: EventType,
   callback: EventListenerOrEventListenerObject
 ): void => eventTarget.removeEventListener(type, callback);
