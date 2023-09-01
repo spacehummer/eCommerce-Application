@@ -1,7 +1,8 @@
 import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
-import { Address, getProfile, isDefaultAddress } from '#src/logic/state/profile';
+import { getProfile, isDefaultAddress } from '#src/logic/state/profile';
+import { Address } from '#src/logic/state/types';
 import View from '#src/view/view';
 import FieldSet from '../signup-login/components/field-set';
 import { createDisplayAdress, createDisplayField } from './field-factory';

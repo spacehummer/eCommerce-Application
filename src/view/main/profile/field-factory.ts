@@ -1,4 +1,5 @@
-import { Address, isDefaultAddress } from '#src/logic/state/profile';
+import { isDefaultAddress } from '#src/logic/state/profile';
+import { Address } from '#src/logic/state/types';
 import FieldSet from '../signup-login/components/field-set';
 import InputField from '../signup-login/components/input-field';
 
