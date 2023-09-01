@@ -1,3 +1,4 @@
+import { ClientResponse, CustomerSignInResult } from '@commercetools/platform-sdk';
 import Api from '#src/api/api';
 import CustomerData from '#src/api/endpoints/types/customer';
 import ApiError from '#src/api/utils/apiError';
@@ -13,9 +14,12 @@ export default class SignUpModel {
 
   public async signUp(data: CustomerData): Promise<ApiRequestResult> {
     try {
-      await this.api.signUp(data);
-      const response = await this.api.login({ password: data.password, username: data.email });
-      setProfile(response.body.customer);
+      this.api
+        .signUp(data)
+        .then(() => this.api.login({ password: data.password, username: data.email }))
+        .then((response: ClientResponse<CustomerSignInResult>) =>
+          setProfile(response.body.customer)
+        );
       return {
         isSuccessful: true,
       };
