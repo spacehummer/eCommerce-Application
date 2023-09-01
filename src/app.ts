@@ -109,14 +109,14 @@ export default class App {
         path: `${PagesUrls.LOGIN}`,
         callback: async (): Promise<void> => {
           const { default: LoginView } = await import('./view/main/signup-login/login-view');
-          this.setContent(PagesUrls.LOGIN, new LoginView());
+          this.setContent(PagesUrls.LOGIN, new LoginView(this.logicParams));
         },
       },
       {
         path: `${PagesUrls.SIGN_UP}`,
         callback: async (): Promise<void> => {
           const { default: SignUpView } = await import('./view/main/signup-login/signup-view');
-          this.setContent(PagesUrls.SIGN_UP, new SignUpView());
+          this.setContent(PagesUrls.SIGN_UP, new SignUpView(this.logicParams));
         },
       },
       {
