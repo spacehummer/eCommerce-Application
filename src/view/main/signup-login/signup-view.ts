@@ -65,9 +65,6 @@ export default class SignUpView extends BaseView {
       shippingAddress: 0,
       billingAddress: billingAddressIndex,
     };
-    this.controller
-      .signUp(data)
-      .then(this.showResults)
-      .then(this.redirect);
+    this.controller.signUp(data).then(this.showResults).then(this.redirectLazy);
   }
 }
