@@ -18,6 +18,15 @@ const PagesUrls: { [index: string]: string } = {
   ERROR_404: 'error-404',
 };
 
+/**
+ * Only for anonymous users visible pages indexes in @pagesSequence
+ */
+const anonPageIndexes = [1, 2];
+/**
+ * Only for authorized users visible pages indexes in @pagesSequence
+ */
+const signPageIndexes = [3];
+
 const ID_SELECTOR = '{id}';
 
-export { PagesNames, pagesSequence, PagesUrls, ID_SELECTOR };
+export { PagesNames, pagesSequence, PagesUrls, ID_SELECTOR, anonPageIndexes, signPageIndexes };
