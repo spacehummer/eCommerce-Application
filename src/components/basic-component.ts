@@ -35,10 +35,14 @@ export class BasicComponent implements GetHTMLElement {
 
   public cssClasses: ClassList;
 
+  public debug: 0 | 1;
+
   /**
    * @param {ElementParams} params
    */
   constructor(params: BasicComponentConstructorArgs) {
+    this.debug = 0;
+
     this.paramsObj = { ...params };
 
     this.htmlElement = null;
@@ -61,7 +65,9 @@ export class BasicComponent implements GetHTMLElement {
   protected createElement(params: BasicComponentConstructorArgs): void {
     this.htmlElement = document.createElement(params.tagName);
     this.updateCssClassesComponent();
-    console.log('Classes:', this.cssClasses);
+    if (this.debug === 1) {
+      console.log('---- BasicComponent: current component CSS Classes:', this.cssClasses);
+    }
     this.setCssClassesToElement(this.cssClasses);
     if (params.id) {
       this.setCssId(params.id);
