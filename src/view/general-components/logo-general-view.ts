@@ -5,8 +5,8 @@ import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import TextContentEnum from '#src/components_params/text-content-enum';
 
-import AttributesNamesEnum from '../../components_params/attributes-names-enum';
-import AttributesValuesEnum from '../../components_params/attributes-values-enum';
+import AttributesNamesEnum from '#src/components_params/attributes-names-enum';
+import PathsObj from '#src/components_params/paths-obj';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.CONTAINER,
@@ -28,7 +28,7 @@ export default class LogoGeneralView extends View {
       classNames: ClassesEnum.GENERAL_LOGO_IMG,
     };
     const logoImg = new BasicComponent(logoImgParams);
-    logoImg.setComponentAttribute(AttributesNamesEnum.SRC, AttributesValuesEnum.SRC_LOGO_IMG);
+    logoImg.setComponentAttribute(AttributesNamesEnum.SRC, PathsObj.LOGO_IMG);
 
     const logoSpanParams = {
       tagName: TagsEnum.SPAN,

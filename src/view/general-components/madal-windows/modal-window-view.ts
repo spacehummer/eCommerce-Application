@@ -3,8 +3,8 @@ import TagsEnum from '#src/components_params/tags-enum';
 import ClassesEnum from '#src/components_params/classes-enum';
 import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import TextContentEnum from '#src/components_params/text-content-enum';
-import AttributesNamesEnum from '../../../components_params/attributes-names-enum';
-import AttributesValuesEnum from '../../../components_params/attributes-values-enum';
+import AttributesNamesEnum from '#src/components_params/attributes-names-enum';
+import PathsObj from '#src/components_params/paths-obj';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.CONTAINER,
@@ -69,7 +69,7 @@ export default class ModalWindowView extends View {
       classNames: ClassesEnum.MODAL_WINDOW_STATE_ICON,
     };
     const stateIcon = new BasicComponent(stateIconParams);
-    stateIcon.setComponentAttribute(AttributesNamesEnum.SRC, AttributesValuesEnum.SRC_EMPTY_IMG);
+    stateIcon.setComponentAttribute(AttributesNamesEnum.SRC, PathsObj.EMPTY_IMG);
 
     const headingTextLabelParams = {
       tagName: TagsEnum.SPAN,
