@@ -5,7 +5,8 @@ import { getProfile, isDefaultAddress } from '#src/logic/state/state';
 import { Address } from '#src/logic/state/types';
 import View from '#src/view/view';
 import FieldSet from '../signup-login/components/field-set';
-import { createDisplayAdress, createDisplayField } from './field-factory';
+import EditableForm from './components/user-data/editable-form';
+import { createDisplayAdress } from './field-factory';
 
 const args: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
@@ -37,11 +38,11 @@ export default class ProfileView extends View {
     const profile = getProfile();
 
     if (profile) {
-      const firstName = createDisplayField('First Name', profile.firstName);
-
-      const lastName = createDisplayField('LastName', profile.lastName);
-
-      const dateOfBirth = createDisplayField('Date of birth', profile.dateOfBirth);
+      const personValues = [profile.firstName, profile.lastName, profile.dateOfBirth];
+      const personData = new EditableForm(
+        (/* record: Record<string, string | Record<string, string>> */) => {},
+        personValues
+      );
 
       const shippingAddresses = profile.addresses
         .filter((val) => profile.shippingAddressIds.find((shipId) => shipId === val.id))
@@ -52,9 +53,7 @@ export default class ProfileView extends View {
         .sort(sortPredicate)
         .map(createDisplayAdress);
 
-      this.basicComponent.addInnerElement(firstName);
-      this.basicComponent.addInnerElement(lastName);
-      this.basicComponent.addInnerElement(dateOfBirth);
+      this.basicComponent.addInnerElement(personData);
       this.basicComponent.addInnerElement(new FieldSet('', 'Shipping Adresses', shippingAddresses));
       this.basicComponent.addInnerElement(new FieldSet('', 'Billing Adresses', billingAddresses));
     }

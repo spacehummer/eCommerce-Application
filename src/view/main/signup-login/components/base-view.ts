@@ -37,7 +37,7 @@ export default abstract class BaseView extends View {
   };
 
   protected redirectLazy = (result: ApiRequestResult): ApiRequestResult => {
-    if (result.isSuccessful) setTimeout(this.redirect, 5000);
+    if (result.isSuccessful) setTimeout(this.redirect, 1500);
     return result;
   };
 }

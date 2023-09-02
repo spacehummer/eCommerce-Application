@@ -3,6 +3,8 @@ import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
 
 export default class FieldSet extends View {
+  protected readonly legend: HTMLLegendElement;
+
   private get fieldset(): HTMLFieldSetElement {
     return this.getHTMLElement() as HTMLFieldSetElement;
   }
@@ -18,9 +20,11 @@ export default class FieldSet extends View {
     });
 
     this.fieldset.name = name;
-    const legend = document.createElement('legend');
-    legend.textContent = label;
-    this.basicComponent.addInnerElement(legend);
+    this.legend = document.createElement('legend');
+    this.legend.append(label);
+    this.legend.style.display = 'inline';
+
+    this.basicComponent.addInnerElement(this.legend);
 
     this.createFields(fields);
   }
