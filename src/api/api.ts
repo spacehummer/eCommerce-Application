@@ -1,6 +1,7 @@
 import {
   Cart,
   ClientResponse,
+  Customer,
   CustomerSignInResult,
   ProductProjectionPagedQueryResponse,
 } from '@commercetools/platform-sdk';
@@ -10,7 +11,7 @@ import CartRepository from './endpoints/meCart';
 import CustomerRepository from './endpoints/meCustomer';
 import ProductProjection from './endpoints/productProjection';
 import { CartRemoveItemDraft } from './endpoints/types/cart';
-import CustomerData from './endpoints/types/customer';
+import CustomerData, { PersonalesDto } from './endpoints/types/customer';
 
 const authService = new AuthService();
 const cart = new CartRepository(authService);
@@ -28,6 +29,11 @@ class Api {
       email: credentials.username,
       password: credentials.password,
     });
+  }
+
+  public async updatePersonales(updateDto: PersonalesDto): Promise<ClientResponse<Customer>> {
+    const dto = customer.createUpdatePersonalesDraft(updateDto);
+    return customer.updateCustomer(dto);
   }
 
   public async logout(): Promise<void> {

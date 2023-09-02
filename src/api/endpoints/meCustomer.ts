@@ -3,10 +3,12 @@ import {
   CustomerSignInResult,
   CustomerSignin,
   MyCustomerDraft,
+  Customer,
+  MyCustomerUpdate,
 } from '@commercetools/platform-sdk';
 import BaseEndpoint from './baseEndpoint';
 import ErrorData from './types/error';
-import CustomerData from './types/customer';
+import CustomerData, { PersonalesDto } from './types/customer';
 import ApiError from '../utils/apiError';
 
 interface ICustomerRepository {
@@ -73,6 +75,47 @@ class CustomerRepository extends BaseEndpoint implements ICustomerRepository {
             updateProductData: true,
             activeCartSignInMode: 'MergeWithExistingCustomerCart',
           },
+        })
+        .execute();
+
+      return customer;
+    } catch (error) {
+      throw new ApiError(error as ErrorData);
+    }
+  }
+
+  public createUpdatePersonalesDraft({
+    version,
+    firstName,
+    lastName,
+    dateOfBirth,
+  }: PersonalesDto): MyCustomerUpdate {
+    return {
+      version,
+      actions: [
+        {
+          action: 'setFirstName',
+          firstName,
+        },
+        {
+          action: 'setLastName',
+          lastName,
+        },
+        {
+          action: 'setDateOfBirth',
+          dateOfBirth,
+        },
+      ],
+    };
+  }
+
+  public async updateCustomer(updateDto: MyCustomerUpdate): Promise<ClientResponse<Customer>> {
+    try {
+      const customer = await this.apiRoot
+        .withProjectKey({ projectKey: this.projectKey })
+        .me()
+        .post({
+          body: updateDto,
         })
         .execute();
 
