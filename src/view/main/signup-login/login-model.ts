@@ -9,7 +9,7 @@ export default class LoginModel {
 
   public async login(username: string, password: string): Promise<ApiRequestResult> {
     try {
-      this.api
+      await this.api
         .login({ username, password })
         .then((response: ClientResponse<CustomerSignInResult>) =>
           setProfile(response.body.customer)

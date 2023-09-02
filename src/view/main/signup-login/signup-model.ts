@@ -14,7 +14,7 @@ export default class SignUpModel {
 
   public async signUp(data: CustomerData): Promise<ApiRequestResult> {
     try {
-      this.api
+      await this.api
         .signUp(data)
         .then(() => this.api.login({ password: data.password, username: data.email }))
         .then((response: ClientResponse<CustomerSignInResult>) =>
