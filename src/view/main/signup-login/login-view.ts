@@ -4,8 +4,9 @@ import TagsEnum from '#src/components_params/tags-enum';
 import { ViewLogicParams } from '#src/view/view';
 import LoginController from './login-controller';
 import '#assets/styles/signup-login.css';
-import LoginForm, { LoginFieldNames } from './components/login-form';
+import LoginForm from './components/login-form';
 import BaseView from './components/base-view';
+import { CredentialFieldNames } from './components/enums';
 
 const constructorArgs: BasicComponentConstructorArgs = {
   classNames: ClassesEnum.LOGIN,
@@ -29,8 +30,8 @@ export default class LoginView extends BaseView {
 
   private login(record: Record<string, string | Record<string, string>>): void {
     const data = {
-      email: record[LoginFieldNames.Email] as string,
-      password: record[LoginFieldNames.Password] as string,
+      email: record[CredentialFieldNames.Email] as string,
+      password: record[CredentialFieldNames.Password] as string,
     };
     this.controller.login(data.email, data.password).then(this.showResults).then(this.redirectLazy);
   }

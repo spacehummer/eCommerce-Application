@@ -5,6 +5,7 @@ import { ViewLogicParams } from '../../view';
 import SignUpController from './signup-controller';
 import '#assets/styles/signup-login.css';
 import SignUpForm, { SignUpFieldNames } from './components/signup-form';
+import { AddressFieldNames, CredentialFieldNames, PersonFieldNames } from './components/enums';
 import BaseView from './components/base-view';
 
 const args: BasicComponentConstructorArgs = {
@@ -37,10 +38,10 @@ export default class SignUpView extends BaseView {
   private signUp(record: Record<string, string | Record<string, string>>): void {
     const getAddress = (rec: Record<string, string>): Address => {
       return {
-        country: rec[SignUpFieldNames.CountryCode],
-        city: rec[SignUpFieldNames.City],
-        streetName: rec[SignUpFieldNames.Street],
-        postalCode: rec[SignUpFieldNames.PostalCode],
+        country: rec[AddressFieldNames.CountryCode],
+        city: rec[AddressFieldNames.City],
+        streetName: rec[AddressFieldNames.Street],
+        postalCode: rec[AddressFieldNames.PostalCode],
       };
     };
     const shippingAddressRecord = record[SignUpFieldNames.ShippingAddress] as Record<
@@ -56,11 +57,11 @@ export default class SignUpView extends BaseView {
       ? [[shippingAddress], 0]
       : [[shippingAddress, billingAddress], 1];
     const data = {
-      email: record[SignUpFieldNames.Email] as string,
-      password: record[SignUpFieldNames.Password] as string,
-      firstName: record[SignUpFieldNames.FirstName] as string,
-      lastName: record[SignUpFieldNames.LastName] as string,
-      dateOfBirth: record[SignUpFieldNames.DateOfBirth] as string,
+      email: record[CredentialFieldNames.Email] as string,
+      password: record[CredentialFieldNames.Password] as string,
+      firstName: record[PersonFieldNames.FirstName] as string,
+      lastName: record[PersonFieldNames.LastName] as string,
+      dateOfBirth: record[PersonFieldNames.DateOfBirth] as string,
       addresses,
       shippingAddress: 0,
       billingAddress: billingAddressIndex,

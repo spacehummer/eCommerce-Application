@@ -22,6 +22,10 @@ export default class FieldSet extends View {
     legend.textContent = label;
     this.basicComponent.addInnerElement(legend);
 
+    this.createFields(fields);
+  }
+
+  protected createFields(fields: View[]): void {
     fields.forEach((field) => this.basicComponent.addInnerElement(field));
   }
 

@@ -3,7 +3,7 @@ import TagsEnum from '#src/components_params/tags-enum';
 export type Args = InputProperties & ElementProperties;
 
 type InputProperties = {
-  id: string;
+  id?: string;
   name?: string;
   placeholder?: string;
   required?: boolean;

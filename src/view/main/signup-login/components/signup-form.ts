@@ -2,6 +2,7 @@ import ClassesEnum from '#src/components_params/classes-enum';
 import Validator from '#src/utils/validator';
 import InputFactory from '#src/view/main/signup-login/components/utils/inputFactory';
 import View from '#src/view/view';
+import { CredentialFieldNames, PersonFieldNames, AddressFieldNames } from './enums';
 import FieldSet from './field-set';
 import FormComponent from './form';
 import InputField from './input-field';
@@ -9,19 +10,17 @@ import PasswordField from './password-field';
 import SelectField from './select-field';
 
 export enum SignUpFieldNames {
-  FirstName = 'firstName',
-  DateOfBirth = 'dateOfBirth',
-  LastName = 'lastName',
-  CountryCode = 'countryCode',
-  City = 'city',
-  Email = 'email',
-  Password = 'password',
-  Street = 'street',
-  PostalCode = 'postalCode',
   ShippingAddress = 'shippingAddress',
   BillingAddress = 'billingAddress',
   SetAsBillingToo = 'setAsBillingToo',
 }
+
+const getItemNames = (): string[] => [
+  ...Object.values(CredentialFieldNames),
+  ...Object.values(PersonFieldNames),
+  ...Object.values(AddressFieldNames),
+  ...Object.values(SignUpFieldNames),
+];
 
 export default class SignUpForm extends FormComponent {
   private readonly shippingFieldset: FieldSet;
@@ -29,7 +28,7 @@ export default class SignUpForm extends FormComponent {
   private readonly billingFieldset: FieldSet;
 
   constructor(submitCallback: (record: Record<string, string | Record<string, string>>) => void) {
-    super(submitCallback, Object.values(SignUpFieldNames), ClassesEnum.SIGN_UP_FORM);
+    super(submitCallback, getItemNames(), ClassesEnum.SIGN_UP_FORM);
 
     const submit = InputFactory.submit({
       id: 'submit',
@@ -37,16 +36,16 @@ export default class SignUpForm extends FormComponent {
       classList: [ClassesEnum.INPUT, ClassesEnum.INPUT_SUBMIT],
     });
 
-    this.append(this.createPersonFields());
+    this.append(SignUpForm.createCustomerFields());
 
-    const billingAddress = this.createAdressFields();
+    const billingAddress = SignUpForm.createAdressFields();
     this.billingFieldset = new FieldSet(
       SignUpFieldNames.BillingAddress,
       'Billing address',
       billingAddress
     );
 
-    const shippingAdresses = this.createAdressFields();
+    const shippingAdresses = SignUpForm.createAdressFields();
     shippingAdresses.push(this.createAddressContr(this.billingFieldset));
 
     this.shippingFieldset = new FieldSet(
@@ -61,10 +60,10 @@ export default class SignUpForm extends FormComponent {
     this.basicComponent.addInnerElement(submit);
   }
 
-  private createPersonFields(): View[] {
+  public static createCustomerFields(): View[] {
     const email = new InputField({
       type: 'email',
-      name: SignUpFieldNames.Email,
+      name: CredentialFieldNames.Email,
       label: 'Email',
       placeholder: 'Your email',
       required: true,
@@ -73,16 +72,20 @@ export default class SignUpForm extends FormComponent {
     });
     const password = new PasswordField({
       type: 'password',
-      name: SignUpFieldNames.Password,
+      name: CredentialFieldNames.Password,
       label: 'Password',
       placeholder: 'Your password',
       required: true,
       pattern: Validator.passwordRegex.source,
       title: Validator.passwordMsg,
     });
+    return [email, password, ...this.createPersonFields()];
+  }
+
+  public static createPersonFields(): View[] {
     const firsName = new InputField({
       type: 'text',
-      name: SignUpFieldNames.FirstName,
+      name: PersonFieldNames.FirstName,
       label: 'First name',
       required: true,
       pattern: Validator.nameRegex.source,
@@ -90,38 +93,38 @@ export default class SignUpForm extends FormComponent {
     });
     const lastName = new InputField({
       type: 'text',
-      name: SignUpFieldNames.LastName,
+      name: PersonFieldNames.LastName,
       label: 'Last name',
       pattern: Validator.nameRegex.source,
       title: Validator.nameMsg,
     });
     const dateOfBirth = this.createDate();
-    return [email, password, firsName, lastName, dateOfBirth];
+    return [firsName, lastName, dateOfBirth];
   }
 
-  private createDate(): InputField {
+  public static createDate(): InputField {
     const date = new Date();
     date.setFullYear(date.getFullYear() - 13);
 
     return new InputField({
       type: 'date',
-      name: SignUpFieldNames.DateOfBirth,
+      name: PersonFieldNames.DateOfBirth,
       label: 'Date of birth',
       required: true,
       max: date.toISOString().split('T')[0],
     });
   }
 
-  private createAdressFields(): View[] {
+  public static createAdressFields(): View[] {
     const country = new SelectField(
-      SignUpFieldNames.CountryCode,
+      AddressFieldNames.CountryCode,
       'Country',
       [{ text: 'RUSSIA', value: 'RU', defaultSelected: true, selected: true }],
       true
     );
     const city = new InputField({
       type: 'text',
-      name: SignUpFieldNames.City,
+      name: AddressFieldNames.City,
       label: 'City',
       required: true,
       pattern: Validator.nameRegex.source,
@@ -129,7 +132,7 @@ export default class SignUpForm extends FormComponent {
     });
     const street = new InputField({
       type: 'text',
-      name: SignUpFieldNames.Street,
+      name: AddressFieldNames.Street,
       label: 'Street',
       required: true,
       pattern: Validator.streetRegex.source,
@@ -137,7 +140,7 @@ export default class SignUpForm extends FormComponent {
     });
     const postalCode = new InputField({
       type: 'text',
-      name: SignUpFieldNames.PostalCode,
+      name: AddressFieldNames.PostalCode,
       label: 'Postal code',
       required: true,
       pattern: Validator.postCodeRegex.source,
