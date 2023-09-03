@@ -70,7 +70,7 @@ export default class ModalWindowView extends View {
       classNames: ClassesEnum.MODAL_WINDOW_STATE_ICON,
     };
     const stateIcon = new BasicComponent(stateIconParams);
-    stateIcon.setComponentAttribute(AttributesNamesEnum.SRC, PathsObj.EMPTY_IMG);
+    stateIcon.setComponentAttribute(AttributesNamesEnum.SRC, PathsObj.MODAL_STATE_ICON_OK);
 
     const headingTextLabelParams = {
       tagName: TagsEnum.SPAN,
