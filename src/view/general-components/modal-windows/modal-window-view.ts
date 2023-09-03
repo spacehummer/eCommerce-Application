@@ -55,12 +55,31 @@ export default class ModalWindowView extends View {
   private generateComponentContentConfig(): void {
     switch (this.modalWindowConfig.type) {
       case 'login': {
+        switch (this.modalWindowConfig.status) {
+          case 'ok':
+            break;
+          case 'error':
+            break;
+          default:
+            console.log(errors.MODAL_WINDOW_VIEW.CONFIG_STATUS_INCORRECT(true));
+            break;
+        }
         break;
       }
       case 'registration': {
+        switch (this.modalWindowConfig.status) {
+          case 'ok':
+            break;
+          case 'error':
+            break;
+          default:
+            console.log(errors.MODAL_WINDOW_VIEW.CONFIG_STATUS_INCORRECT(true));
+            break;
+        }
         break;
       }
       default:
+        console.log(errors.MODAL_WINDOW_VIEW.CONFIG_TYPE_INCORRECT(true));
         break;
     }
   }
@@ -127,7 +146,7 @@ export default class ModalWindowView extends View {
     if (this.container instanceof BasicComponent) {
       this.container.addInnerElement(this.headingContainer);
     } else {
-      throw errors.MODAL_WINDOW_VIEW.CONTAINER_INSTANCE_INCORRECT();
+      throw errors.MODAL_WINDOW_VIEW.containerInstanceIncorrect();
     }
   }
 
@@ -149,7 +168,7 @@ export default class ModalWindowView extends View {
     if (this.container instanceof BasicComponent) {
       this.container.addInnerElement(this.contentContainer);
     } else {
-      throw errors.MODAL_WINDOW_VIEW.CONTAINER_INSTANCE_INCORRECT();
+      throw errors.MODAL_WINDOW_VIEW.containerInstanceIncorrect();
     }
   }
 }
