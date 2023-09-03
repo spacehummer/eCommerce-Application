@@ -10,7 +10,7 @@ const enum TextContentEnum {
   MAIN_WELCOME_SECTION_TB1_P2 = 'If you have accumulated unwanted books, we can give them a second life!',
   MAIN_WELCOME_SECTION_TB1_P3 = 'If you are looking for a book to complement your library or collection - you are also in the right place!',
   /* Modal window */
-  MODAL_WINDOW_BTN_CLOSE_PLACEHOLDER = 'x',
+  MODAL_WINDOW_BTN_CLOSE_PLACEHOLDER = 'X',
   /* # Login */
   MODAL_WINDOW_LOGIN_SUCCESSFUL_HEADING = 'Successful login',
   MODAL_WINDOW_LOGIN_SUCCESSFUL_CONTENT = 'You have successfully logged into your account!',

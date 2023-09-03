@@ -61,6 +61,10 @@ export default class ModalWindowView extends View {
     this.configureView();
   }
 
+  /**
+   * Set content and styles depends on component config, receiving through constructor.
+   * @private
+   */
   private generateComponentContentConfig(): void {
     switch (this.modalWindowConfig.type) {
       case 'login': {
@@ -71,13 +75,15 @@ export default class ModalWindowView extends View {
               TextContentEnum.MODAL_WINDOW_LOGIN_SUCCESSFUL_HEADING;
             this.contentAndStyles.contentText =
               TextContentEnum.MODAL_WINDOW_LOGIN_SUCCESSFUL_CONTENT;
-            this.contentAndStyles.containerClassNames.push(ClassesEnum.MODAL_WINDOW_BTN_CLOSE_OK);
+            this.contentAndStyles.containerClassNames.push(ClassesEnum.MODAL_WINDOW_CONTAINER_OK);
+            this.contentAndStyles.btnClassNames.push(ClassesEnum.MODAL_WINDOW_BTN_CLOSE_OK);
             break;
           case 'error':
             this.contentAndStyles.statusIconPath = PathsObj.MODAL_STATE_ICON_ERR;
             this.contentAndStyles.headingText = TextContentEnum.MODAL_WINDOW_LOGIN_ERROR_HEADING;
             this.contentAndStyles.contentText = TextContentEnum.MODAL_WINDOW_LOGIN_ERROR_CONTENT;
-            this.contentAndStyles.containerClassNames.push(ClassesEnum.MODAL_WINDOW_BTN_CLOSE_ERR);
+            this.contentAndStyles.containerClassNames.push(ClassesEnum.MODAL_WINDOW_CONTAINER_ERR);
+            this.contentAndStyles.btnClassNames.push(ClassesEnum.MODAL_WINDOW_BTN_CLOSE_ERR);
             break;
           default:
             console.error(ERRORS.CONFIG_STATUS_INCORRECT());
@@ -93,7 +99,8 @@ export default class ModalWindowView extends View {
               TextContentEnum.MODAL_WINDOW_REGISTRATION_SUCCESSFUL_HEADING;
             this.contentAndStyles.contentText =
               TextContentEnum.MODAL_WINDOW_REGISTRATION_SUCCESSFUL_CONTENT;
-            this.contentAndStyles.containerClassNames.push(ClassesEnum.MODAL_WINDOW_BTN_CLOSE_OK);
+            this.contentAndStyles.containerClassNames.push(ClassesEnum.MODAL_WINDOW_CONTAINER_OK);
+            this.contentAndStyles.btnClassNames.push(ClassesEnum.MODAL_WINDOW_BTN_CLOSE_OK);
             break;
           case 'error':
             this.contentAndStyles.statusIconPath = PathsObj.MODAL_STATE_ICON_ERR;
@@ -101,7 +108,8 @@ export default class ModalWindowView extends View {
               TextContentEnum.MODAL_WINDOW_REGISTRATION_ERROR_HEADING;
             this.contentAndStyles.contentText =
               TextContentEnum.MODAL_WINDOW_REGISTRATION_ERROR_CONTENT;
-            this.contentAndStyles.containerClassNames.push(ClassesEnum.MODAL_WINDOW_BTN_CLOSE_ERR);
+            this.contentAndStyles.containerClassNames.push(ClassesEnum.MODAL_WINDOW_CONTAINER_ERR);
+            this.contentAndStyles.btnClassNames.push(ClassesEnum.MODAL_WINDOW_BTN_CLOSE_ERR);
             break;
           default:
             console.error(ERRORS.CONFIG_STATUS_INCORRECT());
@@ -124,7 +132,7 @@ export default class ModalWindowView extends View {
 
     const containerParams: BasicComponentConstructorArgs = {
       tagName: TagsEnum.CONTAINER,
-      classNames: ClassesEnum.MODAL_WINDOW_CONTAINER,
+      classNames: this.contentAndStyles.containerClassNames,
     };
     this.container = new BasicComponent(containerParams);
 
@@ -153,18 +161,18 @@ export default class ModalWindowView extends View {
       classNames: ClassesEnum.MODAL_WINDOW_STATE_ICON,
     };
     const stateIcon = new BasicComponent(stateIconParams);
-    stateIcon.setComponentAttribute(AttributesNamesEnum.SRC, PathsObj.MODAL_STATE_ICON_OK);
+    stateIcon.setComponentAttribute(AttributesNamesEnum.SRC, this.contentAndStyles.statusIconPath);
 
     const headingTextLabelParams = {
       tagName: TagsEnum.SPAN,
       classNames: ClassesEnum.MODAL_WINDOW_HEADING_LABEL,
-      textContent: TextContentEnum.MODAL_WINDOW_LOGIN_SUCCESSFUL_HEADING,
+      textContent: this.contentAndStyles.headingText,
     };
     const headingTextLabel = new BasicComponent(headingTextLabelParams);
 
     const closeBtnParams = {
       tagName: TagsEnum.BUTTON,
-      classNames: ClassesEnum.MODAL_WINDOW_BTN_CLOSE_BASE,
+      classNames: this.contentAndStyles.btnClassNames,
       textContent: TextContentEnum.MODAL_WINDOW_BTN_CLOSE_PLACEHOLDER,
     };
     const closeBtn = new BasicComponent(closeBtnParams);
@@ -191,7 +199,7 @@ export default class ModalWindowView extends View {
     const contentMsgTextParams = {
       tagName: TagsEnum.PARAGRAPH,
       classNames: ClassesEnum.MODAL_WINDOW_CONTENT_PARAGRAPH,
-      textContent: TextContentEnum.MODAL_WINDOW_LOGIN_SUCCESSFUL_CONTENT,
+      textContent: this.contentAndStyles.contentText,
     };
     const contentMsgText = new BasicComponent(contentMsgTextParams);
 

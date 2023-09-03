@@ -239,10 +239,14 @@ html {
 }
 
 .modal-window__btn-close {
+  font-weight: 600;
+  font-size: 20px;
+  background-color: transparent;
   border: var(--border-button-general);
   border-radius: 24px;
-  width: 48px;
-  height: 48px;
+  transition: color ease-in-out 300ms, background-color ease-in-out 300ms, border ease-in-out 300ms, box-shadow ease-in-out 300ms;
+  min-width: 48px;
+  min-height: 48px;
   padding: 0;
 }
 
@@ -251,15 +255,19 @@ html {
 }
 
 .modal-window__btn-close--ok:hover {
+  color: var(--color-white);
   background-color: var(--color-green);
   border-color: var(--color-green);
   box-shadow: var(--hover-bs-status-ok);
 }
 
 .modal-window__btn-close--ok:active {
+  font-size: 18px;
+  color: var(--color-white);
   background-color: var(--color-green-light);
   border-color: var(--color-green-light);
   box-shadow: var(--active-bs-status-ok);
+  transition: color ease-in-out 100ms, background-color ease-in-out 100ms, border ease-in-out 100ms, box-shadow ease-in-out 100ms;
 }
 
 .modal-window__btn-close--err {
@@ -267,12 +275,14 @@ html {
 }
 
 .modal-window__btn-close--err:hover {
+  color: var(--color-white);
   background-color: var(--color-red);
   border-color: var(--color-red);
   box-shadow: var(--hover-bs-status-err);
 }
 
 .modal-window__btn-close--err:active {
+  color: var(--color-white);
   background-color: var(--color-red-light-accent);
   border-color: var(--color-red-light-accent);
   box-shadow: var(--active-bs-status-err);
