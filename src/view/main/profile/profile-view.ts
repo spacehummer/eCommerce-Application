@@ -1,8 +1,8 @@
 import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
-import { getProfile, isDefaultAddress } from '#src/logic/state/state';
-import { Address } from '#src/logic/state/types';
+import { getProfile, isDefaultAddress, isDefaultBillingAddress, isDefaultShippingAddress } from '#src/logic/state/state';
+import { Address, ProfileAddress } from '#src/logic/state/types';
 import View from '#src/view/view';
 import { CredentialFieldNames, PersonFieldNames } from '../signup-login/components/enums';
 import FieldSet from '../signup-login/components/field-set';
@@ -11,7 +11,7 @@ import ChangePassword from './components/user-data/change-password';
 import EditableForm from './components/user-data/editable-form';
 import PersonalDataForm from './components/user-data/personal-data-form';
 import PersonalesModel from './components/user-data/personales-model';
-import { createDisplayAdress } from './field-factory';
+import { createDisplayAddress, createDisplayAdress } from './field-factory';
 
 const args: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
@@ -57,19 +57,21 @@ export default class ProfileView extends View {
       ];
       this.personForm = new PersonalDataForm(this.personDataCallback, personValues);
 
-      const shippingAddresses = profile.addresses
-        .filter((val) => profile.shippingAddressIds.find((shipId) => shipId === val.id))
+      const addresses = profile.addresses
         .sort(sortPredicate)
-        .map(createDisplayAdress);
-      const billingAddresses = profile.addresses
-        .filter((val) => profile.billingAddressIds.find((billId) => billId === val.id))
-        .sort(sortPredicate)
-        .map(createDisplayAdress);
+        .map((val) => {
+          return createDisplayAddress({
+            isBilling: profile.billingAddressIds.find((billId) => billId === val.id) !== undefined,
+            isShipping: profile.shippingAddressIds.find((shipId) => shipId === val.id) !== undefined,
+            isDefaultBilling: isDefaultBillingAddress(val.id),
+            isDefaultShipping: isDefaultShippingAddress(val.id),
+            ...val
+          });
+        });
 
       this.basicComponent.addInnerElement(changePassword);
       this.basicComponent.addInnerElement(this.personForm);
-      this.basicComponent.addInnerElement(new FieldSet('', 'Shipping Adresses', shippingAddresses));
-      this.basicComponent.addInnerElement(new FieldSet('', 'Billing Adresses', billingAddresses));
+      this.basicComponent.addInnerElement(new FieldSet('', 'Addresses', addresses));
     }
   }
 
