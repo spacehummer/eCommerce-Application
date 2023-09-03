@@ -37,13 +37,6 @@ html {
   width: 100%;
   height: 100%;
 }
-
-.heading_type-3 {
-  font-family: Inter, sans-serif;
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 600;
-}
 /* </editor-fold desc="General styles">*/
 
 /* <editor-fold desc="General modifiers">*/
@@ -190,13 +183,16 @@ html {
   transform: translate(-50%, 25%);
   /*bottom: 5%;*/
   /*left: calc(50% - var(--modal-window-width) / 2);*/
-  width: calc(var(--modal-window-width) + var(--modal-window-viewport-padding));
+  width: calc(var(--modal-window-width) + var(--modal-window-viewport-padding) * 2);
   max-width: 100%;
-  min-height: calc(var(--modal-window-height) + var(--modal-window-viewport-padding));
+  min-height: calc(var(--modal-window-height) + var(--modal-window-viewport-padding) * 2);
   padding: var(--modal-window-viewport-padding);
 }
 
 .modal-window__container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
   background-color: #FFFFFF;
   padding: 16px 48px 48px;
 }
@@ -235,6 +231,10 @@ html {
 .modal-window__content-container {
   padding-left: 16px;
   padding-right: 16px;
+}
+
+.modal-window__content-paragraph {
+  margin: 0;
 }
 /* </editor-fold desc="Modal window">*/
 

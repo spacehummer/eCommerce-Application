@@ -2,6 +2,7 @@
 
 /* Import styles */
 import '#assets/styles/font.css';
+import '#assets/styles/font-styles.css';
 import '#assets/styles/general.css';
 import '#assets/styles/normalize.css';
 

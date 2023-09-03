@@ -107,8 +107,8 @@ export default class ModalWindowView extends View {
 
     const contentMsgTextParams = {
       tagName: TagsEnum.PARAGRAPH,
-      classNames: ClassesEnum.PLACEHOLDER,
-      textContent: TextContentEnum.PLACEHOLDER,
+      classNames: ClassesEnum.MODAL_WINDOW_CONTENT_PARAGRAPH,
+      textContent: TextContentEnum.MODAL_WINDOW_LOGIN_SUCCESSFUL_CONTENT,
     };
     const contentMsgText = new BasicComponent(contentMsgTextParams);
 
