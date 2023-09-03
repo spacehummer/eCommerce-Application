@@ -5,6 +5,7 @@ import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/b
 import TextContentEnum from '#src/components_params/text-content-enum';
 import AttributesNamesEnum from '#src/components_params/attributes-names-enum';
 import PathsObj from '#src/components_params/paths-obj';
+import errors from '#src/utils/errors';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.CONTAINER,
@@ -93,9 +94,7 @@ export default class ModalWindowView extends View {
     if (this.container instanceof BasicComponent) {
       this.container.addInnerElement(this.headingContainer);
     } else {
-      throw new Error(
-        'ERR: In ModalWindowView: container must be an instance of the BasicComponent!'
-      );
+      throw errors.MODAL_WINDOW_VIEW();
     }
   }
 
