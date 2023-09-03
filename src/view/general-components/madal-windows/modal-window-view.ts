@@ -94,7 +94,7 @@ export default class ModalWindowView extends View {
     if (this.container instanceof BasicComponent) {
       this.container.addInnerElement(this.headingContainer);
     } else {
-      throw errors.MODAL_WINDOW_VIEW();
+      throw errors.MODAL_WINDOW_VIEW.CONTAINER_INSTANCE_INCORRECT();
     }
   }
 
