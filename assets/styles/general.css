@@ -4,6 +4,7 @@
 }
 
 html {
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
 }
 
@@ -200,27 +201,35 @@ html {
   padding: 16px 48px 48px;
 }
 
-.heading-container {
+.modal-window__heading-container {
   display: flex;
   align-items: center;
   column-gap: 32px;
 }
 
-.state-icon {
+.modal-window-state-icon {
   display: block;
   width: 64px;
   height: 64px;
 }
 
-.state-icon[src=""] {
+.modal-window-state-icon[src=""] {
   /*noinspection CssUnknownTarget*/
   content:url("data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
 }
 
-.heading-text-label {
+.modal-window__heading-text-label {
   flex-grow: 1;
   height: fit-content;
   padding-top: 8px;
+}
+
+.modal-window-btn-close-base {
+  border-width: 2px;
+  border-radius: 24px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
 }
 /* </editor-fold desc="Modal window">*/
 

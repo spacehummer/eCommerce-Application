@@ -81,8 +81,8 @@ export default class ModalWindowView extends View {
 
     const closeBtnParams = {
       tagName: TagsEnum.BUTTON,
-      classNames: ClassesEnum.PLACEHOLDER,
-      textContent: TextContentEnum.PLACEHOLDER,
+      classNames: ClassesEnum.MODAL_WINDOW_BTN_CLOSE_BASE,
+      textContent: TextContentEnum.MODAL_WINDOW_BTN_CLOSE_PLACEHOLDER,
     };
     const closeBtn = new BasicComponent(closeBtnParams);
 
