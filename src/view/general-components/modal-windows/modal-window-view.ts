@@ -16,6 +16,8 @@ interface ContentAndStyles {
   statusIconPath: string;
   headingText: TextContentEnum;
   contentText: TextContentEnum;
+  containerClassNames: ClassesEnum[];
+  btnClassNames: ClassesEnum[];
 }
 
 const viewParams: BasicComponentConstructorArgs = {

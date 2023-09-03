@@ -4,15 +4,38 @@
   --color-black: #000000;
   --color-black-75: rgba(0, 0, 0, 0.75);
   --color-black-60: rgba(0, 0, 0, 0.60);
+  --color-black-25: rgba(0, 0, 0, 0.25);
+  --color-black-10: rgba(0, 0, 0, 0.10);
   --color-gray-light: #F2F2F2;
+  --color-red-light-accent: #FF6F61;
+  --color-red: #E63D2E;
   --color-red-dark-general: #B44739;
+  --color-red-dark-l: #99291F;
+  --color-red-dark-xl: #331410;
   --color-gold: #FFD700;
   --color-gold-light-l: #FFEE8C;
   --color-gold-light-xl: #FFF5BF;
+  --color-green-light: #61FF76;
+  --color-green: #2EE646;
+  --color-green-dark-l: #29CC3F;
+  --color-green-dark-xl: #1F992F;
   --color-viewport-shading: rgba(26, 26, 26, 0.5);
+  /* Borders */
+  --border-general: 3px var(--color-black) solid;
+  --border-ok: 3px var(--color-green-light) solid;
+  --border-err: 3px var(--color-red-light-accent) solid;
+  --border-button-general: 2px var(--color-black) solid;
+  --border-button-ok: 2px var(--color-green-dark-l) solid;
+  --border-button-err: 2px var(--color-red-dark-general) solid;
   /* Effects */
   --vulemetric-text-shadow: 0 0 1px var(--color-black), 1px 1px 3px var(--color-black-75);
   --hover-glow-ts-general: 0 0 1px var(--color-black), 0 0 4px var(--color-gold), 1px 1px 16px var(--color-black-60);
   --active-glow-ts-general: 0 0 1px var(--color-black), 0 0 8px var(--color-gold), 1px 1px 16px var(--color-black-60);
   --current-glow-ts-general: 0 0 1px var(--color-black), 0 0 3px var(--color-gold), 1px 1px 8px var(--color-black-60);
+  --bs-status-ok: 0px 0px 16px 1px var(--color-green-light);
+  --hover-bs-status-ok: 0px 0px 1px 0px var(--color-black-25), 0px 0px 8px 2px var(--color-green), 0px 0px 16px 4px var(--color-black-25);
+  --active-bs-status-ok: 0px 0px 1px 0px var(--color-black-10), 0px 0px 8px 2px var(--color-green-light), 0px 0px 16px 4px var(--color-black-25);
+  --bs-status-err: 0px 0px 16px 1px var(--color-red-light-accent);
+  --hover-bs-status-err: 0px 0px 16px 4px var(--color-black-25), 0px 0px 8px 2px var(--color-red), 0px 0px 1px 0px var(--color-black-25);
+  --active-bs-status-err: 0px 0px 16px 4px var(--color-black-25), 0px 0px 8px 2px var(--color-red-light-accent), 0px 0px 1px 0px var(--color-black-10);
 }

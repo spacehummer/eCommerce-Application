@@ -49,7 +49,7 @@ const enum ClassesEnum {
   MODAL_WINDOW_STATE_ICON_WRP = 'modal-window__state-icon-wrp',
   MODAL_WINDOW_STATE_ICON = 'modal-window__state-icon',
   MODAL_WINDOW_HEADING_LABEL = 'modal-window__heading-text-label heading_type-3',
-  MODAL_WINDOW_BTN_CLOSE_BASE = 'modal-window__btn-close-base',
+  MODAL_WINDOW_BTN_CLOSE_BASE = 'modal-window__btn-close',
   MODAL_WINDOW_CONTENT_CONTAINER = 'modal-window__content-container',
   MODAL_WINDOW_CONTENT_PARAGRAPH = 'modal-window__content-paragraph paragraph_type_2',
   /* ERROR 404 */
