@@ -1,51 +1,33 @@
 import ClassesEnum from '#src/components_params/classes-enum';
-import {
-  CredentialFieldNames,
-  PersonFieldNames,
-} from '#src/view/main/signup-login/components/enums';
 import FieldSet from '#src/view/main/signup-login/components/field-set';
-import SignUpForm from '#src/view/main/signup-login/components/signup-form';
 import { ErrorCollection } from '#src/view/main/signup-login/components/types';
 import FormComponent from '../../../signup-login/components/form';
 import EditButton from './edit-btn';
 import EditableFieldSet from './editable-fieldset';
 import CancelSubmit from './save-cancel-btn';
 
-export default class EditableForm extends FormComponent {
-  private readonly fieldSet: FieldSet;
+export default abstract class EditableForm extends FormComponent {
+  protected readonly fieldSet: FieldSet;
 
   public readonly fieldSesName: string = 'user-data';
 
-  private readonly editBtn: EditButton;
+  protected readonly editBtn: EditButton;
 
-  private readonly submit: CancelSubmit;
-
-  private defaultValues: string[];
+  protected readonly submit: CancelSubmit;
 
   constructor(
     submitCallback: (record: Record<string, string | Record<string, string>>) => void,
-    values: string[],
+    private defaultValues: string[],
+    names: string[],
     private readonly isDisabledByDefault: boolean = true
   ) {
-    super(
-      submitCallback,
-      [CredentialFieldNames.Email, ...Object.values(PersonFieldNames)],
-      ClassesEnum.LOGIN_FORM
-    );
-
-    this.defaultValues = values;
+    super(submitCallback, names, ClassesEnum.LOGIN_FORM);
 
     this.submit = new CancelSubmit(this.cancel);
 
     this.editBtn = new EditButton(this.toggleForm);
 
-    this.fieldSet = new EditableFieldSet(
-      this.fieldSesName,
-      'Personal data',
-      [SignUpForm.createEmail(), ...SignUpForm.createPersonFields()],
-      this.editBtn,
-      this.submit
-    );
+    this.fieldSet = this.createFieldSet();
 
     this.setValues();
 
@@ -54,7 +36,9 @@ export default class EditableForm extends FormComponent {
     this.basicComponent.addInnerElement(this.fieldSet);
   }
 
-  private setValues(): void {
+  protected abstract createFieldSet(): EditableFieldSet;
+
+  protected setValues(): void {
     let index = 0;
     Array.from(this.fieldSet.elements).forEach((val) => {
       const elem = val;
@@ -73,21 +57,21 @@ export default class EditableForm extends FormComponent {
     });
   }
 
-  private readonly editBtnToggle = (): void => {
+  protected readonly editBtnToggle = (): void => {
     this.editBtn.getHTMLElement()?.toggleAttribute('disabled');
   };
 
-  private readonly toggleSetItems = (): void => {
+  protected readonly toggleSetItems = (): void => {
     this.submit.getHTMLElement()?.classList.toggle(ClassesEnum.HIDDEN);
     this.fieldSet.getHTMLElement()?.toggleAttribute('disabled');
   };
 
-  private readonly toggleForm = (): void => {
+  protected readonly toggleForm = (): void => {
     this.toggleSetItems();
     this.editBtnToggle();
   };
 
-  private readonly cancel = (): void => {
+  protected readonly cancel = (): void => {
     this.setValues();
     this.toggleForm();
     this.errorMsg.hide();

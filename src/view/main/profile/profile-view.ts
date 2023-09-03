@@ -8,6 +8,7 @@ import { CredentialFieldNames, PersonFieldNames } from '../signup-login/componen
 import FieldSet from '../signup-login/components/field-set';
 import { ApiRequestResult } from '../signup-login/components/types';
 import EditableForm from './components/user-data/editable-form';
+import PersonalDataForm from './components/user-data/personal-data-form';
 import PersonalesModel from './components/user-data/personales-model';
 import { createDisplayAdress } from './field-factory';
 
@@ -51,7 +52,7 @@ export default class ProfileView extends View {
         profile.lastName,
         profile.dateOfBirth,
       ];
-      this.personForm = new EditableForm(this.personDataCallback, personValues);
+      this.personForm = new PersonalDataForm(this.personDataCallback, personValues);
 
       const shippingAddresses = profile.addresses
         .filter((val) => profile.shippingAddressIds.find((shipId) => shipId === val.id))
