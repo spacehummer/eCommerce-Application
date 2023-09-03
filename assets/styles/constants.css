@@ -1,0 +1,18 @@
+:root {
+  /* Colors */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-black-75: rgba(0, 0, 0, 0.75);
+  --color-black-60: rgba(0, 0, 0, 0.60);
+  --color-gray-light: #F2F2F2;
+  --color-red-dark-general: #B44739;
+  --color-gold: #FFD700;
+  --color-gold-light-l: #FFEE8C;
+  --color-gold-light-xl: #FFF5BF;
+  --color-viewport-shading: rgba(26, 26, 26, 0.5);
+  /* Effects */
+  --vulemetric-text-shadow: 0 0 1px var(--color-black), 1px 1px 3px var(--color-black-75);
+  --hover-glow-ts-general: 0 0 1px var(--color-black), 0 0 4px var(--color-gold), 1px 1px 16px var(--color-black-60);
+  --active-glow-ts-general: 0 0 1px var(--color-black), 0 0 8px var(--color-gold), 1px 1px 16px var(--color-black-60);
+  --current-glow-ts-general: 0 0 1px var(--color-black), 0 0 3px var(--color-gold), 1px 1px 8px var(--color-black-60);
+}

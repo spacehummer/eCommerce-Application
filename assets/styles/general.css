@@ -1,6 +1,4 @@
-:root {
-  --viewport-shading: rgba(26, 26, 26, 0.5);
-}
+@import './constants.css';
 
 * {
   box-sizing: border-box;
@@ -37,7 +35,7 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--viewport-shading);
+  background-color: var(--color-viewport-shading);
   width: 100%;
   height: 100%;
 }
@@ -63,7 +61,7 @@ html {
 
 /* <editor-fold desc="Header">*/
 .header {
-  background-color: #B44739;
+  background-color: var(--color-red-dark-general);
 }
 
 .content--header {
@@ -91,18 +89,23 @@ html {
   font-size: 22px;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: #ffffff;
-  text-shadow: 0 0 1px rgb(0, 0, 0), 1px 1px 3px rgba(0, 0, 0, 0.75);
+  color: var(--color-white);
+  text-shadow: var(--vulemetric-text-shadow);
 }
 
 .nav-link:hover {
-  color: rgb(255, 245, 191);
-  text-shadow: 0 0 1px rgb(0, 0, 0), 0 0 4px rgba(255, 215, 0, 1), 1px 1px 16px rgba(0, 0, 0, 0.6);
+  color: var(--color-gold-light-xl);
+  text-shadow: var(--hover-glow-ts-general);
+}
+
+.nav-link:active {
+  color: var(--color-gold-light-xl);
+  text-shadow: var(--active-glow-ts-general);
 }
 
 .item__link--current {
-  color: rgb(255, 238, 140);
-  text-shadow: 0 0 1px rgb(0, 0, 0), 0 0 3px rgba(255, 215, 0, 1), 1px 1px 8px rgba(0, 0, 0, 0.6);
+  color: var(--color-gold-light-l);
+  text-shadow: var(--current-glow-ts-general);
 }
 /* </editor-fold>*/
 
@@ -126,8 +129,8 @@ html {
   font-size: 32px;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: #F2F2F2;
-  text-shadow: 0 0 1px rgb(0, 0, 0), 1px 1px 3px rgba(0, 0, 0, 0.75);
+  color: var(--color-gray-light);
+  text-shadow: var(--vulemetric-text-shadow);
 }
 /* </editor-fold desc="Logo component">*/
 
@@ -197,7 +200,7 @@ html {
   display: flex;
   flex-direction: column;
   row-gap: 32px;
-  background-color: #FFFFFF;
+  background-color: var(--color-white);
   padding: 16px 48px 48px;
 }
 
