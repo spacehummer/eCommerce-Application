@@ -7,13 +7,11 @@ import EditableFieldSet from './editable-fieldset';
 import CancelSubmit from './save-cancel-btn';
 
 export default abstract class EditableForm extends FormComponent {
-  protected readonly fieldSet: FieldSet;
+  protected fieldSet?: FieldSet;
 
-  public readonly fieldSesName: string = 'user-data';
+  public readonly editBtn: EditButton;
 
-  protected readonly editBtn: EditButton;
-
-  protected readonly submit: CancelSubmit;
+  protected submit?: CancelSubmit;
 
   constructor(
     submitCallback: (record: Record<string, string | Record<string, string>>) => void,
@@ -23,12 +21,9 @@ export default abstract class EditableForm extends FormComponent {
   ) {
     super(submitCallback, names, ClassesEnum.LOGIN_FORM);
 
-    this.submit = new CancelSubmit(this.cancel);
-
     this.editBtn = new EditButton(this.toggleForm);
-
+    this.submit = this.createCancel();
     this.fieldSet = this.createFieldSet();
-
     this.setValues();
 
     if (this.isDisabledByDefault) this.toggleSetItems();
@@ -36,25 +31,37 @@ export default abstract class EditableForm extends FormComponent {
     this.basicComponent.addInnerElement(this.fieldSet);
   }
 
+  protected createCancel(): CancelSubmit {
+    return new CancelSubmit(this.cancel);
+  }
+
   protected abstract createFieldSet(): EditableFieldSet;
 
-  protected setValues(): void {
+  public setValues(): void {
     let index = 0;
-    Array.from(this.fieldSet.elements).forEach((val) => {
-      const elem = val;
-      if (elem instanceof HTMLInputElement && elem.type !== 'submit') {
-        elem.value = this.defaultValues[index];
-        index += 1;
-      } else if (elem instanceof HTMLSelectElement) {
-        Array.from(elem.options).forEach((value) => {
-          const option = value;
-          if (option.value === this.defaultValues[index]) {
-            option.selected = true;
+    if (this.fieldSet) {
+      Array.from(this.fieldSet.elements).forEach((val) => {
+        const elem = val;
+        if (
+          elem instanceof HTMLInputElement &&
+          elem.type !== 'submit' &&
+          elem.type !== 'checkbox'
+        ) {
+          if (this.defaultValues[index] !== undefined) {
+            elem.value = this.defaultValues[index];
             index += 1;
           }
-        });
-      }
-    });
+        } else if (elem instanceof HTMLSelectElement) {
+          Array.from(elem.options).forEach((value) => {
+            const option = value;
+            if (option.value === this.defaultValues[index]) {
+              option.selected = true;
+              index += 1;
+            }
+          });
+        }
+      });
+    }
   }
 
   protected readonly editBtnToggle = (): void => {
@@ -62,8 +69,8 @@ export default abstract class EditableForm extends FormComponent {
   };
 
   protected readonly toggleSetItems = (): void => {
-    this.submit.getHTMLElement()?.classList.toggle(ClassesEnum.HIDDEN);
-    this.fieldSet.getHTMLElement()?.toggleAttribute('disabled');
+    this.submit?.getHTMLElement()?.classList.toggle(ClassesEnum.HIDDEN);
+    this.fieldSet?.getHTMLElement()?.toggleAttribute('disabled');
   };
 
   protected readonly toggleForm = (): void => {
@@ -78,11 +85,15 @@ export default abstract class EditableForm extends FormComponent {
     this.okMsg.hide();
   };
 
+  protected readonly onSucces = (): void => {
+    this.okMsg.hide();
+  };
+
   public showSubmitResults(successMsg: string, errors?: ErrorCollection): void {
     if (!(errors && errors.errorMsg)) {
       this.toggleForm();
       setTimeout(() => {
-        this.okMsg.hide();
+        this.onSucces();
       }, 1500);
     }
     super.showSubmitResults(successMsg, errors);

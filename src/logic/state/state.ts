@@ -36,8 +36,14 @@ export const setProfile = (user: Customer): void => {
   }
 };
 
+export const isDefaultShippingAddress = (id: string): boolean =>
+  profile && id === profile.defaultShippingAddressId;
+
+export const isDefaultBillingAddress = (id: string): boolean =>
+  profile && id === profile.defaultBillingAddressId;
+
 export const isDefaultAddress = (id: string): boolean =>
-  profile && (id === profile.defaultShippingAddressId || id === profile.defaultBillingAddressId);
+  isDefaultShippingAddress(id) || isDefaultBillingAddress(id);
 
 export const isAuthorised = (): boolean => isLogin;
 

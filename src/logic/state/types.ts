@@ -24,6 +24,15 @@ type Addresses = Readonly<{
   billingAddressIds: string[];
 }>;
 
+export type ProfileAddress = Address & AddressState;
+
+type AddressState = Readonly<{
+  isBilling: boolean;
+  isShipping: boolean;
+  isDefaultBilling: boolean;
+  isDefaultShipping: boolean;
+}>;
+
 export type Profile = TechData & PersonalData & Addresses;
 
 export type EventType = 'login' | 'logout' | 'update';

@@ -30,4 +30,10 @@ type Version = Readonly<{ version: number }>;
 
 export type PersonalesDto = PersonalData & Version & Email;
 
+export type ChangePasswordDto = Readonly<{
+  currentPassword: string;
+  newPassword: string;
+}> &
+  Version;
+
 export default CustomerData;

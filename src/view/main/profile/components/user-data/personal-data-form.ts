@@ -7,6 +7,8 @@ import EditableFieldSet from './editable-fieldset';
 import EditableForm from './editable-form';
 
 export default class PersonalDataForm extends EditableForm {
+  public readonly fieldSesName: string = 'user-data';
+
   constructor(
     submitCallback: (record: Record<string, string | Record<string, string>>) => void,
     values: string[]
@@ -20,7 +22,7 @@ export default class PersonalDataForm extends EditableForm {
       'Personal data',
       [SignUpForm.createEmail(), ...SignUpForm.createPersonFields()],
       this.editBtn,
-      this.submit
+      this.submit || super.createCancel()
     );
   }
 }

@@ -8,7 +8,7 @@ import {
 } from '@commercetools/platform-sdk';
 import BaseEndpoint from './baseEndpoint';
 import ErrorData from './types/error';
-import CustomerData, { PersonalesDto } from './types/customer';
+import CustomerData, { ChangePasswordDto, PersonalesDto } from './types/customer';
 import ApiError from '../utils/apiError';
 
 interface ICustomerRepository {
@@ -112,6 +112,23 @@ class CustomerRepository extends BaseEndpoint implements ICustomerRepository {
         },
       ],
     };
+  }
+
+  public async changePassword(passwordDto: ChangePasswordDto): Promise<ClientResponse<Customer>> {
+    try {
+      const customer = await this.apiRoot
+        .withProjectKey({ projectKey: this.projectKey })
+        .me()
+        .password()
+        .post({
+          body: passwordDto,
+        })
+        .execute();
+
+      return customer;
+    } catch (error) {
+      throw new ApiError(error as ErrorData);
+    }
   }
 
   public async updateCustomer(updateDto: MyCustomerUpdate): Promise<ClientResponse<Customer>> {

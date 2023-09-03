@@ -7,6 +7,7 @@ import View from '#src/view/view';
 import { CredentialFieldNames, PersonFieldNames } from '../signup-login/components/enums';
 import FieldSet from '../signup-login/components/field-set';
 import { ApiRequestResult } from '../signup-login/components/types';
+import ChangePassword from './components/user-data/change-password';
 import EditableForm from './components/user-data/editable-form';
 import PersonalDataForm from './components/user-data/personal-data-form';
 import PersonalesModel from './components/user-data/personales-model';
@@ -46,6 +47,8 @@ export default class ProfileView extends View {
     const profile = getProfile();
 
     if (profile) {
+      const changePassword = new ChangePassword();
+
       const personValues = [
         profile.email,
         profile.firstName,
@@ -63,6 +66,7 @@ export default class ProfileView extends View {
         .sort(sortPredicate)
         .map(createDisplayAdress);
 
+      this.basicComponent.addInnerElement(changePassword);
       this.basicComponent.addInnerElement(this.personForm);
       this.basicComponent.addInnerElement(new FieldSet('', 'Shipping Adresses', shippingAddresses));
       this.basicComponent.addInnerElement(new FieldSet('', 'Billing Adresses', billingAddresses));
