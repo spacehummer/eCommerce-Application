@@ -1,44 +1,34 @@
 const modalWindowViewERRHeading = 'ERROR: In ModalWindowView:';
 
-// interface ModalWindowViewErrors {
-//   CONTAINER_INSTANCE_INCORRECT: (giveText?: boolean) => Error | string;
-//   CONFIG_TYPE_INCORRECT: (giveText?: boolean) => Error | string;
-//   CONFIG_STATUS_INCORRECT: (giveText?: boolean) => Error | string;
-// }
-//
-// interface Errors {
-//   MODAL_WINDOW_VIEW: ModalWindowViewErrors;
-// }
-
-// function dependsOnParameter<B extends boolean>(x: B): B extends true ? number : string;
-// function dependsOnParameter(x: boolean): number | string {
-//   return x ? 3 : 'string';
-// }
-
-function containerInstanceIncorrect(giveText?: false): Error;
-function containerInstanceIncorrect(giveText: true): string;
-function containerInstanceIncorrect(giveText?: boolean): string | Error;
-function containerInstanceIncorrect(giveText?: boolean): string | Error {
-  const text =
-    `${modalWindowViewERRHeading} \`ModalWindowView.prototype.container\`` +
-    `must be an instance of the BasicComponent!`;
-  return giveText ? new Error(text) : text;
+interface ModalWindowViewErrors {
+  CONTAINER_INSTANCE_INCORRECT: () => string;
+  CONFIG_TYPE_INCORRECT: () => string;
+  CONFIG_STATUS_INCORRECT: () => string;
 }
 
-const errors = {
+interface Errors {
+  MODAL_WINDOW_VIEW: ModalWindowViewErrors;
+}
+
+const errors: Errors = {
   MODAL_WINDOW_VIEW: {
-    containerInstanceIncorrect,
-    CONFIG_TYPE_INCORRECT: (giveText = false): Error | string => {
-      const text =
-        `${modalWindowViewERRHeading} \`ModalWindowView.prototype.modalWindowConfig.type\`` +
-        `has an incorrect value!`;
-      return giveText ? new Error(text) : text;
+    CONTAINER_INSTANCE_INCORRECT: (): string => {
+      return (
+        `${modalWindowViewERRHeading} \`ModalWindowView.prototype.container\`` +
+        `must be an instance of the BasicComponent!`
+      );
     },
-    CONFIG_STATUS_INCORRECT: (giveText = false): Error | string => {
-      const text =
+    CONFIG_TYPE_INCORRECT: (): string => {
+      return (
+        `${modalWindowViewERRHeading} \`ModalWindowView.prototype.modalWindowConfig.type\`` +
+        `has an incorrect value!`
+      );
+    },
+    CONFIG_STATUS_INCORRECT: (): string => {
+      return (
         `${modalWindowViewERRHeading} \`ModalWindowView.prototype.modalWindowConfig.status\`` +
-        `has an incorrect value!`;
-      return giveText ? new Error(text) : text;
+        `has an incorrect value!`
+      );
     },
   },
 };

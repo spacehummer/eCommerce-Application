@@ -7,6 +7,8 @@ import AttributesNamesEnum from '#src/components_params/attributes-names-enum';
 import PathsObj from '#src/components_params/paths-obj';
 import errors from '#src/utils/errors';
 
+const ERRORS = errors.MODAL_WINDOW_VIEW;
+
 export interface ModalWindowConfig {
   type: 'login' | 'registration';
   status: 'ok' | 'error';
@@ -61,7 +63,7 @@ export default class ModalWindowView extends View {
           case 'error':
             break;
           default:
-            console.log(errors.MODAL_WINDOW_VIEW.CONFIG_STATUS_INCORRECT(true));
+            console.log(ERRORS.CONFIG_STATUS_INCORRECT());
             break;
         }
         break;
@@ -73,13 +75,13 @@ export default class ModalWindowView extends View {
           case 'error':
             break;
           default:
-            console.log(errors.MODAL_WINDOW_VIEW.CONFIG_STATUS_INCORRECT(true));
+            console.log(ERRORS.CONFIG_STATUS_INCORRECT());
             break;
         }
         break;
       }
       default:
-        console.log(errors.MODAL_WINDOW_VIEW.CONFIG_TYPE_INCORRECT(true));
+        console.log(ERRORS.CONFIG_TYPE_INCORRECT());
         break;
     }
   }
@@ -146,7 +148,7 @@ export default class ModalWindowView extends View {
     if (this.container instanceof BasicComponent) {
       this.container.addInnerElement(this.headingContainer);
     } else {
-      throw errors.MODAL_WINDOW_VIEW.containerInstanceIncorrect();
+      throw new Error(ERRORS.CONTAINER_INSTANCE_INCORRECT());
     }
   }
 
@@ -168,7 +170,7 @@ export default class ModalWindowView extends View {
     if (this.container instanceof BasicComponent) {
       this.container.addInnerElement(this.contentContainer);
     } else {
-      throw errors.MODAL_WINDOW_VIEW.containerInstanceIncorrect();
+      throw new Error(ERRORS.CONTAINER_INSTANCE_INCORRECT());
     }
   }
 }
