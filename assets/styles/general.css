@@ -241,10 +241,12 @@ html {
 .modal-window__btn-close {
   font-weight: 600;
   font-size: 20px;
+  text-align: center;
   background-color: transparent;
   border: var(--border-button-general);
   border-radius: 24px;
   transition: color ease-in-out 300ms, background-color ease-in-out 300ms, border ease-in-out 300ms, box-shadow ease-in-out 300ms;
+  text-shadow: var(--text-shadow-thin-75);
   min-width: 48px;
   min-height: 48px;
   padding: 0;

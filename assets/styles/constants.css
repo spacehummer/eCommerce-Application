@@ -29,6 +29,7 @@
   --border-button-err: 2px var(--color-red-dark-general) solid;
   /* Effects */
   --vulemetric-text-shadow: 0 0 1px var(--color-black), 1px 1px 3px var(--color-black-75);
+  --text-shadow-thin-75: 0px 0px 1px var(--color-black-75);
   --hover-glow-ts-general: 0 0 1px var(--color-black), 0 0 4px var(--color-gold), 1px 1px 16px var(--color-black-60);
   --active-glow-ts-general: 0 0 1px var(--color-black), 0 0 8px var(--color-gold), 1px 1px 16px var(--color-black-60);
   --current-glow-ts-general: 0 0 1px var(--color-black), 0 0 3px var(--color-gold), 1px 1px 8px var(--color-black-60);
