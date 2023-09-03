@@ -7,12 +7,27 @@ import AttributesNamesEnum from '#src/components_params/attributes-names-enum';
 import PathsObj from '#src/components_params/paths-obj';
 import errors from '#src/utils/errors';
 
+export interface ModalWindowConfig {
+  type: 'login' | 'registration';
+  status: 'ok' | 'error';
+}
+
+interface ContentAndStyles {
+  statusIconPath: string;
+  headingText: TextContentEnum;
+  contentText: TextContentEnum;
+}
+
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.CONTAINER,
   classNames: ClassesEnum.MODAL_WINDOW_SHADING,
 };
 
 export default class ModalWindowView extends View {
+  private modalWindowConfig: ModalWindowConfig;
+
+  private contentAndStyles: ContentAndStyles | null;
+
   private container: BasicComponent | null;
 
   private containerWrp: BasicComponent | null;
@@ -21,8 +36,11 @@ export default class ModalWindowView extends View {
 
   private contentContainer: BasicComponent | null;
 
-  constructor() {
+  constructor(componentConfig: ModalWindowConfig) {
     super(viewParams);
+
+    this.modalWindowConfig = componentConfig;
+    this.contentAndStyles = null;
 
     this.container = null;
     this.containerWrp = null;
@@ -30,6 +48,19 @@ export default class ModalWindowView extends View {
     this.contentContainer = null;
 
     this.configureView();
+  }
+
+  private generateComponentContentConfig(): void {
+    switch (this.modalWindowConfig.type) {
+      case 'login': {
+        break;
+      }
+      case 'registration': {
+        break;
+      }
+      default:
+        break;
+    }
   }
 
   private configureView(): void {

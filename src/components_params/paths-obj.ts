@@ -28,6 +28,6 @@ const PathsObj: Record<
   LOGO_IMG: logoImg,
   MODAL_STATE_ICON_OK: modalStateIconOk,
   MODAL_STATE_ICON_ERR: modalStateIconErr,
-};
+} as const;
 
 export default PathsObj;
