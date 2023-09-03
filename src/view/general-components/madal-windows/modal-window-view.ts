@@ -101,7 +101,7 @@ export default class ModalWindowView extends View {
   private generateContentComponents(): void {
     const contentContainerParams = {
       tagName: TagsEnum.CONTAINER,
-      classNames: ClassesEnum.PLACEHOLDER,
+      classNames: ClassesEnum.MODAL_WINDOW_CONTENT_CONTAINER,
     };
     this.contentContainer = new BasicComponent(contentContainerParams);
 
