@@ -30,7 +30,7 @@ const viewParams: BasicComponentConstructorArgs = {
 export default class ModalWindowView extends View {
   private modalWindowConfig: ModalWindowConfig;
 
-  private contentAndStyles: ContentAndStyles | null;
+  private contentAndStyles: ContentAndStyles;
 
   private container: BasicComponent | null;
 
@@ -44,13 +44,20 @@ export default class ModalWindowView extends View {
     super(viewParams);
 
     this.modalWindowConfig = componentConfig;
-    this.contentAndStyles = null;
+    this.contentAndStyles = {
+      statusIconPath: '',
+      headingText: TextContentEnum.PLACEHOLDER,
+      contentText: TextContentEnum.PLACEHOLDER,
+      containerClassNames: [ClassesEnum.MODAL_WINDOW_CONTAINER],
+      btnClassNames: [ClassesEnum.MODAL_WINDOW_BTN_CLOSE_BASE],
+    };
 
     this.container = null;
     this.containerWrp = null;
     this.headingContainer = null;
     this.contentContainer = null;
 
+    this.generateComponentContentConfig();
     this.configureView();
   }
 
@@ -59,11 +66,21 @@ export default class ModalWindowView extends View {
       case 'login': {
         switch (this.modalWindowConfig.status) {
           case 'ok':
+            this.contentAndStyles.statusIconPath = PathsObj.MODAL_STATE_ICON_OK;
+            this.contentAndStyles.headingText =
+              TextContentEnum.MODAL_WINDOW_LOGIN_SUCCESSFUL_HEADING;
+            this.contentAndStyles.contentText =
+              TextContentEnum.MODAL_WINDOW_LOGIN_SUCCESSFUL_CONTENT;
+            this.contentAndStyles.containerClassNames.push(ClassesEnum.MODAL_WINDOW_BTN_CLOSE_OK);
             break;
           case 'error':
+            this.contentAndStyles.statusIconPath = PathsObj.MODAL_STATE_ICON_ERR;
+            this.contentAndStyles.headingText = TextContentEnum.MODAL_WINDOW_LOGIN_ERROR_HEADING;
+            this.contentAndStyles.contentText = TextContentEnum.MODAL_WINDOW_LOGIN_ERROR_CONTENT;
+            this.contentAndStyles.containerClassNames.push(ClassesEnum.MODAL_WINDOW_BTN_CLOSE_ERR);
             break;
           default:
-            console.log(ERRORS.CONFIG_STATUS_INCORRECT());
+            console.error(ERRORS.CONFIG_STATUS_INCORRECT());
             break;
         }
         break;
@@ -71,17 +88,29 @@ export default class ModalWindowView extends View {
       case 'registration': {
         switch (this.modalWindowConfig.status) {
           case 'ok':
+            this.contentAndStyles.statusIconPath = PathsObj.MODAL_STATE_ICON_OK;
+            this.contentAndStyles.headingText =
+              TextContentEnum.MODAL_WINDOW_REGISTRATION_SUCCESSFUL_HEADING;
+            this.contentAndStyles.contentText =
+              TextContentEnum.MODAL_WINDOW_REGISTRATION_SUCCESSFUL_CONTENT;
+            this.contentAndStyles.containerClassNames.push(ClassesEnum.MODAL_WINDOW_BTN_CLOSE_OK);
             break;
           case 'error':
+            this.contentAndStyles.statusIconPath = PathsObj.MODAL_STATE_ICON_ERR;
+            this.contentAndStyles.headingText =
+              TextContentEnum.MODAL_WINDOW_REGISTRATION_ERROR_HEADING;
+            this.contentAndStyles.contentText =
+              TextContentEnum.MODAL_WINDOW_REGISTRATION_ERROR_CONTENT;
+            this.contentAndStyles.containerClassNames.push(ClassesEnum.MODAL_WINDOW_BTN_CLOSE_ERR);
             break;
           default:
-            console.log(ERRORS.CONFIG_STATUS_INCORRECT());
+            console.error(ERRORS.CONFIG_STATUS_INCORRECT());
             break;
         }
         break;
       }
       default:
-        console.log(ERRORS.CONFIG_TYPE_INCORRECT());
+        console.error(ERRORS.CONFIG_TYPE_INCORRECT());
         break;
     }
   }
