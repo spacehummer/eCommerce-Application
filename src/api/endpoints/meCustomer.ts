@@ -86,6 +86,7 @@ class CustomerRepository extends BaseEndpoint implements ICustomerRepository {
 
   public createUpdatePersonalesDraft({
     version,
+    email,
     firstName,
     lastName,
     dateOfBirth,
@@ -104,6 +105,10 @@ class CustomerRepository extends BaseEndpoint implements ICustomerRepository {
         {
           action: 'setDateOfBirth',
           dateOfBirth,
+        },
+        {
+          action: 'changeEmail',
+          email,
         },
       ],
     };

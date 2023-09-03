@@ -1,5 +1,8 @@
 import ClassesEnum from '#src/components_params/classes-enum';
-import { PersonFieldNames } from '#src/view/main/signup-login/components/enums';
+import {
+  CredentialFieldNames,
+  PersonFieldNames,
+} from '#src/view/main/signup-login/components/enums';
 import FieldSet from '#src/view/main/signup-login/components/field-set';
 import SignUpForm from '#src/view/main/signup-login/components/signup-form';
 import { ErrorCollection } from '#src/view/main/signup-login/components/types';
@@ -24,7 +27,11 @@ export default class EditableForm extends FormComponent {
     values: string[],
     private readonly isDisabledByDefault: boolean = true
   ) {
-    super(submitCallback, Object.values(PersonFieldNames), ClassesEnum.LOGIN_FORM);
+    super(
+      submitCallback,
+      [CredentialFieldNames.Email, ...Object.values(PersonFieldNames)],
+      ClassesEnum.LOGIN_FORM
+    );
 
     this.defaultValues = values;
 
@@ -35,7 +42,7 @@ export default class EditableForm extends FormComponent {
     this.fieldSet = new EditableFieldSet(
       this.fieldSesName,
       'Personal data',
-      SignUpForm.createPersonFields(),
+      [SignUpForm.createEmail(), ...SignUpForm.createPersonFields()],
       this.editBtn,
       this.submit
     );
@@ -88,7 +95,12 @@ export default class EditableForm extends FormComponent {
   };
 
   public showSubmitResults(successMsg: string, errors?: ErrorCollection): void {
-    if (!errors) this.toggleForm();
+    if (!(errors && errors.errorMsg)) {
+      this.toggleForm();
+      setTimeout(() => {
+        this.okMsg.hide();
+      }, 1500);
+    }
     super.showSubmitResults(successMsg, errors);
   }
 }

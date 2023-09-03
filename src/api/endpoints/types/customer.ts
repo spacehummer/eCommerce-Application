@@ -28,6 +28,6 @@ type PersonalData = Readonly<{
 
 type Version = Readonly<{ version: number }>;
 
-export type PersonalesDto = PersonalData & Version;
+export type PersonalesDto = PersonalData & Version & Email;
 
 export default CustomerData;

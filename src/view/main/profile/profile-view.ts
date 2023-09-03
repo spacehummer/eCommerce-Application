@@ -4,8 +4,9 @@ import TagsEnum from '#src/components_params/tags-enum';
 import { getProfile, isDefaultAddress } from '#src/logic/state/state';
 import { Address } from '#src/logic/state/types';
 import View from '#src/view/view';
-import { PersonFieldNames } from '../signup-login/components/enums';
+import { CredentialFieldNames, PersonFieldNames } from '../signup-login/components/enums';
 import FieldSet from '../signup-login/components/field-set';
+import { ApiRequestResult } from '../signup-login/components/types';
 import EditableForm from './components/user-data/editable-form';
 import PersonalesModel from './components/user-data/personales-model';
 import { createDisplayAdress } from './field-factory';
@@ -28,6 +29,8 @@ const sortPredicate = (a: Address, b: Address): number => {
 const personalModel = new PersonalesModel();
 
 export default class ProfileView extends View {
+  protected personForm?: EditableForm;
+
   constructor() {
     super(args);
 
@@ -42,8 +45,13 @@ export default class ProfileView extends View {
     const profile = getProfile();
 
     if (profile) {
-      const personValues = [profile.firstName, profile.lastName, profile.dateOfBirth];
-      const personData = new EditableForm(this.personDataCallback, personValues);
+      const personValues = [
+        profile.email,
+        profile.firstName,
+        profile.lastName,
+        profile.dateOfBirth,
+      ];
+      this.personForm = new EditableForm(this.personDataCallback, personValues);
 
       const shippingAddresses = profile.addresses
         .filter((val) => profile.shippingAddressIds.find((shipId) => shipId === val.id))
@@ -54,7 +62,7 @@ export default class ProfileView extends View {
         .sort(sortPredicate)
         .map(createDisplayAdress);
 
-      this.basicComponent.addInnerElement(personData);
+      this.basicComponent.addInnerElement(this.personForm);
       this.basicComponent.addInnerElement(new FieldSet('', 'Shipping Adresses', shippingAddresses));
       this.basicComponent.addInnerElement(new FieldSet('', 'Billing Adresses', billingAddresses));
     }
@@ -62,6 +70,7 @@ export default class ProfileView extends View {
 
   private personDataCallback = (record: Record<string, string | Record<string, string>>): void => {
     const {
+      [CredentialFieldNames.Email]: email,
       [PersonFieldNames.FirstName]: firstName,
       [PersonFieldNames.LastName]: lastName,
       [PersonFieldNames.DateOfBirth]: dateOfBirth,
@@ -70,7 +79,9 @@ export default class ProfileView extends View {
     if (profile) {
       const { version } = profile;
 
-      personalModel.apiCall({ version, firstName, lastName, dateOfBirth });
+      personalModel
+        .apiCall({ version, email, firstName, lastName, dateOfBirth })
+        .then((result: ApiRequestResult) => this.personForm?.showSubmitResults('Updated!', result));
     }
   };
 }

@@ -13,7 +13,7 @@ export default abstract class BaseView extends View {
 
   protected title?: string;
 
-  constructor(args: BasicComponentConstructorArgs, logicParams: ViewLogicParams) {
+  constructor(args: BasicComponentConstructorArgs, logicParams?: ViewLogicParams) {
     super(args, logicParams);
 
     if (isAuthorised()) this.redirect();
@@ -27,16 +27,16 @@ export default abstract class BaseView extends View {
     if (this.form) this.basicComponent.addInnerElement(this.form);
   }
 
-  protected showResults = (result: ApiRequestResult): ApiRequestResult => {
+  protected readonly showResults = (result: ApiRequestResult): ApiRequestResult => {
     this.form?.showSubmitResults(this.successMsg || '', result);
     return result;
   };
 
-  protected redirect = (): void => {
+  protected readonly redirect = (): void => {
     if (this.logicParams) this.logicParams.router.navigate(PagesUrls[pagesSequence[0]]);
   };
 
-  protected redirectLazy = (result: ApiRequestResult): ApiRequestResult => {
+  protected readonly redirectLazy = (result: ApiRequestResult): ApiRequestResult => {
     if (result.isSuccessful) setTimeout(this.redirect, 1500);
     return result;
   };

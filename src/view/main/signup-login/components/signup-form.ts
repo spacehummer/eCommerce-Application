@@ -61,15 +61,6 @@ export default class SignUpForm extends FormComponent {
   }
 
   public static createCustomerFields(): View[] {
-    const email = new InputField({
-      type: 'email',
-      name: CredentialFieldNames.Email,
-      label: 'Email',
-      placeholder: 'Your email',
-      required: true,
-      title: Validator.emailMsg,
-      pattern: Validator.emailRegex.source,
-    });
     const password = new PasswordField({
       type: 'password',
       name: CredentialFieldNames.Password,
@@ -79,7 +70,19 @@ export default class SignUpForm extends FormComponent {
       pattern: Validator.passwordRegex.source,
       title: Validator.passwordMsg,
     });
-    return [email, password, ...this.createPersonFields()];
+    return [this.createEmail(), password, ...this.createPersonFields()];
+  }
+
+  public static createEmail(): View {
+    return new InputField({
+      type: 'email',
+      name: CredentialFieldNames.Email,
+      label: 'Email',
+      placeholder: 'Your email',
+      required: true,
+      title: Validator.emailMsg,
+      pattern: Validator.emailRegex.source,
+    });
   }
 
   public static createPersonFields(): View[] {
