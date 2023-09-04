@@ -1,13 +1,7 @@
 import Api from '#src/api/api';
 import CustomerData from '#src/api/endpoints/types/customer';
-import { ErrorBodyCollection } from '#src/api/endpoints/types/error';
 import ApiError from '#src/api/utils/apiError';
-
-export type SignUpResult = {
-  isSuccessful: boolean;
-  error?: ErrorBodyCollection[];
-  errorMsg?: string;
-};
+import { ApiRequestResult } from './components/types';
 
 export default class SignUpModel {
   private readonly api: Api;
@@ -16,7 +10,7 @@ export default class SignUpModel {
     this.api = new Api();
   }
 
-  public async signUp(data: CustomerData): Promise<SignUpResult> {
+  public async signUp(data: CustomerData): Promise<ApiRequestResult> {
     try {
       await this.api.signUp(data);
       await this.api.login({ password: data.password, username: data.email });

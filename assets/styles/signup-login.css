@@ -1,3 +1,5 @@
+.login,
+.login-form,
 .sign-up,
 .sign-up-form {
     display: flex;
@@ -5,6 +7,7 @@
     align-items: center;
 }
 
+.login-form,
 .sign-up-form {
     width: 25rem;
 }
@@ -41,7 +44,12 @@
     width: auto !important;
 }
 
+.form__input-select {
+    padding: 1px 2px;
+}
+
 .form-field,
+.form-field-container,
 .form-field-checkbox {
     display: flex;
     justify-content: left;
@@ -49,10 +57,31 @@
     margin: 5px 0;
 }
 
+.hidden {
+    display: none !important;
+}
+
+.form-field-container,
 .form-field {
     flex-direction: column;
 }
 
+.form-field-checkbox {
+    flex-direction: row;
+}
+
 .from__submit-btn {
     width: 100%;
+}
+
+.form__msg {
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 480px) {
+    html {
+        font-size: 12px;
+    }
 }
