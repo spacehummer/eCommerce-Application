@@ -35,22 +35,23 @@ export default class SignUpView extends BaseView {
     this.controller = new SignUpController();
   }
 
-  private signUp(record: Record<string, string | Record<string, string>>): void {
-    const getAddress = (rec: Record<string, string>): Address => {
-      return {
-        country: rec[AddressFieldNames.CountryCode],
-        city: rec[AddressFieldNames.City],
-        streetName: rec[AddressFieldNames.Street],
-        postalCode: rec[AddressFieldNames.PostalCode],
-      };
+  public static getAddress = (rec: Record<string, string>): Address => {
+    return {
+      country: rec[AddressFieldNames.CountryCode],
+      city: rec[AddressFieldNames.City],
+      streetName: rec[AddressFieldNames.Street],
+      postalCode: rec[AddressFieldNames.PostalCode],
     };
+  };
+
+  private signUp(record: Record<string, string | Record<string, string>>): void {
     const shippingAddressRecord = record[SignUpFieldNames.ShippingAddress] as Record<
       string,
       string
     >;
-    const shippingAddress = getAddress(shippingAddressRecord);
+    const shippingAddress = SignUpView.getAddress(shippingAddressRecord);
     const billingAddressRecord = record[SignUpFieldNames.BillingAddress] as Record<string, string>;
-    const billingAddress = getAddress(billingAddressRecord);
+    const billingAddress = SignUpView.getAddress(billingAddressRecord);
     const shipIsBill = shippingAddressRecord[SignUpFieldNames.SetAsBillingToo] === 'on';
 
     const [addresses, billingAddressIndex] = shipIsBill

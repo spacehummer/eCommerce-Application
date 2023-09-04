@@ -2,6 +2,7 @@ import ClassesEnum from '#src/components_params/classes-enum';
 import FieldSet from '#src/view/main/signup-login/components/field-set';
 import { ErrorCollection } from '#src/view/main/signup-login/components/types';
 import FormComponent from '../../signup-login/components/form';
+import { getCheckboxCheckedValue } from '../field-factory';
 import EditButton from './edit-btn';
 import EditableFieldSet from './editable-fieldset';
 import CancelSubmit from './save-cancel-btn';
@@ -42,14 +43,17 @@ export default abstract class EditableForm extends FormComponent {
     if (this.fieldSet) {
       Array.from(this.fieldSet.elements).forEach((val) => {
         const elem = val;
-        if (
-          elem instanceof HTMLInputElement &&
-          elem.type !== 'submit' &&
-          elem.type !== 'checkbox'
-        ) {
-          if (this.defaultValues[index] !== undefined) {
-            elem.value = this.defaultValues[index];
-            index += 1;
+        if (elem instanceof HTMLInputElement) {
+          if (
+            (elem.type !== 'submit' && elem.type !== 'checkbox') ||
+            (elem.type === 'checkbox' &&
+              (this.defaultValues[index] === 'on' || this.defaultValues[index] === 'off'))
+          ) {
+            if (this.defaultValues[index] !== undefined) {
+              elem.value = this.defaultValues[index];
+              if (elem.type === 'checkbox') elem.checked = getCheckboxCheckedValue(elem.value);
+              index += 1;
+            }
           }
         } else if (elem instanceof HTMLSelectElement) {
           Array.from(elem.options).forEach((value) => {

@@ -18,6 +18,10 @@ export default class EditableFieldSet extends FieldSet {
     this.basicComponent.addInnerElement(submit);
   }
 
+  public addLegendElement(elem: HTMLElement): void {
+    this.legend.append(elem);
+  }
+
   protected createFields(fields: View[]): void {
     super.createFields(fields);
   }

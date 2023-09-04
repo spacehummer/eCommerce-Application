@@ -3,6 +3,8 @@ import { Address, ProfileAddress } from '#src/logic/state/types';
 import FieldSet from '../signup-login/components/field-set';
 import InputField from '../signup-login/components/input-field';
 
+export type CheckBoxValue = 'on' | 'off';
+
 export const createDisplayField = (name: string, value: string): InputField => {
   const result = new InputField({
     type: 'text',
@@ -44,5 +46,22 @@ export const createDisplayAddress = (val: ProfileAddress): FieldSet => {
   }
   return new FieldSet('', label, fields);
 };
+
+export const createLabel = (val: ProfileAddress): string => {
+  let label: string = '';
+  if (val.isBilling) {
+    if (val.isDefaultBilling) label += 'Default';
+    label += ' Billing';
+  }
+  if (val.isShipping) {
+    if (val.isDefaultShipping) label += ' Default';
+    label += ' Shipping';
+  }
+  return label;
+};
+
+export const getCheckboxValue = (value: boolean): CheckBoxValue => (value ? 'on' : 'off');
+
+export const getCheckboxCheckedValue = (value: string): boolean => value === 'on';
 
 export default { createDisplayField };
