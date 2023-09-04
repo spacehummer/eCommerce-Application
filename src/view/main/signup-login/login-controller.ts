@@ -1,6 +1,6 @@
 import { ErrorBodyCollection } from '#src/api/endpoints/types/error';
 import Validator from '#src/utils/validator';
-import { LoginFieldNames } from './components/login-form';
+import { CredentialFieldNames } from './components/enums';
 import { ApiRequestResult } from './components/types';
 import LoginModel from './login-model';
 
@@ -13,14 +13,14 @@ export default class LoginController {
       errMsg.push({
         code: '-1',
         message: Validator.emailMsg,
-        field: LoginFieldNames.Email,
+        field: CredentialFieldNames.Email,
       });
     }
     if (!Validator.password(password)) {
       errMsg.push({
         code: '-1',
         message: Validator.passwordMsg,
-        field: LoginFieldNames.Password,
+        field: CredentialFieldNames.Password,
       });
     }
     if (errMsg.length > 0) {

@@ -10,9 +10,6 @@ import { ApiRoot, createApiBuilderFromCtpClient } from '@commercetools/platform-
 import getAuthMiddleware from '../utils/authMiddleware';
 import APICredentials from '../utils/apiCredentials';
 
-const userClientBuilder = new ClientBuilder();
-const anonymousClientBuilder = new ClientBuilder();
-
 const httpMiddlewareOptions: HttpMiddlewareOptions = {
   host: APICredentials.CTP_API_URL,
   fetch,
@@ -50,7 +47,7 @@ class ApiClient {
   }
 
   public getDefaultClient(): Client {
-    return anonymousClientBuilder
+    return new ClientBuilder()
       .defaultClient(this.baseUri, this.credentials, this.oauthUri, this.projectKey)
       .build();
   }
@@ -58,7 +55,7 @@ class ApiClient {
   public getClient(credentials?: UserAuthOptions): Client {
     const authMiddleware: Middleware = getAuthMiddleware(credentials);
     if (credentials) {
-      return userClientBuilder
+      return new ClientBuilder()
         .withProjectKey(this.projectKey)
         .withMiddleware(authMiddleware)
         .withHttpMiddleware(httpMiddlewareOptions)
@@ -66,7 +63,7 @@ class ApiClient {
         .build();
     }
 
-    return anonymousClientBuilder
+    return new ClientBuilder()
       .withProjectKey(this.projectKey)
       .withMiddleware(authMiddleware)
       .withHttpMiddleware(httpMiddlewareOptions)

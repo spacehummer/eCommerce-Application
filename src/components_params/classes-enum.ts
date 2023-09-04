@@ -46,6 +46,8 @@ const enum ClassesEnum {
   SIGN_UP_FORM = 'sign-up-form',
   /* TO NOT DISPLAY */
   HIDDEN = 'hidden',
+  /* ONLY FOR DRAFT CODE */
+  ONLY_FOR_DRAFT_CODE = '',
   /* ERROR 404 */
   SECTION_404 = 'page-section page-section--error-404',
   SECTION_404_HEADING = 'page-section__heading page-section__heading--error-404',

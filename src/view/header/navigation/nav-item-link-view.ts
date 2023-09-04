@@ -43,6 +43,14 @@ export default class NavItemLinkView extends View {
     );
   }
 
+  public show(): void {
+    this.basicComponent.getHTMLElement()?.classList.remove(ClassesEnum.HIDDEN);
+  }
+
+  public hide(): void {
+    this.basicComponent.getHTMLElement()?.classList.add(ClassesEnum.HIDDEN);
+  }
+
   /**
    * Unset current page status for navigation link component.
    * @private
