@@ -44,10 +44,15 @@ export default class MainView extends View {
     // add new view nested page components
     this.pageViewRoot?.addInnerElement(newView);
 
+    // test modal window
     const modalWindowConfig: ModalWindowConfig = {
       type: 'login',
       status: 'ok',
     };
+    this.displayModalWindow(modalWindowConfig);
+  }
+
+  public displayModalWindow(modalWindowConfig: ModalWindowConfig): void {
     document.body.append(
       checkInstance(new ModalWindowView(modalWindowConfig).getHTMLElement(), HTMLElement)
     );
