@@ -36,4 +36,20 @@ export type ChangePasswordDto = Readonly<{
 }> &
   Version;
 
+export type AddressId = Readonly<{
+  addressId: string;
+}>;
+
+type AddressState = Readonly<{
+  isShipping: boolean;
+  isBilling: boolean;
+  isDefault: boolean;
+}>;
+
+export type DeleteAddressDto = AddressId & Version;
+
+export type AddAddresDto = AddressState & Version & Readonly<Address>;
+
+export type AddressDto = AddressId & AddressState & Version & Readonly<Address>;
+
 export default CustomerData;
