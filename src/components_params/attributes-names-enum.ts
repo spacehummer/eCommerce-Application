@@ -4,6 +4,7 @@ const enum AttributesNamesEnum {
   SRC = 'src',
   HREF = 'href',
   INPUT_MAX = 'max',
+  STYLE = 'style',
 }
 
 export default AttributesNamesEnum;

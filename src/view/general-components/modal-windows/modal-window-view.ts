@@ -6,6 +6,7 @@ import TextContentEnum from '#src/components_params/text-content-enum';
 import AttributesNamesEnum from '#src/components_params/attributes-names-enum';
 import PathsObj from '#src/components_params/paths-obj';
 import errors from '#src/utils/errors';
+import AttributesValuesEnum from '#src/components_params/attributes-values-enum';
 
 const ERRORS = errors.MODAL_WINDOW_VIEW;
 
@@ -40,6 +41,8 @@ export default class ModalWindowView extends View {
 
   private contentContainer: BasicComponent | null;
 
+  private closeBtn: BasicComponent | null;
+
   constructor(componentConfig: ModalWindowConfig) {
     super(viewParams);
 
@@ -56,6 +59,7 @@ export default class ModalWindowView extends View {
     this.containerWrp = null;
     this.headingContainer = null;
     this.contentContainer = null;
+    this.closeBtn = null;
 
     this.generateComponentContentConfig();
     this.configureView();
@@ -139,6 +143,8 @@ export default class ModalWindowView extends View {
     this.generateHeadingComponents();
     this.generateContentComponents();
 
+    this.addListeners();
+
     this.containerWrp.addInnerElement(this.container);
     this.basicComponent.addInnerElement(this.containerWrp);
   }
@@ -175,13 +181,13 @@ export default class ModalWindowView extends View {
       classNames: this.contentAndStyles.btnClassNames,
       textContent: TextContentEnum.MODAL_WINDOW_BTN_CLOSE_PLACEHOLDER,
     };
-    const closeBtn = new BasicComponent(closeBtnParams);
+    this.closeBtn = new BasicComponent(closeBtnParams);
 
     stateIconWrp.addInnerElement(stateIcon);
 
     this.headingContainer.addInnerElement(stateIconWrp);
     this.headingContainer.addInnerElement(headingTextLabel);
-    this.headingContainer.addInnerElement(closeBtn);
+    this.headingContainer.addInnerElement(this.closeBtn);
     if (this.container instanceof BasicComponent) {
       this.container.addInnerElement(this.headingContainer);
     } else {
@@ -209,5 +215,28 @@ export default class ModalWindowView extends View {
     } else {
       throw new Error(ERRORS.CONTAINER_INSTANCE_INCORRECT());
     }
+  }
+
+  private addListeners(): void {
+    this.container?.setCallback((event) => {
+      event?.stopPropagation();
+    });
+
+    this.setCloseListener(this.basicComponent);
+    if (!(this.closeBtn instanceof BasicComponent)) {
+      throw new Error(ERRORS.CLOSE_BTN_INCORRECT(`${this.closeBtn}`));
+    }
+    this.setCloseListener(this.closeBtn);
+  }
+
+  private setCloseListener(component: BasicComponent): void {
+    component.setCallback((event) => {
+      event?.stopPropagation();
+      setTimeout(() => {
+        this.basicComponent
+          .getHTMLElement()
+          ?.setAttribute(AttributesNamesEnum.STYLE, AttributesValuesEnum.STYLE_HIDDEN_HARD);
+      }, 300);
+    }, 'click');
   }
 }

@@ -4,6 +4,7 @@ interface ModalWindowViewErrors {
   CONTAINER_INSTANCE_INCORRECT: () => string;
   CONFIG_TYPE_INCORRECT: () => string;
   CONFIG_STATUS_INCORRECT: () => string;
+  CLOSE_BTN_INCORRECT: (curValue: string) => string;
 }
 
 interface Errors {
@@ -28,6 +29,12 @@ const errors: Errors = {
       return (
         `${modalWindowViewERRHeading} \`ModalWindowView.prototype.modalWindowConfig.status\`` +
         `has an incorrect value!`
+      );
+    },
+    CLOSE_BTN_INCORRECT: (curValue): string => {
+      return (
+        `${modalWindowViewERRHeading} \`ModalWindowView.prototype.closeBtn\`` +
+        `has an incorrect value! Current value: ${curValue}.`
       );
     },
   },
