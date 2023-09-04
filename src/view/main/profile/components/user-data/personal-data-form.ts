@@ -3,8 +3,8 @@ import {
   PersonFieldNames,
 } from '#src/view/main/signup-login/components/enums';
 import SignUpForm from '#src/view/main/signup-login/components/signup-form';
-import EditableFieldSet from './editable-fieldset';
-import EditableForm from './editable-form';
+import EditableFieldSet from '../editable-fieldset';
+import EditableForm from '../editable-form';
 
 export default class PersonalDataForm extends EditableForm {
   public readonly fieldSesName: string = 'user-data';

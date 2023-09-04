@@ -1,9 +1,9 @@
 import ClassesEnum from '#src/components_params/classes-enum';
 import Validator from '#src/utils/validator';
 import PasswordField from '#src/view/main/signup-login/components/password-field';
-import EditableFieldSet from './editable-fieldset';
-import EditableForm from './editable-form';
-import CancelSubmit from './save-cancel-btn';
+import EditableFieldSet from '../editable-fieldset';
+import EditableForm from '../editable-form';
+import CancelSubmit from '../save-cancel-btn';
 
 export enum PasswordNames {
   CurrentPassword = 'currentPassword',

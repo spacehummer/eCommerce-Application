@@ -1,7 +1,7 @@
 import ClassesEnum from '#src/components_params/classes-enum';
 import FieldSet from '#src/view/main/signup-login/components/field-set';
 import { ErrorCollection } from '#src/view/main/signup-login/components/types';
-import FormComponent from '../../../signup-login/components/form';
+import FormComponent from '../../signup-login/components/form';
 import EditButton from './edit-btn';
 import EditableFieldSet from './editable-fieldset';
 import CancelSubmit from './save-cancel-btn';

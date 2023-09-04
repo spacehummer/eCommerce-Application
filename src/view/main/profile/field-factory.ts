@@ -35,12 +35,12 @@ export const createDisplayAddress = (val: ProfileAddress): FieldSet => {
   ];
   let label: string = '';
   if (val.isBilling) {
-    if (val.isDefaultBilling) label += 'Default'
-    label += ' Billing'
+    if (val.isDefaultBilling) label += 'Default';
+    label += ' Billing';
   }
   if (val.isShipping) {
-    if (val.isDefaultShipping) label += ' Default'
-    label += ' Shipping'
+    if (val.isDefaultShipping) label += ' Default';
+    label += ' Shipping';
   }
   return new FieldSet('', label, fields);
 };

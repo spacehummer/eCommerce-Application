@@ -1,17 +1,22 @@
 import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
-import { getProfile, isDefaultAddress, isDefaultBillingAddress, isDefaultShippingAddress } from '#src/logic/state/state';
-import { Address, ProfileAddress } from '#src/logic/state/types';
+import {
+  getProfile,
+  isDefaultAddress,
+  isDefaultBillingAddress,
+  isDefaultShippingAddress,
+} from '#src/logic/state/state';
+import { Address } from '#src/logic/state/types';
 import View from '#src/view/view';
 import { CredentialFieldNames, PersonFieldNames } from '../signup-login/components/enums';
 import FieldSet from '../signup-login/components/field-set';
 import { ApiRequestResult } from '../signup-login/components/types';
-import ChangePassword from './components/user-data/change-password';
-import EditableForm from './components/user-data/editable-form';
+import ChangePassword from './components/password/change-password';
+import EditableForm from './components/editable-form';
 import PersonalDataForm from './components/user-data/personal-data-form';
 import PersonalesModel from './components/user-data/personales-model';
-import { createDisplayAddress, createDisplayAdress } from './field-factory';
+import { createDisplayAddress } from './field-factory';
 
 const args: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
@@ -57,17 +62,15 @@ export default class ProfileView extends View {
       ];
       this.personForm = new PersonalDataForm(this.personDataCallback, personValues);
 
-      const addresses = profile.addresses
-        .sort(sortPredicate)
-        .map((val) => {
-          return createDisplayAddress({
-            isBilling: profile.billingAddressIds.find((billId) => billId === val.id) !== undefined,
-            isShipping: profile.shippingAddressIds.find((shipId) => shipId === val.id) !== undefined,
-            isDefaultBilling: isDefaultBillingAddress(val.id),
-            isDefaultShipping: isDefaultShippingAddress(val.id),
-            ...val
-          });
+      const addresses = profile.addresses.sort(sortPredicate).map((val) => {
+        return createDisplayAddress({
+          isBilling: profile.billingAddressIds.find((billId) => billId === val.id) !== undefined,
+          isShipping: profile.shippingAddressIds.find((shipId) => shipId === val.id) !== undefined,
+          isDefaultBilling: isDefaultBillingAddress(val.id),
+          isDefaultShipping: isDefaultShippingAddress(val.id),
+          ...val,
         });
+      });
 
       this.basicComponent.addInnerElement(changePassword);
       this.basicComponent.addInnerElement(this.personForm);
