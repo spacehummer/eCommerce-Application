@@ -3,6 +3,10 @@ import View from '#src/view/view';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import Content from '#src/components/basic_structure/content';
+import checkInstance from '#src/utils/utils';
+import ModalWindowView, {
+  ModalWindowConfig,
+} from '../general-components/modal-windows/modal-window-view';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.MAIN,
@@ -39,5 +43,18 @@ export default class MainView extends View {
     }
     // add new view nested page components
     this.pageViewRoot?.addInnerElement(newView);
+
+    // test modal window
+    // const modalWindowConfig: ModalWindowConfig = {
+    //   type: 'login',
+    //   status: 'ok',
+    // };
+    // this.displayModalWindow(modalWindowConfig);
+  }
+
+  public displayModalWindow(modalWindowConfig: ModalWindowConfig): void {
+    document.body.append(
+      checkInstance(new ModalWindowView(modalWindowConfig).getHTMLElement(), HTMLElement)
+    );
   }
 }

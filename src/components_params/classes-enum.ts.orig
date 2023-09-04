@@ -44,8 +44,7 @@ const enum ClassesEnum {
   FORM_OK_MESSAGE = 'form__ok-msg',
   SIGN_UP = 'sign-up',
   SIGN_UP_FORM = 'sign-up-form',
-  /* TO NOT DISPLAY */
-  HIDDEN = 'hidden',
+<<<<<<< HEAD
   /* Modal window */
   MODAL_WINDOW_SHADING = 'viewport-shading',
   MODAL_WINDOW_CONTAINER_WRP = 'modal-window__container-wrp',
@@ -61,6 +60,10 @@ const enum ClassesEnum {
   MODAL_WINDOW_BTN_CLOSE_ERR = 'modal-window__btn-close--err',
   MODAL_WINDOW_CONTENT_CONTAINER = 'modal-window__content-container',
   MODAL_WINDOW_CONTENT_PARAGRAPH = 'modal-window__content-paragraph paragraph_type_2',
+=======
+  /* TO NOT DISPLAY */
+  HIDDEN = 'hidden',
+>>>>>>> release/login-registration-main
   /* ERROR 404 */
   SECTION_404 = 'page-section page-section--error-404',
   SECTION_404_HEADING = 'page-section__heading page-section__heading--error-404',

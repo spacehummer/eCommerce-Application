@@ -1,9 +1,12 @@
+@import './constants.css';
+
 * {
   box-sizing: border-box;
   /* outline: solid red 1px; */
 }
 
 html {
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
 }
 
@@ -23,6 +26,18 @@ html {
   width: 1322px;
   margin: 32px auto;
   padding: 0 64px;
+}
+
+.viewport-shading {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-viewport-shading);
+  width: 100%;
+  height: 100%;
 }
 /* </editor-fold desc="General styles">*/
 
@@ -46,7 +61,7 @@ html {
 
 /* <editor-fold desc="Header">*/
 .header {
-  background-color: #B44739;
+  background-color: var(--color-red-dark-general);
 }
 
 .content--header {
@@ -59,6 +74,65 @@ html {
   margin-bottom: 16px;
 }
 /* </editor-fold desc="Header">*/
+
+/* <editor-fold desc="Navigation menu component">*/
+.nav-menu-list {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  column-gap: 16px;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-link {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-white);
+  text-shadow: var(--vulemetric-text-shadow);
+}
+
+.nav-link:hover {
+  color: var(--color-gold-light-xl);
+  text-shadow: var(--hover-glow-ts-general);
+}
+
+.nav-link:active {
+  color: var(--color-gold-light-xl);
+  text-shadow: var(--active-glow-ts-general);
+}
+
+.item__link--current {
+  color: var(--color-gold-light-l);
+  text-shadow: var(--current-glow-ts-general);
+}
+/* </editor-fold>*/
+
+/* <editor-fold desc="Logo component">*/
+.logo {
+  display: flex;
+  column-gap: 16px;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+}
+
+.logo__img {
+  display: block;
+  width: 64px;
+  height: 64px;
+}
+
+.logo__name {
+  display: inline-block;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-gray-light);
+  text-shadow: var(--vulemetric-text-shadow);
+}
+/* </editor-fold desc="Logo component">*/
 
 .main {
   /*flex-grow: 1;*/
@@ -104,59 +178,127 @@ html {
   margin-top: auto;
 }
 
-/* <editor-fold desc="Navigation menu component">*/
-.nav-menu-list {
+/* <editor-fold desc="Modal window">*/
+.modal-window__container-wrp {
+  --modal-window-width: 608px;
+  --modal-window-height: 184px;
+  --modal-window-viewport-padding: 16px;
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 25%;
+  transform: translate(-50%, 25%);
+  /*bottom: 5%;*/
+  /*left: calc(50% - var(--modal-window-width) / 2);*/
+  width: calc(var(--modal-window-width) + var(--modal-window-viewport-padding) * 2);
+  max-width: 100%;
+  min-height: calc(var(--modal-window-height) + var(--modal-window-viewport-padding) * 2);
+  padding: var(--modal-window-viewport-padding);
+}
+
+.modal-window__container {
   display: flex;
-  justify-content: start;
-  flex-wrap: wrap;
-  column-gap: 16px;
-  align-items: center;
-  height: 100%;
+  flex-direction: column;
+  row-gap: 32px;
+  background-color: var(--color-white);
+  border: var(--border-general);
+  padding: 16px 48px 48px;
 }
 
-.nav-link {
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #ffffff;
-  text-shadow: 0 0 1px rgb(0, 0, 0), 1px 1px 3px rgba(0, 0, 0, 0.75);
+.modal-window__container--ok {
+  border: var(--border-ok);
+  box-shadow: var(--bs-status-ok);
 }
 
-.nav-link:hover {
-  color: rgb(255, 245, 191);
-  text-shadow: 0 0 1px rgb(0, 0, 0), 0 0 4px rgba(255, 215, 0, 1), 1px 1px 16px rgba(0, 0, 0, 0.6);
+.modal-window__container--err {
+  border: var(--border-err);
+  box-shadow: var(--bs-status-err);
 }
 
-.item__link--current {
-  color: rgb(255, 238, 140);
-  text-shadow: 0 0 1px rgb(0, 0, 0), 0 0 3px rgba(255, 215, 0, 1), 1px 1px 8px rgba(0, 0, 0, 0.6);
-}
-/* </editor-fold>*/
-
-/* <editor-fold desc="Logo component">*/
-.logo {
+.modal-window__heading-container {
   display: flex;
-  column-gap: 16px;
   align-items: center;
-  width: fit-content;
-  height: fit-content;
+  column-gap: 32px;
 }
 
-.logo__img {
+.modal-window__state-icon {
   display: block;
   width: 64px;
   height: 64px;
 }
 
-.logo__name {
-  display: inline-block;
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #F2F2F2;
-  text-shadow: 0 0 1px rgb(0, 0, 0), 1px 1px 3px rgba(0, 0, 0, 0.75);
+.modal-window__state-icon[src=""] {
+  /*noinspection CssUnknownTarget*/
+  content:url("data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
 }
-/* </editor-fold desc="Logo component">*/
+
+.modal-window__heading-text-label {
+  flex-grow: 1;
+  height: fit-content;
+  padding-top: 8px;
+}
+
+.modal-window__btn-close {
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+  background-color: transparent;
+  border: var(--border-button-general);
+  border-radius: 24px;
+  transition: color ease-in-out 300ms, background-color ease-in-out 300ms, border ease-in-out 300ms, box-shadow ease-in-out 300ms;
+  text-shadow: var(--text-shadow-thin-75);
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0;
+}
+
+.modal-window__btn-close--ok {
+  border: var(--border-button-ok);
+}
+
+.modal-window__btn-close--ok:hover {
+  color: var(--color-white);
+  background-color: var(--color-green);
+  border-color: var(--color-green);
+  box-shadow: var(--hover-bs-status-ok);
+}
+
+.modal-window__btn-close--ok:active {
+  font-size: 18px;
+  color: var(--color-white);
+  background-color: var(--color-green-light);
+  border-color: var(--color-green-light);
+  box-shadow: var(--active-bs-status-ok);
+  transition: color ease-in-out 100ms, background-color ease-in-out 100ms, border ease-in-out 100ms, box-shadow ease-in-out 100ms;
+}
+
+.modal-window__btn-close--err {
+  border: var(--border-button-err);
+}
+
+.modal-window__btn-close--err:hover {
+  color: var(--color-white);
+  background-color: var(--color-red);
+  border-color: var(--color-red);
+  box-shadow: var(--hover-bs-status-err);
+}
+
+.modal-window__btn-close--err:active {
+  color: var(--color-white);
+  background-color: var(--color-red-light-accent);
+  border-color: var(--color-red-light-accent);
+  box-shadow: var(--active-bs-status-err);
+}
+
+.modal-window__content-container {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.modal-window__content-paragraph {
+  margin: 0;
+}
+/* </editor-fold desc="Modal window">*/
 
 /* <editor-fold desc="Test styles">*/
 .demo-container {
@@ -168,6 +310,7 @@ html {
 }
 /* </editor-fold desc="Test styles">*/
 
+/* <editor-fold desc="Media">*/
 @media screen and (max-width: 1024px) {
   /* Points
    * 100vw  |  margin  *
@@ -199,3 +342,4 @@ html {
     row-gap: 16px;
   }
 }
+/* </editor-fold desc="Media">*/
