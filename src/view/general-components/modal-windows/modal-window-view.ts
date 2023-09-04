@@ -236,7 +236,7 @@ export default class ModalWindowView extends View {
         this.basicComponent
           .getHTMLElement()
           ?.setAttribute(AttributesNamesEnum.STYLE, AttributesValuesEnum.STYLE_HIDDEN_HARD);
-      }, 300);
+      }, 100);
     }, 'click');
   }
 }
