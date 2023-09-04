@@ -5,10 +5,17 @@ import {
   MyCustomerDraft,
   Customer,
   MyCustomerUpdate,
+  MyCustomerUpdateAction,
 } from '@commercetools/platform-sdk';
 import BaseEndpoint from './baseEndpoint';
 import ErrorData from './types/error';
-import CustomerData, { ChangePasswordDto, PersonalesDto } from './types/customer';
+import CustomerData, {
+  AddAddresDto,
+  AddressDto,
+  ChangePasswordDto,
+  DeleteAddressDto,
+  PersonalesDto,
+} from './types/customer';
 import ApiError from '../utils/apiError';
 
 interface ICustomerRepository {
@@ -145,6 +152,88 @@ class CustomerRepository extends BaseEndpoint implements ICustomerRepository {
     } catch (error) {
       throw new ApiError(error as ErrorData);
     }
+  }
+
+  protected createAddressStateAction({
+    addressId,
+    isBilling,
+    isShipping,
+    isDefault,
+  }: AddressDto): MyCustomerUpdateAction[] {
+    const res: MyCustomerUpdateAction[] = [];
+    res.push({
+      action: isBilling ? 'addBillingAddressId' : 'removeBillingAddressId',
+      addressId,
+    });
+    res.push({
+      action: isShipping ? 'addBillingAddressId' : 'removeShippingAddressId',
+      addressId,
+    });
+    if (isDefault) {
+      if (isBilling) {
+        res.push({
+          action: 'setDefaultBillingAddress',
+          addressId,
+        });
+      }
+      if (isShipping) {
+        res.push({
+          action: 'setDefaultShippingAddress',
+          addressId,
+        });
+      }
+    }
+    return res;
+  }
+
+  public createUpdateAddressDraft(dto: AddressDto): MyCustomerUpdate {
+    const { addressId, version, country, city, streetName, postalCode } = dto;
+    return {
+      version,
+      actions: [
+        {
+          addressId,
+          action: 'changeAddress',
+          address: {
+            country,
+            city,
+            streetName,
+            postalCode,
+          },
+        },
+        // ...this.createAddressStateAction(dto),
+      ],
+    };
+  }
+
+  public createDeleteAddressDraft({ addressId, version }: DeleteAddressDto): MyCustomerUpdate {
+    return {
+      version,
+      actions: [
+        {
+          action: 'removeAddress',
+          addressId,
+        },
+      ],
+    };
+  }
+
+  public createAddAddressDraft(dto: AddAddresDto): MyCustomerUpdate {
+    const { version, country, city, streetName, postalCode } = dto;
+    return {
+      version,
+      actions: [
+        {
+          action: 'addAddress',
+          address: {
+            country,
+            city,
+            streetName,
+            postalCode,
+          },
+        },
+      ],
+    };
   }
 }
 

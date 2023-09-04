@@ -11,7 +11,12 @@ import CartRepository from './endpoints/meCart';
 import CustomerRepository from './endpoints/meCustomer';
 import ProductProjection from './endpoints/productProjection';
 import { CartRemoveItemDraft } from './endpoints/types/cart';
-import CustomerData, { ChangePasswordDto, PersonalesDto } from './endpoints/types/customer';
+import CustomerData, {
+  AddressDto,
+  ChangePasswordDto,
+  DeleteAddressDto,
+  PersonalesDto,
+} from './endpoints/types/customer';
 
 const authService = new AuthService();
 const cart = new CartRepository(authService);
@@ -37,6 +42,16 @@ class Api {
 
   public async updatePersonales(updateDto: PersonalesDto): Promise<ClientResponse<Customer>> {
     const dto = customer.createUpdatePersonalesDraft(updateDto);
+    return customer.updateCustomer(dto);
+  }
+
+  public async updateAddress(addressDto: AddressDto): Promise<ClientResponse<Customer>> {
+    const dto = customer.createUpdateAddressDraft(addressDto);
+    return customer.updateCustomer(dto);
+  }
+
+  public async deleteAddress(addressDto: DeleteAddressDto): Promise<ClientResponse<Customer>> {
+    const dto = customer.createDeleteAddressDraft(addressDto);
     return customer.updateCustomer(dto);
   }
 
