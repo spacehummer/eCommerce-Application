@@ -1,11 +1,6 @@
 import { ID_SELECTOR, PagesUrls } from '#src/logic/router/pages-params';
-
-interface Route {
-  path: string;
-  callback: () => void;
-}
-
-export type Routes = Route[];
+import { Routes } from './route-types';
+import { filter } from './routes-filter';
 
 interface UserRequest {
   path: string;
@@ -49,7 +44,7 @@ export default class Router {
         ? requestFromURL.path
         : `${requestFromURL.path}/${ID_SELECTOR}`;
 
-    const route = this.routes.find((currentRoute) => currentRoute.path === seekingPath);
+    const route = filter(this.routes, seekingPath);
 
     if (!route) {
       this.redirectToError404();

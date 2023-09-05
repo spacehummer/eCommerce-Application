@@ -8,7 +8,34 @@ const PagesNames: { [index: string]: string } = {
   PROFILE: 'Profile',
 };
 
-const pagesSequence: string[] = ['INDEX', 'SIGN_UP', 'LOGIN', 'PROFILE'];
+export enum PageEnum {
+  INDEX = 'INDEX',
+}
+
+export enum AnonPageEnum {
+  SIGN_UP = 'SIGN_UP',
+  LOGIN = 'LOGIN',
+}
+
+export enum SignPageEnum {
+  PROFILE = 'PROFILE',
+}
+
+export const AllPages = { ...PageEnum, ...AnonPageEnum, ...SignPageEnum };
+export type AllPageEnum = typeof AllPages;
+
+const pagesSequence: string[] = [
+  ...Object.values(AllPages),
+];
+
+export const SignAvailablePage = { ...PageEnum, ...SignPageEnum };
+export type SignAvailablePageEnum = typeof SignAvailablePage;
+
+export const AnonAvailablePage = { ...PageEnum, ...AnonPageEnum };
+export type AnonAvailablePageEnum = typeof SignAvailablePage;
+
+// how to use:
+// let a: AllPageEnum = AllPages.PROFILE
 
 const PagesUrls: { [index: string]: string } = {
   INDEX: 'main',
@@ -18,15 +45,6 @@ const PagesUrls: { [index: string]: string } = {
   ERROR_404: 'error-404',
 };
 
-/**
- * Only for anonymous users visible pages indexes in @pagesSequence
- */
-const anonPageIndexes = [1, 2];
-/**
- * Only for authorized users visible pages indexes in @pagesSequence
- */
-const signPageIndexes = [3];
-
 const ID_SELECTOR = '{id}';
 
-export { PagesNames, pagesSequence, PagesUrls, ID_SELECTOR, anonPageIndexes, signPageIndexes };
+export { PagesNames, pagesSequence, PagesUrls, ID_SELECTOR };
