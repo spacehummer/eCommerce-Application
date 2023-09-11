@@ -42,6 +42,8 @@ const addressModel = new UpdateModel();
 export default class ProfileView extends View {
   protected personForm?: EditableForm;
 
+  protected addresses?: Map<string, AddressEditableForm>;
+
   constructor() {
     super(args);
 
@@ -66,16 +68,19 @@ export default class ProfileView extends View {
       ];
       this.personForm = new PersonalDataForm(this.personDataCallback, personValues);
 
-      const addresses = this.genAddreses(profile);
+      this.addresses = this.genAddreses(profile);
 
       this.basicComponent.addInnerElement(changePassword);
       this.basicComponent.addInnerElement(this.personForm);
-      this.basicComponent.addInnerElement(new FieldSet('', 'Addresses', addresses));
+      this.basicComponent.addInnerElement(
+        new FieldSet('', 'Addresses', Array.from(this.addresses.values()))
+      );
     }
   }
 
-  private genAddreses(profile: Profile): AddressEditableForm[] {
-    return profile.addresses.sort(sortPredicate).map((val) => {
+  private genAddreses(profile: Profile): Map<string, AddressEditableForm> {
+    const res: Map<string, AddressEditableForm> = new Map();
+    return profile.addresses.sort(sortPredicate).reduce((acc, val) => {
       const isBilling = profile.billingAddressIds.find((billId) => billId === val.id) !== undefined;
       const isShipping =
         profile.shippingAddressIds.find((shipId) => shipId === val.id) !== undefined;
@@ -88,21 +93,25 @@ export default class ProfileView extends View {
         isDefaultShipping,
         ...val,
       });
-      return new AddressEditableForm(
-        this.addressUpdateCallback,
-        [
-          val.country,
-          val.city,
-          val.streetName,
-          val.postalCode,
-          // getCheckboxValue(isBilling),
-          // getCheckboxValue(isShipping),
-          // getCheckboxValue(isDefaultAddress(val.id)),
-          val.id,
-        ],
-        label
+      acc.set(
+        val.id,
+        new AddressEditableForm(
+          this.addressUpdateCallback,
+          [
+            val.country,
+            val.city,
+            val.streetName,
+            val.postalCode,
+            // getCheckboxValue(isBilling),
+            // getCheckboxValue(isShipping),
+            // getCheckboxValue(isDefaultAddress(val.id)),
+            val.id,
+          ],
+          label
+        )
       );
-    });
+      return acc;
+    }, res);
   }
 
   private addressUpdateCallback = (
@@ -116,7 +125,8 @@ export default class ProfileView extends View {
     } = record;
     const address = SignUpView.getAddress(record as Record<string, string>);
     const profile = getProfile();
-    if (profile) {
+    const addressForm = this.addresses?.get(addressId as string);
+    if (profile && addressForm) {
       const { version } = profile;
 
       addressModel
@@ -128,7 +138,7 @@ export default class ProfileView extends View {
           // isDefault: getCheckboxCheckedValue(isDefault as string),
           addressId,
         })
-        .then((result: ApiRequestResult) => this.personForm?.showSubmitResults('Updated!', result));
+        .then((result: ApiRequestResult) => addressForm.showSubmitResults('Updated!', result));
     }
   };
 

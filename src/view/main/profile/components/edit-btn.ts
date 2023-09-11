@@ -9,6 +9,8 @@ export default class EditButton extends View {
       classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
     });
 
+    this.basicComponent.setComponentAttribute('type', 'button');
+
     const btn = this.getHTMLElement();
     if (btn) {
       btn.textContent = 'Edit';

@@ -10,6 +10,7 @@ type InputProperties = {
   pattern?: string;
   value?: string;
   title?: string;
+  form?: string;
   minLength?: number;
   maxLength?: number;
   max?: string;
@@ -48,6 +49,7 @@ export default class InputFactory {
     if (defaults.pattern) result.pattern = defaults.pattern;
     if (defaults.value) result.value = defaults.value;
     if (defaults.title) result.title = defaults.title;
+    if (defaults.form) result.setAttribute('form', defaults.form);
     if (defaults.minLength) result.minLength = defaults.minLength;
     if (defaults.maxLength) result.maxLength = defaults.maxLength;
     if (defaults.max) result.max = defaults.max;
