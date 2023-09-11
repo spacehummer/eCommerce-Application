@@ -24,9 +24,7 @@ export enum SignPageEnum {
 export const AllPages = { ...PageEnum, ...AnonPageEnum, ...SignPageEnum };
 export type AllPageEnum = typeof AllPages;
 
-const pagesSequence: string[] = [
-  ...Object.values(AllPages),
-];
+const pagesSequence: string[] = [...Object.values(AllPages)];
 
 export const SignAvailablePage = { ...PageEnum, ...SignPageEnum };
 export type SignAvailablePageEnum = typeof SignAvailablePage;
