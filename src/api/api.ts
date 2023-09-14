@@ -28,8 +28,8 @@ const product = new ProductProjection(authService);
 const category = new Category(authService);
 
 class Api {
-  public async getProducts(): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> {
-    return product.getProducts();
+  public async getProducts(filterByCategotyId?: string): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> {
+    return product.getProducts(filterByCategotyId);
   }
 
   public async login(credentials: UserAuthOptions): Promise<ClientResponse<CustomerSignInResult>> {
