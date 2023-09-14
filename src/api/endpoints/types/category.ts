@@ -17,7 +17,7 @@ type CategoryBody = Readonly<{
 }>;
 
 type CategoryHierarchy = Readonly<{
-  childrens: CategoryDto[];
+  childrens: Category[];
 }>;
 
-export type CategoryDto = CategoryId & CategoryBody & CategoryHierarchy;
+export type Category = CategoryId & CategoryBody & CategoryHierarchy;

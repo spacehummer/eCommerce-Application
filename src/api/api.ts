@@ -19,7 +19,7 @@ import CustomerData, {
   PersonalesDto,
 } from './endpoints/types/customer';
 import Category from './endpoints/category';
-import { CategoryDto, LocaleString } from './endpoints/types/category';
+import { Category as CategoryDto, LocaleString } from './endpoints/types/category';
 
 const authService = new AuthService();
 const cart = new CartRepository(authService);

@@ -13,7 +13,9 @@ class ProductProjection extends BaseEndpoint implements IProductRepository {
       const products = await this.apiRoot
         .withProjectKey({ projectKey: this.projectKey })
         .productProjections()
-        .get()
+        .get({
+          queryArgs: { limit: 500 },
+        })
         .execute();
 
       return products;
