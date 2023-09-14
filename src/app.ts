@@ -11,7 +11,7 @@ import MainView from '#src/view/main/main-view';
 import FooterView from '#src/view/footer/footer-view';
 import checkInstance from '#src/utils/utils';
 import View, { ViewLogicParams } from '#src/view/view';
-import Router from '#src/logic/router/router';
+import PageRouter from '#src/logic/router/router';
 import { Routes } from '#src/logic/router/route-types';
 import { PagesUrls } from '#src/logic/router/pages-params';
 
@@ -45,7 +45,7 @@ export default class App {
     const routes = this.createRoutes();
 
     this.logicParams = {
-      router: new Router(routes),
+      router: new PageRouter(routes),
     };
 
     this.createView();

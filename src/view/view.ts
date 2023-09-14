@@ -1,6 +1,6 @@
 import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
+import { Router } from '#src/logic/router/route-types';
 import { GetHTMLElement } from '#src/types/types';
-import Router from '#src/logic/router/router';
 
 export interface ViewLogicParams {
   router: Router;

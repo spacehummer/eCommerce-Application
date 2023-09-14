@@ -6,7 +6,6 @@ const classNames = ClassesEnum.NAV_MENU_LIST_ITEM_LINK;
 const currentClass = ClassesEnum.ITEM_CURRENT;
 
 export default class NavItemLinkView extends BaseItemLinkView {
-
   constructor(pageParams: PageParams, linkComponents: LinkComponents) {
     super(classNames, currentClass, pageParams, linkComponents);
   }

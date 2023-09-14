@@ -28,7 +28,9 @@ const product = new ProductProjection(authService);
 const category = new Category(authService);
 
 class Api {
-  public async getProducts(filterByCategotyId?: string): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> {
+  public async getProducts(
+    filterByCategotyId?: string
+  ): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> {
     return product.getProducts(filterByCategotyId);
   }
 
