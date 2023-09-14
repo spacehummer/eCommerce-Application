@@ -1,5 +1,6 @@
 import {
   Cart,
+  Category as CategorySdk,
   ClientResponse,
   Customer,
   CustomerSignInResult,
@@ -17,11 +18,14 @@ import CustomerData, {
   DeleteAddressDto,
   PersonalesDto,
 } from './endpoints/types/customer';
+import Category from './endpoints/category';
+import { CategoryDto, LocaleString } from './endpoints/types/category';
 
 const authService = new AuthService();
 const cart = new CartRepository(authService);
 const customer = new CustomerRepository(authService);
 const product = new ProductProjection(authService);
+const category = new Category(authService);
 
 class Api {
   public async getProducts(): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> {
@@ -84,6 +88,42 @@ class Api {
 
   public async removeFromCart(itemDraft: CartRemoveItemDraft): Promise<ClientResponse<Cart>> {
     return cart.removeLineItem(itemDraft);
+  }
+
+  private getLocalString(local: { [key: string]: string }): LocaleString {
+    return {
+      ru: local.ru,
+      en: local.en,
+    };
+  }
+
+  private mapCategory(categoryToMap: CategorySdk): CategoryDto {
+    return {
+      childrens: [],
+      id: categoryToMap.id,
+      key: categoryToMap.key,
+      name: this.getLocalString(categoryToMap.name),
+      slug: this.getLocalString(categoryToMap.slug),
+      description: this.getLocalString(categoryToMap.slug),
+      ancestors: categoryToMap.ancestors,
+      parent: categoryToMap.parent,
+    };
+  }
+
+  public async getCategories(): Promise<CategoryDto[]> {
+    const categories = await category.getCategories();
+    const result: CategoryDto[] = [];
+    categories.body.results.forEach((resItem) => {
+      if (resItem.parent) {
+        const parent = result.find((curr) => curr.id === resItem.parent?.id);
+        if (parent) {
+          parent.childrens.push(this.mapCategory(resItem));
+        }
+      } else {
+        result.push(this.mapCategory(resItem));
+      }
+    });
+    return result;
   }
 }
 
