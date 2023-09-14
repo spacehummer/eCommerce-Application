@@ -3,7 +3,7 @@ import View, { ViewLogicParams } from '#src/view/view';
 
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
-import NavItemLinkView, { LinkComponents } from '#src/view/header/navigation/nav-item-link-view';
+import NavItemLinkView from '#src/view/header/navigation/nav-item-link-view';
 import { PageParams } from '#src/types/types';
 
 import {
@@ -19,6 +19,8 @@ const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.NAV,
   classNames: ClassesEnum.NAV_MENU,
 };
+
+type LinkComponents = Map<string, NavItemLinkView>;
 
 /**
  * Navigation menu view component.
