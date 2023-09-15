@@ -128,6 +128,15 @@ export default class App {
         },
       },
       {
+        path: `${PagesUrls.CATALOG}`,
+        callback: async (): Promise<void> => {
+          const { default: CatalogView } = await import(
+            './view/main/catalog/catalog-view'
+          );
+          this.setContent(PagesUrls.CATALOG, new CatalogView(this.logicParams));
+        },
+      },
+      {
         path: `${PagesUrls.ERROR_404}`,
         callback: async (): Promise<void> => {
           const { default: Section404View } = await import(

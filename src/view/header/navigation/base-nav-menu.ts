@@ -7,7 +7,7 @@ import BaseItemLinkView, { LinkComponents } from './base-nav-item-link-view';
 
 export type NavMenuParams = Readonly<{
   names: { [index: string]: string };
-  sequence: string[];
+  keySequence: string[];
   paths: { [index: string]: string };
 }>;
 
@@ -50,12 +50,12 @@ export default abstract class BaseNavMenu extends View {
 
     const navMenuList = new BasicComponent(this.navMenuListParams);
 
-    const navMenuListItems = this.navArgs.sequence.map(
+    const navMenuListItems = this.navArgs.keySequence.map(
       () => new BasicComponent(this.navMenuListItemParams)
     );
 
     navMenuListItems.forEach((component, index) => {
-      const currentItemKey = this.navArgs.sequence[index];
+      const currentItemKey = this.navArgs.keySequence[index];
       this.pageParams = {
         name: this.navArgs.names[currentItemKey],
         callback: (): void => {

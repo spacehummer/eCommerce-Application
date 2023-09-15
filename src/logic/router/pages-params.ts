@@ -3,6 +3,7 @@
  */
 const PagesNames: { [index: string]: string } = {
   INDEX: 'Main',
+  CATALOG: 'Catalog',
   LOGIN: 'Log in',
   SIGN_UP: 'Sign up',
   PROFILE: 'Profile',
@@ -10,6 +11,7 @@ const PagesNames: { [index: string]: string } = {
 
 export enum PageEnum {
   INDEX = 'INDEX',
+  CATALOG = 'CATALOG'
 }
 
 export enum AnonPageEnum {
@@ -37,6 +39,7 @@ export type AnonAvailablePageEnum = typeof SignAvailablePage;
 
 const PagesUrls: { [index: string]: string } = {
   INDEX: 'main',
+  CATALOG: 'catalog',
   LOGIN: 'login',
   SIGN_UP: 'sign-up',
   PROFILE: 'profile',

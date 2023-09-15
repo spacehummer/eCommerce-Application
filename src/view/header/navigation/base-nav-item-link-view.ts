@@ -27,7 +27,7 @@ export default class BaseItemLinkView extends View {
 
   /**
    * Set current page status for navigation link component.
-   * @private
+   * @public
    */
   public setCurrentStatus(): void {
     this.linkComponents.forEach((linkComponent) => {
@@ -39,18 +39,24 @@ export default class BaseItemLinkView extends View {
 
   /**
    * Unset current page status for navigation link component.
-   * @private
+   * @public
    */
-  private setNotCurrentStatus(): void {
+  public setNotCurrentStatus(): void {
     checkInstance(this.basicComponent.getHTMLElement(), HTMLElement).classList.remove(
       this.currState
     );
   }
 
-  private configureView(): void {
+  protected configureView(): void {
     this.basicComponent.setTextContent(this.pageParam.name);
     this.basicComponent.setCallback(this.pageParam.callback, 'click');
     /* weak thing: do we need a state manager? */
     this.basicComponent.setCallback(this.setCurrentStatus.bind(this), 'click');
   }
+
+  // protected setListeners(): void {
+  //   this.basicComponent.setCallback(this.pageParam.callback, 'click');
+  //   /* weak thing: do we need a state manager? */
+  //   this.basicComponent.setCallback(this.setCurrentStatus.bind(this), 'click');
+  // }
 }

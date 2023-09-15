@@ -65,3 +65,5 @@ export const removeStateListener = (
   type: EventType,
   callback: EventListenerOrEventListenerObject
 ): void => eventTarget.removeEventListener(type, callback);
+
+export const getLang = (): string => 'en';

@@ -45,7 +45,7 @@ export default class NavMenuView extends BaseNavMenu {
   constructor(logicParams: ViewLogicParams) {
     super(viewParams, logicParams, {
       names: PagesNames,
-      sequence: pagesSequence,
+      keySequence: pagesSequence,
       paths: PagesUrls,
     });
 
