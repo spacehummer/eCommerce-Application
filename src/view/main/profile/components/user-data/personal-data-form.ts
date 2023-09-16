@@ -14,6 +14,8 @@ export default class PersonalDataForm extends EditableForm {
     values: string[]
   ) {
     super(submitCallback, values, [CredentialFieldNames.Email, ...Object.values(PersonFieldNames)]);
+
+    this.setId(this.fieldSesName);
   }
 
   protected createFieldSet(): EditableFieldSet {

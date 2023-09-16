@@ -25,8 +25,9 @@ export default class CancelSubmit extends View {
     });
 
     this.cancel = document.createElement(TagsEnum.BUTTON);
-    this.cancel.textContent = 'cancel';
+    this.cancel.textContent = 'Cancel';
     this.cancel.classList.add(...btnStyle);
+    this.cancel.setAttribute('type', 'button');
     this.cancel.onclick = cancelCallback;
 
     this.basicComponent.addInnerElement(this.submit);

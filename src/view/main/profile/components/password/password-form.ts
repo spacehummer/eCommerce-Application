@@ -13,6 +13,8 @@ export enum PasswordNames {
 export default class PasswordForm extends EditableForm {
   private paswordFields?: PasswordField[];
 
+  private readonly formName = 'change-password';
+
   constructor(
     submitCallback: (record: Record<string, string | Record<string, string>>) => void,
     private submitCancelCallback: () => void
@@ -20,6 +22,8 @@ export default class PasswordForm extends EditableForm {
     super(submitCallback, ['', ''], Object.values(PasswordNames));
 
     this.getHTMLElement()?.classList.add(ClassesEnum.HIDDEN);
+
+    this.setId(this.formName);
   }
 
   private setFieldsRequired(value: boolean): void {
@@ -59,10 +63,10 @@ export default class PasswordForm extends EditableForm {
     );
   }
 
-  protected readonly onSucces = (): void => {
+  protected onSucces(): void {
     this.hide();
     this.toggleForm();
-  };
+  }
 
   private createFields(): PasswordField[] {
     const currentPassword = new PasswordField({

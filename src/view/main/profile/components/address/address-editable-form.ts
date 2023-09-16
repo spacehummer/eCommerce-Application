@@ -13,6 +13,8 @@ export enum AddressIdNames {
 }
 
 export default class AddressEditableForm extends EditableForm {
+  public readonly id: string;
+
   constructor(
     submitCallback: (record: Record<string, string | Record<string, string>>) => void,
     values: string[],
@@ -25,13 +27,16 @@ export default class AddressEditableForm extends EditableForm {
       ...Object.values(AddressIdNames),
     ]);
 
-    const id = InputFactory.default({
+    this.id = values[values.length - 1];
+
+    const idElem = InputFactory.default({
       type: 'hidden',
       name: AddressIdNames.AddressId,
-      value: values[values.length - 1],
+      value: this.id,
     });
 
-    this.fieldSet?.basicComponent.addInnerElement(id);
+    this.setId(this.id);
+    this.fieldSet?.basicComponent.addInnerElement(idElem);
   }
 
   protected createFieldSet(): EditableFieldSet {

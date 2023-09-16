@@ -22,7 +22,7 @@ export default abstract class EditableForm extends FormComponent {
   ) {
     super(submitCallback, names, ClassesEnum.LOGIN_FORM);
 
-    this.editBtn = new EditButton(this.toggleForm);
+    this.editBtn = new EditButton(this.toggleForm.bind(this));
     this.submit = this.createCancel();
     this.fieldSet = this.createFieldSet();
     this.setValues();
@@ -33,7 +33,12 @@ export default abstract class EditableForm extends FormComponent {
   }
 
   protected createCancel(): CancelSubmit {
-    return new CancelSubmit(this.cancel);
+    return new CancelSubmit(this.cancel.bind(this));
+  }
+
+  protected setId(id: string): void {
+    this.form.id = id;
+    this.submit?.submit.setAttribute('form', id);
   }
 
   protected abstract createFieldSet(): EditableFieldSet;
@@ -68,30 +73,30 @@ export default abstract class EditableForm extends FormComponent {
     }
   }
 
-  protected readonly editBtnToggle = (): void => {
+  protected editBtnToggle(): void {
     this.editBtn.getHTMLElement()?.toggleAttribute('disabled');
-  };
+  }
 
-  protected readonly toggleSetItems = (): void => {
+  protected toggleSetItems(): void {
     this.submit?.getHTMLElement()?.classList.toggle(ClassesEnum.HIDDEN);
     this.fieldSet?.getHTMLElement()?.toggleAttribute('disabled');
-  };
+  }
 
-  protected readonly toggleForm = (): void => {
+  protected toggleForm(): void {
     this.toggleSetItems();
     this.editBtnToggle();
-  };
+  }
 
-  protected readonly cancel = (): void => {
+  protected cancel(): void {
     this.setValues();
     this.toggleForm();
     this.errorMsg.hide();
     this.okMsg.hide();
-  };
+  }
 
-  protected readonly onSucces = (): void => {
+  protected onSucces(): void {
     this.okMsg.hide();
-  };
+  }
 
   public showSubmitResults(successMsg: string, errors?: ErrorCollection): void {
     if (!(errors && errors.errorMsg)) {
