@@ -28,10 +28,24 @@ const product = new ProductProjection(authService);
 const category = new Category(authService);
 
 class Api {
-  public async getProducts(
-    filterByCategotyId?: string
+  public async getProductsInCategory(
+    categoryId: string
   ): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> {
-    return product.getProducts(filterByCategotyId);
+    const filter = product.createFilterForCategory(categoryId);
+    return this.getProducts(filter);
+  }
+
+  public async getProductById(
+    productId: string
+  ): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> {
+    const filter = product.createFilterForProduct(productId);
+    return this.getProducts(filter);
+  }
+
+  public async getProducts(
+    filter?: string
+  ): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> {
+    return product.getProducts(filter);
   }
 
   public async login(credentials: UserAuthOptions): Promise<ClientResponse<CustomerSignInResult>> {

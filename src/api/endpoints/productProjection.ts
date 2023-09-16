@@ -8,13 +8,21 @@ interface IProductRepository {
 }
 
 class ProductProjection extends BaseEndpoint implements IProductRepository {
+  public createFilterForCategory(categoryId: string): string {
+    return `categories.id: subtree("${categoryId}")`;
+  }
+
+  public createFilterForProduct(productId: string): string {
+    return `id: "${productId}"`;
+  }
+
   public async getProducts(
-    filterByCategotyId?: string
+    filter?: string
   ): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> {
     try {
       const args: Record<string, string | number | string[]> = { limit: 500 };
-      if (filterByCategotyId) {
-        args.filter = `categories.id: subtree("${filterByCategotyId}")`;
+      if (filter) {
+        args.filter = filter;
       }
       const products = await this.apiRoot
         .withProjectKey({ projectKey: this.projectKey })

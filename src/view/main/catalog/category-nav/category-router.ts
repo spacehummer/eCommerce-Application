@@ -13,7 +13,7 @@ export default class CategoryRouter implements Router {
   }
 
   public navigate(path: string): void {
-    model.apiCall(path).then(this.getProducts).then(this.setProducts);
+    model.getProductsInCategory(path).then(this.getProducts).then(this.setProducts);
   }
 
   private getProducts(value: ProductApiResponse): ProductProjection[] {
@@ -24,7 +24,7 @@ export default class CategoryRouter implements Router {
   }
 
   public async getAllProducts(): Promise<ProductProjection[]> {
-    const result = await model.apiCall();
+    const result = await model.getAllProducts();
     return this.getProducts(result);
   }
 }

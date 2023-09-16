@@ -15,10 +15,23 @@ export default class ProductModel {
     this.api = new Api();
   }
 
-  public async apiCall(data?: unknown): Promise<ProductApiResponse> {
+  public async getProductsInCategory(categoryId: string): Promise<ProductApiResponse> {
+    return this.apiCall(this.api.getProductsInCategory(categoryId));
+  }
+
+  public async getAllProducts(): Promise<ProductApiResponse> {
+    return this.apiCall(this.api.getProducts());
+  }
+
+  public async getProductById(productId: string): Promise<ProductApiResponse> {
+    return this.apiCall(this.api.getProductById(productId));
+  }
+
+  public async apiCall(
+    apiRequest: Promise<ClientResponse<ProductProjectionPagedQueryResponse>>
+  ): Promise<ProductApiResponse> {
     try {
-      const categoryId = data as string;
-      const response = await this.api.getProducts(categoryId);
+      const response = await apiRequest;
       return {
         isSuccessful: true,
         response,
