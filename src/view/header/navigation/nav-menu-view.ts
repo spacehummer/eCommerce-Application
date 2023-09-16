@@ -6,14 +6,9 @@ import TagsEnum from '#src/components_params/tags-enum';
 import NavItemLinkView, { LinkComponents } from '#src/view/header/navigation/nav-item-link-view';
 import { PageParams } from '#src/types/types';
 
-import {
-  anonPageIndexes,
-  PagesNames,
-  pagesSequence,
-  PagesUrls,
-  signPageIndexes,
-} from '#src/logic/router/pages-params';
+import { PagesNames, pagesSequence, PagesUrls } from '#src/logic/router/pages-params';
 import { addStateListener } from '#src/logic/state/state';
+import { isAvailablePage } from '#src/logic/router/routes-filter';
 
 const viewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.NAV,
@@ -45,28 +40,17 @@ export default class NavMenuView extends View {
   }
 
   private setStateListeners(): void {
-    addStateListener('login', this.onlogin);
-    addStateListener('logout', this.onlogout);
+    addStateListener('login', this.showHideAvailableLinks);
+    addStateListener('logout', this.showHideAvailableLinks);
   }
 
-  private readonly onlogin = (): void => {
-    pagesSequence.forEach((page, index) => {
-      if (anonPageIndexes.includes(index)) {
-        this.linkComponents.get(PagesUrls[page])?.hide();
-      }
-      if (signPageIndexes.includes(index)) {
-        this.linkComponents.get(PagesUrls[page])?.show();
-      }
-    });
-  };
-
-  private readonly onlogout = (): void => {
-    pagesSequence.forEach((page, index) => {
-      if (signPageIndexes.includes(index)) {
-        this.linkComponents.get(PagesUrls[page])?.hide();
-      }
-      if (anonPageIndexes.includes(index)) {
-        this.linkComponents.get(PagesUrls[page])?.show();
+  private readonly showHideAvailableLinks = (): void => {
+    pagesSequence.forEach((page) => {
+      const link = this.linkComponents.get(PagesUrls[page]);
+      if (isAvailablePage(page)) {
+        link?.show();
+      } else {
+        link?.hide();
       }
     });
   };
@@ -111,6 +95,6 @@ export default class NavMenuView extends View {
     this.basicComponent.addInnerElement(navMenuList);
 
     // hide authorized links
-    this.onlogout();
+    this.showHideAvailableLinks();
   }
 }

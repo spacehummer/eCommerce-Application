@@ -11,7 +11,8 @@ import MainView from '#src/view/main/main-view';
 import FooterView from '#src/view/footer/footer-view';
 import checkInstance from '#src/utils/utils';
 import View, { ViewLogicParams } from '#src/view/view';
-import Router, { Routes } from '#src/logic/router/router';
+import Router from '#src/logic/router/router';
+import { Routes } from '#src/logic/router/route-types';
 import { PagesUrls } from '#src/logic/router/pages-params';
 
 // </editor-fold desc="Imports">

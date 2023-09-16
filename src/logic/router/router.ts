@@ -1,11 +1,6 @@
 import { ID_SELECTOR, PagesUrls } from '#src/logic/router/pages-params';
-
-interface Route {
-  path: string;
-  callback: () => void;
-}
-
-export type Routes = Route[];
+import { Route, Routes } from './route-types';
+import { filter } from './routes-filter';
 
 interface UserRequest {
   path: string;
@@ -38,10 +33,6 @@ export default class Router {
     console.log(`Rote to page URL: ${urlStr}`);
     console.log('Current routes:', this.routes);
 
-    if (typeof urlStr !== null) {
-      this.setHistory(urlStr);
-    }
-
     const requestFromURL = this.parseURLStr(urlStr);
 
     const seekingPath =
@@ -49,14 +40,18 @@ export default class Router {
         ? requestFromURL.path
         : `${requestFromURL.path}/${ID_SELECTOR}`;
 
-    const route = this.routes.find((currentRoute) => currentRoute.path === seekingPath);
+    const route = filter(this.routes, seekingPath);
+
+    if (route?.path) {
+      this.setHistory(route.path);
+    }
 
     if (!route) {
       this.redirectToError404();
       return undefined;
     }
 
-    route.callback();
+    this.goRoute(route);
     return undefined;
   }
 
@@ -77,12 +72,16 @@ export default class Router {
     return result;
   }
 
+  private goRoute(route: Route): void {
+    route.callback();
+  }
+
   private redirectToError404(): void {
     const routeError404 = this.routes.find(
       (currentRoute) => currentRoute.path === PagesUrls.ERROR_404
     );
     if (routeError404) {
-      this.navigate(routeError404.path);
+      this.goRoute(routeError404);
     }
   }
 
