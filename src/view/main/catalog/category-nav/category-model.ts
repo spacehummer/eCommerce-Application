@@ -1,7 +1,7 @@
-import Api from "#src/api/api";
-import { Category } from "#src/api/endpoints/types/category";
-import ApiError from "#src/api/utils/apiError";
-import { ApiRequestResult } from "../../signup-login/components/types";
+import Api from '#src/api/api';
+import { Category } from '#src/api/endpoints/types/category';
+import ApiError from '#src/api/utils/apiError';
+import { ApiRequestResult } from '../../signup-login/components/types';
 
 export type CategoryApiResponse = Readonly<{
   response?: Category[];

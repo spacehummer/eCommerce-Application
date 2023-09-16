@@ -3,8 +3,7 @@ type CategoryId = Readonly<{
 }>;
 
 export type LocaleString = Readonly<{
-  en: string;
-  ru: string;
+  [index: string]: string;
 }>;
 
 type CategoryBody = Readonly<{

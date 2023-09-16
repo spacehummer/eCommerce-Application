@@ -1,8 +1,6 @@
 import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import View, { ViewLogicParams } from '#src/view/view';
-
 import { PageParams } from '#src/types/types';
-
 import BaseItemLinkView, { LinkComponents } from './base-nav-item-link-view';
 
 export type NavMenuParams = Readonly<{

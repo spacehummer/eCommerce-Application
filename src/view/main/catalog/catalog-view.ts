@@ -13,22 +13,25 @@ const args: BasicComponentConstructorArgs = {
 
 export default class CatalogView extends View {
   private readonly prodView: ProductsView;
+
   private readonly categoryRouter: CategoryRouter;
+
   private readonly categoryView: CategoryView;
+
   constructor(logicParams: ViewLogicParams) {
     super(args, logicParams);
 
     this.prodView = new ProductsView();
     this.categoryRouter = new CategoryRouter(this.prodView);
-    this.categoryView = new CategoryView({ router: this.categoryRouter })
+    this.categoryView = new CategoryView({ router: this.categoryRouter });
 
-    this.getAllProds()
+    this.getAllProds();
 
-    this.basicComponent.addInnerElement(this.categoryView)
-    this.basicComponent.addInnerElement(this.prodView)
+    this.basicComponent.addInnerElement(this.categoryView);
+    this.basicComponent.addInnerElement(this.prodView);
   }
 
   private getAllProds(): void {
-    this.categoryRouter.getAllProducts().then(this.prodView.setPorducts)
+    this.categoryRouter.getAllProducts().then(this.prodView.setPorducts);
   }
 }

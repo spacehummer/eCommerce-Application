@@ -11,7 +11,7 @@ const PagesNames: { [index: string]: string } = {
 
 export enum PageEnum {
   INDEX = 'INDEX',
-  CATALOG = 'CATALOG'
+  CATALOG = 'CATALOG',
 }
 
 export enum AnonPageEnum {

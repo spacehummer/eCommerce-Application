@@ -14,7 +14,7 @@ const args: BasicComponentConstructorArgs = {
   tagName: TagsEnum.CONTAINER,
 };
 
-export class CategoryNav extends BaseNavMenu {
+export default class CategoryNav extends BaseNavMenu {
   protected get navMenuListParams(): BasicComponentConstructorArgs {
     return {
       classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,

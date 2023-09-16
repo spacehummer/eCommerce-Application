@@ -130,9 +130,7 @@ export default class App {
       {
         path: `${PagesUrls.CATALOG}`,
         callback: async (): Promise<void> => {
-          const { default: CatalogView } = await import(
-            './view/main/catalog/catalog-view'
-          );
+          const { default: CatalogView } = await import('./view/main/catalog/catalog-view');
           this.setContent(PagesUrls.CATALOG, new CatalogView(this.logicParams));
         },
       },
