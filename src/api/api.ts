@@ -19,7 +19,7 @@ import CustomerData, {
   PersonalesDto,
 } from './endpoints/types/customer';
 import Category from './endpoints/category';
-import { Category as CategoryDto, LocaleString } from './endpoints/types/category';
+import { Category as CategoryDto } from './endpoints/types/category';
 
 const authService = new AuthService();
 const cart = new CartRepository(authService);
@@ -106,21 +106,14 @@ class Api {
     return cart.removeLineItem(itemDraft);
   }
 
-  private getLocalString(local: { [key: string]: string }): LocaleString {
-    return {
-      ru: local.ru,
-      en: local.en,
-    };
-  }
-
   private mapCategory(categoryToMap: CategorySdk): CategoryDto {
     return {
       childrens: [],
       id: categoryToMap.id,
       key: categoryToMap.key,
-      name: this.getLocalString(categoryToMap.name),
-      slug: this.getLocalString(categoryToMap.slug),
-      description: this.getLocalString(categoryToMap.slug),
+      name: categoryToMap.name,
+      slug: categoryToMap.slug,
+      description: categoryToMap.description,
       ancestors: categoryToMap.ancestors,
       parent: categoryToMap.parent,
     };
