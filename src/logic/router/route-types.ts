@@ -4,3 +4,7 @@ export interface Route {
 }
 
 export type Routes = Route[];
+
+export interface Router {
+  navigate(urlStr: string): void;
+}

@@ -1,5 +1,5 @@
 import { ID_SELECTOR, PagesUrls } from '#src/logic/router/pages-params';
-import { Route, Routes } from './route-types';
+import { Route, Router, Routes } from './route-types';
 import { filter } from './routes-filter';
 
 interface UserRequest {
@@ -7,7 +7,7 @@ interface UserRequest {
   resource: string;
 }
 
-export default class Router {
+export default class PageRouter implements Router {
   private readonly routes: Routes;
 
   constructor(routes: Routes) {
