@@ -36,7 +36,6 @@ export default class InputField extends View implements IFormField {
 
     this.label = LabelFactory.default({
       textContent: fieldArgs.label,
-      htmlFor: this.input.id,
     });
 
     this.input.onchange = this.onChange;
@@ -55,7 +54,7 @@ export default class InputField extends View implements IFormField {
 
   protected createInput({ classList, label, ...fieldArgs }: FormFieldArgs): HTMLInputElement {
     const resultClassList = classList ? [ClassesEnum.INPUT, ...classList] : [ClassesEnum.INPUT];
-    const res = { classList: resultClassList, id: fieldArgs.name, ...fieldArgs };
+    const res = { classList: resultClassList, ...fieldArgs };
     return InputFactory.default(res);
   }
 
