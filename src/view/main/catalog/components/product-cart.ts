@@ -4,6 +4,7 @@ import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
 import { getLang } from '#src/logic/state/state';
+import AddToCartForm from '../../basket/components/add-to-cart-form';
 
 const args: BasicComponentConstructorArgs = {
   classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
@@ -16,6 +17,8 @@ const productArgs: BasicComponentConstructorArgs = {
 };
 
 export default class ProductCart extends View {
+  public readonly addToCartFrom: AddToCartForm;
+
   constructor(product: ProductProjection) {
     super(args);
 
@@ -38,9 +41,13 @@ export default class ProductCart extends View {
 
     const pricesComponent = this.createPrice(prices);
 
+    this.addToCartFrom = new AddToCartForm(() => {}, { productId: id });
+
     this.basicComponent.addInnerElement(nameComponent);
     this.basicComponent.addInnerElement(descriptionComponent);
     this.basicComponent.addInnerElement(pricesComponent);
+
+    this.basicComponent.addInnerElement(this.addToCartFrom);
   }
 
   private createPrice(prices?: Price[]): BasicComponent {

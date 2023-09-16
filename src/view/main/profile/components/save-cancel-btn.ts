@@ -14,23 +14,29 @@ const btnStyle = [ClassesEnum.INPUT, ClassesEnum.INPUT_SUBMIT];
 export default class CancelSubmit extends View {
   public readonly submit: HTMLInputElement;
 
-  public readonly cancel: HTMLButtonElement;
+  public readonly cancel?: HTMLButtonElement;
 
-  constructor(cancelCallback: () => void) {
+  constructor(
+    cancelCallback?: () => void,
+    submitBtnText: string = 'Save',
+    cancelBtmText: string = 'Cancel'
+  ) {
     super(args);
 
     this.submit = InputFactory.submit({
-      value: 'Save',
+      value: submitBtnText,
       classList: btnStyle,
     });
 
-    this.cancel = document.createElement(TagsEnum.BUTTON);
-    this.cancel.textContent = 'Cancel';
-    this.cancel.classList.add(...btnStyle);
-    this.cancel.setAttribute('type', 'button');
-    this.cancel.onclick = cancelCallback;
-
     this.basicComponent.addInnerElement(this.submit);
-    this.basicComponent.addInnerElement(this.cancel);
+
+    if (cancelCallback) {
+      this.cancel = document.createElement(TagsEnum.BUTTON);
+      this.cancel.textContent = cancelBtmText;
+      this.cancel.classList.add(...btnStyle);
+      this.cancel.setAttribute('type', 'button');
+      this.cancel.onclick = cancelCallback;
+      this.basicComponent.addInnerElement(this.cancel);
+    }
   }
 }

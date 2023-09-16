@@ -8,14 +8,18 @@ export default class EditableFieldSet extends FieldSet {
     name: string,
     label: string,
     fields: View[],
-    editBtn: EditButton,
-    submit: CancelSubmit
+    editBtn?: EditButton,
+    submit?: CancelSubmit
   ) {
     super(name, label, fields);
 
-    this.legend.append(editBtn.getHTMLElement() as HTMLElement);
+    if (editBtn) {
+      this.legend.append(editBtn.getHTMLElement() as HTMLElement);
+    }
 
-    this.basicComponent.addInnerElement(submit);
+    if (submit) {
+      this.basicComponent.addInnerElement(submit);
+    }
   }
 
   public addLegendElement(elem: HTMLElement): void {
