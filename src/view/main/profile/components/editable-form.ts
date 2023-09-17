@@ -50,7 +50,7 @@ export default abstract class EditableForm extends FormComponent {
         const elem = val;
         if (elem instanceof HTMLInputElement) {
           if (
-            (elem.type !== 'submit' && elem.type !== 'checkbox') ||
+            (elem.type !== 'submit' && elem.type !== 'checkbox' && elem.type !== 'button') ||
             (elem.type === 'checkbox' &&
               (this.defaultValues[index] === 'on' || this.defaultValues[index] === 'off'))
           ) {

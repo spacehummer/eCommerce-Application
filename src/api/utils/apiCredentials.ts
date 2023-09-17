@@ -6,6 +6,7 @@ enum APICredentials {
   CTP_API_URL = 'https://api.europe-west1.gcp.commercetools.com',
   CTP_SCOPES = 'manage_my_quotes:book-savior manage_my_business_units:book-savior manage_my_orders:book-savior manage_my_profile:book-savior view_categories:book-savior manage_my_payments:book-savior create_anonymous_token:book-savior view_published_products:book-savior manage_my_shopping_lists:book-savior manage_my_quote_requests:book-savior',
   DEFAULT_CURRENCY = 'RUB',
+  DEFAULT_COUNTRY = 'RU',
 }
 
 export default APICredentials;

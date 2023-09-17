@@ -24,7 +24,15 @@ export type DefaultArgs = {
   type: InputType;
 } & Args;
 
-export type InputType = 'password' | 'email' | 'submit' | 'checkbox' | 'text' | 'date' | 'hidden';
+export type InputType =
+  | 'password'
+  | 'email'
+  | 'submit'
+  | 'button'
+  | 'checkbox'
+  | 'text'
+  | 'date'
+  | 'hidden';
 
 type ConcreteType = {
   type: InputType;
