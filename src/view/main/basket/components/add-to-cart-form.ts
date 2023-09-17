@@ -7,8 +7,18 @@ import { ProductCredentials } from './types';
 export enum AddCartFileds {
   ProductId = 'ProductId',
 }
+const enableValue = 'Add to Cart';
+const disableValue = 'Already in cart';
 
 export default class AddToCartForm extends EditableForm {
+  protected get enableValue(): string {
+    return enableValue;
+  }
+
+  protected get disableValue(): string {
+    return disableValue;
+  }
+
   constructor(
     callback: (record: Record<string, string | Record<string, string>>) => void,
     values: ProductCredentials,
@@ -40,10 +50,18 @@ export default class AddToCartForm extends EditableForm {
 
   public enable(): void {
     this.fieldSet?.getHTMLElement()?.removeAttribute('disabled');
+    this.setSubmitValue(this.disableValue);
   }
 
   public disable(): void {
     this.fieldSet?.getHTMLElement()?.setAttribute('disabled', '');
+    this.setSubmitValue(this.enableValue);
+  }
+
+  protected setSubmitValue(value: string): void {
+    if (this.submit) {
+      this.submit.submit.value = value;
+    }
   }
 
   protected toggleForm(): void {}
@@ -53,6 +71,6 @@ export default class AddToCartForm extends EditableForm {
   }
 
   protected createCancel(): CancelSubmit {
-    return new CancelSubmit(undefined, 'Add to Cart', 'button');
+    return new CancelSubmit(undefined, this.enableValue, 'button');
   }
 }

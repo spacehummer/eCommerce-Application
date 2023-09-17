@@ -27,6 +27,7 @@ export default class ProductCartView extends View {
     super(args);
 
     const lang = getLang();
+
     this.id = product.id;
     const {
       name,

@@ -2,6 +2,7 @@ import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View, { ViewLogicParams } from '#src/view/view';
+import cartState from '#src/logic/state/cartState';
 import ProductCartView from './product-cart';
 import AddToCartForm, { AddCartFileds } from '../../basket/components/add-to-cart-form';
 import CartModel from '../../basket/cart-model';
@@ -42,17 +43,17 @@ export default class ProductsView extends View {
     if (this.productCarts) {
       const cart = this.productCarts[productId];
       cart.addToCartFrom.disable();
-      if (cart.addToCartFrom.submit) {
-        cart.addToCartFrom.submit.submit.value = 'Alredy in cart';
-      }
     }
   }
 
   private createCarts(prods: ProductCart[]): HTMLElement[] {
     this.productCarts = {};
+    const basket = cartState.getCart();
     return prods.map((prod: ProductCart) => {
       const cart = new ProductCartView(prod, this.factory.bind(this));
       if (this.productCarts) this.productCarts[cart.id] = cart;
+      if (basket && basket.lineItems.findIndex((item) => item.productId === prod.id) !== -1)
+        cart.addToCartFrom.disable();
       return cart.basicComponent.htmlElement as HTMLElement;
     });
   }

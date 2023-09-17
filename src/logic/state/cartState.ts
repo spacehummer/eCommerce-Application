@@ -5,9 +5,9 @@ import { EventType } from './types';
 
 const eventTarget = new CartEventTarget();
 
-let cart: Cart;
+let cart: Cart | undefined;
 
-const getCart = (): Cart => cart;
+const getCart = (): Cart | undefined => cart;
 const setCart = (newCart: Cart): void => {
   cart = newCart;
   eventTarget.emit('update', cart);
