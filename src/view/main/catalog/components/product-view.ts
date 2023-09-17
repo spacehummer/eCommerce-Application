@@ -25,9 +25,13 @@ export default class ProductsView extends View {
     this.cartModel = new CartModel();
   }
 
-  public readonly setProducts = (prods: ProductCart[]): void => {
-    this.basicComponent.htmlElement?.replaceChildren(...this.createCarts(prods));
-  };
+  public setProducts(prods: ProductCart[]): void {
+    this.replaceCarts(this.createCarts(prods));
+  }
+
+  protected replaceCarts(newElems: HTMLElement[]): void {
+    this.basicComponent.htmlElement?.replaceChildren(...newElems);
+  }
 
   protected callback(record: Record<string, string | Record<string, string>>): void {
     const { [AddCartFileds.ProductId]: productId } = record;
@@ -39,10 +43,10 @@ export default class ProductsView extends View {
     return new AddToCartForm(this.callback.bind(this), values);
   }
 
-  protected disableCart(productId: string): void {
+  private disableCart(productId: string): void {
     if (this.productCarts) {
       const cart = this.productCarts[productId];
-      cart.addToCartFrom.disable();
+      if (cart.addToCartFrom) cart?.addToCartFrom.disable();
     }
   }
 
@@ -51,8 +55,13 @@ export default class ProductsView extends View {
     const basket = cartState.getCart();
     return prods.map((prod: ProductCart) => {
       const cart = new ProductCartView(prod, this.factory.bind(this));
+      cart.mount();
       if (this.productCarts) this.productCarts[cart.id] = cart;
-      if (basket && basket.lineItems.findIndex((item) => item.productId === prod.id) !== -1)
+      if (
+        basket &&
+        cart.addToCartFrom &&
+        basket.lineItems.findIndex((item) => item.productId === prod.id) !== -1
+      )
         cart.addToCartFrom.disable();
       return cart.basicComponent.htmlElement as HTMLElement;
     });

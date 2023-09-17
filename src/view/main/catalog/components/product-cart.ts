@@ -1,3 +1,4 @@
+import { LocalizedString, Image } from '@commercetools/platform-sdk';
 import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
@@ -19,42 +20,86 @@ const productArgs: BasicComponentConstructorArgs = {
 };
 
 export default class ProductCartView extends View {
-  public readonly addToCartFrom: AddToCartForm;
+  public addToCartFrom?: AddToCartForm;
 
   public readonly id: string;
 
-  constructor(product: ProductCart, factoryMethod: (values: ProductCredentials) => AddToCartForm) {
+  protected readonly lang: string;
+
+  protected nameComponent: BasicComponent;
+
+  protected descriptionComponent?: BasicComponent;
+
+  protected pricesComponent?: PriceView;
+
+  protected imageContainer?: HTMLDivElement;
+
+  constructor(
+    product: ProductCart,
+    private readonly factoryMethod: (values: ProductCredentials) => AddToCartForm
+  ) {
     super(args);
 
     const lang = getLang();
-
+    this.lang = lang;
     this.id = product.id;
     const {
       name,
       description,
-      masterVariant: { prices },
+      masterVariant: { prices, images },
     } = product;
 
-    const idComponent = new BasicComponent(productArgs);
-    idComponent.setTextContent(this.id);
+    this.nameComponent = this.createComponent(name, productArgs);
 
-    const nameComponent = new BasicComponent(productArgs);
-    nameComponent.setTextContent(name[lang]);
+    this.createAddToBasket();
+    if (images) this.createImages(images);
 
-    this.addToCartFrom = factoryMethod({ productId: this.id });
-
-    this.basicComponent.addInnerElement(nameComponent);
+    this.basicComponent.addInnerElement(this.nameComponent);
     if (description) {
-      const descriptionComponent = new BasicComponent(productArgs);
-      descriptionComponent.setTextContent(description?.[lang]);
-      this.basicComponent.addInnerElement(descriptionComponent);
+      this.descriptionComponent = this.createComponent(description, productArgs);
     }
 
     if (prices) {
-      const pricesComponent = new PriceView(prices[0]);
-      this.basicComponent.addInnerElement(pricesComponent);
+      this.pricesComponent = new PriceView(prices[0]);
     }
+  }
 
-    this.basicComponent.addInnerElement(this.addToCartFrom);
+  protected createAddToBasket(): void {
+    this.addToCartFrom = this.factoryMethod({ productId: this.id });
+  }
+
+  protected createImages(images: Image[]): void {
+    const [image] = images;
+    if (image) {
+      const container = document.createElement(TagsEnum.CONTAINER);
+      const img = document.createElement(TagsEnum.IMG);
+      img.src = image.url;
+      img.style.display = 'block';
+      img.style.width = '100%';
+
+      // container.classList.add(ClassesEnum.ONLY_FOR_DRAFT_CODE)
+      container.style.width = '50px';
+      container.style.height = '100px';
+
+      container.append(img);
+      this.imageContainer = container;
+    }
+  }
+
+  protected createComponent(
+    name: LocalizedString,
+    componentArgs: BasicComponentConstructorArgs
+  ): BasicComponent {
+    const nameComponent = new BasicComponent(componentArgs);
+    nameComponent.setTextContent(name[this.lang]);
+    return nameComponent;
+  }
+
+  public mount(): void {
+    this.basicComponent.addInnerElement(this.nameComponent);
+    if (this.imageContainer) this.basicComponent.addInnerElement(this.imageContainer);
+    if (this.descriptionComponent) this.basicComponent.addInnerElement(this.descriptionComponent);
+    if (this.pricesComponent) this.basicComponent.addInnerElement(this.pricesComponent);
+    if (this.addToCartFrom) this.basicComponent.addInnerElement(this.addToCartFrom);
   }
 }

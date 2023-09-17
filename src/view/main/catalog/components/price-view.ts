@@ -1,9 +1,10 @@
-import { Price, TypedMoney } from '@commercetools/platform-sdk';
+import { TypedMoney } from '@commercetools/platform-sdk';
 import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
 import PriceComponent from './price';
+import { ProductPrice } from './types';
 
 const args: BasicComponentConstructorArgs = {
   classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
@@ -18,24 +19,30 @@ export default class PriceView extends View {
 
   private discountPrice?: PriceComponent;
 
-  constructor(price: Price) {
-    super(args);
-
-    this.price = this.createPrice(priceLabel, price.value);
-    if (price.discounted) {
-      this.discountPrice = this.createPrice(discountedLabel, price.discounted.value);
-    }
-
-    this.basicComponent.addInnerElement(this.price);
+  protected get priceLabel(): string {
+    return this.argPriceLabel || priceLabel;
   }
 
-  public setPrice(price: Price): void {
+  constructor(price: ProductPrice, protected readonly argPriceLabel?: string) {
+    super(args);
+
+    this.price = this.createPrice(this.priceLabel, price.value);
+    this.basicComponent.addInnerElement(this.price);
+
+    if (price.discounted) {
+      this.discountPrice = this.createPrice(discountedLabel, price.discounted.value);
+      this.basicComponent.addInnerElement(this.discountPrice);
+    }
+  }
+
+  public setPrice(price: ProductPrice): void {
     if (price.discounted) {
       const discounted = PriceView.calculatePrice(price.discounted.value);
       if (this.discountPrice) {
         this.discountPrice.setPrice(discounted);
       } else {
         this.discountPrice = new PriceComponent(discountedLabel, discounted);
+        this.basicComponent.addInnerElement(this.discountPrice);
       }
     } else if (this.discountPrice) {
       this.discountPrice.setPrice('');
