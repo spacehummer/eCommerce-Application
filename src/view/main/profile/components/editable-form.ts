@@ -12,7 +12,7 @@ export default abstract class EditableForm extends FormComponent {
 
   public readonly editBtn: EditButton;
 
-  protected submit?: CancelSubmit;
+  public submit?: CancelSubmit;
 
   constructor(
     submitCallback: (record: Record<string, string | Record<string, string>>) => void,
