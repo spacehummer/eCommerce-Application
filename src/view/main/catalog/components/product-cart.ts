@@ -1,9 +1,13 @@
-import { Price, ProductProjection, TypedMoney } from '@commercetools/platform-sdk';
+import { LocalizedString, Image } from '@commercetools/platform-sdk';
 import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
 import { getLang } from '#src/logic/state/state';
+import AddToCartForm from '../../basket/components/add-to-cart-form';
+import { ProductCredentials } from '../../basket/components/types';
+import { ProductCart } from './types';
+import PriceView from './price-view';
 
 const args: BasicComponentConstructorArgs = {
   classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
@@ -15,52 +19,87 @@ const productArgs: BasicComponentConstructorArgs = {
   tagName: TagsEnum.PARAGRAPH,
 };
 
-export default class ProductCart extends View {
-  constructor(product: ProductProjection) {
+export default class ProductCartView extends View {
+  public addToCartFrom?: AddToCartForm;
+
+  public readonly id: string;
+
+  protected readonly lang: string;
+
+  protected nameComponent: BasicComponent;
+
+  protected descriptionComponent?: BasicComponent;
+
+  protected pricesComponent?: PriceView;
+
+  protected imageContainer?: HTMLDivElement;
+
+  constructor(
+    product: ProductCart,
+    private readonly factoryMethod: (values: ProductCredentials) => AddToCartForm
+  ) {
     super(args);
 
     const lang = getLang();
-
+    this.lang = lang;
+    this.id = product.id;
     const {
-      id,
       name,
       description,
-      masterVariant: { prices },
+      masterVariant: { prices, images },
     } = product;
 
-    const idComponent = new BasicComponent(productArgs);
-    idComponent.setTextContent(id);
+    this.nameComponent = this.createComponent(name, productArgs);
 
-    const nameComponent = new BasicComponent(productArgs);
-    nameComponent.setTextContent(name[lang]);
-    const descriptionComponent = new BasicComponent(productArgs);
-    descriptionComponent.setTextContent(description?.[lang]);
+    this.createAddToBasket();
+    if (images) this.createImages(images);
 
-    const pricesComponent = this.createPrice(prices);
+    this.basicComponent.addInnerElement(this.nameComponent);
+    if (description) {
+      this.descriptionComponent = this.createComponent(description, productArgs);
+    }
 
-    this.basicComponent.addInnerElement(nameComponent);
-    this.basicComponent.addInnerElement(descriptionComponent);
-    this.basicComponent.addInnerElement(pricesComponent);
-  }
-
-  private createPrice(prices?: Price[]): BasicComponent {
-    const pricesComponent = new BasicComponent(productArgs);
     if (prices) {
-      const [price] = prices;
-      let value: string;
-      value = `Price: ${this.calculatePrice(price.value)}`;
-      if (price.discounted) {
-        value += `; discounted price:${this.calculatePrice(price.discounted.value)}`;
-      }
-      pricesComponent.setTextContent(value);
+      this.pricesComponent = new PriceView(prices[0]);
     }
-    return pricesComponent;
   }
 
-  private calculatePrice(money: TypedMoney): string {
-    if (money.fractionDigits !== 0) {
-      return (money.centAmount / 10 ** money.fractionDigits).toFixed(money.fractionDigits);
+  protected createAddToBasket(): void {
+    this.addToCartFrom = this.factoryMethod({ productId: this.id });
+  }
+
+  protected createImages(images: Image[]): void {
+    const [image] = images;
+    if (image) {
+      const container = document.createElement(TagsEnum.CONTAINER);
+      const img = document.createElement(TagsEnum.IMG);
+      img.src = image.url;
+      img.style.display = 'block';
+      img.style.width = '100%';
+
+      // container.classList.add(ClassesEnum.ONLY_FOR_DRAFT_CODE)
+      container.style.width = '50px';
+      container.style.height = '100px';
+
+      container.append(img);
+      this.imageContainer = container;
     }
-    return `${money.centAmount}`;
+  }
+
+  protected createComponent(
+    name: LocalizedString,
+    componentArgs: BasicComponentConstructorArgs
+  ): BasicComponent {
+    const nameComponent = new BasicComponent(componentArgs);
+    nameComponent.setTextContent(name[this.lang]);
+    return nameComponent;
+  }
+
+  public mount(): void {
+    this.basicComponent.addInnerElement(this.nameComponent);
+    if (this.imageContainer) this.basicComponent.addInnerElement(this.imageContainer);
+    if (this.descriptionComponent) this.basicComponent.addInnerElement(this.descriptionComponent);
+    if (this.pricesComponent) this.basicComponent.addInnerElement(this.pricesComponent);
+    if (this.addToCartFrom) this.basicComponent.addInnerElement(this.addToCartFrom);
   }
 }

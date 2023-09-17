@@ -9,7 +9,7 @@ export default class CategoryRouter implements Router {
   private readonly setProducts: (prods: ProductProjection[]) => void;
 
   constructor(protected readonly prodView: ProductsView) {
-    this.setProducts = this.prodView.setPorducts.bind(this.prodView);
+    this.setProducts = this.prodView.setProducts.bind(this.prodView);
   }
 
   public navigate(path: string): void {

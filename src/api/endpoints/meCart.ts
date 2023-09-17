@@ -56,7 +56,10 @@ class CartRepository extends BaseEndpoint implements ICart {
         if (error.data.statusCode !== 404) throw error;
       } else throw error;
     }
-    return this.createCartForCurrentCustomer({ currency: APICredentials.DEFAULT_CURRENCY });
+    return this.createCartForCurrentCustomer({
+      currency: APICredentials.DEFAULT_CURRENCY,
+      country: APICredentials.DEFAULT_COUNTRY,
+    });
   }
 
   public async createCartForCurrentCustomer(cartDraft: CartDraft): Promise<ClientResponse<Cart>> {

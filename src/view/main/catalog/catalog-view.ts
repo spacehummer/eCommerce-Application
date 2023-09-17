@@ -32,6 +32,6 @@ export default class CatalogView extends View {
   }
 
   private getAllProds(): void {
-    this.categoryRouter.getAllProducts().then(this.prodView.setPorducts);
+    this.categoryRouter.getAllProducts().then(this.prodView.setProducts.bind(this.prodView));
   }
 }

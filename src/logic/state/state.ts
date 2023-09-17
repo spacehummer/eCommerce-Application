@@ -2,22 +2,9 @@ import { Customer } from '@commercetools/platform-sdk';
 import Api from '#src/api/api';
 import { EventType, Profile } from './types';
 import StateEvent from './StateEvent';
+import ProfileEventTarget from './ProfileEventTarget';
 
-class StateEventTarget extends EventTarget {
-  public emit(type: EventType, profile?: Profile): void {
-    this.dispatchEvent(new StateEvent(type, profile));
-  }
-
-  public addEventListener(type: EventType, callback: EventListenerOrEventListenerObject): void {
-    super.addEventListener(type, callback);
-  }
-
-  public removeEventListener(type: EventType, callback: EventListenerOrEventListenerObject): void {
-    super.removeEventListener(type, callback);
-  }
-}
-
-const eventTarget = new StateEventTarget();
+const eventTarget = new ProfileEventTarget();
 let isLogin: boolean = false;
 let profile: Profile;
 

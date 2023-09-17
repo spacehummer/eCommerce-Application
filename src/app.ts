@@ -135,6 +135,13 @@ export default class App {
         },
       },
       {
+        path: `${PagesUrls.BASKET}`,
+        callback: async (): Promise<void> => {
+          const { default: BasketView } = await import('./view/main/basket/basket-view');
+          this.setContent(PagesUrls.BASKET, new BasketView(this.logicParams));
+        },
+      },
+      {
         path: `${PagesUrls.ERROR_404}`,
         callback: async (): Promise<void> => {
           const { default: Section404View } = await import(
