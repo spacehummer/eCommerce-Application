@@ -1,5 +1,5 @@
 import { CentPrecisionMoney, LineItem } from '@commercetools/platform-sdk';
-import { BasicComponentConstructorArgs } from '#src/components/basic-component';
+import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import cartState from '#src/logic/state/cartState';
@@ -7,6 +7,8 @@ import View, { ViewLogicParams } from '#src/view/view';
 import { BasketProduct } from '../catalog/components/types';
 import CartProductsView from './cart-products-view';
 import PriceView from '../catalog/components/price-view';
+import BaseItemLinkView from '#src/view/header/navigation/base-nav-item-link-view';
+import NavItemLinkView from '#src/view/header/navigation/nav-item-link-view';
 
 const args: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
@@ -52,6 +54,19 @@ export default class BasketView extends View {
       this.createTotal(cart.totalPrice);
     } else {
       // empty cart
+      const component = new BasicComponent({ tagName: TagsEnum.CONTAINER, classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE })
+      component.setTextContent('Your basket is empty.')
+
+      this.basicComponent.addInnerElement(component)
+
+      const link = new NavItemLinkView({
+        callback: () => {
+          this.logicParams?.router.navigate('catalog')
+        }
+        , name: 'Go to "Catalog" page and add books you want!'
+      }, new Map<string, NavItemLinkView>())
+
+      this.basicComponent.addInnerElement(link)
     }
   }
 
