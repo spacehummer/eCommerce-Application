@@ -144,6 +144,13 @@ export default class App {
         },
       },
       {
+        path: `${PagesUrls.ABOUT_US}`,
+        callback: async (): Promise<void> => {
+          const { default: AboutUsView } = await import('./view/main/about-us/about-us-view');
+          this.setContent(PagesUrls.ABOUT_US, new AboutUsView());
+        },
+      },
+      {
         path: `${PagesUrls.ERROR_404}`,
         callback: async (): Promise<void> => {
           const { default: Section404View } = await import(
