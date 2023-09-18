@@ -51,7 +51,6 @@ export default class ProductCartView extends View {
 
     this.nameComponent = this.createComponent(name, productArgs);
 
-    this.createAddToBasket();
     if (images) this.createImages(images);
 
     this.basicComponent.addInnerElement(this.nameComponent);
@@ -64,7 +63,7 @@ export default class ProductCartView extends View {
     }
   }
 
-  protected createAddToBasket(): void {
+  public createAddToBasket(): void {
     this.addToCartFrom = this.factoryMethod({ productId: this.id });
   }
 

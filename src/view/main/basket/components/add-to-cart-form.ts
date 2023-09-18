@@ -19,12 +19,23 @@ export default class AddToCartForm extends EditableForm {
     return disableValue;
   }
 
+  protected get isToggle(): boolean {
+    return false;
+  }
+
   constructor(
     callback: (record: Record<string, string | Record<string, string>>) => void,
     values: ProductCredentials,
+    defaultValues?: string[],
+    names?: string[],
     isDisabledByDefault: boolean = false
   ) {
-    super(callback, [values.productId], Object.values(AddCartFileds), isDisabledByDefault);
+    super(
+      callback,
+      defaultValues || [values.productId],
+      names || Object.values(AddCartFileds),
+      isDisabledByDefault
+    );
 
     this.setId(values.productId);
 
@@ -64,7 +75,9 @@ export default class AddToCartForm extends EditableForm {
     }
   }
 
-  protected toggleForm(): void {}
+  protected toggleForm(): void {
+    if (this.isToggle) super.toggleForm();
+  }
 
   protected createFieldSet(): EditableFieldSet {
     return new EditableFieldSet('', '', [], undefined, this.submit);

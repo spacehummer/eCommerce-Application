@@ -16,7 +16,7 @@ export default abstract class EditableForm extends FormComponent {
 
   constructor(
     submitCallback: (record: Record<string, string | Record<string, string>>) => void,
-    private defaultValues: string[],
+    protected defaultValues: string[],
     names: string[],
     private readonly isDisabledByDefault: boolean = true
   ) {
