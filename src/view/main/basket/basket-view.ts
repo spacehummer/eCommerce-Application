@@ -9,22 +9,21 @@ import CartEvent from '#src/logic/state/cartStateEvent';
 import { BasketProduct } from '../catalog/components/types';
 import BasketProductsView from './basket-products-view';
 import PriceView from '../catalog/components/price-view';
+import EditButton from '../profile/components/edit-btn';
+import BasketModel from './basket-model';
 
 const args: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
   classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
 };
 
+const basketModel = new BasketModel();
+
 export default class BasketView extends View {
   private totalPrice?: PriceView;
 
   constructor(logicParams: ViewLogicParams) {
     super(args, logicParams);
-
-    const title = document.createElement(TagsEnum.H2);
-    title.textContent = 'Basket';
-
-    this.basicComponent.addInnerElement(title);
 
     this.createComponents();
 
@@ -38,9 +37,17 @@ export default class BasketView extends View {
     }
   }
 
+  private createTitle(): void {
+    const title = document.createElement(TagsEnum.H2);
+    title.textContent = 'Basket';
+
+    this.basicComponent.addInnerElement(title);
+  }
+
   private createComponents(): void {
     const cart = cartState.getCart();
-    if (cart) {
+    this.createTitle();
+    if (cart && cart.lineItems.length > 0) {
       const productsInCart = new BasketProductsView();
       const items = cart.lineItems.map(
         (item: LineItem): BasketProduct => {
@@ -61,28 +68,46 @@ export default class BasketView extends View {
       this.basicComponent.addInnerElement(productsInCart);
 
       this.createTotal(cart.totalPrice);
+
+      this.createClearCartBtn();
     } else {
       // empty cart
-      const component = new BasicComponent({
-        tagName: TagsEnum.CONTAINER,
-        classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
-      });
-      component.setTextContent('Your basket is empty.');
-
-      this.basicComponent.addInnerElement(component);
-
-      const link = new NavItemLinkView(
-        {
-          callback: (): void => {
-            this.logicParams?.router.navigate('catalog');
-          },
-          name: 'Go to "Catalog" page and add books you want!',
-        },
-        new Map<string, NavItemLinkView>()
-      );
-
-      this.basicComponent.addInnerElement(link);
+      this.showEmptyCart();
     }
+  }
+
+  private createClearCartBtn(): void {
+    const btn = new EditButton(() => this.onClearBasket(), 'Clear basket items.');
+    this.basicComponent.addInnerElement(btn);
+  }
+
+  private onClearBasket(): void {
+    this.basicComponent.htmlElement?.replaceChildren('');
+    this.createTitle();
+    this.showEmptyCart();
+    basketModel.clearCart();
+  }
+
+  private showEmptyCart(): void {
+    const component = new BasicComponent({
+      tagName: TagsEnum.CONTAINER,
+      classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
+    });
+    component.setTextContent('Your basket is empty.');
+
+    this.basicComponent.addInnerElement(component);
+
+    const link = new NavItemLinkView(
+      {
+        callback: (): void => {
+          this.logicParams?.router.navigate('catalog');
+        },
+        name: 'Go to "Catalog" page and add books you want!',
+      },
+      new Map<string, NavItemLinkView>()
+    );
+
+    this.basicComponent.addInnerElement(link);
   }
 
   private createTotal(price: CentPrecisionMoney): void {

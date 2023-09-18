@@ -112,6 +112,10 @@ class Api {
     return cart.removeLineItem(itemDraft);
   }
 
+  public async clearCart(): Promise<ClientResponse<Cart>> {
+    return cart.cleanActiveCart();
+  }
+
   private mapCategory(categoryToMap: CategorySdk): CategoryDto {
     return {
       childrens: [],

@@ -2,12 +2,15 @@ import {
   Cart,
   CartDraft,
   ClientResponse,
+  MyCartRemoveLineItemAction,
   MyCartUpdate,
   MyCartUpdateAction,
 } from '@commercetools/platform-sdk';
 import APICredentials from '../utils/apiCredentials';
 import ErrorData from './types/error';
 import {
+  CartActionsDraft,
+  CartItemDraft,
   CartQuantityDraft,
   CartRemoveItemDraft,
   CartUpdateDraft,
@@ -139,6 +142,45 @@ class CartRepository extends BaseEndpoint implements ICart {
         .carts()
         .withId({ ID: cartId })
         .post({ body: this.createCartUpdateDraft(cartUpdateDraft) })
+        .execute();
+    } catch (error) {
+      throw new ApiError(error as ErrorData);
+    }
+  }
+
+  private createRemoveItemsDraft(cartActionsDraft: CartActionsDraft): MyCartRemoveItem {
+    const action = 'removeLineItem'; // default value needed to tell the system we are removing an item from the cart
+    const { version, items } = cartActionsDraft;
+    const actions = items.map(
+      ({ lineItemId }): MyCartRemoveLineItemAction => {
+        return {
+          action,
+          lineItemId,
+        };
+      }
+    );
+    return {
+      version,
+      actions,
+    };
+  }
+
+  public async cleanActiveCart(): Promise<ClientResponse<Cart>> {
+    const {
+      body: { id, version, lineItems },
+    } = await this.getActiveCart();
+    const items = lineItems.map(
+      (val): CartItemDraft => {
+        return { lineItemId: val.id };
+      }
+    );
+    try {
+      return await this.apiRoot
+        .withProjectKey({ projectKey: this.projectKey })
+        .me()
+        .carts()
+        .withId({ ID: id })
+        .post({ body: this.createRemoveItemsDraft({ id, version, items }) })
         .execute();
     } catch (error) {
       throw new ApiError(error as ErrorData);

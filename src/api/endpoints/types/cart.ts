@@ -17,19 +17,24 @@ export type CartRemoveItemDraft = {
 };
 
 export type CartCredentials = Readonly<{
+  version: number;
   id: string;
 }>;
 
-type CartActionDraft = Readonly<{
-  version: number;
-  lineItemId: string;
-}> &
-  CartCredentials;
+export type CartItemDraft = Readonly<{
+  lineItemId?: string;
+}>;
 
 export type CartQuantityDraft = Readonly<{
   quantity: number;
 }> &
-  CartActionDraft;
+  CartItemDraft &
+  CartCredentials;
+
+export type CartActionsDraft = Readonly<{
+  items: CartItemDraft[];
+}> &
+  CartCredentials;
 
 export type CartDraft = {
   currency: string;
@@ -55,6 +60,6 @@ export type MyCartRemoveItem = {
 
 type MyCartRemoveLineItemAction = {
   readonly action: 'removeLineItem';
-  readonly lineItemId: string;
+  readonly lineItemId?: string;
   readonly quantity?: number;
 };

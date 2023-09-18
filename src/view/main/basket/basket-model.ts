@@ -22,6 +22,10 @@ export default class BasketModel {
     return cart;
   }
 
+  public async clearCart(): Promise<CartApiResponse> {
+    return this.apiCall(this.api.clearCart().then(this.updateCart));
+  }
+
   public async updateQuantity(quantityDraft: CartQuantityDraft): Promise<CartApiResponse> {
     return this.apiCall(this.api.updateCartItemQuantity(quantityDraft).then(this.updateCart));
   }
