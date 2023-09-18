@@ -49,6 +49,15 @@ export default class BasketProductsView extends ProductsView {
     return prods.map((prod: BasketProduct) => {
       const cart = new BasketProductCart(prod, this.factory.bind(this));
       cart.createAddToBasket();
+      cart.createRemoveProductBtn(() => {
+        if (this.productCarts && this.productCarts[cart.id]) delete this.productCarts[cart.id];
+        if (cart.basicComponent.htmlElement)
+          this.basicComponent.htmlElement?.removeChild(cart.basicComponent.htmlElement);
+        const basket = cartState.getCart();
+        if (basket) {
+          basketModel.removeItemFromCart({ lineItemId: prod.id, version: basket.version });
+        }
+      });
       cart.mount();
       if (this.productCarts) this.productCarts[cart.id] = cart;
       return cart.basicComponent.htmlElement as HTMLElement;

@@ -13,7 +13,7 @@ export type ProductDetails = {
 export type CartRemoveItemDraft = {
   version: number;
   lineItemId: string;
-  quantity: number;
+  quantity?: number;
 };
 
 export type CartCredentials = Readonly<{
