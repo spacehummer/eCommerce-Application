@@ -1,7 +1,14 @@
-import { Cart, CartDraft, ClientResponse, MyCartUpdate } from '@commercetools/platform-sdk';
+import {
+  Cart,
+  CartDraft,
+  ClientResponse,
+  MyCartUpdate,
+  MyCartUpdateAction,
+} from '@commercetools/platform-sdk';
 import APICredentials from '../utils/apiCredentials';
 import ErrorData from './types/error';
 import {
+  CartQuantityDraft,
   CartRemoveItemDraft,
   CartUpdateDraft,
   MyCartRemoveItem,
@@ -47,6 +54,16 @@ class CartRepository extends BaseEndpoint implements ICart {
     };
   }
 
+  private createChangeItemQuantityDraft(quantityDraft: CartQuantityDraft): MyCartUpdateAction {
+    const action = 'changeLineItemQuantity';
+    const { lineItemId, quantity } = quantityDraft;
+    return {
+      action,
+      lineItemId,
+      quantity,
+    };
+  }
+
   public async getActiveCartOrCreateIt(): Promise<ClientResponse<Cart>> {
     try {
       const cart = await this.getActiveCart();
@@ -84,6 +101,21 @@ class CartRepository extends BaseEndpoint implements ICart {
         .me()
         .activeCart()
         .get()
+        .execute();
+    } catch (error) {
+      throw new ApiError(error as ErrorData);
+    }
+  }
+
+  public async changeQuantity(quantityDraft: CartQuantityDraft): Promise<ClientResponse<Cart>> {
+    const { id, version } = quantityDraft;
+    try {
+      return await this.apiRoot
+        .withProjectKey({ projectKey: this.projectKey })
+        .me()
+        .carts()
+        .withId({ ID: id })
+        .post({ body: { version, actions: [this.createChangeItemQuantityDraft(quantityDraft)] } })
         .execute();
     } catch (error) {
       throw new ApiError(error as ErrorData);

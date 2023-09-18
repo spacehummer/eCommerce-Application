@@ -1,7 +1,7 @@
 export type CartUpdateDraft = {
   version: number;
   productId: string;
-  variantId: number;
+  variantId?: number;
   quantity: number;
 };
 
@@ -15,6 +15,21 @@ export type CartRemoveItemDraft = {
   lineItemId: string;
   quantity: number;
 };
+
+export type CartCredentials = Readonly<{
+  id: string;
+}>;
+
+type CartActionDraft = Readonly<{
+  version: number;
+  lineItemId: string;
+}> &
+  CartCredentials;
+
+export type CartQuantityDraft = Readonly<{
+  quantity: number;
+}> &
+  CartActionDraft;
 
 export type CartDraft = {
   currency: string;

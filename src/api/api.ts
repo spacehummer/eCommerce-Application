@@ -11,7 +11,7 @@ import AuthService from './utils/authService';
 import CartRepository from './endpoints/meCart';
 import CustomerRepository from './endpoints/meCustomer';
 import ProductProjection from './endpoints/productProjection';
-import { CartRemoveItemDraft } from './endpoints/types/cart';
+import { CartQuantityDraft, CartRemoveItemDraft } from './endpoints/types/cart';
 import CustomerData, {
   AddressDto,
   ChangePasswordDto,
@@ -90,6 +90,12 @@ class Api {
 
   public async createCart(currency: string): Promise<ClientResponse<Cart>> {
     return cart.createCartForCurrentCustomer({ currency });
+  }
+
+  public async updateCartItemQuantity(
+    quantityDraft: CartQuantityDraft
+  ): Promise<ClientResponse<Cart>> {
+    return cart.changeQuantity(quantityDraft);
   }
 
   public async addToCart(

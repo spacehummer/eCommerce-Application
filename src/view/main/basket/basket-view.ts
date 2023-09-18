@@ -5,6 +5,7 @@ import TagsEnum from '#src/components_params/tags-enum';
 import cartState from '#src/logic/state/cartState';
 import View, { ViewLogicParams } from '#src/view/view';
 import NavItemLinkView from '#src/view/header/navigation/nav-item-link-view';
+import CartEvent from '#src/logic/state/cartStateEvent';
 import { BasketProduct } from '../catalog/components/types';
 import BasketProductsView from './basket-products-view';
 import PriceView from '../catalog/components/price-view';
@@ -26,6 +27,15 @@ export default class BasketView extends View {
     this.basicComponent.addInnerElement(title);
 
     this.createComponents();
+
+    cartState.addStateListener('update', this.onCartChange.bind(this));
+  }
+
+  private onCartChange(event: CartEvent): void {
+    const { cart } = event;
+    if (cart) {
+      this.totalPrice?.setPrice({ value: cart.totalPrice });
+    }
   }
 
   private createComponents(): void {

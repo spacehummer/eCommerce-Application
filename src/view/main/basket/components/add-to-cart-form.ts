@@ -43,7 +43,6 @@ export default class AddToCartForm extends EditableForm {
       type: 'hidden',
       name: AddCartFileds.ProductId,
       value: values.productId,
-      form: values.productId,
     });
 
     if (this.submit) {

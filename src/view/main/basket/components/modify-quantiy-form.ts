@@ -1,3 +1,4 @@
+import EditButton from '../../profile/components/edit-btn';
 import EditableFieldSet from '../../profile/components/editable-fieldset';
 import CancelSubmit from '../../profile/components/save-cancel-btn';
 import InputField from '../../signup-login/components/input-field';
@@ -12,6 +13,8 @@ export enum ModifyQuantityFields {
 
 export const BasketItemFields = { ...AddCartFileds, ...ModifyQuantityFields };
 export type ModifyQuantityEnum = typeof BasketItemFields;
+
+const editBtnText = 'Modify quantity';
 
 export default class ModifyQuantity extends AddToCartForm {
   protected get enableValue(): string {
@@ -46,8 +49,12 @@ export default class ModifyQuantity extends AddToCartForm {
     this.fieldSet?.basicComponent.addInnerElement(this.createQuantity(values));
   }
 
+  protected createEditBtn(btnText?: string): EditButton {
+    return super.createEditBtn(btnText || editBtnText);
+  }
+
   protected createFieldSet(): EditableFieldSet {
-    return new EditableFieldSet('', 'Modify quantity', [], this.editBtn, this.submit);
+    return new EditableFieldSet('', '', [], this.editBtn, this.submit);
   }
 
   protected createCancel(): CancelSubmit {

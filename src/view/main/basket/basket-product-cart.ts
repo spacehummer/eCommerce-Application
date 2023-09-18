@@ -5,7 +5,7 @@ import AddToCartForm from './components/add-to-cart-form';
 import { BasketProductCredentials, ProductCredentials } from './components/types';
 
 export default class BasketProductCart extends ProductCartView {
-  private itemTotal: PriceView;
+  public itemTotal: PriceView;
 
   constructor(
     protected readonly basketProduct: BasketProduct,
