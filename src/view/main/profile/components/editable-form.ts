@@ -16,13 +16,13 @@ export default abstract class EditableForm extends FormComponent {
 
   constructor(
     submitCallback: (record: Record<string, string | Record<string, string>>) => void,
-    private defaultValues: string[],
+    protected defaultValues: string[],
     names: string[],
     private readonly isDisabledByDefault: boolean = true
   ) {
     super(submitCallback, names, ClassesEnum.LOGIN_FORM);
 
-    this.editBtn = new EditButton(this.toggleForm.bind(this));
+    this.editBtn = this.createEditBtn();
     this.submit = this.createCancel();
     this.fieldSet = this.createFieldSet();
     this.setValues();
@@ -30,6 +30,10 @@ export default abstract class EditableForm extends FormComponent {
     if (this.isDisabledByDefault) this.toggleSetItems();
 
     this.basicComponent.addInnerElement(this.fieldSet);
+  }
+
+  protected createEditBtn(btnText?: string): EditButton {
+    return new EditButton(this.toggleForm.bind(this), btnText);
   }
 
   protected createCancel(): CancelSubmit {

@@ -55,6 +55,7 @@ export default class ProductsView extends View {
     const basket = cartState.getCart();
     return prods.map((prod: ProductCart) => {
       const cart = new ProductCartView(prod, this.factory.bind(this));
+      cart.createAddToBasket();
       cart.mount();
       if (this.productCarts) this.productCarts[cart.id] = cart;
       if (

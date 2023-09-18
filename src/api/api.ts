@@ -11,7 +11,7 @@ import AuthService from './utils/authService';
 import CartRepository from './endpoints/meCart';
 import CustomerRepository from './endpoints/meCustomer';
 import ProductProjection from './endpoints/productProjection';
-import { CartRemoveItemDraft } from './endpoints/types/cart';
+import { CartQuantityDraft, CartRemoveItemDraft } from './endpoints/types/cart';
 import CustomerData, {
   AddressDto,
   ChangePasswordDto,
@@ -92,6 +92,12 @@ class Api {
     return cart.createCartForCurrentCustomer({ currency });
   }
 
+  public async updateCartItemQuantity(
+    quantityDraft: CartQuantityDraft
+  ): Promise<ClientResponse<Cart>> {
+    return cart.changeQuantity(quantityDraft);
+  }
+
   public async addToCart(
     productId: string,
     variantId: number,
@@ -104,6 +110,10 @@ class Api {
 
   public async removeFromCart(itemDraft: CartRemoveItemDraft): Promise<ClientResponse<Cart>> {
     return cart.removeLineItem(itemDraft);
+  }
+
+  public async clearCart(): Promise<ClientResponse<Cart>> {
+    return cart.cleanActiveCart();
   }
 
   private mapCategory(categoryToMap: CategorySdk): CategoryDto {

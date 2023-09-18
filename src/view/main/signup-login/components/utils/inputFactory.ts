@@ -13,6 +13,7 @@ type InputProperties = {
   form?: string;
   minLength?: number;
   maxLength?: number;
+  min?: string;
   max?: string;
 };
 
@@ -32,7 +33,8 @@ export type InputType =
   | 'checkbox'
   | 'text'
   | 'date'
-  | 'hidden';
+  | 'hidden'
+  | 'number';
 
 type ConcreteType = {
   type: InputType;
