@@ -1,8 +1,10 @@
 // <editor-fold desc="Imports">
 
 /* Import styles */
-import '../assets/styles/general.css';
-import '../assets/styles/normalize.css';
+import '#assets/styles/font.css';
+import '#assets/styles/font-styles.css';
+import '#assets/styles/general.css';
+import '#assets/styles/normalize.css';
 
 /* Import classes */
 import RootContainer from '#src/components/basic_structure/root-container';
