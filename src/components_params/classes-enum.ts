@@ -12,6 +12,7 @@ const enum ClassesEnum {
   HEADING_H1 = 'heading-h1',
   HEADING_H2 = 'heading-h2',
   HEADING_H3 = 'heading-h3',
+  PARAGRAPH = 'paragraph',
   PLACEHOLDER = 'placeholder',
   /* Logo */
   GENERAL_LOGO = 'logo',
@@ -73,6 +74,7 @@ const enum ClassesEnum {
   SECTION_404_PARAGRAPH = 'text-block__paragraph text-block__paragraph--error-404',
   /* Modifiers */
   SPARSE_004 = 'sparse-004',
+  FONT_WEIGHT_500 = 'fw-500',
 }
 
 export default ClassesEnum;
