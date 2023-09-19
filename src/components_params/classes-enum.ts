@@ -11,6 +11,7 @@ const enum ClassesEnum {
   CONTENT_FOOTER = 'content--footer',
   HEADING_H1 = 'heading-h1',
   HEADING_H2 = 'heading-h2',
+  HEADING_H3 = 'heading-h3',
   PLACEHOLDER = 'placeholder',
   /* Logo */
   GENERAL_LOGO = 'logo',
