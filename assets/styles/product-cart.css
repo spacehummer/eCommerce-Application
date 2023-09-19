@@ -17,20 +17,33 @@
     /* overflow-y: hidden; */
     overflow: hidden;
     text-overflow: ellipsis;
-    /* white-space: nowrap; */
 }
 
-.cart-price {
-    font-weight: 500;
+/* .cart-price__container {
+    display: inline;
+    white-space: nowrap;
+} */
+
+.cart-price__container .cart-price__field:only-of-type .cart-price__value {
+    text-decoration: none !important;
+}
+
+.cart-price__field {
+    display: inline;
+}
+
+.cart-price__value {
     text-decoration: line-through;
     text-decoration-color: red;
 }
 
-.cart-price:not(:empty) {
+.cart-price__container .cart-price__field:only-of-type {
+    font-weight: 500;
     text-decoration: none !important;
+    color: inherit;
 }
 
-.cart-price__discount {
+.cart-price__value__discount {
     color: red;
     text-decoration: none !important;
 }
@@ -53,5 +66,6 @@
 .cart__add-to-basket .form__input,
 .cart__add-to-basket .form-field-container,
 .cart__add-to-basket .form-field {
+    display: inline;
     width: inherit !important;
 }

@@ -62,10 +62,13 @@ const enum ClassesEnum {
   CART = 'cart',
   CART_TITLE = 'cart-title',
   CART_DESCRIPTION = 'cart-desc',
-  CART_PRICE = 'cart-price',
-  CART_PRICE__DISCOUNT = 'cart-price__discount',
   CART__IMAGE = 'cart__image',
   CART__ADD_TO_BASKET = 'cart__add-to-basket',
+  /* CART_PRICE */
+  CART_PRICE__CONTAINER = 'cart-price__container',
+  CART_PRICE__FIELD = 'cart-price__field',
+  CART_PRICE__VALUE = 'cart-price__value',
+  CART_PRICE__VALUE__DISCOUNT = 'cart-price__value__discount',
   /* ERROR 404 */
   SECTION_404 = 'page-section page-section--error-404',
   SECTION_404_HEADING = 'page-section__heading page-section__heading--error-404',
