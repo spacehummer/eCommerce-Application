@@ -2,10 +2,15 @@ import { BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
+import HeadingH1View from '#src/view/general-components/heading-h1/heading-h1-view';
 
-const args: BasicComponentConstructorArgs = {
+const AboutUsViewRootParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
   classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
+};
+
+const AboutUsViewConfig = {
+  heading: 'About us',
 };
 
 type LogoArgs = Readonly<{
@@ -17,8 +22,18 @@ type LogoArgs = Readonly<{
 }>;
 
 export default class AboutUsView extends View {
+  private readonly componentConfig: typeof AboutUsViewConfig;
+
+  private headingH1: HeadingH1View | null;
+
   constructor() {
-    super(args);
+    super(AboutUsViewRootParams);
+
+    this.componentConfig = AboutUsViewConfig;
+
+    this.headingH1 = null;
+
+    this.configureView();
 
     this.createTitle();
     this.createLogoImg({
@@ -28,6 +43,12 @@ export default class AboutUsView extends View {
       width: 73,
       height: 26,
     });
+  }
+
+  private configureView(): void {
+    this.headingH1 = new HeadingH1View('About us');
+
+    this.basicComponent.addInnerElement(this.headingH1);
   }
 
   private createTitle(): void {
