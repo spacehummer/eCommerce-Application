@@ -10,6 +10,7 @@ const enum ClassesEnum {
   FOOTER = 'footer',
   CONTENT_FOOTER = 'content--footer',
   HEADING_H1 = 'heading-h1',
+  HEADING_H2 = 'heading-h2',
   PLACEHOLDER = 'placeholder',
   /* Logo */
   GENERAL_LOGO = 'logo',
@@ -69,6 +70,8 @@ const enum ClassesEnum {
   SECTION_404_HEADING = 'page-section__heading page-section__heading--error-404',
   SECTION_404_TEXT_BLOCK = 'page-section__text-block page-section__text-block--error-404',
   SECTION_404_PARAGRAPH = 'text-block__paragraph text-block__paragraph--error-404',
+  /* Modifiers */
+  SPARSE_004 = 'sparse-004',
 }
 
 export default ClassesEnum;

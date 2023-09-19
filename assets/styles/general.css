@@ -57,6 +57,10 @@ html {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.sparse-004 {
+  letter-spacing: 0.04em;
+}
 /* </editor-fold desc="General modifiers">*/
 
 /* <editor-fold desc="Header">*/
