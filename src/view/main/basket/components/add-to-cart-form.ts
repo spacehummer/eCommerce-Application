@@ -1,3 +1,4 @@
+import ClassesEnum from '#src/components_params/classes-enum';
 import EditableFieldSet from '../../profile/components/editable-fieldset';
 import EditableForm from '../../profile/components/editable-form';
 import CancelSubmit from '../../profile/components/save-cancel-btn';
@@ -28,13 +29,15 @@ export default class AddToCartForm extends EditableForm {
     values: ProductCredentials,
     defaultValues?: string[],
     names?: string[],
-    isDisabledByDefault: boolean = false
+    isDisabledByDefault: boolean = false,
+    styles?: ClassesEnum | ClassesEnum[]
   ) {
     super(
       callback,
       defaultValues || [values.productId],
       names || Object.values(AddCartFileds),
-      isDisabledByDefault
+      isDisabledByDefault,
+      styles
     );
 
     this.setId(values.productId);

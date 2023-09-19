@@ -1,3 +1,4 @@
+import ClassesEnum from '#src/components_params/classes-enum';
 import EditButton from '../../profile/components/edit-btn';
 import EditableFieldSet from '../../profile/components/editable-fieldset';
 import CancelSubmit from '../../profile/components/save-cancel-btn';
@@ -35,7 +36,8 @@ export default class ModifyQuantity extends AddToCartForm {
       values,
       [`${values.quantity}`, values.productId, values.id],
       Object.values(BasketItemFields),
-      isDisabledByDefault
+      isDisabledByDefault,
+      ClassesEnum.ONLY_FOR_DRAFT_CODE
     );
 
     this.setId(values.id);
@@ -64,16 +66,20 @@ export default class ModifyQuantity extends AddToCartForm {
   }
 
   private createQuantity(prod: BasketProductCredentials): InputField {
-    const quantity = new InputField({
-      label: 'Quntity:',
-      name: ModifyQuantityFields.Quantity,
-      type: 'number',
-      min: '1',
-      max: '100',
-      maxLength: 3,
-      title: 'Must be a value including between 1 and 100!',
-      value: `${prod.quantity}`,
-    });
+    const quantity = new InputField(
+      {
+        label: 'Quntity:',
+        name: ModifyQuantityFields.Quantity,
+        type: 'number',
+        min: '1',
+        max: '100',
+        maxLength: 3,
+        title: 'Must be a value including between 1 and 100!',
+        value: `${prod.quantity}`,
+      },
+      undefined,
+      ClassesEnum.BASKET_CART__INPUT
+    );
 
     return quantity;
   }
