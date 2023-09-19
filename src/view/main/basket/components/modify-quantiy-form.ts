@@ -49,6 +49,8 @@ export default class ModifyQuantity extends AddToCartForm {
     this.fieldSet?.basicComponent.addInnerElement(this.createQuantity(values));
   }
 
+  protected setSubmitOnClick(): void {}
+
   protected createEditBtn(btnText?: string): EditButton {
     return super.createEditBtn(btnText || editBtnText);
   }
@@ -58,7 +60,7 @@ export default class ModifyQuantity extends AddToCartForm {
   }
 
   protected createCancel(): CancelSubmit {
-    return new CancelSubmit(this.cancel.bind(this), this.enableValue, 'button');
+    return new CancelSubmit(this.cancel.bind(this), this.enableValue, 'submit');
   }
 
   private createQuantity(prod: BasketProductCredentials): InputField {
@@ -69,6 +71,7 @@ export default class ModifyQuantity extends AddToCartForm {
       min: '1',
       max: '100',
       maxLength: 3,
+      title: 'Must be a value including between 1 and 100!',
       value: `${prod.quantity}`,
     });
 

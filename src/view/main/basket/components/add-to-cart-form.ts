@@ -45,6 +45,12 @@ export default class AddToCartForm extends EditableForm {
       value: values.productId,
     });
 
+    this.setSubmitOnClick();
+
+    this.basicComponent.addInnerElement(productId);
+  }
+
+  protected setSubmitOnClick(): void {
     if (this.submit) {
       this.submit.submit.onclick = (e: Event): void => {
         const elem = e.currentTarget as HTMLInputElement;
@@ -54,8 +60,6 @@ export default class AddToCartForm extends EditableForm {
         }
       };
     }
-
-    this.basicComponent.addInnerElement(productId);
   }
 
   public enable(): void {
