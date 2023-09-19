@@ -8,12 +8,14 @@ const PagesNames: { [index: string]: string } = {
   LOGIN: 'Log in',
   SIGN_UP: 'Sign up',
   PROFILE: 'Profile',
+  ABOUT_US: 'About Us',
 };
 
 export enum PageEnum {
   INDEX = 'INDEX',
   CATALOG = 'CATALOG',
   BASKET = 'BASKET',
+  ABOUT_US = 'ABOUT_US',
 }
 
 export enum AnonPageEnum {
@@ -46,6 +48,7 @@ const PagesUrls: { [index: string]: string } = {
   LOGIN: 'login',
   SIGN_UP: 'sign-up',
   PROFILE: 'profile',
+  ABOUT_US: 'about-us',
   ERROR_404: 'error-404',
 };
 
