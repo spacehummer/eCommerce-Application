@@ -47,7 +47,25 @@ const enum ClassesEnum {
   /* TO NOT DISPLAY */
   HIDDEN = 'hidden',
   /* ONLY FOR DRAFT CODE */
-  ONLY_FOR_DRAFT_CODE = '',
+  ONLY_FOR_DRAFT_CODE = 'only_for_draft_code',
+  /* BASKET */
+  BASKET = 'basket',
+  BASKET_CART_LIST = 'basket-cart-list',
+  BASKET_LINK = 'basket-link',
+  /* BASKET CART */
+  BASKET_CART = 'basket-cart',
+  BASKET_CART__IMAGE = 'basket-cart__image',
+  BASKET_CART__CONTENT = 'basket-cart__content',
+  BASKET_CART__CTRL = 'basket-cart__ctrl',
+  BASKET_CART__INPUT = 'basket-cart__input',
+  /* CART */
+  CART = 'cart',
+  CART_TITLE = 'cart-title',
+  CART_DESCRIPTION = 'cart-desc',
+  CART_PRICE = 'cart-price',
+  CART_PRICE__DISCOUNT = 'cart-price__discount',
+  CART__IMAGE = 'cart__image',
+  CART__ADD_TO_BASKET = 'cart__add-to-basket',
   /* ERROR 404 */
   SECTION_404 = 'page-section page-section--error-404',
   SECTION_404_HEADING = 'page-section__heading page-section__heading--error-404',

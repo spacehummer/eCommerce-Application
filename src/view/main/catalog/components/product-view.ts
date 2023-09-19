@@ -8,6 +8,7 @@ import AddToCartForm, { AddCartFileds } from '../../basket/components/add-to-car
 import CartModel from '../../basket/cart-model';
 import { ProductCredentials } from '../../basket/components/types';
 import { ProductCart } from './types';
+import '#assets/styles/product-cart.css';
 
 const args: BasicComponentConstructorArgs = {
   classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
@@ -19,8 +20,8 @@ export default class ProductsView extends View {
 
   protected readonly cartModel: CartModel;
 
-  constructor(logicParams?: ViewLogicParams) {
-    super(args, logicParams);
+  constructor(logicParams?: ViewLogicParams, style?: ClassesEnum) {
+    super({ tagName: args.tagName, classNames: style || args.classNames }, logicParams);
 
     this.cartModel = new CartModel();
   }
@@ -40,7 +41,14 @@ export default class ProductsView extends View {
   }
 
   protected factory(values: ProductCredentials): AddToCartForm {
-    return new AddToCartForm(this.callback.bind(this), values);
+    return new AddToCartForm(
+      this.callback.bind(this),
+      values,
+      undefined,
+      undefined,
+      undefined,
+      ClassesEnum.CART__ADD_TO_BASKET
+    );
   }
 
   private disableCart(productId: string): void {
@@ -54,7 +62,7 @@ export default class ProductsView extends View {
     this.productCarts = {};
     const basket = cartState.getCart();
     return prods.map((prod: ProductCart) => {
-      const cart = new ProductCartView(prod, this.factory.bind(this));
+      const cart = new ProductCartView(prod, this.factory.bind(this), ClassesEnum.CART);
       cart.createAddToBasket();
       cart.mount();
       if (this.productCarts) this.productCarts[cart.id] = cart;

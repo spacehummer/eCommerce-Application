@@ -29,8 +29,8 @@ export default class InputField extends View implements IFormField {
 
   public readonly label: HTMLLabelElement;
 
-  constructor(fieldArgs: FormFieldArgs, order: Order = 'label-first') {
-    super(args);
+  constructor(fieldArgs: FormFieldArgs, order: Order = 'label-first', style?: ClassesEnum) {
+    super({ tagName: args.tagName, classNames: style || args.classNames });
 
     this.input = this.createInput(fieldArgs);
 

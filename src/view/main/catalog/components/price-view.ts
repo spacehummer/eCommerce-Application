@@ -7,9 +7,11 @@ import PriceComponent from './price';
 import { ProductPrice } from './types';
 
 const args: BasicComponentConstructorArgs = {
-  classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
+  classNames: ClassesEnum.CART_PRICE,
   tagName: TagsEnum.CONTAINER,
 };
+
+const discountStyle = ClassesEnum.CART_PRICE__DISCOUNT;
 
 const priceLabel = 'Price';
 const discountedLabel = 'Discounted price';
@@ -30,7 +32,7 @@ export default class PriceView extends View {
     this.basicComponent.addInnerElement(this.price);
 
     if (price.discounted) {
-      this.discountPrice = this.createPrice(discountedLabel, price.discounted.value);
+      this.discountPrice = this.createPrice(discountedLabel, price.discounted.value, discountStyle);
       this.basicComponent.addInnerElement(this.discountPrice);
     }
   }
@@ -41,7 +43,7 @@ export default class PriceView extends View {
       if (this.discountPrice) {
         this.discountPrice.setPrice(discounted);
       } else {
-        this.discountPrice = new PriceComponent(discountedLabel, discounted);
+        this.discountPrice = new PriceComponent(discountedLabel, discounted, discountStyle);
         this.basicComponent.addInnerElement(this.discountPrice);
       }
     } else if (this.discountPrice) {
@@ -50,8 +52,8 @@ export default class PriceView extends View {
     this.price.setPrice(PriceView.calculatePrice(price.value));
   }
 
-  private createPrice(label: string, money: TypedMoney): PriceComponent {
-    return new PriceComponent(label, PriceView.calculatePrice(money));
+  private createPrice(label: string, money: TypedMoney, style?: ClassesEnum): PriceComponent {
+    return new PriceComponent(label, PriceView.calculatePrice(money), style);
   }
 
   public static calculatePrice(money: TypedMoney): string {

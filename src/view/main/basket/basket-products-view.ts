@@ -1,3 +1,4 @@
+import ClassesEnum from '#src/components_params/classes-enum';
 import cartState from '#src/logic/state/cartState';
 import ProductsView from '../catalog/components/product-view';
 import { BasketProduct } from '../catalog/components/types';
@@ -10,6 +11,10 @@ import { BasketProductCredentials } from './components/types';
 const basketModel = new BasketModel();
 
 export default class BasketProductsView extends ProductsView {
+  constructor() {
+    super(undefined, ClassesEnum.BASKET_CART_LIST);
+  }
+
   protected callback(record: Record<string, string | Record<string, string>>): void {
     const lineItemId = record[BasketItemFields.BasketItemId] as string;
     const quantity = record[BasketItemFields.Quantity] as string;

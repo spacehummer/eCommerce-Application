@@ -6,15 +6,17 @@ import cartState from '#src/logic/state/cartState';
 import View, { ViewLogicParams } from '#src/view/view';
 import NavItemLinkView from '#src/view/header/navigation/nav-item-link-view';
 import CartEvent from '#src/logic/state/cartStateEvent';
+import BaseItemLinkView from '#src/view/header/navigation/base-nav-item-link-view';
 import { BasketProduct } from '../catalog/components/types';
 import BasketProductsView from './basket-products-view';
 import PriceView from '../catalog/components/price-view';
 import EditButton from '../profile/components/edit-btn';
 import BasketModel from './basket-model';
+import '#assets/styles/basket-cart.css';
 
 const args: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
-  classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
+  classNames: ClassesEnum.BASKET,
 };
 
 const basketModel = new BasketModel();
@@ -90,14 +92,16 @@ export default class BasketView extends View {
 
   private showEmptyCart(): void {
     const component = new BasicComponent({
-      tagName: TagsEnum.CONTAINER,
+      tagName: TagsEnum.H4,
       classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
     });
     component.setTextContent('Your basket is empty.');
 
     this.basicComponent.addInnerElement(component);
 
-    const link = new NavItemLinkView(
+    const link = new BaseItemLinkView(
+      ClassesEnum.BASKET_LINK,
+      ClassesEnum.ITEM_CURRENT,
       {
         callback: (): void => {
           this.logicParams?.router.navigate('catalog');

@@ -18,9 +18,10 @@ export default abstract class EditableForm extends FormComponent {
     submitCallback: (record: Record<string, string | Record<string, string>>) => void,
     protected defaultValues: string[],
     names: string[],
-    private readonly isDisabledByDefault: boolean = true
+    private readonly isDisabledByDefault: boolean = true,
+    styles?: ClassesEnum | ClassesEnum[]
   ) {
-    super(submitCallback, names, ClassesEnum.LOGIN_FORM);
+    super(submitCallback, names, styles || ClassesEnum.LOGIN_FORM);
 
     this.editBtn = this.createEditBtn();
     this.submit = this.createCancel();
