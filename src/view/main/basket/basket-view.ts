@@ -13,6 +13,7 @@ import PriceView from '../catalog/components/price-view';
 import EditButton from '../profile/components/edit-btn';
 import BasketModel from './basket-model';
 import '#assets/styles/basket-cart.css';
+import AddPromoCodeForm, { PromoCodeFields } from './components/add-promo-code-form';
 
 const args: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
@@ -23,6 +24,8 @@ const basketModel = new BasketModel();
 
 export default class BasketView extends View {
   private totalPrice?: PriceView;
+
+  private addPromoCodeForm?: AddPromoCodeForm;
 
   constructor(logicParams: ViewLogicParams) {
     super(args, logicParams);
@@ -71,6 +74,8 @@ export default class BasketView extends View {
 
       this.createTotal(cart.totalPrice);
 
+      this.createDiscountCodeForm();
+
       this.createClearCartBtn();
     } else {
       // empty cart
@@ -88,6 +93,40 @@ export default class BasketView extends View {
     this.createTitle();
     this.showEmptyCart();
     basketModel.clearCart();
+  }
+
+  private createDiscountCodeForm(): void {
+    const container = new BasicComponent({
+      tagName: TagsEnum.CONTAINER,
+      classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
+    });
+    const addedContainer = new BasicComponent({
+      tagName: TagsEnum.CONTAINER,
+      classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
+    });
+
+    const callback = (record: Record<string, string | Record<string, string>>): void => {
+      const cart = cartState.getCart();
+      if (cart) {
+        const code = record[PromoCodeFields.PromoCode] as string;
+        basketModel.applyDiscountCode({ code, id: cart.id, version: cart.version }).then((res) => {
+          this.addPromoCodeForm?.showSubmitResults('Promo-code Activated!', res);
+          if (res.isSuccessful) {
+            const activePromoCode = new BasicComponent({
+              tagName: TagsEnum.PARAGRAPH,
+              classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
+            });
+            activePromoCode.setTextContent(code);
+            addedContainer.addInnerElement(activePromoCode);
+          }
+        });
+      }
+    };
+    this.addPromoCodeForm = new AddPromoCodeForm(callback);
+
+    container.addInnerElement(addedContainer);
+    container.addInnerElement(this.addPromoCodeForm);
+    this.basicComponent.addInnerElement(container);
   }
 
   private showEmptyCart(): void {

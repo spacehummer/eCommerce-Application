@@ -36,6 +36,11 @@ export type CartActionsDraft = Readonly<{
 }> &
   CartCredentials;
 
+export type CartDiscountCodeDraft = Readonly<{
+  code: string;
+}> &
+  CartCredentials;
+
 export type CartDraft = {
   currency: string;
   customerEmail?: string;

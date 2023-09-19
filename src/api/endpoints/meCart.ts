@@ -10,6 +10,7 @@ import APICredentials from '../utils/apiCredentials';
 import ErrorData from './types/error';
 import {
   CartActionsDraft,
+  CartDiscountCodeDraft,
   CartItemDraft,
   CartQuantityDraft,
   CartRemoveItemDraft,
@@ -64,6 +65,15 @@ class CartRepository extends BaseEndpoint implements ICart {
       action,
       lineItemId,
       quantity,
+    };
+  }
+
+  private createAddDiscountCode(codeDraft: CartDiscountCodeDraft): MyCartUpdateAction {
+    const action = 'addDiscountCode';
+    const { code } = codeDraft;
+    return {
+      action,
+      code,
     };
   }
 
@@ -196,6 +206,21 @@ class CartRepository extends BaseEndpoint implements ICart {
         .carts()
         .withId({ ID: body.id })
         .post({ body: this.createRemoveItemDraft(productDetails) })
+        .execute();
+    } catch (error) {
+      throw new ApiError(error as ErrorData);
+    }
+  }
+
+  public async addDiscountCode(codeDraft: CartDiscountCodeDraft): Promise<ClientResponse<Cart>> {
+    const { id, version } = codeDraft;
+    try {
+      return await this.apiRoot
+        .withProjectKey({ projectKey: this.projectKey })
+        .me()
+        .carts()
+        .withId({ ID: id })
+        .post({ body: { version, actions: [this.createAddDiscountCode(codeDraft)] } })
         .execute();
     } catch (error) {
       throw new ApiError(error as ErrorData);
