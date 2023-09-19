@@ -3,7 +3,7 @@ import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
 
-import './heading-h1.css';
+import './heading-h2.css';
 
 const HeadingH2ViewParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.H2,
