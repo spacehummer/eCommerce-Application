@@ -30,7 +30,7 @@ export default class ContributorSectionView extends View {
 
   private contributorSectionHeading: HeadingH2View | null;
 
-  private contributorSubsection: ContributorSubsectionView | null;
+  private contributorSubsections: ContributorSubsectionView[] | null;
 
   private viewConfig: ContributorSectionViewConfig;
 
@@ -42,7 +42,7 @@ export default class ContributorSectionView extends View {
     this.contributorPhoto = null;
     this.contributorRightSideContainer = null;
     this.contributorSectionHeading = null;
-    this.contributorSubsection = null;
+    this.contributorSubsections = null;
 
     this.configureView();
   }
@@ -57,10 +57,15 @@ export default class ContributorSectionView extends View {
     this.contributorRightSideContainer = new BasicComponent(contributorRightSideContainerParams);
 
     this.contributorSectionHeading = new HeadingH2View(this.viewConfig.heading);
-    this.contributorSubsection = new ContributorSubsectionView(this.viewConfig.subsections[0]);
+    this.contributorSubsections = [new ContributorSubsectionView(this.viewConfig.subsections[0])];
+    this.contributorSubsections = [
+      ...this.contributorSubsections,
+      new ContributorSubsectionView(this.viewConfig.subsections[1]),
+    ];
 
     this.contributorRightSideContainer.addInnerElement(this.contributorSectionHeading);
-    this.contributorRightSideContainer.addInnerElement(this.contributorSubsection);
+    this.contributorRightSideContainer.addInnerElement(this.contributorSubsections[0]);
+    this.contributorRightSideContainer.addInnerElement(this.contributorSubsections[1]);
 
     this.basicComponent.addInnerElement(this.contributorPhoto);
     this.basicComponent.addInnerElement(this.contributorRightSideContainer);
