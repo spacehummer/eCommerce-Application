@@ -4,21 +4,28 @@ import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
 import HeadingH1View from '#src/view/general-components/heading-h1/heading-h1-view';
 import PathsObj from '#src/components_params/paths-obj';
+
+import { SubsectionBlockConfig } from '#src/view/main/about-us/contributor-section/contributor-subsection/contributor-subsection-block/contributor-subsection-block-view';
+import RegularSubsectionView from '#src/view/main/about-us/contributor-section/regular-subsection/regular-subsection-view';
+
 import ContributorSectionView, {
   ContributorSectionViewConfig,
 } from './contributor-section/contributor-section-view';
-
-import './about-us.css';
 
 const ViewRootParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
   classNames: ClassesEnum.ABOUT_US_SECTION,
 };
 
+interface RegularSubsectionConfig {
+  heading: string;
+  blocks: SubsectionBlockConfig[];
+}
+
 interface AboutUsViewConfig {
   heading: string;
   contributors: ContributorSectionViewConfig[];
-  regularSubsections: 'TODO';
+  regularSubsections: RegularSubsectionConfig[];
 }
 
 const ViewConfig: AboutUsViewConfig = {
@@ -142,7 +149,28 @@ const ViewConfig: AboutUsViewConfig = {
       ],
     },
   ],
-  regularSubsections: 'TODO',
+  regularSubsections: [
+    {
+      heading: 'Team development retrospective',
+      blocks: [
+        {
+          type: 'paragraph',
+          content:
+            'The efficiency of interaction was maintained through the use of project management software. Thanks to integration with GitHub, it was clear which commit, which branch related to which task.',
+        },
+        {
+          type: 'paragraph',
+          content:
+            'Communications were conducted on a Discord server created and configured with channels for the main types of team interactions.',
+        },
+        {
+          type: 'paragraph',
+          content:
+            'For automation and convenience for deployment, the Netlify service was used with integration with GitHub and preview deployments, which made it possible to quickly see the current result and identify errors.',
+        },
+      ],
+    },
+  ],
 };
 
 type LogoArgs = Readonly<{
@@ -160,6 +188,8 @@ export default class AboutUsView extends View {
 
   private contributorSections: ContributorSectionView[] | null;
 
+  private regularSubsections: RegularSubsectionView | null;
+
   constructor() {
     super(ViewRootParams);
 
@@ -167,6 +197,7 @@ export default class AboutUsView extends View {
 
     this.headingH1 = null;
     this.contributorSections = null;
+    this.regularSubsections = null;
 
     this.configureView();
 
@@ -185,7 +216,6 @@ export default class AboutUsView extends View {
       new ContributorSectionView(this.viewConfig.contributors[0]),
       new ContributorSectionView(this.viewConfig.contributors[1]),
     ];
-
 
     this.basicComponent.addInnerElement(this.headingH1);
     this.contributorSections.forEach((element) => {
