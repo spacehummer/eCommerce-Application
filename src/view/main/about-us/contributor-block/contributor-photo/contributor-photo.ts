@@ -4,11 +4,9 @@ import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
 import AttributesNamesEnum from '#src/components_params/attributes-names-enum';
 
-// import './contributor-subsection.css';
-
 const viewRootParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.CONTAINER,
-  classNames: ClassesEnum.PLACEHOLDER,
+  classNames: ClassesEnum.ABOUT_US_SECTION_CONTRIBUTORS_SECTION_PHOTO_WRP,
 };
 
 export interface ContributorPhotoConfig {
@@ -34,7 +32,7 @@ export default class ContributorPhoto extends View {
   private configureView(): void {
     const imgParams: BasicComponentConstructorArgs = {
       tagName: TagsEnum.IMG,
-      classNames: ClassesEnum.PLACEHOLDER,
+      classNames: ClassesEnum.ABOUT_US_SECTION_CONTRIBUTORS_SECTION_PHOTO,
     };
     this.img = new BasicComponent(imgParams);
     this.img.setComponentAttribute(AttributesNamesEnum.SRC, this.viewConfig.src);
