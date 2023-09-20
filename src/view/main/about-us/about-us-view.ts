@@ -77,7 +77,54 @@ const ViewConfig: AboutUsViewConfig = {
           paragraphs: [
             {
               type: 'gh-link',
-              content: 'Yuriy is a beginner front-end developer.',
+              content: 'spacehummer; https://github.com/spacehummer',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      heading: 'David',
+      subsections: [
+        {
+          heading: 'Quick bio',
+          paragraphs: [
+            {
+              type: 'paragraph',
+              content: 'Coming soon...',
+            },
+          ],
+        },
+        {
+          heading: 'Contribution to the project',
+          paragraphs: [
+            {
+              type: 'paragraph',
+              content: 'David is a member of the team. His contribution to the project is:',
+            },
+            {
+              type: 'list',
+              content:
+                'project README updates\n' +
+                'app UI design\n' +
+                'Commercetools project and API client setup\n' +
+                'app Sign up page\n' +
+                'app Log in page\n' +
+                'app basic catalog page\n' +
+                'app basket page\n' +
+                'app basic About Us page\n' +
+                'search for information for the formation of products\n' +
+                'add products and categories into Commercetools with descriptions and other product parameters\n' +
+                'app routing updates',
+            },
+          ],
+        },
+        {
+          heading: 'Quick bio',
+          paragraphs: [
+            {
+              type: 'gh-link',
+              content: 'kuzikevichdavid; https://github.com/KuzikevichDavid',
             },
           ],
         },
@@ -124,7 +171,10 @@ export default class AboutUsView extends View {
 
   private configureView(): void {
     this.headingH1 = new HeadingH1View('About us');
-    this.contributorSections = [new ContributorSectionView(this.viewConfig.contributors[0])];
+    this.contributorSections = [
+      new ContributorSectionView(this.viewConfig.contributors[0]),
+      new ContributorSectionView(this.viewConfig.contributors[1]),
+    ];
 
     this.basicComponent.addInnerElement(this.headingH1);
     this.contributorSections.forEach((element) => {
