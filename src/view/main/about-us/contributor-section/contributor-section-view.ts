@@ -5,7 +5,7 @@ import View from '#src/view/view';
 
 import './contributor-section.css';
 import ContributorSubsectionView, {
-  Subsection,
+  SubsectionConfig,
 } from '#src/view/main/about-us/contributor-section/contributor-subsection/contributor-subsection-view';
 import ContributorPhoto, {
   ContributorPhotoConfig,
@@ -20,7 +20,7 @@ const viewRootParams: BasicComponentConstructorArgs = {
 export interface ContributorSectionViewConfig {
   heading: string;
   img: ContributorPhotoConfig;
-  subsections: Subsection[];
+  subsections: SubsectionConfig[];
 }
 
 export default class ContributorSectionView extends View {
@@ -49,11 +49,13 @@ export default class ContributorSectionView extends View {
 
   private configureView(): void {
     this.contributorPhoto = new ContributorPhoto(this.viewConfig.img);
+
     const contributorRightSideContainerParams: BasicComponentConstructorArgs = {
       tagName: TagsEnum.CONTAINER,
       classNames: ClassesEnum.ABOUT_US_SECTION_CONTRIBUTORS_SECTION_RIGHT_SIDE,
     };
     this.contributorRightSideContainer = new BasicComponent(contributorRightSideContainerParams);
+
     this.contributorSectionHeading = new HeadingH2View(this.viewConfig.heading);
     this.contributorSubsection = new ContributorSubsectionView(this.viewConfig.subsections[0]);
 

@@ -31,7 +31,7 @@ const ViewConfig: AboutUsViewConfig = {
       subsections: [
         {
           heading: 'Quick bio',
-          paragraphs: [
+          blocks: [
             {
               type: 'paragraph',
               content: 'Yuriy is a beginner front-end developer.',
@@ -50,7 +50,7 @@ const ViewConfig: AboutUsViewConfig = {
         },
         {
           heading: 'Contribution to the project',
-          paragraphs: [
+          blocks: [
             {
               type: 'paragraph',
               content: 'Yuriy is a leader of the team. His contribution to the project is:',
@@ -79,7 +79,7 @@ const ViewConfig: AboutUsViewConfig = {
         },
         {
           heading: 'Quick bio',
-          paragraphs: [
+          blocks: [
             {
               type: 'gh-link',
               content: 'spacehummer; https://github.com/spacehummer',
@@ -97,7 +97,7 @@ const ViewConfig: AboutUsViewConfig = {
       subsections: [
         {
           heading: 'Quick bio',
-          paragraphs: [
+          blocks: [
             {
               type: 'paragraph',
               content: 'Coming soon...',
@@ -106,7 +106,7 @@ const ViewConfig: AboutUsViewConfig = {
         },
         {
           heading: 'Contribution to the project',
-          paragraphs: [
+          blocks: [
             {
               type: 'paragraph',
               content: 'David is a member of the team. His contribution to the project is:',
@@ -130,7 +130,7 @@ const ViewConfig: AboutUsViewConfig = {
         },
         {
           heading: 'Quick bio',
-          paragraphs: [
+          blocks: [
             {
               type: 'gh-link',
               content: 'kuzikevichdavid; https://github.com/KuzikevichDavid',
