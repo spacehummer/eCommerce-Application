@@ -31,9 +31,15 @@ export default class HeadingH2View extends View {
       });
     }
     if (config?.letterSpacing === '4%') {
-      Object.assign(HeadingH2ViewParams, {
-        classNames: [...HeadingH2ViewParams.classNames, ClassesEnum.SPARSE_004],
-      });
+      if (HeadingH2ViewParams.classNames !== null) {
+        Object.assign(HeadingH2ViewParams, {
+          classNames: [...HeadingH2ViewParams.classNames, ClassesEnum.SPARSE_004],
+        });
+      } else {
+        Object.assign(HeadingH2ViewParams, {
+          classNames: ClassesEnum.SPARSE_004,
+        });
+      }
     }
 
     super(HeadingH2ViewParams);
