@@ -12,7 +12,7 @@ export interface BasicComponentConstructorArgs {
   tagName: TagsEnum;
   classNames: ClassesEnum | ClassesEnum[] | null;
   id?: string | null;
-  textContent?: TextContentEnum | null;
+  textContent?: TextContentEnum | string | null;
   callback?: ListenerCB | null;
   eventType?: string;
 }

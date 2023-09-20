@@ -1,4 +1,4 @@
-import { BasicComponentConstructorArgs } from '#src/components/basic-component';
+import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
 import ClassesEnum from '#src/components_params/classes-enum';
@@ -30,6 +30,14 @@ export default class ListView extends View {
   }
 
   private configureView(): void {
-    // todo
+    this.viewConfig.content.split('\n').forEach((elementText) => {
+      const listElementParams: BasicComponentConstructorArgs = {
+        tagName: TagsEnum.LIST_ITEM,
+        classNames: this.viewConfig.elementClasses ? this.viewConfig.elementClasses : null,
+        textContent: elementText,
+      };
+      const listElement = new BasicComponent(listElementParams);
+      this.basicComponent.addInnerElement(listElement);
+    });
   }
 }
