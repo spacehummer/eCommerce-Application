@@ -3,6 +3,7 @@ import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
 import HeadingH1View from '#src/view/general-components/heading-h1/heading-h1-view';
+import PathsObj from '#src/components_params/paths-obj';
 import ContributorSectionView, {
   ContributorSectionViewConfig,
 } from './contributor-block/contributor-section-view';
@@ -23,6 +24,10 @@ const ViewConfig: AboutUsViewConfig = {
   contributors: [
     {
       heading: 'Yuriy',
+      img: {
+        src: PathsObj.CONTRIBUTOR_PHOTO_YURIY,
+        alt: 'Yuriy photo.',
+      },
       subsections: [
         {
           heading: 'Quick bio',
@@ -85,6 +90,10 @@ const ViewConfig: AboutUsViewConfig = {
     },
     {
       heading: 'David',
+      img: {
+        src: PathsObj.CONTRIBUTOR_PHOTO_DAVID,
+        alt: 'David photo.',
+      },
       subsections: [
         {
           heading: 'Quick bio',
