@@ -22,7 +22,7 @@ export interface SubsectionConfig {
 export default class ContributorSubsectionView extends View {
   private contributorSectionHeading: HeadingH3View | null;
 
-  private contributorSubsectionBlock: ContributorSubsectionBlockView | null;
+  private contributorSubsectionBlocks: ContributorSubsectionBlockView[];
 
   private viewConfig: SubsectionConfig;
 
@@ -32,16 +32,20 @@ export default class ContributorSubsectionView extends View {
     this.viewConfig = config;
 
     this.contributorSectionHeading = null;
-    this.contributorSubsectionBlock = null;
+    this.contributorSubsectionBlocks = [];
 
     this.configureView();
   }
 
   private configureView(): void {
     this.contributorSectionHeading = new HeadingH3View(this.viewConfig.heading);
-    this.contributorSubsectionBlock = new ContributorSubsectionBlockView(this.viewConfig.blocks[0]);
+    this.viewConfig.blocks.forEach((blockSource) => {
+      this.contributorSubsectionBlocks.push(new ContributorSubsectionBlockView(blockSource));
+    });
 
     this.basicComponent.addInnerElement(this.contributorSectionHeading);
-    this.basicComponent.addInnerElement(this.contributorSubsectionBlock);
+    this.contributorSubsectionBlocks.forEach((block) => {
+      this.basicComponent.addInnerElement(block);
+    });
   }
 }
