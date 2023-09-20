@@ -80,7 +80,7 @@ const ViewConfig: AboutUsViewConfig = {
           ],
         },
         {
-          heading: 'Quick bio',
+          heading: 'Github',
           blocks: [
             {
               type: 'gh-link',
@@ -131,7 +131,7 @@ const ViewConfig: AboutUsViewConfig = {
           ],
         },
         {
-          heading: 'Quick bio',
+          heading: 'Github',
           blocks: [
             {
               type: 'gh-link',

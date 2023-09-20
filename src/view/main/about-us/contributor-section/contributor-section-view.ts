@@ -57,15 +57,24 @@ export default class ContributorSectionView extends View {
     this.contributorRightSideContainer = new BasicComponent(contributorRightSideContainerParams);
 
     this.contributorSectionHeading = new HeadingH2View(this.viewConfig.heading);
-    this.contributorSubsections = [new ContributorSubsectionView(this.viewConfig.subsections[0])];
-    this.contributorSubsections = [
-      ...this.contributorSubsections,
-      new ContributorSubsectionView(this.viewConfig.subsections[1]),
-    ];
+    this.contributorSubsections = [];
+    this.viewConfig.subsections.forEach((subsectionSource) => {
+      if (this.contributorSubsections === null) {
+        this.contributorSubsections = [new ContributorSubsectionView(subsectionSource)];
+      } else {
+        this.contributorSubsections.push(new ContributorSubsectionView(subsectionSource));
+      }
+    });
 
     this.contributorRightSideContainer.addInnerElement(this.contributorSectionHeading);
-    this.contributorRightSideContainer.addInnerElement(this.contributorSubsections[0]);
-    this.contributorRightSideContainer.addInnerElement(this.contributorSubsections[1]);
+    this.contributorSubsections.forEach((subsection) => {
+      if (!this.contributorRightSideContainer) {
+        throw new Error(
+          'ERR in ContributorSectionView: missed `this.contributorRightSideContainer` BasicComponent while subsections adding!'
+        );
+      }
+      this.contributorRightSideContainer.addInnerElement(subsection);
+    });
 
     this.basicComponent.addInnerElement(this.contributorPhoto);
     this.basicComponent.addInnerElement(this.contributorRightSideContainer);
