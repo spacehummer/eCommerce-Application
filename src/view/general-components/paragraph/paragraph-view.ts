@@ -11,7 +11,7 @@ const ParagraphViewParams: BasicComponentConstructorArgs = {
 };
 
 interface ParagraphConfig {
-  paragraphType?: 'type-1' | 'type-2';
+  textStyle?: 'type-1' | 'type-2';
 }
 
 /**
@@ -38,8 +38,8 @@ export default class ParagraphView extends View {
     this.componentConfig = config || null;
 
     if (this.componentConfig) {
-      if (this.componentConfig.paragraphType) {
-        switch (this.componentConfig.paragraphType) {
+      if (this.componentConfig.textStyle) {
+        switch (this.componentConfig.textStyle) {
           case 'type-1':
             this.basicComponent.addAdditionalClasses(ClassesEnum.FONT_PARAGRAPH_1);
             break;
