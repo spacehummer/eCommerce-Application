@@ -11,8 +11,8 @@ const viewRootParams: BasicComponentConstructorArgs = {
 export interface ListComponentConfig {
   type: 'marked' | 'linked';
   content: string;
-  containerClasses: ClassesEnum[] | ClassesEnum | null;
-  elementClasses: ClassesEnum[] | ClassesEnum | null;
+  containerClasses?: ClassesEnum[] | ClassesEnum;
+  elementClasses?: ClassesEnum[] | ClassesEnum;
 }
 
 export default class ListView extends View {
