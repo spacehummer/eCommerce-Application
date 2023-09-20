@@ -8,6 +8,8 @@ import ContributorSectionView, {
   ContributorSectionViewConfig,
 } from './contributor-section/contributor-section-view';
 
+import './about-us.css';
+
 const ViewRootParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
   classNames: ClassesEnum.ABOUT_US_SECTION,

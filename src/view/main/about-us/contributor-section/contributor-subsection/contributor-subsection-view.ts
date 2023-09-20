@@ -42,5 +42,6 @@ export default class ContributorSubsectionView extends View {
     this.contributorSubsectionBlock = new ContributorSubsectionBlockView(this.viewConfig.blocks[0]);
 
     this.basicComponent.addInnerElement(this.contributorSectionHeading);
+    this.basicComponent.addInnerElement(this.contributorSubsectionBlock);
   }
 }

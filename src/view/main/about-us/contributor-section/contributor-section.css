@@ -1,6 +1,7 @@
 .about-us__contributor-section {
   display: flex;
   column-gap: 32px;
+  width: 100%;
 }
 
 .about-us__contributor-photo {
@@ -9,6 +10,7 @@
 
 .about-us__contributor-section-right-side {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   row-gap: 16px;
 }

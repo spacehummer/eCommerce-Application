@@ -1,4 +1,5 @@
 .about-us__contributor-subsection {
   display: flex;
-  column-gap: 8px;
+  flex-direction: column;
+  row-gap: 8px;
 }

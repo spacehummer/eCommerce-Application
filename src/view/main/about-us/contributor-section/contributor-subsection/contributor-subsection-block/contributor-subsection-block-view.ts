@@ -1,11 +1,12 @@
 import { BasicComponentConstructorArgs } from '#src/components/basic-component';
-import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
+import ParagraphView from '#src/view/general-components/paragraph/paragraph-view';
+import ListView from '#src/view/general-components/list/list-view';
 
 const viewRootParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.CONTAINER,
-  classNames: ClassesEnum.PLACEHOLDER,
+  classNames: null,
 };
 
 export interface SubsectionBlockConfig {
@@ -25,6 +26,22 @@ export default class ContributorSubsectionBlockView extends View {
   }
 
   private configureView(): void {
-    // this.basicComponent.addInnerElement(this.contributorSectionHeading);
+    let newViewBasicComponentSource: ParagraphView | ListView;
+    switch (this.viewConfig.type) {
+      case 'paragraph':
+        newViewBasicComponentSource = new ParagraphView(this.viewConfig.content);
+        break;
+      case 'list':
+        newViewBasicComponentSource = new ParagraphView(this.viewConfig.content);
+        break;
+      case 'gh-link':
+        newViewBasicComponentSource = new ParagraphView(this.viewConfig.content);
+        break;
+      default:
+        throw new Error(
+          'ERR in ContributorSubsectionBlockView: unexpected value of `SubsectionBlockConfig.type`!'
+        );
+    }
+    this.basicComponent = newViewBasicComponentSource.basicComponent;
   }
 }
