@@ -160,7 +160,7 @@ export class BasicComponent implements GetHTMLElement {
     checkInstance(this.htmlElement, HTMLElement).setAttribute(name, value);
   }
 
-  protected addAdditionalClasses(additionClassesList: ClassesEnum | ClassesEnum[]): void {
+  public addAdditionalClasses(additionClassesList: ClassesEnum | ClassesEnum[]): void {
     if (Array.isArray(this.paramsObj.classNames)) {
       if (Array.isArray(additionClassesList)) {
         this.paramsObj.classNames.push(...additionClassesList);

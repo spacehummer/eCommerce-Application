@@ -30,18 +30,11 @@ export default class HeadingH2View extends View {
         textContent: text,
       });
     }
-    if (config?.letterSpacing === '4%') {
-      if (HeadingH2ViewParams.classNames !== null) {
-        Object.assign(HeadingH2ViewParams, {
-          classNames: [...HeadingH2ViewParams.classNames, ClassesEnum.SPARSE_004],
-        });
-      } else {
-        Object.assign(HeadingH2ViewParams, {
-          classNames: ClassesEnum.SPARSE_004,
-        });
-      }
-    }
 
     super(HeadingH2ViewParams);
+
+    if (config?.letterSpacing === '4%') {
+      this.basicComponent.addAdditionalClasses(ClassesEnum.SPARSE_004);
+    }
   }
 }

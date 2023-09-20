@@ -30,12 +30,11 @@ export default class ParagraphView extends View {
         textContent: text,
       });
     }
-    if (config?.fontWeight === 'medium-500') {
-      Object.assign(ParagraphViewParams, {
-        classNames: [...ParagraphViewParams.classNames, ClassesEnum.FONT_WEIGHT_500],
-      });
-    }
 
     super(ParagraphViewParams);
+
+    if (config?.fontWeight === 'medium-500') {
+      this.basicComponent.addAdditionalClasses(ClassesEnum.FONT_WEIGHT_500);
+    }
   }
 }
