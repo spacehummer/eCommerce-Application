@@ -6,3 +6,9 @@
 .about-us__contributor-photo {
   max-width: 256px;
 }
+
+.about-us__contributor-section-right-side {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
