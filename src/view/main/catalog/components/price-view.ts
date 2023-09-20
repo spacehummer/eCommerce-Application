@@ -7,14 +7,14 @@ import PriceComponent from './price';
 import { ProductPrice } from './types';
 
 const args: BasicComponentConstructorArgs = {
-  classNames: ClassesEnum.CART_PRICE,
+  classNames: ClassesEnum.CART_PRICE__CONTAINER,
   tagName: TagsEnum.CONTAINER,
 };
 
-const discountStyle = ClassesEnum.CART_PRICE__DISCOUNT;
+const discountStyle = ClassesEnum.CART_PRICE__VALUE__DISCOUNT;
 
 const priceLabel = 'Price';
-const discountedLabel = 'Discounted price';
+const discountedLabel = '';
 
 export default class PriceView extends View {
   private readonly price: PriceComponent;
@@ -28,7 +28,7 @@ export default class PriceView extends View {
   constructor(price: ProductPrice, protected readonly argPriceLabel?: string) {
     super(args);
 
-    this.price = this.createPrice(this.priceLabel, price.value);
+    this.price = this.createPrice(`${this.priceLabel} ${price.value.currencyCode}`, price.value);
     this.basicComponent.addInnerElement(this.price);
 
     if (price.discounted) {
@@ -47,7 +47,8 @@ export default class PriceView extends View {
         this.basicComponent.addInnerElement(this.discountPrice);
       }
     } else if (this.discountPrice) {
-      this.discountPrice.setPrice('');
+      this.discountPrice.basicComponent.htmlElement?.remove();
+      this.discountPrice = undefined;
     }
     this.price.setPrice(PriceView.calculatePrice(price.value));
   }

@@ -1,10 +1,10 @@
-import { Image } from '@commercetools/platform-sdk';
+import { Image, LineItem, ProductVariant } from '@commercetools/platform-sdk';
 import { BasicComponent } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import PriceView from '../catalog/components/price-view';
 import ProductCartView from '../catalog/components/product-cart';
-import { BasketProduct } from '../catalog/components/types';
+import { ProductCart } from '../catalog/components/types';
 import EditButton from '../profile/components/edit-btn';
 import AddToCartForm from './components/add-to-cart-form';
 import { BasketProductCredentials, ProductCredentials } from './components/types';
@@ -19,23 +19,35 @@ export default class BasketProductCart extends ProductCartView {
   }
 
   constructor(
-    protected readonly basketProduct: BasketProduct,
+    protected readonly lineItem: LineItem,
     private factory: (values: BasketProductCredentials) => AddToCartForm
   ) {
+    const variant: Partial<ProductVariant> = { prices: [lineItem.price] };
+    const prod: ProductCart = {
+      id: lineItem.productId,
+      masterVariant: Object.assign(lineItem.variant, variant), // {basketProduct.variant},
+      name: lineItem.name,
+      slug: lineItem.productSlug,
+    };
     const method = (prodVals: ProductCredentials): AddToCartForm =>
       factory(prodVals as BasketProductCredentials);
-    super(basketProduct.product, method, ClassesEnum.BASKET_CART);
+    super(prod, method, ClassesEnum.BASKET_CART);
 
-    const { totalPrice } = basketProduct;
+    const price = lineItem.price.value;
+    const discounted = lineItem.discountedPricePerQuantity[0]?.discountedPrice;
+    const totalPrice =
+      lineItem.price.discounted || lineItem.discountedPricePerQuantity[0]
+        ? { value: price, discounted }
+        : { value: lineItem.totalPrice };
 
     this.itemTotal = new PriceView(totalPrice, 'Total');
   }
 
   public createAddToBasket(): void {
     this.addToCartFrom = this.factory({
-      quantity: this.basketProduct.quantity,
-      id: this.basketProduct.id,
-      productId: this.basketProduct.product.id,
+      quantity: this.lineItem.quantity,
+      id: this.lineItem.id,
+      productId: this.lineItem.productId,
     });
   }
 

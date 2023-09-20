@@ -1,6 +1,10 @@
 import { Cart, ClientResponse } from '@commercetools/platform-sdk';
 import Api from '#src/api/api';
-import { CartQuantityDraft, CartRemoveItemDraft } from '#src/api/endpoints/types/cart';
+import {
+  CartDiscountCodeDraft,
+  CartQuantityDraft,
+  CartRemoveItemDraft,
+} from '#src/api/endpoints/types/cart';
 import ApiError from '#src/api/utils/apiError';
 import cartState from '#src/logic/state/cartState';
 import { ApiRequestResult } from '../signup-login/components/types';
@@ -20,6 +24,10 @@ export default class BasketModel {
   protected updateCart(cart: ClientResponse<Cart>): ClientResponse<Cart> {
     cartState.setCart(cart.body);
     return cart;
+  }
+
+  public async applyDiscountCode(codeDraft: CartDiscountCodeDraft): Promise<CartApiResponse> {
+    return this.apiCall(this.api.applyDiscountCode(codeDraft).then(this.updateCart));
   }
 
   public async removeItemFromCart(itemDraft: CartRemoveItemDraft): Promise<ClientResponse<Cart>> {

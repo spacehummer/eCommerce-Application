@@ -35,7 +35,7 @@ export default class ProductCartView extends View {
 
   protected descriptionComponent?: BasicComponent;
 
-  protected pricesComponent?: PriceView;
+  public pricesComponent?: PriceView;
 
   protected imageContainer?: HTMLDivElement;
 
