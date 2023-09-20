@@ -6,7 +6,7 @@ import HeadingH1View from '#src/view/general-components/heading-h1/heading-h1-vi
 
 const AboutUsViewRootParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
-  classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
+  classNames: ClassesEnum.PLACEHOLDER,
 };
 
 const AboutUsViewConfig = {

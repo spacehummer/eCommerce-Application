@@ -1,0 +1,4 @@
+.about-us__contributor-block {
+  display: flex;
+  column-gap: 32px;
+}

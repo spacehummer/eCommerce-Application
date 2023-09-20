@@ -65,13 +65,17 @@ const enum ClassesEnum {
   MODAL_WINDOW_BTN_CLOSE_ERR = 'modal-window__btn-close--err',
   MODAL_WINDOW_CONTENT_CONTAINER = 'modal-window__content-container',
   MODAL_WINDOW_CONTENT_PARAGRAPH = 'modal-window__content-paragraph paragraph_type_2',
-  /* ONLY FOR DRAFT CODE */
-  ONLY_FOR_DRAFT_CODE = '',
   /* ERROR 404 */
   SECTION_404 = 'page-section page-section--error-404',
   SECTION_404_HEADING = 'page-section__heading page-section__heading--error-404',
   SECTION_404_TEXT_BLOCK = 'page-section__text-block page-section__text-block--error-404',
   SECTION_404_PARAGRAPH = 'text-block__paragraph text-block__paragraph--error-404',
+  /* About us */
+  ABOUT_US_SECTION = 'page-section page-section--about-us',
+  ABOUT_US_SECTION_HEADING = 'about-us__heading',
+  ABOUT_US_SECTION_CONTRIBUTORS_SECTION = 'about-us__contributors-section',
+  /* ONLY FOR DRAFT CODE */
+  ONLY_FOR_DRAFT_CODE = '',
   /* Modifiers */
   SPARSE_004 = 'sparse-004',
   FONT_WEIGHT_500 = 'fw-500',
