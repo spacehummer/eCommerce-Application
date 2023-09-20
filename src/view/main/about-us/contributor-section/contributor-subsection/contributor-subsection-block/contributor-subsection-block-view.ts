@@ -14,6 +14,11 @@ export interface SubsectionBlockConfig {
   content: string;
 }
 
+// const listConfig: ListComponentConfig = {
+//   type: 'marked',
+//   content: '',
+// };
+
 export default class ContributorSubsectionBlockView extends View {
   private viewConfig: SubsectionBlockConfig;
 

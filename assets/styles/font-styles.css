@@ -5,6 +5,13 @@
   font-weight: 600;
 }
 
+.paragraph_type_1 {
+  font-family: Inter, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+}
+
 .paragraph_type_2 {
   font-family: Inter, sans-serif;
   font-size: 20px;

@@ -11,13 +11,15 @@ const ParagraphViewParams: BasicComponentConstructorArgs = {
 };
 
 interface ParagraphConfig {
-  fontWeight?: 'medium-500';
+  paragraphType?: 'type-1' | 'type-2';
 }
 
 /**
  * General paragraph component.
  */
 export default class ParagraphView extends View {
+  private readonly componentConfig: ParagraphConfig | null;
+
   /**
    * Constructor.
    * @param {string | undefined} text - text for paragraph.
@@ -33,8 +35,25 @@ export default class ParagraphView extends View {
 
     super(ParagraphViewParams);
 
-    if (config?.fontWeight === 'medium-500') {
-      this.basicComponent.addAdditionalClasses(ClassesEnum.FONT_WEIGHT_500);
+    this.componentConfig = config || null;
+
+    if (this.componentConfig) {
+      if (this.componentConfig.paragraphType) {
+        switch (this.componentConfig.paragraphType) {
+          case 'type-1':
+            this.basicComponent.addAdditionalClasses(ClassesEnum.FONT_PARAGRAPH_1);
+            break;
+          case 'type-2':
+            this.basicComponent.addAdditionalClasses(ClassesEnum.FONT_PARAGRAPH_2);
+            break;
+          default:
+            throw new Error(
+              'ERR in ContributorSubsectionBlockView: unexpected value of `SubsectionBlockConfig.type`!'
+            );
+        }
+      }
+    } else {
+      this.basicComponent.addAdditionalClasses(ClassesEnum.FONT_PARAGRAPH_2);
     }
   }
 }

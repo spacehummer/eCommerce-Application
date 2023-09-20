@@ -13,6 +13,8 @@ const enum ClassesEnum {
   HEADING_H2 = 'heading-h2',
   HEADING_H3 = 'heading-h3',
   PARAGRAPH = 'paragraph',
+  FONT_PARAGRAPH_1 = 'paragraph_type_1',
+  FONT_PARAGRAPH_2 = 'paragraph_type_2',
   PLACEHOLDER = 'placeholder',
   /* Logo */
   GENERAL_LOGO = 'logo',
@@ -78,6 +80,7 @@ const enum ClassesEnum {
   ABOUT_US_SECTION_CONTRIBUTORS_SECTION_PHOTO = 'about-us__contributor-photo',
   ABOUT_US_SECTION_CONTRIBUTORS_SECTION_RIGHT_SIDE = 'about-us__contributor-section-right-side',
   ABOUT_US_SECTION_CONTRIBUTORS_SUBSECTION = 'about-us__contributor-subsection',
+  ABOUT_US_SECTION_CONTRIBUTORS_LIST = 'about-us__subsection-list',
   /* ONLY FOR DRAFT CODE */
   ONLY_FOR_DRAFT_CODE = '',
   /* Modifiers */
