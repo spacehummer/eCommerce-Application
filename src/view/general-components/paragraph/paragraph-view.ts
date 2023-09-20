@@ -11,7 +11,7 @@ const ParagraphViewParams: BasicComponentConstructorArgs = {
 };
 
 interface ParagraphConfig {
-  textStyle?: 'type-1' | 'type-2';
+  textStyle?: 'paragraph-type-1' | 'paragraph-type-2';
 }
 
 /**
@@ -40,15 +40,15 @@ export default class ParagraphView extends View {
     if (this.componentConfig) {
       if (this.componentConfig.textStyle) {
         switch (this.componentConfig.textStyle) {
-          case 'type-1':
+          case 'paragraph-type-1':
             this.basicComponent.addAdditionalClasses(ClassesEnum.FONT_PARAGRAPH_1);
             break;
-          case 'type-2':
+          case 'paragraph-type-2':
             this.basicComponent.addAdditionalClasses(ClassesEnum.FONT_PARAGRAPH_2);
             break;
           default:
             throw new Error(
-              'ERR in ContributorSubsectionBlockView: unexpected value of `SubsectionBlockConfig.type`!'
+              'ERR in ParagraphView: unexpected value of `componentConfig.textStyle`!'
             );
         }
       }

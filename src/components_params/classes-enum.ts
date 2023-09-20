@@ -13,8 +13,11 @@ const enum ClassesEnum {
   HEADING_H2 = 'heading-h2',
   HEADING_H3 = 'heading-h3',
   PARAGRAPH = 'paragraph',
-  FONT_PARAGRAPH_1 = 'paragraph_type_1',
-  FONT_PARAGRAPH_2 = 'paragraph_type_2',
+  FONT_HEADING_TYPE_1 = 'heading-type-1',
+  FONT_HEADING_TYPE_2 = 'heading-type-2',
+  FONT_HEADING_TYPE_3 = 'heading-type-3',
+  FONT_PARAGRAPH_1 = 'paragraph-type-1',
+  FONT_PARAGRAPH_2 = 'paragraph-type-2',
   PLACEHOLDER = 'placeholder',
   /* Logo */
   GENERAL_LOGO = 'logo',

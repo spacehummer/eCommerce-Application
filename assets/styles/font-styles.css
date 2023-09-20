@@ -1,3 +1,17 @@
+.heading-type-1 {
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.heading-type-2 {
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+}
+
 .heading-type-3 {
   font-family: Inter, sans-serif;
   font-size: 22px;
