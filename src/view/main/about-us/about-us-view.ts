@@ -3,14 +3,88 @@ import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
 import HeadingH1View from '#src/view/general-components/heading-h1/heading-h1-view';
+import ContributorSectionView, {
+  ContributorSectionViewConfig,
+} from './contributor-block/contributor-section-view';
 
-const AboutUsViewRootParams: BasicComponentConstructorArgs = {
+const ViewRootParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
   classNames: ClassesEnum.PLACEHOLDER,
 };
 
-const AboutUsViewConfig = {
+interface AboutUsViewConfig {
+  heading: string;
+  contributors: ContributorSectionViewConfig[];
+  regularSubsections: 'TODO';
+}
+
+const ViewConfig: AboutUsViewConfig = {
   heading: 'About us',
+  contributors: [
+    {
+      heading: 'Yuriy',
+      subsections: [
+        {
+          heading: 'Quick bio',
+          paragraphs: [
+            {
+              type: 'paragraph',
+              content: 'Yuriy is a beginner front-end developer.',
+            },
+            {
+              type: 'paragraph',
+              content:
+                "He is 28 years old. He has Bachelor's degree in Mathematical and computer modeling of mechanical systems and processes of Moscow State University of Civil Engineering (MGSU).",
+            },
+            {
+              type: 'paragraph',
+              content:
+                'During his studies at the institute, he realized that information technology attracted him more than mechanics, and is currently working on becoming a qualified developer.',
+            },
+          ],
+        },
+        {
+          heading: 'Contribution to the project',
+          paragraphs: [
+            {
+              type: 'paragraph',
+              content: 'Yuriy is a leader of the team. His contribution to the project is:',
+            },
+            {
+              type: 'list',
+              content:
+                'repository setup\n' +
+                'Discord server setup for team communications\n' +
+                'setting up a task board on jetbrains YouTrack project management software, setup GitHub integration\n' +
+                'Figma team project setup\n' +
+                'npm project setup\n' +
+                'builder setup\n' +
+                'development scripts\n' +
+                'project README\n' +
+                'project basic components\n' +
+                'project basic routing\n' +
+                'app UI design\n' +
+                'app Main page\n' +
+                'app header\n' +
+                'app About Us page improvements\n' +
+                'make photos for references for products\n' +
+                'setup deploy on Netlify with GitHub integration, deploy management',
+            },
+          ],
+        },
+        {
+          heading: 'Quick bio',
+          paragraphs: [
+            {
+              type: 'gh-link',
+              content: 'Yuriy is a beginner front-end developer.',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  regularSubsections: 'TODO',
 };
 
 type LogoArgs = Readonly<{
@@ -22,16 +96,19 @@ type LogoArgs = Readonly<{
 }>;
 
 export default class AboutUsView extends View {
-  private readonly componentConfig: typeof AboutUsViewConfig;
+  private readonly viewConfig: typeof ViewConfig;
 
   private headingH1: HeadingH1View | null;
 
-  constructor() {
-    super(AboutUsViewRootParams);
+  private contributorSections: ContributorSectionView[] | null;
 
-    this.componentConfig = AboutUsViewConfig;
+  constructor() {
+    super(ViewRootParams);
+
+    this.viewConfig = ViewConfig;
 
     this.headingH1 = null;
+    this.contributorSections = null;
 
     this.configureView();
 
@@ -47,8 +124,12 @@ export default class AboutUsView extends View {
 
   private configureView(): void {
     this.headingH1 = new HeadingH1View('About us');
+    this.contributorSections = [new ContributorSectionView(this.viewConfig.contributors[0])];
 
     this.basicComponent.addInnerElement(this.headingH1);
+    this.contributorSections.forEach((element) => {
+      this.basicComponent.addInnerElement(element);
+    });
   }
 
   private createTitle(): void {
