@@ -3,12 +3,12 @@ import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
 
-// import './contributor-section.css';
+import './contributor-subsection.css';
 import HeadingH3View from '#src/view/general-components/heading-h3/heading-h3-view';
 
 const viewRootParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.CONTAINER,
-  classNames: ClassesEnum.PLACEHOLDER,
+  classNames: ClassesEnum.ABOUT_US_SECTION_CONTRIBUTORS_SUBSECTION,
 };
 
 interface SubsectionElement {

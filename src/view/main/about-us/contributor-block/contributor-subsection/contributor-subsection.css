@@ -1,0 +1,4 @@
+.about-us__contributor-subsection {
+  display: flex;
+  column-gap: 8px;
+}

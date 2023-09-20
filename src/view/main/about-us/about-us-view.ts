@@ -9,7 +9,7 @@ import ContributorSectionView, {
 
 const ViewRootParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
-  classNames: ClassesEnum.PLACEHOLDER,
+  classNames: ClassesEnum.ABOUT_US_SECTION,
 };
 
 interface AboutUsViewConfig {

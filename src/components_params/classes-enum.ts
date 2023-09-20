@@ -74,6 +74,7 @@ const enum ClassesEnum {
   ABOUT_US_SECTION = 'page-section page-section--about-us',
   ABOUT_US_SECTION_HEADING = 'about-us__heading',
   ABOUT_US_SECTION_CONTRIBUTORS_SECTION = 'about-us__contributors-section',
+  ABOUT_US_SECTION_CONTRIBUTORS_SUBSECTION = 'about-us__contributors-subsection',
   /* ONLY FOR DRAFT CODE */
   ONLY_FOR_DRAFT_CODE = '',
   /* Modifiers */
