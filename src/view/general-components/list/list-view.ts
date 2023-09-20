@@ -11,12 +11,13 @@ const viewRootParams: BasicComponentConstructorArgs = {
 export interface ListComponentConfig {
   type: 'marked' | 'linked';
   content: string;
+  textStyle?: 'paragraph-type-1' | 'paragraph-type-2';
   containerClasses?: ClassesEnum[] | ClassesEnum;
   elementClasses?: ClassesEnum[] | ClassesEnum;
 }
 
 export default class ListView extends View {
-  private viewConfig: ListComponentConfig;
+  private readonly viewConfig: ListComponentConfig;
 
   constructor(config: ListComponentConfig) {
     super(viewRootParams);
@@ -30,6 +31,23 @@ export default class ListView extends View {
   }
 
   private configureView(): void {
+    if (this.viewConfig) {
+      if (this.viewConfig.textStyle) {
+        switch (this.viewConfig.textStyle) {
+          case 'paragraph-type-1':
+            this.basicComponent.addAdditionalClasses(ClassesEnum.FONT_PARAGRAPH_1);
+            break;
+          case 'paragraph-type-2':
+            this.basicComponent.addAdditionalClasses(ClassesEnum.FONT_PARAGRAPH_2);
+            break;
+          default:
+            throw new Error('ERR in ListView: unexpected value of `viewConfig.textStyle`!');
+        }
+      }
+    } else {
+      this.basicComponent.addAdditionalClasses(ClassesEnum.FONT_PARAGRAPH_2);
+    }
+
     this.viewConfig.content.split('\n').forEach((elementText) => {
       const listElementParams: BasicComponentConstructorArgs = {
         tagName: TagsEnum.LIST_ITEM,

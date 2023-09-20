@@ -84,6 +84,7 @@ const enum ClassesEnum {
   ABOUT_US_SECTION_CONTRIBUTORS_SECTION_RIGHT_SIDE = 'about-us__contributor-section-right-side',
   ABOUT_US_SECTION_CONTRIBUTORS_SUBSECTION = 'about-us__contributor-subsection',
   ABOUT_US_SECTION_CONTRIBUTORS_LIST = 'about-us__subsection-list',
+  ABOUT_US_SECTION_CONTRIBUTORS_LIST_ELEMENT = 'about-us__subsection-list-element',
   /* ONLY FOR DRAFT CODE */
   ONLY_FOR_DRAFT_CODE = '',
   /* Modifiers */

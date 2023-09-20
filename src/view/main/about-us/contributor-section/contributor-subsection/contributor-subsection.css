@@ -3,3 +3,7 @@
   flex-direction: column;
   row-gap: 8px;
 }
+
+.about-us__subsection-list {
+  margin: 0;
+}

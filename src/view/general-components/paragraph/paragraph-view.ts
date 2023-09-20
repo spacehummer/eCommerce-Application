@@ -37,6 +37,7 @@ export default class ParagraphView extends View {
 
     this.componentConfig = config || null;
 
+    // TODO: encapsulate in separate method with name `configureView`.
     if (this.componentConfig) {
       if (this.componentConfig.textStyle) {
         switch (this.componentConfig.textStyle) {
