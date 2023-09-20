@@ -1,4 +1,3 @@
-import { CentPrecisionMoney, LineItem } from '@commercetools/platform-sdk';
 import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
@@ -7,7 +6,7 @@ import View, { ViewLogicParams } from '#src/view/view';
 import NavItemLinkView from '#src/view/header/navigation/nav-item-link-view';
 import CartEvent from '#src/logic/state/cartStateEvent';
 import BaseItemLinkView from '#src/view/header/navigation/base-nav-item-link-view';
-import { BasketProduct } from '../catalog/components/types';
+import { ProductPrice } from '../catalog/components/types';
 import BasketProductsView from './basket-products-view';
 import PriceView from '../catalog/components/price-view';
 import EditButton from '../profile/components/edit-btn';
@@ -27,6 +26,8 @@ export default class BasketView extends View {
 
   private addPromoCodeForm?: AddPromoCodeForm;
 
+  private basketProductsView?: BasketProductsView;
+
   constructor(logicParams: ViewLogicParams) {
     super(args, logicParams);
 
@@ -38,7 +39,14 @@ export default class BasketView extends View {
   private onCartChange(event: CartEvent): void {
     const { cart } = event;
     if (cart) {
-      this.totalPrice?.setPrice({ value: cart.totalPrice });
+      if (cart.lineItems.length > 0) {
+        if (this.basketProductsView) {
+          const newTotal = this.basketProductsView.updateCartPrices(cart);
+          this.totalPrice?.setPrice(newTotal);
+        }
+      } else {
+        this.clearBasket();
+      }
     }
   }
 
@@ -54,25 +62,12 @@ export default class BasketView extends View {
     this.createTitle();
     if (cart && cart.lineItems.length > 0) {
       const productsInCart = new BasketProductsView();
-      const items = cart.lineItems.map(
-        (item: LineItem): BasketProduct => {
-          return {
-            product: {
-              id: item.productId,
-              masterVariant: item.variant,
-              name: item.name,
-              slug: item.productSlug,
-            },
-            id: item.id,
-            quantity: item.quantity,
-            totalPrice: { value: item.totalPrice },
-          };
-        }
-      );
-      productsInCart.setBasketProducts(items);
+      productsInCart.setBasketProducts(cart.lineItems);
+      const newTotal = productsInCart.updateCartPrices(cart);
       this.basicComponent.addInnerElement(productsInCart);
+      this.basketProductsView = productsInCart;
 
-      this.createTotal(cart.totalPrice);
+      this.createTotal(newTotal);
 
       this.createDiscountCodeForm();
 
@@ -88,10 +83,14 @@ export default class BasketView extends View {
     this.basicComponent.addInnerElement(btn);
   }
 
-  private onClearBasket(): void {
+  private clearBasket(): void {
     this.basicComponent.htmlElement?.replaceChildren('');
     this.createTitle();
     this.showEmptyCart();
+  }
+
+  private onClearBasket(): void {
+    this.clearBasket();
     basketModel.clearCart();
   }
 
@@ -153,8 +152,8 @@ export default class BasketView extends View {
     this.basicComponent.addInnerElement(link);
   }
 
-  private createTotal(price: CentPrecisionMoney): void {
-    this.totalPrice = new PriceView({ value: price }, 'Total price');
+  private createTotal(price: ProductPrice): void {
+    this.totalPrice = new PriceView(price, 'Total price');
     this.basicComponent.addInnerElement(this.totalPrice);
   }
 }
