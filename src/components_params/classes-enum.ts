@@ -38,7 +38,7 @@ const enum ClassesEnum {
   /* GitHub link */
   GITHUB_LINK = 'github-link',
   GITHUB_LINK_LOGO = 'github-link__gh-logo',
-  GITHUB_LINK_TEXT = 'github-link__text',
+  GITHUB_LINK_LINK = 'github-link__link reset-link paragraph-type-1',
   /* Login / Register */
   LOGIN = 'login',
   LOGIN_FORM = 'login-form',

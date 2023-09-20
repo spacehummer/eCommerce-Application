@@ -47,8 +47,8 @@ export default class ContributorSubsectionBlockView extends View {
         break;
       case 'gh-link':
         newViewBasicComponentSource = new GithubLinkView({
-          text: '',
-          link: '',
+          text: this.viewConfig.content.split('; ')[0],
+          link: this.viewConfig.content.split('; ')[1],
         });
         break;
       default:

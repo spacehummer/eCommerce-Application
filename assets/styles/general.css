@@ -58,6 +58,10 @@ html {
   cursor: pointer;
 }
 
+.reset-link {
+  text-decoration: none;
+}
+
 .sparse-004 {
   letter-spacing: 0.04em;
 }

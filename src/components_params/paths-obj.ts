@@ -2,6 +2,8 @@ import logoImg from '#assets/icons/logo.svg';
 import modalStateIconOk from '#assets/icons/state-icon-ok.svg';
 import modalStateIconErr from '#assets/icons/state-icon-error.svg';
 import humanAvatarPlaceholder from '#assets/images/photo-template.png';
+import githubLogoLight from '#assets/icons/github-logo-light.svg';
+import githubLogoBlueDark75 from '#assets/icons/github-logo-blue-dark-75.svg';
 
 // interface PathsObj {
 //   [pathName: string]: string;
@@ -22,7 +24,9 @@ const PathsObj: Record<
   | 'MODAL_STATE_ICON_OK'
   | 'MODAL_STATE_ICON_ERR'
   | 'CONTRIBUTOR_PHOTO_YURIY'
-  | 'CONTRIBUTOR_PHOTO_DAVID',
+  | 'CONTRIBUTOR_PHOTO_DAVID'
+  | 'GIT_HUB_LOGO_LIGHT'
+  | 'GIT_HUB_LOGO_BLUE_DARK_75',
   string
 > = {
   EMPTY_IMG: '',
@@ -33,6 +37,8 @@ const PathsObj: Record<
   MODAL_STATE_ICON_ERR: modalStateIconErr,
   CONTRIBUTOR_PHOTO_YURIY: humanAvatarPlaceholder,
   CONTRIBUTOR_PHOTO_DAVID: humanAvatarPlaceholder,
+  GIT_HUB_LOGO_LIGHT: githubLogoLight,
+  GIT_HUB_LOGO_BLUE_DARK_75: githubLogoBlueDark75,
 } as const;
 
 export default PathsObj;

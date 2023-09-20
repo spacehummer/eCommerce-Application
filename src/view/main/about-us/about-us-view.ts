@@ -170,7 +170,6 @@ export default class AboutUsView extends View {
 
     this.configureView();
 
-    this.createTitle();
     this.createLogoImg({
       href: 'https://rs.school/js/',
       src: 'https://rs.school/images/rs_school_js.svg',
@@ -187,17 +186,11 @@ export default class AboutUsView extends View {
       new ContributorSectionView(this.viewConfig.contributors[1]),
     ];
 
+
     this.basicComponent.addInnerElement(this.headingH1);
     this.contributorSections.forEach((element) => {
       this.basicComponent.addInnerElement(element);
     });
-  }
-
-  private createTitle(): void {
-    const title = document.createElement(TagsEnum.H2);
-    title.textContent = 'About us';
-
-    this.basicComponent.addInnerElement(title);
   }
 
   private createLogoImg({ href, src, alt, width, height }: LogoArgs): void {
