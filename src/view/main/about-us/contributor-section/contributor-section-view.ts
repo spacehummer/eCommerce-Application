@@ -6,10 +6,10 @@ import View from '#src/view/view';
 import './contributor-section.css';
 import ContributorSubsectionView, {
   Subsection,
-} from '#src/view/main/about-us/contributor-block/contributor-subsection/contributor-subsection-view';
+} from '#src/view/main/about-us/contributor-section/contributor-subsection/contributor-subsection-view';
 import ContributorPhoto, {
   ContributorPhotoConfig,
-} from '#src/view/main/about-us/contributor-block/contributor-photo/contributor-photo';
+} from '#src/view/main/about-us/contributor-section/contributor-photo/contributor-photo';
 import HeadingH2View from '../../../general-components/heading-h2/heading-h2-view';
 
 const viewRootParams: BasicComponentConstructorArgs = {

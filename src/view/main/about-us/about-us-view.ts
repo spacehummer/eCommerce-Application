@@ -6,7 +6,7 @@ import HeadingH1View from '#src/view/general-components/heading-h1/heading-h1-vi
 import PathsObj from '#src/components_params/paths-obj';
 import ContributorSectionView, {
   ContributorSectionViewConfig,
-} from './contributor-block/contributor-section-view';
+} from './contributor-section/contributor-section-view';
 
 const ViewRootParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.SECTION,
