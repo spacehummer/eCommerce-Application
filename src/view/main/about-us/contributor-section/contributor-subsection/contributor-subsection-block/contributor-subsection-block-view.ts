@@ -4,6 +4,7 @@ import View from '#src/view/view';
 import ParagraphView from '#src/view/general-components/paragraph/paragraph-view';
 import ListView, { ListComponentConfig } from '#src/view/general-components/list/list-view';
 import ClassesEnum from '#src/components_params/classes-enum';
+import GithubLinkView from '#src/view/general-components/github-link/github-link-view';
 
 const viewRootParams: BasicComponentConstructorArgs = {
   tagName: TagsEnum.CONTAINER,
@@ -35,7 +36,7 @@ export default class ContributorSubsectionBlockView extends View {
   }
 
   private configureView(): void {
-    let newViewBasicComponentSource: ParagraphView | ListView;
+    let newViewBasicComponentSource: ParagraphView | ListView | GithubLinkView;
     switch (this.viewConfig.type) {
       case 'paragraph':
         newViewBasicComponentSource = new ParagraphView(this.viewConfig.content);
@@ -45,7 +46,10 @@ export default class ContributorSubsectionBlockView extends View {
         newViewBasicComponentSource = new ListView(listConfig);
         break;
       case 'gh-link':
-        newViewBasicComponentSource = new ParagraphView(this.viewConfig.content);
+        newViewBasicComponentSource = new GithubLinkView({
+          text: '',
+          link: '',
+        });
         break;
       default:
         throw new Error(

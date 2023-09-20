@@ -1,0 +1,26 @@
+@import '#assets/styles/constants.css';
+
+.github-link {
+  display: flex;
+  column-gap: 12px;
+}
+
+.github-link__gh-logo {
+  width: 32px;
+  height: 32px;
+}
+
+.github-link__text {
+  color: var(--color-white);
+  text-shadow: var(--vulemetric-text-shadow);
+}
+
+.github-link__text:hover {
+  color: var(--color-gold-light-xl);
+  text-shadow: var(--hover-glow-ts-general);
+}
+
+.github-link__text:active {
+  color: var(--color-gold-light-xl);
+  text-shadow: var(--active-glow-ts-general);
+}

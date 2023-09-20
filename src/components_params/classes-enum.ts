@@ -35,6 +35,10 @@ const enum ClassesEnum {
   MAIN_WELCOME_SECTION_HEADING = 'page-section__heading page-section__heading--welcome',
   MAIN_WELCOME_SECTION_TEXT_BLOCK = 'page-section__text-block page-section__text-block--welcome',
   MAIN_WELCOME_SECTION_PARAGRAPH = 'text-block__paragraph text-block__paragraph--welcome',
+  /* GitHub link */
+  GITHUB_LINK = 'github-link',
+  GITHUB_LINK_LOGO = 'github-link__gh-logo',
+  GITHUB_LINK_TEXT = 'github-link__text',
   /* Login / Register */
   LOGIN = 'login',
   LOGIN_FORM = 'login-form',
