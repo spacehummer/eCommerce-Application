@@ -1,4 +1,4 @@
-import { BasicComponentConstructorArgs } from '#src/components/basic-component';
+import { BasicComponent, BasicComponentConstructorArgs } from '#src/components/basic-component';
 import ClassesEnum from '#src/components_params/classes-enum';
 import TagsEnum from '#src/components_params/tags-enum';
 import View from '#src/view/view';
@@ -26,6 +26,8 @@ export interface ContributorSectionViewConfig {
 export default class ContributorSectionView extends View {
   private contributorPhoto: ContributorPhoto | null;
 
+  private contributorRightSideContainer: BasicComponent | null;
+
   private contributorSectionHeading: HeadingH2View | null;
 
   private contributorSubsection: ContributorSubsectionView | null;
@@ -38,6 +40,7 @@ export default class ContributorSectionView extends View {
     this.viewConfig = config;
 
     this.contributorPhoto = null;
+    this.contributorRightSideContainer = null;
     this.contributorSectionHeading = null;
     this.contributorSubsection = null;
 
@@ -46,11 +49,18 @@ export default class ContributorSectionView extends View {
 
   private configureView(): void {
     this.contributorPhoto = new ContributorPhoto(this.viewConfig.img);
+    const contributorRightSideContainerParams: BasicComponentConstructorArgs = {
+      tagName: TagsEnum.CONTAINER,
+      classNames: ClassesEnum.ABOUT_US_SECTION_CONTRIBUTORS_SECTION_RIGHT_SIDE,
+    };
+    this.contributorRightSideContainer = new BasicComponent(contributorRightSideContainerParams);
     this.contributorSectionHeading = new HeadingH2View(this.viewConfig.heading);
     this.contributorSubsection = new ContributorSubsectionView(this.viewConfig.subsections[0]);
 
+    this.contributorRightSideContainer.addInnerElement(this.contributorSectionHeading);
+    this.contributorRightSideContainer.addInnerElement(this.contributorSubsection);
+
     this.basicComponent.addInnerElement(this.contributorPhoto);
-    this.basicComponent.addInnerElement(this.contributorSectionHeading);
-    this.basicComponent.addInnerElement(this.contributorSubsection);
+    this.basicComponent.addInnerElement(this.contributorRightSideContainer);
   }
 }

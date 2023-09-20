@@ -76,6 +76,7 @@ const enum ClassesEnum {
   ABOUT_US_SECTION_CONTRIBUTORS_SECTION = 'about-us__contributor-section',
   ABOUT_US_SECTION_CONTRIBUTORS_SECTION_PHOTO_WRP = 'about-us__contributor-photo-wrp',
   ABOUT_US_SECTION_CONTRIBUTORS_SECTION_PHOTO = 'about-us__contributor-photo',
+  ABOUT_US_SECTION_CONTRIBUTORS_SECTION_RIGHT_SIDE = 'about-us__contributor-section-right-side',
   ABOUT_US_SECTION_CONTRIBUTORS_SUBSECTION = 'about-us__contributors-subsection',
   /* ONLY FOR DRAFT CODE */
   ONLY_FOR_DRAFT_CODE = '',
