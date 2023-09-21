@@ -14,3 +14,10 @@
   flex-direction: column;
   row-gap: 16px;
 }
+
+@media screen and (max-width: 768px) {
+  .about-us__contributor-section {
+    align-items: center;
+    flex-direction: column;
+  }
+}
