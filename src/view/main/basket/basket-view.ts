@@ -90,8 +90,11 @@ export default class BasketView extends View {
   }
 
   private onClearBasket(): void {
-    this.clearBasket();
-    basketModel.clearCart();
+    const isConfirm = window.confirm('Are you want to clear cart?');
+    if (isConfirm) {
+      this.clearBasket();
+      basketModel.clearCart();
+    }
   }
 
   private createDiscountCodeForm(): void {
