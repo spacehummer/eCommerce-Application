@@ -74,8 +74,6 @@ const enum ClassesEnum {
   MODAL_WINDOW_BTN_CLOSE_ERR = 'modal-window__btn-close--err',
   MODAL_WINDOW_CONTENT_CONTAINER = 'modal-window__content-container',
   MODAL_WINDOW_CONTENT_PARAGRAPH = 'modal-window__content-paragraph paragraph_type_2',
-  /* ONLY FOR DRAFT CODE */
-  ONLY_FOR_DRAFT_CODE = 'only_for_draft_code',
   /* BASKET */
   BASKET = 'basket',
   BASKET_CART_LIST = 'basket-cart-list',
@@ -114,7 +112,7 @@ const enum ClassesEnum {
   ABOUT_US_SECTION_CONTRIBUTORS_LIST_ELEMENT = 'about-us__subsection-list-element',
   ABOUT_US_SECTION_REGULAR_SUBSECTION = 'about-us__regular-subsection',
   /* ONLY FOR DRAFT CODE */
-  ONLY_FOR_DRAFT_CODE = '',
+  ONLY_FOR_DRAFT_CODE = 'only_for_draft_code',
   /* Modifiers */
   SPARSE_004 = 'sparse-004',
   FONT_WEIGHT_500 = 'fw-500',
