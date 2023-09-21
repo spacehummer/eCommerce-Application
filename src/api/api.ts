@@ -11,7 +11,11 @@ import AuthService from './utils/authService';
 import CartRepository from './endpoints/meCart';
 import CustomerRepository from './endpoints/meCustomer';
 import ProductProjection from './endpoints/productProjection';
-import { CartQuantityDraft, CartRemoveItemDraft } from './endpoints/types/cart';
+import {
+  CartDiscountCodeDraft,
+  CartQuantityDraft,
+  CartRemoveItemDraft,
+} from './endpoints/types/cart';
 import CustomerData, {
   AddressDto,
   ChangePasswordDto,
@@ -96,6 +100,10 @@ class Api {
     quantityDraft: CartQuantityDraft
   ): Promise<ClientResponse<Cart>> {
     return cart.changeQuantity(quantityDraft);
+  }
+
+  public async applyDiscountCode(codeDraft: CartDiscountCodeDraft): Promise<ClientResponse<Cart>> {
+    return cart.addDiscountCode(codeDraft);
   }
 
   public async addToCart(

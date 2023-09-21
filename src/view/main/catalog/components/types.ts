@@ -1,4 +1,4 @@
-import { LocalizedString, ProductVariant, TypedMoney } from '@commercetools/platform-sdk';
+import { LocalizedString, Price, ProductVariant, TypedMoney } from '@commercetools/platform-sdk';
 
 export type ProductCart = Readonly<{
   id: string;
@@ -19,4 +19,5 @@ export type BasketProduct = Readonly<{
   id: string;
   quantity: number;
   totalPrice: PriceValue;
+  price: Price;
 }>;

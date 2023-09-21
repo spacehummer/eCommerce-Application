@@ -19,6 +19,11 @@ const productArgs: BasicComponentConstructorArgs = {
   tagName: TagsEnum.PARAGRAPH,
 };
 
+const nameArgs: BasicComponentConstructorArgs = {
+  classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
+  tagName: TagsEnum.H4,
+};
+
 export default class ProductCartView extends View {
   public addToCartFrom?: AddToCartForm;
 
@@ -30,15 +35,16 @@ export default class ProductCartView extends View {
 
   protected descriptionComponent?: BasicComponent;
 
-  protected pricesComponent?: PriceView;
+  public pricesComponent?: PriceView;
 
   protected imageContainer?: HTMLDivElement;
 
   constructor(
     product: ProductCart,
-    private readonly factoryMethod: (values: ProductCredentials) => AddToCartForm
+    private readonly factoryMethod: (values: ProductCredentials) => AddToCartForm,
+    style?: ClassesEnum
   ) {
-    super(args);
+    super({ tagName: args.tagName, classNames: style || args.classNames });
 
     const lang = getLang();
     this.lang = lang;
@@ -49,13 +55,16 @@ export default class ProductCartView extends View {
       masterVariant: { prices, images },
     } = product;
 
-    this.nameComponent = this.createComponent(name, productArgs);
+    this.nameComponent = this.createComponent(name, nameArgs);
 
     if (images) this.createImages(images);
 
     this.basicComponent.addInnerElement(this.nameComponent);
     if (description) {
-      this.descriptionComponent = this.createComponent(description, productArgs);
+      this.descriptionComponent = this.createComponent(description, {
+        classNames: ClassesEnum.CART_DESCRIPTION,
+        tagName: productArgs.tagName,
+      });
     }
 
     if (prices) {
@@ -67,18 +76,16 @@ export default class ProductCartView extends View {
     this.addToCartFrom = this.factoryMethod({ productId: this.id });
   }
 
-  protected createImages(images: Image[]): void {
+  protected createImages(images: Image[], style: ClassesEnum = ClassesEnum.CART__IMAGE): void {
     const [image] = images;
     if (image) {
       const container = document.createElement(TagsEnum.CONTAINER);
       const img = document.createElement(TagsEnum.IMG);
       img.src = image.url;
-      img.style.display = 'block';
-      img.style.width = '100%';
-
-      // container.classList.add(ClassesEnum.ONLY_FOR_DRAFT_CODE)
-      container.style.width = '50px';
-      container.style.height = '100px';
+      if (style) {
+        img.classList.add(style);
+        container.classList.add(style);
+      }
 
       container.append(img);
       this.imageContainer = container;

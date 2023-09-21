@@ -7,12 +7,14 @@ import PriceComponent from './price';
 import { ProductPrice } from './types';
 
 const args: BasicComponentConstructorArgs = {
-  classNames: ClassesEnum.ONLY_FOR_DRAFT_CODE,
+  classNames: ClassesEnum.CART_PRICE__CONTAINER,
   tagName: TagsEnum.CONTAINER,
 };
 
+const discountStyle = ClassesEnum.CART_PRICE__VALUE__DISCOUNT;
+
 const priceLabel = 'Price';
-const discountedLabel = 'Discounted price';
+const discountedLabel = '';
 
 export default class PriceView extends View {
   private readonly price: PriceComponent;
@@ -26,11 +28,11 @@ export default class PriceView extends View {
   constructor(price: ProductPrice, protected readonly argPriceLabel?: string) {
     super(args);
 
-    this.price = this.createPrice(this.priceLabel, price.value);
+    this.price = this.createPrice(`${this.priceLabel} ${price.value.currencyCode}`, price.value);
     this.basicComponent.addInnerElement(this.price);
 
     if (price.discounted) {
-      this.discountPrice = this.createPrice(discountedLabel, price.discounted.value);
+      this.discountPrice = this.createPrice(discountedLabel, price.discounted.value, discountStyle);
       this.basicComponent.addInnerElement(this.discountPrice);
     }
   }
@@ -41,17 +43,18 @@ export default class PriceView extends View {
       if (this.discountPrice) {
         this.discountPrice.setPrice(discounted);
       } else {
-        this.discountPrice = new PriceComponent(discountedLabel, discounted);
+        this.discountPrice = new PriceComponent(discountedLabel, discounted, discountStyle);
         this.basicComponent.addInnerElement(this.discountPrice);
       }
     } else if (this.discountPrice) {
-      this.discountPrice.setPrice('');
+      this.discountPrice.basicComponent.htmlElement?.remove();
+      this.discountPrice = undefined;
     }
     this.price.setPrice(PriceView.calculatePrice(price.value));
   }
 
-  private createPrice(label: string, money: TypedMoney): PriceComponent {
-    return new PriceComponent(label, PriceView.calculatePrice(money));
+  private createPrice(label: string, money: TypedMoney, style?: ClassesEnum): PriceComponent {
+    return new PriceComponent(label, PriceView.calculatePrice(money), style);
   }
 
   public static calculatePrice(money: TypedMoney): string {

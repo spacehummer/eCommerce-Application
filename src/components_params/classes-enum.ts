@@ -74,6 +74,29 @@ const enum ClassesEnum {
   MODAL_WINDOW_BTN_CLOSE_ERR = 'modal-window__btn-close--err',
   MODAL_WINDOW_CONTENT_CONTAINER = 'modal-window__content-container',
   MODAL_WINDOW_CONTENT_PARAGRAPH = 'modal-window__content-paragraph paragraph_type_2',
+  /* ONLY FOR DRAFT CODE */
+  ONLY_FOR_DRAFT_CODE = 'only_for_draft_code',
+  /* BASKET */
+  BASKET = 'basket',
+  BASKET_CART_LIST = 'basket-cart-list',
+  BASKET_LINK = 'basket-link',
+  /* BASKET CART */
+  BASKET_CART = 'basket-cart',
+  BASKET_CART__IMAGE = 'basket-cart__image',
+  BASKET_CART__CONTENT = 'basket-cart__content',
+  BASKET_CART__CTRL = 'basket-cart__ctrl',
+  BASKET_CART__INPUT = 'basket-cart__input',
+  /* CART */
+  CART = 'cart',
+  CART_TITLE = 'cart-title',
+  CART_DESCRIPTION = 'cart-desc',
+  CART__IMAGE = 'cart__image',
+  CART__ADD_TO_BASKET = 'cart__add-to-basket',
+  /* CART_PRICE */
+  CART_PRICE__CONTAINER = 'cart-price__container',
+  CART_PRICE__FIELD = 'cart-price__field',
+  CART_PRICE__VALUE = 'cart-price__value',
+  CART_PRICE__VALUE__DISCOUNT = 'cart-price__value__discount',
   /* ERROR 404 */
   SECTION_404 = 'page-section page-section--error-404',
   SECTION_404_HEADING = 'page-section__heading page-section__heading--error-404',

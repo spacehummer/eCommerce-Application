@@ -63,6 +63,7 @@ export default class InputFactory {
     if (defaults.minLength) result.minLength = defaults.minLength;
     if (defaults.maxLength) result.maxLength = defaults.maxLength;
     if (defaults.max) result.max = defaults.max;
+    if (defaults.min) result.min = defaults.min;
 
     return result;
   }
