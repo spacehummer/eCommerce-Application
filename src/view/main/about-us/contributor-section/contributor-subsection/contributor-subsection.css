@@ -1,0 +1,9 @@
+.about-us__contributor-subsection {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.about-us__subsection-list {
+  margin: 0;
+}

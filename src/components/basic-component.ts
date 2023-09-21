@@ -10,9 +10,9 @@ import TextContentEnum from '#src/components_params/text-content-enum';
 export interface BasicComponentConstructorArgs {
   name?: string;
   tagName: TagsEnum;
-  classNames: ClassesEnum | ClassesEnum[];
+  classNames: ClassesEnum | ClassesEnum[] | null;
   id?: string | null;
-  textContent?: TextContentEnum | null;
+  textContent?: TextContentEnum | string | null;
   callback?: ListenerCB | null;
   eventType?: string;
 }
@@ -99,10 +99,14 @@ export class BasicComponent implements GetHTMLElement {
    * @protected
    */
   protected updateCssClassesComponent(): void {
-    this.cssClasses = Array.isArray(this.paramsObj.classNames)
-      ? this.paramsObj.classNames.flat(Infinity).join(' ').split(' ')
-      : this.paramsObj.classNames.split(' ');
-    this.cssClasses = this.cssClasses.filter((className) => className !== '');
+    if (this.paramsObj.classNames) {
+      this.cssClasses = Array.isArray(this.paramsObj.classNames)
+        ? this.paramsObj.classNames.flat(Infinity).join(' ').split(' ')
+        : this.paramsObj.classNames.split(' ');
+      this.cssClasses = this.cssClasses.filter((className) => className !== '');
+    } else {
+      this.cssClasses = null;
+    }
   }
 
   /**
@@ -156,7 +160,7 @@ export class BasicComponent implements GetHTMLElement {
     checkInstance(this.htmlElement, HTMLElement).setAttribute(name, value);
   }
 
-  protected addAdditionalClasses(additionClassesList: ClassesEnum | ClassesEnum[]): void {
+  public addAdditionalClasses(additionClassesList: ClassesEnum | ClassesEnum[]): void {
     if (Array.isArray(this.paramsObj.classNames)) {
       if (Array.isArray(additionClassesList)) {
         this.paramsObj.classNames.push(...additionClassesList);
@@ -165,8 +169,10 @@ export class BasicComponent implements GetHTMLElement {
       }
     } else if (Array.isArray(additionClassesList)) {
       this.paramsObj.classNames = [...additionClassesList];
-    } else {
+    } else if (this.paramsObj.classNames !== null) {
       this.paramsObj.classNames = [this.paramsObj.classNames, additionClassesList];
+    } else {
+      this.paramsObj.classNames = [additionClassesList];
     }
     this.updateCssClassesComponent();
     this.setCssClassesToElement(this.cssClasses);

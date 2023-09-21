@@ -9,6 +9,15 @@ const enum ClassesEnum {
   CONTENT_MAIN = 'content--main',
   FOOTER = 'footer',
   CONTENT_FOOTER = 'content--footer',
+  HEADING_H1 = 'heading-h1',
+  HEADING_H2 = 'heading-h2',
+  HEADING_H3 = 'heading-h3',
+  PARAGRAPH = 'paragraph',
+  FONT_HEADING_TYPE_1 = 'heading-type-1',
+  FONT_HEADING_TYPE_2 = 'heading-type-2',
+  FONT_HEADING_TYPE_3 = 'heading-type-3',
+  FONT_PARAGRAPH_1 = 'paragraph-type-1',
+  FONT_PARAGRAPH_2 = 'paragraph-type-2',
   PLACEHOLDER = 'placeholder',
   /* Logo */
   GENERAL_LOGO = 'logo',
@@ -26,6 +35,10 @@ const enum ClassesEnum {
   MAIN_WELCOME_SECTION_HEADING = 'page-section__heading page-section__heading--welcome',
   MAIN_WELCOME_SECTION_TEXT_BLOCK = 'page-section__text-block page-section__text-block--welcome',
   MAIN_WELCOME_SECTION_PARAGRAPH = 'text-block__paragraph text-block__paragraph--welcome',
+  /* GitHub link */
+  GITHUB_LINK = 'github-link',
+  GITHUB_LINK_LOGO = 'github-link__gh-logo',
+  GITHUB_LINK_LINK = 'github-link__link reset-link paragraph-type-1',
   /* Login / Register */
   LOGIN = 'login',
   LOGIN_FORM = 'login-form',
@@ -61,8 +74,6 @@ const enum ClassesEnum {
   MODAL_WINDOW_BTN_CLOSE_ERR = 'modal-window__btn-close--err',
   MODAL_WINDOW_CONTENT_CONTAINER = 'modal-window__content-container',
   MODAL_WINDOW_CONTENT_PARAGRAPH = 'modal-window__content-paragraph paragraph_type_2',
-  /* ONLY FOR DRAFT CODE */
-  ONLY_FOR_DRAFT_CODE = 'only_for_draft_code',
   /* BASKET */
   BASKET = 'basket',
   BASKET_CART_LIST = 'basket-cart-list',
@@ -89,6 +100,22 @@ const enum ClassesEnum {
   SECTION_404_HEADING = 'page-section__heading page-section__heading--error-404',
   SECTION_404_TEXT_BLOCK = 'page-section__text-block page-section__text-block--error-404',
   SECTION_404_PARAGRAPH = 'text-block__paragraph text-block__paragraph--error-404',
+  /* About us */
+  ABOUT_US_SECTION = 'page-section page-section--about-us',
+  ABOUT_US_SECTION_HEADING = 'about-us__heading',
+  ABOUT_US_SECTION_CONTRIBUTORS_SECTION = 'about-us__contributor-section',
+  ABOUT_US_SECTION_CONTRIBUTORS_SECTION_PHOTO_WRP = 'about-us__contributor-photo-wrp',
+  ABOUT_US_SECTION_CONTRIBUTORS_SECTION_PHOTO = 'about-us__contributor-photo',
+  ABOUT_US_SECTION_CONTRIBUTORS_SECTION_RIGHT_SIDE = 'about-us__contributor-section-right-side',
+  ABOUT_US_SECTION_CONTRIBUTORS_SUBSECTION = 'about-us__contributor-subsection',
+  ABOUT_US_SECTION_CONTRIBUTORS_LIST = 'about-us__subsection-list',
+  ABOUT_US_SECTION_CONTRIBUTORS_LIST_ELEMENT = 'about-us__subsection-list-element',
+  ABOUT_US_SECTION_REGULAR_SUBSECTION = 'about-us__regular-subsection',
+  /* ONLY FOR DRAFT CODE */
+  ONLY_FOR_DRAFT_CODE = 'only_for_draft_code',
+  /* Modifiers */
+  SPARSE_004 = 'sparse-004',
+  FONT_WEIGHT_500 = 'fw-500',
 }
 
 export default ClassesEnum;

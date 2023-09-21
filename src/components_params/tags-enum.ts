@@ -17,6 +17,7 @@ const enum TagsEnum {
   SPAN = 'span',
   /* Lists */
   MARKED_LIST = 'ul',
+  NUMBERED_LIST = 'ol',
   LIST_ITEM = 'li',
   /* UI interactive */
   LINK = 'a',

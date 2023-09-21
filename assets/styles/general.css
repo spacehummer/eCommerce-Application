@@ -57,6 +57,18 @@ html {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.reset-link {
+  text-decoration: none;
+}
+
+.sparse-004 {
+  letter-spacing: 0.04em;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
 /* </editor-fold desc="General modifiers">*/
 
 /* <editor-fold desc="Header">*/
