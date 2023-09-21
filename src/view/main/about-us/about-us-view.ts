@@ -6,7 +6,7 @@ import HeadingH1View from '#src/view/general-components/heading-h1/heading-h1-vi
 import PathsObj from '#src/components_params/paths-obj';
 
 import { SubsectionBlockConfig } from '#src/view/main/about-us/contributor-section/contributor-subsection/contributor-subsection-block/contributor-subsection-block-view';
-import RegularSubsectionView from '#src/view/main/about-us/contributor-section/regular-subsection/regular-subsection-view';
+import RegularSubsectionView from '#src/view/main/about-us/regular-subsection/regular-subsection-view';
 
 import ContributorSectionView, {
   ContributorSectionViewConfig,
@@ -188,7 +188,7 @@ export default class AboutUsView extends View {
 
   private contributorSections: ContributorSectionView[] | null;
 
-  private regularSubsections: RegularSubsectionView | null;
+  private regularSubsections: RegularSubsectionView[] | null;
 
   constructor() {
     super(ViewRootParams);
@@ -216,10 +216,14 @@ export default class AboutUsView extends View {
       new ContributorSectionView(this.viewConfig.contributors[0]),
       new ContributorSectionView(this.viewConfig.contributors[1]),
     ];
+    this.regularSubsections = [new RegularSubsectionView(this.viewConfig.regularSubsections[0])];
 
     this.basicComponent.addInnerElement(this.headingH1);
-    this.contributorSections.forEach((element) => {
-      this.basicComponent.addInnerElement(element);
+    this.contributorSections.forEach((component) => {
+      this.basicComponent.addInnerElement(component);
+    });
+    this.regularSubsections.forEach((component) => {
+      this.basicComponent.addInnerElement(component);
     });
   }
 
