@@ -109,7 +109,8 @@ const ViewConfig: AboutUsViewConfig = {
           blocks: [
             {
               type: 'paragraph',
-              content: 'Coming soon...',
+              content:
+                'David is thirty years old. He has a bachelor degree software engineer 2015 Yanka Kupala State University of Grodno, faculty of Mathematics and Informatics. Theme of degree work: “Develop a real time strategy game (RTS). Development of user interface and the network part of the game”. Nowadays he work in the IT department at the largest state-owned enterprise of the chemical industry “Grodno Azot” for last eight years. Briefly, his responsibility is to write new and maintain old queries to the database, manipulate with database objects. His strengths are stress resistance, sometimes need to do hot fix in production.',
             },
           ],
         },
@@ -204,7 +205,7 @@ export default class AboutUsView extends View {
     this.createLogoImg({
       href: 'https://rs.school/js/',
       src: 'https://rs.school/images/rs_school_js.svg',
-      alt: 'Rsschool icon',
+      alt: 'RS School icon',
       width: 73,
       height: 26,
     });
