@@ -1,0 +1,2 @@
+productType,name,type,attributeConstraint,isRequired,isSearchable,label.ru,inputTip.en,inputTip.ru,label.en,textInputHint,displayGroup
+Hardcover book,autor,set:ltext,SameForAll,false,true,Автор,Autor,Автор,Autor,SingleLine,Other

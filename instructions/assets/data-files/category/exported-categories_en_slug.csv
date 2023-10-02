@@ -1,0 +1,12 @@
+id,key,externalId,parentId,orderHint,createdAt,lastModifiedAt,name.ru,description.ru,slug.ru,metaTitle.ru,metaDescription.ru,metaKeywords.ru,name.en,description.en,slug.en,metaTitle.en,metaDescription.en,metaKeywords.en
+3e87edc1-eb0c-4206-8c6d-149026d65d7a,Research,,science,0.002,2023-09-12T09:48:42.618Z,2023-09-12T09:48:42.618Z,Научные труды,Научные труды,research,,,,Research,Research,research,,,
+43df7272-fb3a-4f19-9ee6-c33d7076572e,Bookmarks,,accessories,0.002,2023-09-12T09:54:22.948Z,2023-09-12T09:54:22.948Z,Закладки,Закладки,bookmarks,,,,Bookmarks,Bookmarks,bookmarks,,,
+a9d9841c-04ee-4c20-a741-a3f92da15f80,Romance,,literature-fiction,0.001,2023-09-12T09:45:07.338Z,2023-09-12T09:55:05.653Z,Романы,Романы,romance,,,,Romance,Romance,romance,,,
+c4221f23-fe02-432a-b9b3-d3873ace57b0,Covers,,accessories,0.001,2023-09-12T09:53:34.240Z,2023-09-12T09:53:34.240Z,Обложки,Обложки,covers,,,,Covers,Covers,covers,,,
+8bb767ab-a9a6-436c-a2cf-e06aaa09068a,Science,,,0.0002,2023-09-12T09:46:11.188Z,2023-09-12T09:46:11.188Z,Научная литература,Научная литература,science,,,,Science,Science,science,,,
+a432c17b-46e4-4898-92c5-109ca81bd1ca,fantasy,,literature-fiction,0.002,2023-08-07T20:26:35.942Z,2023-09-12T09:55:46.746Z,Фантастика,Фантастическая литература,,Фантастика,Фантастическая литература,,Fantasy,fantasy literature,fantasy,Fantasy,fantasy literature,
+91532486-c110-48a5-98fa-60cd624c525e,schoolbook,,science,0.001,2023-09-12T09:48:00.913Z,2023-09-14T09:36:19.144Z,Учебники,Учебники,study-teaching-books,,,,Study & Teaching books,Study & Teaching books,study-teaching-books,,,
+6dd1d3fa-0234-4cc6-89c0-eeeb020e6bdf,Accessories,,,0.0004,2023-09-12T09:52:39.511Z,2023-09-12T09:52:39.511Z,Аксессуары,Аксессуары,accessories,,,,Accessories,Accessories,accessories,,,
+fe8bb366-6a13-4fd9-b6f0-fa3589c22f1c,Newspaper-Magazine,,,0.0003,2023-09-12T09:51:35.434Z,2023-09-12T09:51:35.434Z,Газеты и журналы,Газеты и журналы,newspaper-magazine,,,,Newspaper & Magazine,Newspaper & Magazine,newspaper-magazine,,,
+c5687c6a-27cd-49ec-95aa-7dd490755542,Literature,,,0.0001,2023-09-12T08:54:37.651Z,2023-09-12T08:54:37.651Z,Художественная литература,Художественная литература,literature-fiction,,,,Literature & Fiction,Literature & Fiction,literature-fiction,,,
+4f1ce3fb-ecd5-44fa-8418-df2a98ed8b70,Science-for-Kids,,science,0.003,2023-09-12T09:50:30.674Z,2023-09-12T09:50:30.674Z,Научно популярные,Научно популярные,science-for-kids,,,,Science for Kids,Science for Kids,science-for-kids,,,
