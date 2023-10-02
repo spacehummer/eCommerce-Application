@@ -26,7 +26,7 @@ Go tab page `Taxes` on `Project settings`
 >**NOTE:**
 >After creating the Api-Client save client credentionals as `.env` file and replace values `CTP_PROJECT_KEY`, `CTP_CLIENT_SECRET`, `CTP_CLIENT_ID` in enum `APICredentials`
 
-https://github.com/spacehummer/eCommerce-Application/blob/c8b469784d48e68104d71624dca68503c1aa7965/src/api/utils/apiCredencials.ts#L1-L4
+https://github.com/spacehummer/eCommerce-Application/blob/efc8daf080a9e569b5aa63190a5c677ee456c888/src/api/utils/apiCredentials.ts#L1-L4
 
 >by new values from `.env` file.
 
