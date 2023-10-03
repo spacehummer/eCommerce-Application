@@ -13,11 +13,13 @@ module.exports = {
     extensions: ['.ts', '.js'],
     alias: {
       '#src': path.resolve('./src'),
+      '#assets': path.resolve('./assets'),
     },
   },
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist', 'production'),
+    publicPath: '/',
   },
   plugins: [
     new HtmlWebpackPlugin({

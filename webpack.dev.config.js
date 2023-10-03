@@ -36,17 +36,20 @@ module.exports = (env) => {
         overlay: false,
         progress: true,
       },
+      historyApiFallback: true,
     },
     resolve: {
       extensions: ['.ts', '.js'],
       alias: {
         '#src': path.resolve('./src'),
+        '#assets': path.resolve('./assets'),
       },
     },
     output: {
       filename: '[name].[contenthash:8].js',
       chunkFilename: '[name].chunk.js',
       path: path.resolve(__dirname, 'dist', getTimestamp()),
+      publicPath: '/',
     },
     plugins: [
       new HtmlWebpackPlugin({
