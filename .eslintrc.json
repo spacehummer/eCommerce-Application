@@ -1,0 +1,84 @@
+{
+    "plugins": ["prettier", "import"],
+    "extends": [
+        "airbnb-base",
+        "eslint:recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/recommended",
+        "plugin:prettier/recommended",
+        "prettier"
+    ],
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-debugger": "off",
+        "no-console": 0,
+        "class-methods-use-this": "off"
+    },
+    "ignorePatterns": ["dist", "node_modules", ".github"],
+    "settings": {
+        "import/resolver": {
+            "alias": {
+                "map": [
+                    ["#src", "./src"]
+                ]
+            }
+        }
+    },
+    "overrides": [
+        {
+            "files": "**/*.{ts,tsx}",
+            "plugins": ["@typescript-eslint"],
+            "extends": [
+                "plugin:@typescript-eslint/recommended",
+                "airbnb-typescript/base",
+                "plugin:import/typescript",
+                "plugin:prettier/recommended",
+                "prettier"
+            ],
+            "parser": "@typescript-eslint/parser",
+            "parserOptions": {
+                "ecmaVersion": 2020,
+                "sourceType": "module",
+                "project": "./tsconfig.json"
+            },
+            "rules": {
+                "@typescript-eslint/no-explicit-any": 2,
+                "@typescript-eslint/naming-convention": "error",
+                "@typescript-eslint/explicit-function-return-type": "error",
+                "@typescript-eslint/explicit-member-accessibility": [
+                    "error",
+                    {
+                        "accessibility": "explicit",
+                        "ignoredMethodNames": [
+                            ""
+                        ],
+                        "overrides": {
+                            "accessors": "explicit",
+                            "constructors": "off",
+                            "methods": "explicit",
+                            "parameterProperties": "explicit",
+                            "properties": "explicit"
+                        }
+                    }
+                ]
+            },
+            "settings": {
+                "import/resolver": {
+                    "typescript": {}
+                },
+                "import/parsers": {
+                    "@typescript-eslint/parser": [".ts", ".tsx"]
+                }
+            }
+        }
+    ]
+}
