@@ -13,6 +13,7 @@ type InputProperties = {
   form?: string;
   minLength?: number;
   maxLength?: number;
+  min?: string;
   max?: string;
 };
 
@@ -24,7 +25,16 @@ export type DefaultArgs = {
   type: InputType;
 } & Args;
 
-export type InputType = 'password' | 'email' | 'submit' | 'checkbox' | 'text' | 'date' | 'hidden';
+export type InputType =
+  | 'password'
+  | 'email'
+  | 'submit'
+  | 'button'
+  | 'checkbox'
+  | 'text'
+  | 'date'
+  | 'hidden'
+  | 'number';
 
 type ConcreteType = {
   type: InputType;
@@ -53,6 +63,7 @@ export default class InputFactory {
     if (defaults.minLength) result.minLength = defaults.minLength;
     if (defaults.maxLength) result.maxLength = defaults.maxLength;
     if (defaults.max) result.max = defaults.max;
+    if (defaults.min) result.min = defaults.min;
 
     return result;
   }

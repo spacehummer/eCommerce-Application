@@ -1,7 +1,7 @@
 export type CartUpdateDraft = {
   version: number;
   productId: string;
-  variantId: number;
+  variantId?: number;
   quantity: number;
 };
 
@@ -13,8 +13,33 @@ export type ProductDetails = {
 export type CartRemoveItemDraft = {
   version: number;
   lineItemId: string;
-  quantity: number;
+  quantity?: number;
 };
+
+export type CartCredentials = Readonly<{
+  version: number;
+  id: string;
+}>;
+
+export type CartItemDraft = Readonly<{
+  lineItemId?: string;
+}>;
+
+export type CartQuantityDraft = Readonly<{
+  quantity: number;
+}> &
+  CartItemDraft &
+  CartCredentials;
+
+export type CartActionsDraft = Readonly<{
+  items: CartItemDraft[];
+}> &
+  CartCredentials;
+
+export type CartDiscountCodeDraft = Readonly<{
+  code: string;
+}> &
+  CartCredentials;
 
 export type CartDraft = {
   currency: string;
@@ -40,6 +65,6 @@ export type MyCartRemoveItem = {
 
 type MyCartRemoveLineItemAction = {
   readonly action: 'removeLineItem';
-  readonly lineItemId: string;
+  readonly lineItemId?: string;
   readonly quantity?: number;
 };

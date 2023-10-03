@@ -12,17 +12,18 @@ export default abstract class EditableForm extends FormComponent {
 
   public readonly editBtn: EditButton;
 
-  protected submit?: CancelSubmit;
+  public submit?: CancelSubmit;
 
   constructor(
     submitCallback: (record: Record<string, string | Record<string, string>>) => void,
-    private defaultValues: string[],
+    protected defaultValues: string[],
     names: string[],
-    private readonly isDisabledByDefault: boolean = true
+    private readonly isDisabledByDefault: boolean = true,
+    styles?: ClassesEnum | ClassesEnum[]
   ) {
-    super(submitCallback, names, ClassesEnum.LOGIN_FORM);
+    super(submitCallback, names, styles || ClassesEnum.LOGIN_FORM);
 
-    this.editBtn = new EditButton(this.toggleForm.bind(this));
+    this.editBtn = this.createEditBtn();
     this.submit = this.createCancel();
     this.fieldSet = this.createFieldSet();
     this.setValues();
@@ -30,6 +31,10 @@ export default abstract class EditableForm extends FormComponent {
     if (this.isDisabledByDefault) this.toggleSetItems();
 
     this.basicComponent.addInnerElement(this.fieldSet);
+  }
+
+  protected createEditBtn(btnText?: string): EditButton {
+    return new EditButton(this.toggleForm.bind(this), btnText);
   }
 
   protected createCancel(): CancelSubmit {
@@ -50,7 +55,7 @@ export default abstract class EditableForm extends FormComponent {
         const elem = val;
         if (elem instanceof HTMLInputElement) {
           if (
-            (elem.type !== 'submit' && elem.type !== 'checkbox') ||
+            (elem.type !== 'submit' && elem.type !== 'checkbox' && elem.type !== 'button') ||
             (elem.type === 'checkbox' &&
               (this.defaultValues[index] === 'on' || this.defaultValues[index] === 'off'))
           ) {

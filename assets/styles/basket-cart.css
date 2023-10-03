@@ -1,0 +1,53 @@
+.basket,
+.basket-cart-list {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+}
+
+.basket-cart .form__input,
+.basket-cart .form-field-container,
+.basket-cart .form-field {
+    width: inherit !important;
+}
+
+.basket-cart {
+    width: 25em;
+    display: flex;
+    border-radius: 5px;
+    background-color: rgb(204, 195, 195);
+    justify-content: space-between;
+    box-shadow: 5px 5px 5px 5px rgb(71, 66, 66);
+}
+
+.basket-cart__image {
+    width: 75px;
+    height: 100px;
+}
+
+.basket-cart__content {
+    justify-content: center;
+}
+
+/* .basket-cart__ctrl{
+    
+} */
+
+/* .basket-cart__input {} */
+
+.basket-link {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #B44739;
+    text-shadow: 0 0 1px rgb(0, 0, 0), 1px 1px 3px rgba(0, 0, 0, 0.75);
+    text-align: center;
+}
+
+.basket-link:hover {
+    color: #d6331d;
+    text-shadow: 0 0 1px rgb(0, 0, 0), 0 0 4px rgb(173, 52, 15), 1px 1px 16px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}

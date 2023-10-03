@@ -11,7 +11,11 @@ import AuthService from './utils/authService';
 import CartRepository from './endpoints/meCart';
 import CustomerRepository from './endpoints/meCustomer';
 import ProductProjection from './endpoints/productProjection';
-import { CartRemoveItemDraft } from './endpoints/types/cart';
+import {
+  CartDiscountCodeDraft,
+  CartQuantityDraft,
+  CartRemoveItemDraft,
+} from './endpoints/types/cart';
 import CustomerData, {
   AddressDto,
   ChangePasswordDto,
@@ -19,7 +23,7 @@ import CustomerData, {
   PersonalesDto,
 } from './endpoints/types/customer';
 import Category from './endpoints/category';
-import { Category as CategoryDto, LocaleString } from './endpoints/types/category';
+import { Category as CategoryDto } from './endpoints/types/category';
 
 const authService = new AuthService();
 const cart = new CartRepository(authService);
@@ -92,6 +96,16 @@ class Api {
     return cart.createCartForCurrentCustomer({ currency });
   }
 
+  public async updateCartItemQuantity(
+    quantityDraft: CartQuantityDraft
+  ): Promise<ClientResponse<Cart>> {
+    return cart.changeQuantity(quantityDraft);
+  }
+
+  public async applyDiscountCode(codeDraft: CartDiscountCodeDraft): Promise<ClientResponse<Cart>> {
+    return cart.addDiscountCode(codeDraft);
+  }
+
   public async addToCart(
     productId: string,
     variantId: number,
@@ -106,11 +120,8 @@ class Api {
     return cart.removeLineItem(itemDraft);
   }
 
-  private getLocalString(local: { [key: string]: string }): LocaleString {
-    return {
-      ru: local.ru,
-      en: local.en,
-    };
+  public async clearCart(): Promise<ClientResponse<Cart>> {
+    return cart.cleanActiveCart();
   }
 
   private mapCategory(categoryToMap: CategorySdk): CategoryDto {
@@ -118,9 +129,9 @@ class Api {
       childrens: [],
       id: categoryToMap.id,
       key: categoryToMap.key,
-      name: this.getLocalString(categoryToMap.name),
-      slug: this.getLocalString(categoryToMap.slug),
-      description: this.getLocalString(categoryToMap.slug),
+      name: categoryToMap.name,
+      slug: categoryToMap.slug,
+      description: categoryToMap.description,
       ancestors: categoryToMap.ancestors,
       parent: categoryToMap.parent,
     };

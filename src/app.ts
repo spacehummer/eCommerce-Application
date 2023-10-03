@@ -1,8 +1,10 @@
 // <editor-fold desc="Imports">
 
 /* Import styles */
-import '../assets/styles/general.css';
-import '../assets/styles/normalize.css';
+import '#assets/styles/font.css';
+import '#assets/styles/font-styles.css';
+import '#assets/styles/general.css';
+import '#assets/styles/normalize.css';
 
 /* Import classes */
 import RootContainer from '#src/components/basic_structure/root-container';
@@ -132,6 +134,20 @@ export default class App {
         callback: async (): Promise<void> => {
           const { default: CatalogView } = await import('./view/main/catalog/catalog-view');
           this.setContent(PagesUrls.CATALOG, new CatalogView(this.logicParams));
+        },
+      },
+      {
+        path: `${PagesUrls.BASKET}`,
+        callback: async (): Promise<void> => {
+          const { default: BasketView } = await import('./view/main/basket/basket-view');
+          this.setContent(PagesUrls.BASKET, new BasketView(this.logicParams));
+        },
+      },
+      {
+        path: `${PagesUrls.ABOUT_US}`,
+        callback: async (): Promise<void> => {
+          const { default: AboutUsView } = await import('./view/main/about-us/about-us-view');
+          this.setContent(PagesUrls.ABOUT_US, new AboutUsView());
         },
       },
       {
