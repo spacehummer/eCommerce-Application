@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build-prod": "rm -r dist/production/* && webpack build",
+    "netlify-build-prod": "webpack build",
     "build-dev": "webpack --node-env development",
     "build-dev-css": "webpack --node-env development --env no_css_in_js=true",
     "watch": "webpack --watch",
@@ -20,6 +21,8 @@
   "author": "spacehummer",
   "license": "",
   "dependencies": {
+    "@commercetools/platform-sdk": "^5.0.0",
+    "@commercetools/sdk-client-v2": "^2.2.0",
     "eslint-webpack-plugin": "^4.0.1",
     "html-webpack-plugin": "^5.5.0"
   },
