@@ -3,15 +3,17 @@ import TagsEnum from '#src/components_params/tags-enum';
 export type Args = InputProperties & ElementProperties;
 
 type InputProperties = {
-  id: string;
+  id?: string;
   name?: string;
   placeholder?: string;
   required?: boolean;
   pattern?: string;
   value?: string;
   title?: string;
+  form?: string;
   minLength?: number;
   maxLength?: number;
+  min?: string;
   max?: string;
 };
 
@@ -23,7 +25,16 @@ export type DefaultArgs = {
   type: InputType;
 } & Args;
 
-export type InputType = 'password' | 'email' | 'submit' | 'checkbox' | 'text' | 'date';
+export type InputType =
+  | 'password'
+  | 'email'
+  | 'submit'
+  | 'button'
+  | 'checkbox'
+  | 'text'
+  | 'date'
+  | 'hidden'
+  | 'number';
 
 type ConcreteType = {
   type: InputType;
@@ -48,9 +59,11 @@ export default class InputFactory {
     if (defaults.pattern) result.pattern = defaults.pattern;
     if (defaults.value) result.value = defaults.value;
     if (defaults.title) result.title = defaults.title;
+    if (defaults.form) result.setAttribute('form', defaults.form);
     if (defaults.minLength) result.minLength = defaults.minLength;
     if (defaults.maxLength) result.maxLength = defaults.maxLength;
     if (defaults.max) result.max = defaults.max;
+    if (defaults.min) result.min = defaults.min;
 
     return result;
   }

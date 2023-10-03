@@ -57,10 +57,6 @@
     margin: 5px 0;
 }
 
-.hidden {
-    display: none !important;
-}
-
 .form-field-container,
 .form-field {
     flex-direction: column;

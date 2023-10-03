@@ -13,7 +13,8 @@ import MainView from '#src/view/main/main-view';
 import FooterView from '#src/view/footer/footer-view';
 import checkInstance from '#src/utils/utils';
 import View, { ViewLogicParams } from '#src/view/view';
-import Router, { Routes } from '#src/logic/router/router';
+import PageRouter from '#src/logic/router/router';
+import { Routes } from '#src/logic/router/route-types';
 import { PagesUrls } from '#src/logic/router/pages-params';
 
 // </editor-fold desc="Imports">
@@ -46,7 +47,7 @@ export default class App {
     const routes = this.createRoutes();
 
     this.logicParams = {
-      router: new Router(routes),
+      router: new PageRouter(routes),
     };
 
     this.createView();
@@ -111,14 +112,42 @@ export default class App {
         path: `${PagesUrls.LOGIN}`,
         callback: async (): Promise<void> => {
           const { default: LoginView } = await import('./view/main/signup-login/login-view');
-          this.setContent(PagesUrls.LOGIN, new LoginView());
+          this.setContent(PagesUrls.LOGIN, new LoginView(this.logicParams));
         },
       },
       {
         path: `${PagesUrls.SIGN_UP}`,
         callback: async (): Promise<void> => {
           const { default: SignUpView } = await import('./view/main/signup-login/signup-view');
-          this.setContent(PagesUrls.SIGN_UP, new SignUpView());
+          this.setContent(PagesUrls.SIGN_UP, new SignUpView(this.logicParams));
+        },
+      },
+      {
+        path: `${PagesUrls.PROFILE}`,
+        callback: async (): Promise<void> => {
+          const { default: ProfileView } = await import('./view/main/profile/profile-view');
+          this.setContent(PagesUrls.SIGN_UP, new ProfileView());
+        },
+      },
+      {
+        path: `${PagesUrls.CATALOG}`,
+        callback: async (): Promise<void> => {
+          const { default: CatalogView } = await import('./view/main/catalog/catalog-view');
+          this.setContent(PagesUrls.CATALOG, new CatalogView(this.logicParams));
+        },
+      },
+      {
+        path: `${PagesUrls.BASKET}`,
+        callback: async (): Promise<void> => {
+          const { default: BasketView } = await import('./view/main/basket/basket-view');
+          this.setContent(PagesUrls.BASKET, new BasketView(this.logicParams));
+        },
+      },
+      {
+        path: `${PagesUrls.ABOUT_US}`,
+        callback: async (): Promise<void> => {
+          const { default: AboutUsView } = await import('./view/main/about-us/about-us-view');
+          this.setContent(PagesUrls.ABOUT_US, new AboutUsView());
         },
       },
       {

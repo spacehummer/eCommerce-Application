@@ -29,14 +29,13 @@ export default class InputField extends View implements IFormField {
 
   public readonly label: HTMLLabelElement;
 
-  constructor(fieldArgs: FormFieldArgs, order: Order = 'label-first') {
-    super(args);
+  constructor(fieldArgs: FormFieldArgs, order: Order = 'label-first', style?: ClassesEnum) {
+    super({ tagName: args.tagName, classNames: style || args.classNames });
 
     this.input = this.createInput(fieldArgs);
 
     this.label = LabelFactory.default({
       textContent: fieldArgs.label,
-      htmlFor: this.input.id,
     });
 
     this.input.onchange = this.onChange;
@@ -55,7 +54,7 @@ export default class InputField extends View implements IFormField {
 
   protected createInput({ classList, label, ...fieldArgs }: FormFieldArgs): HTMLInputElement {
     const resultClassList = classList ? [ClassesEnum.INPUT, ...classList] : [ClassesEnum.INPUT];
-    const res = { classList: resultClassList, id: fieldArgs.name, ...fieldArgs };
+    const res = { classList: resultClassList, ...fieldArgs };
     return InputFactory.default(res);
   }
 

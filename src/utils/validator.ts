@@ -24,9 +24,9 @@ export default class Validator {
   public static readonly nameMsg =
     'Must contain at least one character and no special characters or numbers. Starts with uppercase.';
 
-  public static readonly streetRegex = /^[^]+$/i;
+  public static readonly streetRegex = /^[A-Za-z]+[\w\s\\]*$/i;
 
-  public static readonly streetMsg = 'Must contain at least one character';
+  public static readonly streetMsg = 'Must contain at least one character. Starts with character';
 
   public static readonly postCodeRegex = /^[0-9]{11}$/i;
 

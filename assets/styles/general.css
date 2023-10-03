@@ -57,6 +57,18 @@ html {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.reset-link {
+  text-decoration: none;
+}
+
+.sparse-004 {
+  letter-spacing: 0.04em;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
 /* </editor-fold desc="General modifiers">*/
 
 /* <editor-fold desc="Header">*/
@@ -311,6 +323,10 @@ html {
 /* </editor-fold desc="Test styles">*/
 
 /* <editor-fold desc="Media">*/
+.hidden {
+  display: none !important;
+}
+
 @media screen and (max-width: 1024px) {
   /* Points
    * 100vw  |  margin  *
